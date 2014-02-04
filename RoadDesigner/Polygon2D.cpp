@@ -825,6 +825,32 @@ void Polygon2D::getLoopOBB(const Loop2D& pin, QVector2D& size, QMatrix4x4& xform
 	size = bestBoxSz;
 }
 
+/**
+* Get polygon oriented bounding box
+**/
+void Polygon2D::getLoopOBB(const QVector2D& dir, Loop2D& bboxRotLoop) const {
+	Loop2D rotLoop;
+	QMatrix4x4 rotMat;
+
+	float alpha = atan2f(dir.y(), dir.x());
+	rotMat.setToIdentity();
+	rotMat.rotate(Util::rad2deg(-alpha), 0.0f, 0.0f, 1.0f);
+	transformLoop(contour, rotLoop, rotMat);
+
+	QVector2D minPt, maxPt;
+	QVector2D size = Polygon2D::getLoopAABB(rotLoop, minPt, maxPt);
+
+	Loop2D bboxLoop;
+	bboxLoop.push_back(minPt);
+	bboxLoop.push_back(QVector2D(minPt.x(), maxPt.y()));
+	bboxLoop.push_back(maxPt);
+	bboxLoop.push_back(QVector2D(maxPt.x(), minPt.y()));
+
+	rotMat.setToIdentity();
+	rotMat.rotate(Util::rad2deg(alpha), 0.0f, 0.0f, 1.0f);
+	transformLoop(bboxLoop, bboxRotLoop, rotMat);
+}
+
 /*void Polygon2D::getMyOBB(QVector3D& size, QMatrix4x4& xformMat) {
 	Polygon2D::getLoopOBB(this->contour, size, xformMat);
 }*/

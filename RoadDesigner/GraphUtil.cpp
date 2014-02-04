@@ -1357,7 +1357,7 @@ void GraphUtil::extractRoads(RoadGraph& roads, const AbstractArea& area, bool st
  * Extract roads that reside in the specified area.
  * If a edge is across the border of the area, add a vertex on the border and split the edge at the vertex.
  */
-void GraphUtil::extractRoads2(RoadGraph& roads, const AbstractArea& area, int roadType) {
+void GraphUtil::extractRoads2(RoadGraph& roads, const Polygon2D& area, int roadType) {
 	QList<RoadEdgeDesc> edges;
 
 	RoadEdgeIter ei, eend;

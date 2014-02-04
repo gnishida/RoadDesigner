@@ -27,8 +27,8 @@ ControlWidget::ControlWidget(MainWindow* mainWin) : QDockWidget("Control Widget"
 // Event handlers
 
 void ControlWidget::showLocalStreet(int flag) {
-	mainWin->glWidget->roads.showLocalStreets = ui.checkBoxRoadTypeLocalStreet->isChecked();
-	mainWin->glWidget->roads.setModified();
+	//mainWin->glWidget->roads.showLocalStreets = ui.checkBoxRoadTypeLocalStreet->isChecked();
+	//mainWin->glWidget->roads.setModified();
 
 	mainWin->glWidget->updateGL();
 }
@@ -47,7 +47,7 @@ void ControlWidget::generateGrid() {
 		gf.load("grid_feature2.xml");
 	}
 	RoadGenerator rg;
-	rg.generateRoadNetwork(mainWin->glWidget->roads, mainWin->glWidget->areas[mainWin->glWidget->selectedArea], gf);
+	rg.generateRoadNetwork(mainWin->glWidget->areas[mainWin->glWidget->selectedArea], gf);
 
 	mainWin->glWidget->updateGL();
 }
@@ -61,7 +61,7 @@ void ControlWidget::generateRadial() {
 	RadialFeature rf(mainWin->glWidget->selectedArea);
 	rf.load("radial_feature1.xml");
 	RoadGenerator rg;
-	rg.generateRoadNetwork(mainWin->glWidget->roads, mainWin->glWidget->areas[mainWin->glWidget->selectedArea], rf);
+	rg.generateRoadNetwork(mainWin->glWidget->areas[mainWin->glWidget->selectedArea], rf);
 
 	mainWin->glWidget->updateGL();
 }

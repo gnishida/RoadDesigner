@@ -23,7 +23,7 @@ GLWidget::GLWidget(MainWindow* mainWin) : QGLWidget(QGLFormat(QGL::SampleBuffers
 	terrain.elevation = 0.0f;
 
 	// initialize the width and others
-	roads.setZ((MIN_Z + MAX_Z) / 2.0f);
+	//roads.setZ((MIN_Z + MAX_Z) / 2.0f);
 
 	// initialize the key status
 	shiftPressed = false;
@@ -41,24 +41,25 @@ void GLWidget::drawScene() {
 	terrain.generateMesh();
 	renderer->render(terrain.renderables);
 
-	// draw the road graph
-	roads.generateMesh();
-	renderer->render(roads.renderables);
-	
 	// define the height for other items
 	float height = (float)((int)(camera->dz * 0.012f)) * 0.15f;
 
-	// draw the selected area
+	// draw the selecting polyline
 	if (selectedAreaBuilder.selecting()) {
 		renderer->renderPolyline(selectedAreaBuilder.polygon(), GL_LINE_STIPPLE, height);
 	}
 
+	// draw the areas
 	for (int i = 0; i < areas.size(); ++i) {
 		if (i == selectedArea) {
-			renderer->renderArea(areas[i], GL_LINE_STIPPLE, QColor(0, 0, 255), height);
+			renderer->renderArea(areas[i].area, GL_LINE_STIPPLE, QColor(0, 0, 255), height);
 		} else {
-			renderer->renderArea(areas[i], GL_LINE_STIPPLE, QColor(196, 196, 255), height);
+			renderer->renderArea(areas[i].area, GL_LINE_STIPPLE, QColor(196, 196, 255), height);
 		}
+
+		// draw the road graph
+		areas[i].roads.generateMesh();
+		renderer->render(areas[i].roads.renderables);
 	}
 }
 
@@ -120,7 +121,7 @@ void GLWidget::mousePressEvent(QMouseEvent *e) {
 		case MainWindow::MODE_AREA_SELECT:
 			selectedArea = -1;
 			for (int i = 0; i < areas.size(); ++i) {
-				if (areas[i].contains(pos)) {
+				if (areas[i].area.contains(pos)) {
 					selectedArea = i;
 					break;
 				}
@@ -172,7 +173,9 @@ void GLWidget::mouseMoveEvent(QMouseEvent *e) {
 		if (camera->dz > MAX_Z) camera->dz = MAX_Z;
 
 		// tell the Z coordinate to the road graph so that road graph updates rendering related variables.
-		roads.setZ(camera->dz);
+		for (int i = 0; i < areas.size(); ++i) {
+			areas[i].roads.setZ(camera->dz);
+		}
 
 		lastPos = e->pos();
 	} else {
@@ -201,8 +204,9 @@ void GLWidget::mouseDoubleClickEvent(QMouseEvent *e) {
 		break;
 	case MainWindow::MODE_AREA_CREATE:
 		selectedAreaBuilder.end();
-		areas.push_back(selectedAreaBuilder.polygon());
+		areas.push_back(RoadArea(selectedAreaBuilder.polygon()));
 		selectedArea = areas.size() - 1;
+		areas[selectedArea].roads.setZ(camera->dz);
 
 		mainWin->mode = MainWindow::MODE_AREA_SELECT;
 		break;

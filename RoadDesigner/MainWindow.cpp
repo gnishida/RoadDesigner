@@ -43,19 +43,16 @@ void MainWindow::keyReleaseEvent(QKeyEvent* e) {
 }
 
 void MainWindow::onNew() {
-	glWidget->roads.clear();
+	//glWidget->roads.clear();
 
 	// clear the areas
 	glWidget->areas.clear();
-
-	// clear the features
-	glWidget->gridFeatures.clear();
-	glWidget->radialFeatures.clear();
 
 	glWidget->updateGL();
 }
 
 void MainWindow::onOpen() {
+	/*
 	QString filename = QFileDialog::getOpenFileName(this, tr("Open StreetMap file..."), "", tr("StreetMap Files (*.gsm)"));
 
 	if (filename.isEmpty()) {
@@ -63,15 +60,12 @@ void MainWindow::onOpen() {
 		return;
 	}
 
-	// clear the features
-	glWidget->gridFeatures.clear();
-	glWidget->radialFeatures.clear();
-
 	QApplication::setOverrideCursor(Qt::WaitCursor);
 	GraphUtil::loadRoads(glWidget->roads, filename);
 	GraphUtil::copyRoads(glWidget->roads, glWidget->origRoads);
 	glWidget->updateGL();
 	QApplication::restoreOverrideCursor();
+	*/
 }
 
 void MainWindow::onAreaMenu() {

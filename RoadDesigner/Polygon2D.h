@@ -89,6 +89,7 @@ public:
 	static QVector2D getLoopAABB(const Loop2D& pin, QVector2D& minCorner, QVector2D& maxCorner);
 	BBox getLoopAABB() const;
 	static void getLoopOBB(const Loop2D& pin, QVector2D& size, QMatrix4x4& xformMat);
+	void getLoopOBB(const QVector2D& dir,  Loop2D& bboxRotLoop) const;
 	//void getMyOBB(QVector3D& size, QMatrix4x4& xformMat);
 	//static void extrudePolygon(const Loop2D& basePgon, float height, std::vector<Polygon2D>& pgonExtrusion);
 

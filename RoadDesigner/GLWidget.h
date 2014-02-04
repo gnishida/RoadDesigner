@@ -2,6 +2,7 @@
 
 #include "Camera.h"
 #include "SimpleFlatTerrain.h"
+#include "RoadArea.h"
 #include "RoadGraph.h"
 #include "RoadGraphRenderer.h"
 #include "PolygonAreaBuilder.h"
@@ -21,15 +22,16 @@ public:
 	MainWindow* mainWin;
 	Camera* camera;
 	SimpleFlatTerrain terrain;
-	RoadGraph roads;
-	RoadGraph origRoads;
+	//RoadGraph roads;
+	//RoadGraph origRoads;
 	RoadGraphRenderer* renderer;
 	QPoint lastPos;
-	std::vector<Polygon2D> areas;
+	//std::vector<Polygon2D> areas;
+	std::vector<RoadArea> areas;
 	int selectedArea;
 	PolygonAreaBuilder selectedAreaBuilder;
-	std::vector<GridFeature> gridFeatures;
-	std::vector<RadialFeature> radialFeatures;
+	//std::vector<GridFeature> gridFeatures;
+	//std::vector<RadialFeature> radialFeatures;
 
 	// key status
 	bool shiftPressed;
