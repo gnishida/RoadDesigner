@@ -64,14 +64,6 @@ void RoadGenerator::generateHorizontalAvenueSeeds(RoadGraph& roads, const Polygo
 
 	BBox bbox = area.getLoopAABB();
 
-	// グリッド方向に合わせたBBoxのサイズを取得
-	Loop2D bboxRotLoop;
-	float angle0 = gf.getAngles()[0];
-	QVector2D dir0 = QVector2D(cos(angle0), sinf(angle0));
-	area.getLoopOBB(dir0, bboxRotLoop);
-	Polygon2D area2;
-	area2.setContour(bboxRotLoop);
-
 	// エリアの中心に頂点を作成する
 	RoadVertexPtr center_v = RoadVertexPtr(new RoadVertex(bbox.midPt()));
 	center_v->angles = gf.getAngles();
@@ -81,80 +73,19 @@ void RoadGenerator::generateHorizontalAvenueSeeds(RoadGraph& roads, const Polygo
 	seeds.push_back(center_desc);
 
 	// 中心点から、左方向に頂点を追加していく
-	QVector2D pt = bbox.midPt();
-	float angle2 = gf.getAngles()[2];
-	QVector2D dir2 = QVector2D(cosf(angle2), sinf(angle2));
-	RoadVertexDesc prev_desc = center_desc;
-	while (true) {
-		pt = pt + dir2 * gf.generateLength(2, Util::uniform_rand());
-
-		// エリアの外に出たらストップ
-		if (!area.contains(pt)) {
-			// エリア外周との交点を求める
-			float tab, tcd;
-			QVector2D intPoint;
-			area.intersect(roads.graph[prev_desc]->pt, pt, &tab, &tcd, intPoint);
-
-			// 外周上に頂点を追加
-			RoadVertexPtr v = RoadVertexPtr(new RoadVertex(intPoint));
-			RoadVertexDesc desc = GraphUtil::addVertex(roads, v);
-
-			// １つ前の頂点との間にエッジを生成
-			GraphUtil::addEdge(roads, prev_desc, desc, 2, 1);
-
-			break;
-		}
-
-		// 頂点を追加
-		RoadVertexPtr v = RoadVertexPtr(new RoadVertex(pt));
-		RoadVertexDesc desc = GraphUtil::addVertex(roads, v);
-
-		// エッジを追加
-		GraphUtil::addEdge(roads, prev_desc, desc, 2, 1);
-		prev_desc = desc;
-
-		// シードに追加
-		seeds.push_front(desc);
-	}
+	expandHorizontalAvenueSeeds(roads, area, gf, center_desc, 2, seeds);
 
 	// 中心点から、右方向に頂点を追加していく
-	pt = bbox.midPt();
-	float angle1 = gf.getAngles()[0];
-	QVector2D dir1 = QVector2D(cosf(angle1), sinf(angle1));
-	prev_desc = center_desc;
-	while (true) {
-		pt = pt + dir1 * gf.generateLength(0, Util::uniform_rand());
-
-		// エリアの外に出たらストップ
-		if (!area.contains(pt)) {
-			// エリア外周との交点を求める
-			float tab, tcd;
-			QVector2D intPoint;
-			area.intersect(roads.graph[prev_desc]->pt, pt, &tab, &tcd, intPoint);
-
-			// 外周上に頂点を追加
-			RoadVertexPtr v = RoadVertexPtr(new RoadVertex(intPoint));
-			RoadVertexDesc desc = GraphUtil::addVertex(roads, v);
-
-			// １つ前の頂点との間にエッジを生成
-			GraphUtil::addEdge(roads, prev_desc, desc, 2, 1);
-
-			break;
-		}
-
-		// 頂点を追加
-		RoadVertexPtr v = RoadVertexPtr(new RoadVertex(pt));
-		RoadVertexDesc desc = GraphUtil::addVertex(roads, v);
-
-		// エッジを追加
-		GraphUtil::addEdge(roads, prev_desc, desc, 2, 1);
-		prev_desc = desc;
-
-		// シードに追加
-		seeds.push_back(desc);
-	}
+	expandHorizontalAvenueSeeds(roads, area, gf, center_desc, 0, seeds);
 }
 
+/**
+ * 指定された頂点から、さらに横方向にAvenueのシードを伸ばしていく。
+ *
+ * @param start_desc			この頂点から、左または右に伸ばしていく
+ * @param direction				0 -- 右 / 2 -- 左
+ * @param seeds					新たにシードに追加される
+ */
 void RoadGenerator::expandHorizontalAvenueSeeds(RoadGraph& roads, const Polygon2D& area, const GridFeature& gf, RoadVertexDesc start_desc, int direction, std::list<RoadVertexDesc>& seeds) {
 	QVector2D pt = roads.graph[start_desc]->pt;
 	float angle = gf.getAngles()[direction];
