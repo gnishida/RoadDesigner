@@ -40,21 +40,12 @@ void GLWidget::drawScene() {
 	float height = (float)((int)(camera->dz * 0.012f)) * 0.15f;
 
 	// draw the selected area
-	if (selectedAreaBuilder.selected()) {
-		renderer->renderArea(selectedArea, GL_LINE_STIPPLE, height);
-
-		// グリッドの領域を表示
-		for (int i = 0; i < mainWin->glWidget->gridFeatures.size(); ++i) {
-			renderer->renderConcave(mainWin->glWidget->gridFeatures[i].polygon(), mainWin->glWidget->gridFeatures[i].color(), -10);
-		}
-
-		// Radialの領域を表示
-		for (int i = 0; i < mainWin->glWidget->radialFeatures.size(); ++i) {
-			renderer->renderPoint(mainWin->glWidget->radialFeatures[i].center, QColor(0, 0, 0), height);
-			renderer->renderConcave(mainWin->glWidget->radialFeatures[i].polygon(), mainWin->glWidget->radialFeatures[i].color(), -10);
-		}
-	} else if (selectedAreaBuilder.selecting()) {
+	if (selectedAreaBuilder.selecting()) {
 		renderer->renderPolyline(selectedAreaBuilder.polygon(), GL_LINE_STIPPLE, height);
+	}
+
+	for (int i = 0; i < areas.size(); ++i) {
+		renderer->renderArea(areas[i], GL_LINE_STIPPLE, height);
 	}
 }
 
@@ -165,7 +156,7 @@ void GLWidget::mouseDoubleClickEvent(QMouseEvent *e) {
 	setMouseTracking(false);
 
 	selectedAreaBuilder.end();
-	selectedArea = selectedAreaBuilder.polygon();
+	areas.push_back(selectedAreaBuilder.polygon());
 }
 
 void GLWidget::initializeGL() {

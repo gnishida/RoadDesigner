@@ -33,9 +33,6 @@
       <Extensions>cpp;moc</Extensions>
       <SourceControlFiles>False</SourceControlFiles>
     </Filter>
-    <Filter Include="VBO">
-      <UniqueIdentifier>{41255172-95c6-43a7-a21f-ff513027bb43}</UniqueIdentifier>
-    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -128,45 +125,6 @@
     <ClCompile Include="Util.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="VBOBlocks.cpp">
-      <Filter>VBO</Filter>
-    </ClCompile>
-    <ClCompile Include="VBOBuilding.cpp">
-      <Filter>VBO</Filter>
-    </ClCompile>
-    <ClCompile Include="VBOGUI.cpp">
-      <Filter>VBO</Filter>
-    </ClCompile>
-    <ClCompile Include="VBOModel.cpp">
-      <Filter>VBO</Filter>
-    </ClCompile>
-    <ClCompile Include="VBOModel_StreetElements.cpp">
-      <Filter>VBO</Filter>
-    </ClCompile>
-    <ClCompile Include="VBORenderManager.cpp">
-      <Filter>VBO</Filter>
-    </ClCompile>
-    <ClCompile Include="VBORoadGraph.cpp">
-      <Filter>VBO</Filter>
-    </ClCompile>
-    <ClCompile Include="VBOShader.cpp">
-      <Filter>VBO</Filter>
-    </ClCompile>
-    <ClCompile Include="VBOSkyBox.cpp">
-      <Filter>VBO</Filter>
-    </ClCompile>
-    <ClCompile Include="VBOTerrain.cpp">
-      <Filter>VBO</Filter>
-    </ClCompile>
-    <ClCompile Include="VBOUtil.cpp">
-      <Filter>VBO</Filter>
-    </ClCompile>
-    <ClCompile Include="VBOVegetation.cpp">
-      <Filter>VBO</Filter>
-    </ClCompile>
-    <ClCompile Include="VBOWater.cpp">
-      <Filter>VBO</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="MainWindow.h">
@@ -257,45 +215,6 @@
     </ClInclude>
     <ClInclude Include="Util.h">
       <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="VBOBlocks.h">
-      <Filter>VBO</Filter>
-    </ClInclude>
-    <ClInclude Include="VBOBuilding.h">
-      <Filter>VBO</Filter>
-    </ClInclude>
-    <ClInclude Include="VBOGUI.h">
-      <Filter>VBO</Filter>
-    </ClInclude>
-    <ClInclude Include="VBOModel.h">
-      <Filter>VBO</Filter>
-    </ClInclude>
-    <ClInclude Include="VBOModel_StreetElements.h">
-      <Filter>VBO</Filter>
-    </ClInclude>
-    <ClInclude Include="VBORenderManager.h">
-      <Filter>VBO</Filter>
-    </ClInclude>
-    <ClInclude Include="VBORoadGraph.h">
-      <Filter>VBO</Filter>
-    </ClInclude>
-    <ClInclude Include="VBOShader.h">
-      <Filter>VBO</Filter>
-    </ClInclude>
-    <ClInclude Include="VBOSkyBox.h">
-      <Filter>VBO</Filter>
-    </ClInclude>
-    <ClInclude Include="VBOTerrain.h">
-      <Filter>VBO</Filter>
-    </ClInclude>
-    <ClInclude Include="VBOUtil.h">
-      <Filter>VBO</Filter>
-    </ClInclude>
-    <ClInclude Include="VBOVegetation.h">
-      <Filter>VBO</Filter>
-    </ClInclude>
-    <ClInclude Include="VBOWater.h">
-      <Filter>VBO</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

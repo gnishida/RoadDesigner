@@ -178,19 +178,6 @@
     <ClCompile Include="RoadSegmentationUtil.cpp" />
     <ClCompile Include="RoadVertex.cpp" />
     <ClCompile Include="Util.cpp" />
-    <ClCompile Include="VBOBlocks.cpp" />
-    <ClCompile Include="VBOBuilding.cpp" />
-    <ClCompile Include="VBOGUI.cpp" />
-    <ClCompile Include="VBOModel.cpp" />
-    <ClCompile Include="VBOModel_StreetElements.cpp" />
-    <ClCompile Include="VBORenderManager.cpp" />
-    <ClCompile Include="VBORoadGraph.cpp" />
-    <ClCompile Include="VBOShader.cpp" />
-    <ClCompile Include="VBOSkyBox.cpp" />
-    <ClCompile Include="VBOTerrain.cpp" />
-    <ClCompile Include="VBOUtil.cpp" />
-    <ClCompile Include="VBOVegetation.cpp" />
-    <ClCompile Include="VBOWater.cpp" />
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="MainWindow.h">
@@ -256,19 +243,6 @@
     <ClInclude Include="RoadSegmentationUtil.h" />
     <ClInclude Include="RoadVertex.h" />
     <ClInclude Include="Util.h" />
-    <ClInclude Include="VBOBlocks.h" />
-    <ClInclude Include="VBOBuilding.h" />
-    <ClInclude Include="VBOGUI.h" />
-    <ClInclude Include="VBOModel.h" />
-    <ClInclude Include="VBOModel_StreetElements.h" />
-    <ClInclude Include="VBORenderManager.h" />
-    <ClInclude Include="VBORoadGraph.h" />
-    <ClInclude Include="VBOShader.h" />
-    <ClInclude Include="VBOSkyBox.h" />
-    <ClInclude Include="VBOTerrain.h" />
-    <ClInclude Include="VBOUtil.h" />
-    <ClInclude Include="VBOVegetation.h" />
-    <ClInclude Include="VBOWater.h" />
     <CustomBuild Include="ControlWidget.h">
       <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(QTDIR)\bin\moc.exe;%(FullPath)</AdditionalInputs>
       <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Moc%27ing ControlWidget.h...</Message>

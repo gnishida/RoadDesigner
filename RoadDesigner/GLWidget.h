@@ -23,7 +23,7 @@ public:
 	RoadGraph origRoads;
 	RoadGraphRenderer* renderer;
 	QPoint lastPos;
-	Polygon2D selectedArea;
+	std::vector<Polygon2D> areas;
 	PolygonAreaBuilder selectedAreaBuilder;
 	std::vector<GridFeature> gridFeatures;
 	std::vector<RadialFeature> radialFeatures;
