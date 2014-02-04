@@ -44,16 +44,17 @@ void RoadGraphRenderer::renderOne(RenderablePtr renderable) {
  * 与えられたポリゴンに基づいて、閉じた領域を描画する。
  * ただし、ポリゴンデータ自体は、閉じていなくて良い。
  */
-void RoadGraphRenderer::renderArea(const Polygon2D& area, GLenum lineType, float height) {
+void RoadGraphRenderer::renderArea(const Polygon2D& area, GLenum lineType, const QColor& color, float height) {
 	std::vector<RenderablePtr> renderables;
 	renderables.push_back(RenderablePtr(new Renderable(lineType, 3.0f)));
 	renderables.push_back(RenderablePtr(new Renderable(GL_POINTS, 10.0f)));
 
 	Vertex v;
 
-	v.color[0] = 0.0f;
-	v.color[1] = 0.0f;
-	v.color[2] = 1.0f;
+	v.color[0] = color.redF();
+	v.color[1] = color.greenF();
+	v.color[2] = color.blueF();
+	v.color[3] = color.alphaF();
 	v.normal[0] = 0.0f;
 	v.normal[1] = 0.0f;
 	v.normal[2] = 1.0f;

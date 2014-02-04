@@ -7,10 +7,15 @@ MainWindow::MainWindow(QWidget *parent, Qt::WFlags flags) : QMainWindow(parent, 
 	// setup the docking widgets
 	controlWidget = new ControlWidget(this);
 
+	ui.actionAreaSelect->setChecked(true);
+
 	// register the menu's action handlers
 	connect(ui.actionNew, SIGNAL(triggered()), this, SLOT(onNew()));
 	connect(ui.actionOpen, SIGNAL(triggered()), this, SLOT(onOpen()));
 	connect(ui.actionExit, SIGNAL(triggered()), this, SLOT(close()));
+	connect(ui.menuArea, SIGNAL(aboutToShow()), this, SLOT(onAreaMenu()) );
+	connect(ui.actionAreaSelect, SIGNAL(triggered()), this, SLOT(onAreaSelect()));
+	connect(ui.actionAreaCreate, SIGNAL(triggered()), this, SLOT(onAreaCreate()));
 	connect(ui.actionControlWidget, SIGNAL(triggered()), this, SLOT(onShowControlWidget()));
 
 	// setup the GL widget
@@ -19,6 +24,8 @@ MainWindow::MainWindow(QWidget *parent, Qt::WFlags flags) : QMainWindow(parent, 
 
 	controlWidget->show();
 	addDockWidget(Qt::LeftDockWidgetArea, controlWidget);
+
+	mode = MODE_AREA_SELECT;
 }
 
 MainWindow::~MainWindow() {
@@ -65,6 +72,20 @@ void MainWindow::onOpen() {
 	GraphUtil::copyRoads(glWidget->roads, glWidget->origRoads);
 	glWidget->updateGL();
 	QApplication::restoreOverrideCursor();
+}
+
+void MainWindow::onAreaMenu() {
+	ui.actionAreaSelect->setChecked(mode == MODE_AREA_SELECT);
+	ui.actionAreaCreate->setChecked(mode == MODE_AREA_CREATE);
+	ui.actionSketch->setChecked(mode == MODE_SKETCH);
+}
+
+void MainWindow::onAreaSelect() {
+	mode = MODE_AREA_SELECT;
+}
+
+void MainWindow::onAreaCreate() {
+	mode = MODE_AREA_CREATE;
 }
 
 void MainWindow::onShowControlWidget() {

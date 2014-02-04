@@ -44,7 +44,17 @@
     </property>
     <addaction name="actionControlWidget"/>
    </widget>
+   <widget class="QMenu" name="menuArea">
+    <property name="title">
+     <string>Area</string>
+    </property>
+    <addaction name="actionAreaSelect"/>
+    <addaction name="actionAreaCreate"/>
+    <addaction name="separator"/>
+    <addaction name="actionSketch"/>
+   </widget>
    <addaction name="menuFile"/>
+   <addaction name="menuArea"/>
    <addaction name="menuWindow"/>
   </widget>
   <widget class="QToolBar" name="mainToolBar">
@@ -215,6 +225,30 @@
   <action name="actionShowArea">
    <property name="text">
     <string>Show Area</string>
+   </property>
+  </action>
+  <action name="actionAreaSelect">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Select</string>
+   </property>
+  </action>
+  <action name="actionAreaCreate">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Create</string>
+   </property>
+  </action>
+  <action name="actionSketch">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Sketch</string>
    </property>
   </action>
  </widget>

@@ -30,6 +30,8 @@ GLWidget::GLWidget(MainWindow* mainWin) : QGLWidget(QGLFormat(QGL::SampleBuffers
 	controlPressed = false;
 	altPressed = false;
 	keyXPressed = false;
+
+	selectedArea = -1;
 }
 
 GLWidget::~GLWidget() {
@@ -52,7 +54,11 @@ void GLWidget::drawScene() {
 	}
 
 	for (int i = 0; i < areas.size(); ++i) {
-		renderer->renderArea(areas[i], GL_LINE_STIPPLE, height);
+		if (i == selectedArea) {
+			renderer->renderArea(areas[i], GL_LINE_STIPPLE, QColor(0, 0, 255), height);
+		} else {
+			renderer->renderArea(areas[i], GL_LINE_STIPPLE, QColor(128, 128, 255), height);
+		}
 	}
 }
 
@@ -110,15 +116,23 @@ void GLWidget::mousePressEvent(QMouseEvent *e) {
 	mouseTo2D(e->x(), e->y(), pos);
 
 	if (e->buttons() & Qt::LeftButton) {
-		if (!selectedAreaBuilder.selecting()) {
-			snap(pos);
-			selectedAreaBuilder.start(pos);
-			setMouseTracking(true);
-		}
+		switch (mainWin->mode) {
+		case MainWindow::MODE_AREA_SELECT:
+			break;
+		case MainWindow::MODE_AREA_CREATE:
+			if (!selectedAreaBuilder.selecting()) {
+				snap(pos);
+				selectedAreaBuilder.start(pos);
+				setMouseTracking(true);
+			}
 		
-		if (selectedAreaBuilder.selecting()) {
-			snap(pos);
-			selectedAreaBuilder.addPoint(pos);
+			if (selectedAreaBuilder.selecting()) {
+				snap(pos);
+				selectedAreaBuilder.addPoint(pos);
+			}
+			break;
+		case MainWindow::MODE_SKETCH:
+			break;
 		}
 	}
 
@@ -154,9 +168,19 @@ void GLWidget::mouseMoveEvent(QMouseEvent *e) {
 		roads.setZ(camera->dz);
 
 		lastPos = e->pos();
-	} else if (selectedAreaBuilder.selecting()) {	// Move the last point of the selected polygonal area
-		snap(pos);
-		selectedAreaBuilder.moveLastPoint(pos);
+	} else {
+		switch (mainWin->mode) {
+		case MainWindow::MODE_AREA_SELECT:
+			break;
+		case MainWindow::MODE_AREA_CREATE:
+			if (selectedAreaBuilder.selecting()) {	// Move the last point of the selected polygonal area
+				snap(pos);
+				selectedAreaBuilder.moveLastPoint(pos);
+			}
+			break;
+		case MainWindow::MODE_SKETCH:
+			break;
+		}
 	}
 
 	updateGL();
@@ -165,8 +189,16 @@ void GLWidget::mouseMoveEvent(QMouseEvent *e) {
 void GLWidget::mouseDoubleClickEvent(QMouseEvent *e) {
 	setMouseTracking(false);
 
-	selectedAreaBuilder.end();
-	areas.push_back(selectedAreaBuilder.polygon());
+	switch (mainWin->mode) {
+	case MainWindow::MODE_AREA_SELECT:
+		break;
+	case MainWindow::MODE_AREA_CREATE:
+		selectedAreaBuilder.end();
+		areas.push_back(selectedAreaBuilder.polygon());
+
+		mainWin->mode = MainWindow::MODE_AREA_SELECT;
+		break;
+	}
 }
 
 void GLWidget::initializeGL() {

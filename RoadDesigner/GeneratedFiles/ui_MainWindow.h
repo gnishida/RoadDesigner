@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'MainWindow.ui'
 **
-** Created: Mon Feb 3 20:27:18 2014
+** Created: Mon Feb 3 21:10:42 2014
 **      by: Qt User Interface Compiler version 4.8.1
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
@@ -45,10 +45,14 @@ public:
     QAction *actionModeLayer;
     QAction *actionModeSketch;
     QAction *actionShowArea;
+    QAction *actionAreaSelect;
+    QAction *actionAreaCreate;
+    QAction *actionSketch;
     QWidget *centralWidget;
     QMenuBar *menuBar;
     QMenu *menuFile;
     QMenu *menuWindow;
+    QMenu *menuArea;
     QToolBar *mainToolBar;
     QStatusBar *statusBar;
 
@@ -121,6 +125,15 @@ public:
         actionModeSketch->setCheckable(true);
         actionShowArea = new QAction(MainWindow);
         actionShowArea->setObjectName(QString::fromUtf8("actionShowArea"));
+        actionAreaSelect = new QAction(MainWindow);
+        actionAreaSelect->setObjectName(QString::fromUtf8("actionAreaSelect"));
+        actionAreaSelect->setCheckable(true);
+        actionAreaCreate = new QAction(MainWindow);
+        actionAreaCreate->setObjectName(QString::fromUtf8("actionAreaCreate"));
+        actionAreaCreate->setCheckable(true);
+        actionSketch = new QAction(MainWindow);
+        actionSketch->setObjectName(QString::fromUtf8("actionSketch"));
+        actionSketch->setCheckable(true);
         centralWidget = new QWidget(MainWindow);
         centralWidget->setObjectName(QString::fromUtf8("centralWidget"));
         MainWindow->setCentralWidget(centralWidget);
@@ -131,6 +144,8 @@ public:
         menuFile->setObjectName(QString::fromUtf8("menuFile"));
         menuWindow = new QMenu(menuBar);
         menuWindow->setObjectName(QString::fromUtf8("menuWindow"));
+        menuArea = new QMenu(menuBar);
+        menuArea->setObjectName(QString::fromUtf8("menuArea"));
         MainWindow->setMenuBar(menuBar);
         mainToolBar = new QToolBar(MainWindow);
         mainToolBar->setObjectName(QString::fromUtf8("mainToolBar"));
@@ -140,12 +155,17 @@ public:
         MainWindow->setStatusBar(statusBar);
 
         menuBar->addAction(menuFile->menuAction());
+        menuBar->addAction(menuArea->menuAction());
         menuBar->addAction(menuWindow->menuAction());
         menuFile->addAction(actionNew);
         menuFile->addAction(actionOpen);
         menuFile->addSeparator();
         menuFile->addAction(actionExit);
         menuWindow->addAction(actionControlWidget);
+        menuArea->addAction(actionAreaSelect);
+        menuArea->addAction(actionAreaCreate);
+        menuArea->addSeparator();
+        menuArea->addAction(actionSketch);
 
         retranslateUi(MainWindow);
 
@@ -185,8 +205,12 @@ public:
         actionModeLayer->setText(QApplication::translate("MainWindow", "Graph", 0, QApplication::UnicodeUTF8));
         actionModeSketch->setText(QApplication::translate("MainWindow", "Sketch", 0, QApplication::UnicodeUTF8));
         actionShowArea->setText(QApplication::translate("MainWindow", "Show Area", 0, QApplication::UnicodeUTF8));
+        actionAreaSelect->setText(QApplication::translate("MainWindow", "Select", 0, QApplication::UnicodeUTF8));
+        actionAreaCreate->setText(QApplication::translate("MainWindow", "Create", 0, QApplication::UnicodeUTF8));
+        actionSketch->setText(QApplication::translate("MainWindow", "Sketch", 0, QApplication::UnicodeUTF8));
         menuFile->setTitle(QApplication::translate("MainWindow", "File", 0, QApplication::UnicodeUTF8));
         menuWindow->setTitle(QApplication::translate("MainWindow", "Window", 0, QApplication::UnicodeUTF8));
+        menuArea->setTitle(QApplication::translate("MainWindow", "Area", 0, QApplication::UnicodeUTF8));
     } // retranslateUi
 
 };
