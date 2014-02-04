@@ -1,6 +1,7 @@
 #pragma once
 
-#include <qvector2d.h>
+#include <vector>
+#include <QVector2D>
 #include <boost/shared_ptr.hpp>
 
 class RoadVertex {
@@ -8,6 +9,9 @@ public:
 	QVector2D pt;
 	bool valid;
 	bool virt;
+
+	std::vector<float> angles;
+	std::vector<float> lengths;
 
 public:
 	RoadVertex();

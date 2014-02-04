@@ -24,5 +24,8 @@ public:
 	static float normalizeAngle(float angle);
 	static float diffAngle(const QVector2D& dir1, const QVector2D& dir2, bool absolute = true);
 	static float diffAngle(float angle1, float angle2, bool absolute = true);
+
+	// 乱数関係
+	static float uniform_rand();
 };
 

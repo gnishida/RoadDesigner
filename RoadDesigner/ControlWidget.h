@@ -23,9 +23,7 @@ public:
 
 public slots:
 	void showLocalStreet(int flag);
-	void detectGrid();
-	void detectPlaza();
-	void detectRadial();
-	void detectGridRadial();
+	void generateGrid();
+	void generateRadial();
 };
 

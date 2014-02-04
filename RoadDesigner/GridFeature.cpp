@@ -1,5 +1,8 @@
 ﻿#include "GridFeature.h"
 #include "Util.h"
+#include <QFile>
+#include <QDomDocument>
+#include <random>
 
 #ifndef M_PI
 #define M_PI	3.141592653
@@ -136,6 +139,108 @@ bool GridFeature::isClose(const QVector2D& dir, float threshold) {
 	else return false;
 }
 
+std::vector<float> GridFeature::getAngles() const {
+	std::vector<float> ret;
+	ret.push_back(angle1);
+	ret.push_back(angle2);
+	ret.push_back(angle1 + M_PI);
+	ret.push_back(angle2 + M_PI);
+
+	return ret;
+}
+
+std::vector<float> GridFeature::getLengths() const {
+	std::vector<float> ret;
+	ret.push_back(generateLength(0, Util::uniform_rand()));
+	ret.push_back(generateLength(1, Util::uniform_rand()));
+	ret.push_back(generateLength(2, Util::uniform_rand()));
+	ret.push_back(generateLength(3, Util::uniform_rand()));
+
+	return ret;
+}
+
+/** 
+ * 与えられたuniform random numberに基づいて、エッジの長さを生成する。
+ *
+ * @param dir		0 - 第１象限 / 1 - 第２象限 / 2 - 第３象限 / 3 - 第４象限
+ */
+float GridFeature::generateLength(int dir, float uniform_random_number) const {
+	if (dir == 0 || dir == 2) {
+		for (QMap<float, float>::iterator it = length1.begin(); it != length1.end(); ++it) {
+			if (uniform_random_number <= length1[it.key()]) return it.key();
+		}
+	} else {
+		for (QMap<float, float>::iterator it = length2.begin(); it != length2.end(); ++it) {
+			if (uniform_random_number <= length2[it.key()]) return it.key();
+		}
+	}
+
+	return 0.0f;
+}
+
+/**
+ * ファイルから、グリッドの特徴量を読込む。
+ */
+void GridFeature::load(QString filename) {
+	QFile file(filename);
+
+	QDomDocument doc;
+	doc.setContent(&file, true);
+	QDomElement root = doc.documentElement();
+
+	QDomNode node = root.firstChild();
+	while (!node.isNull()) {
+		if (node.toElement().tagName() == "feature") {
+			if (node.toElement().attribute("type") == "grid") {
+				load(node);
+				break;
+			}
+		}
+
+		node = node.nextSibling();
+	}
+}
+
+/**
+ * 与えられたfeatureノード配下のXML情報に基づいて、グリッド特徴量を設定する。
+ */
+void GridFeature::load(QDomNode& node) {
+	length1.clear();
+	length2.clear();
+
+	QDomNode child = node.firstChild();
+	while (!child.isNull()) {
+		if (child.toElement().tagName() == "angle1") {
+			angle1 = child.firstChild().nodeValue().toFloat();
+		} else if (child.toElement().tagName() == "angle2") {
+			angle2 = child.firstChild().nodeValue().toFloat();
+		} else if (child.toElement().tagName() == "length1") {
+			QDomNode child2 = child.firstChild();
+			while (!child2.isNull()) {
+				float len = child2.toElement().attribute("key").toFloat();
+				float accm = child2.firstChild().nodeValue().toFloat();
+				length1[len] = accm;
+
+				child2 = child2.nextSibling();
+			}
+		} else if (child.toElement().tagName() == "length2") {
+			QDomNode child2 = child.firstChild();
+			while (!child2.isNull()) {
+				float len = child2.toElement().attribute("key").toFloat();
+				float accm = child2.firstChild().nodeValue().toFloat();
+				length2[len] = accm;
+
+				child2 = child2.nextSibling();
+			}
+		}
+
+		child = child.nextSibling();
+	}
+}
+
+/**
+ * 領域を塗りつぶすための色を自動で生成する。
+ */
 QColor GridFeature::color() {
 	return QColor(0, 0, 255 - group_id * 64 % 255);
 }
@@ -146,3 +251,4 @@ QColor GridFeature::color() {
 Polygon2D GridFeature::polygon() {
 	return _polygon;
 }
+

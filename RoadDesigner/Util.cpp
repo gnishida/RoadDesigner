@@ -216,3 +216,7 @@ float Util::diffAngle(float angle1, float angle2, bool absolute) {
 	}
 }
 
+float Util::uniform_rand() {
+	return rand() / (float(RAND_MAX) + 1);
+}
+
