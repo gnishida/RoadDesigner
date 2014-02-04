@@ -534,13 +534,31 @@ bool Polygon2D::reorientFace(bool onlyCheck) {
 }
 
 bool Polygon2D::contains(const QVector2D& pt) const {
+	std::vector<Loop2D> trapezoids;
+	tessellate(trapezoids);
+
+	for (int i = 0; i < trapezoids.size(); ++i) {
+		bool outside = false;
+
+		int sz = trapezoids[i].size();
+		for (int j = 0; j < sz; ++j) {
+			QVector2D vec1 = trapezoids[i][(j + 1) % sz] - trapezoids[i][j];
+			QVector2D vec2 = pt - trapezoids[i][j];
+			if (vec1.x() * vec2.y() - vec1.y() * vec2.x() > 0) outside = true;
+		}
+
+		if (!outside) return true;
+	}
+
+	/*
 	for (int i = 0; i < size(); ++i) {
 		QVector2D vec1 = contour[(i + 1) % size()] - contour[i];
 		QVector2D vec2 = pt - contour[i];
 		if (vec1.x() * vec2.y() - vec1.y() * vec2.x() > 0) return false;
 	}
-
 	return true;
+	*/
+	return false;
 }
 
 void Polygon2D::tessellate(std::vector<Loop2D>& trapezoids) const {
