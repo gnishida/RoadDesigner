@@ -276,8 +276,8 @@ void RoadGenerator::generateCircleAvenues(RoadGraph& roads, const Polygon2D& are
 
 	std::vector<RoadVertexDesc> first_descs;
 	std::vector<RoadVertexDesc> prev_descs;
-	first_descs.reserve(rf.radii.size());
-	prev_descs.reserve(rf.radii.size());
+	first_descs.resize(rf.radii.size());
+	prev_descs.resize(rf.radii.size());
 
 	for (int i = 0; i < rf.numDirections; ++i, theta += theta_step) {
 		for (int j = 0; j < rf.radii.size(); ++j) {
