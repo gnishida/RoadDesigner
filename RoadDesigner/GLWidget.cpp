@@ -57,7 +57,7 @@ void GLWidget::drawScene() {
 		if (i == selectedArea) {
 			renderer->renderArea(areas[i], GL_LINE_STIPPLE, QColor(0, 0, 255), height);
 		} else {
-			renderer->renderArea(areas[i], GL_LINE_STIPPLE, QColor(128, 128, 255), height);
+			renderer->renderArea(areas[i], GL_LINE_STIPPLE, QColor(196, 196, 255), height);
 		}
 	}
 }
@@ -118,6 +118,13 @@ void GLWidget::mousePressEvent(QMouseEvent *e) {
 	if (e->buttons() & Qt::LeftButton) {
 		switch (mainWin->mode) {
 		case MainWindow::MODE_AREA_SELECT:
+			selectedArea = -1;
+			for (int i = 0; i < areas.size(); ++i) {
+				if (areas[i].contains(pos)) {
+					selectedArea = i;
+					break;
+				}
+			}
 			break;
 		case MainWindow::MODE_AREA_CREATE:
 			if (!selectedAreaBuilder.selecting()) {
@@ -195,6 +202,7 @@ void GLWidget::mouseDoubleClickEvent(QMouseEvent *e) {
 	case MainWindow::MODE_AREA_CREATE:
 		selectedAreaBuilder.end();
 		areas.push_back(selectedAreaBuilder.polygon());
+		selectedArea = areas.size() - 1;
 
 		mainWin->mode = MainWindow::MODE_AREA_SELECT;
 		break;
