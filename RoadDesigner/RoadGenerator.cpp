@@ -9,7 +9,7 @@ RoadGenerator::~RoadGenerator() {
 }
 
 /**
- * 道路網を生成する
+ * グリッドパターンの道路網を生成する
  */
 void RoadGenerator::generateRoadNetwork(RoadGraph& roads, const Polygon2D& area, const GridFeature& gf) {
 	// Avenue用シード
@@ -26,6 +26,22 @@ void RoadGenerator::generateRoadNetwork(RoadGraph& roads, const Polygon2D& area,
 	seeds = initSeeds;
 	while (!seeds.empty()) {
 		seeds = expandHorizontalAvenues(roads, area, gf, seeds, 3, gf.generateLength(3, Util::uniform_rand()));
+	}
+}
+
+/**
+ * Radialパターンの道路網を生成する
+ */
+void RoadGenerator::generateRoadNetwork(RoadGraph& roads, const Polygon2D& area, const RadialFeature& rf) {
+	// 円形の道路を生成すると共に、シードを生成する
+	std::list<RoadVertexDesc> seeds;
+	generateCircleAvenues(roads, area, rf, seeds);
+
+	// シードから放射線状にAvenueを生成する
+	while (!seeds.empty()) {
+		RoadVertexDesc desc = seeds.front();
+		seeds.pop_front();
+		expandRadialAvenues(roads, area, rf, desc);
 	}
 }
 
@@ -90,7 +106,6 @@ void RoadGenerator::generateHorizontalAvenues(RoadGraph& roads, const Polygon2D&
 		// シードに追加
 		seeds.push_back(desc);
 	}
-
 }
 
 /**
@@ -174,4 +189,66 @@ std::list<RoadVertexDesc> RoadGenerator::expandHorizontalAvenues(RoadGraph& road
 	}
 
 	return newSeeds;
+}
+
+/**
+ * 指定されたRadial Featureに基づき、円形の道路を生成する。
+ */
+void RoadGenerator::generateCircleAvenues(RoadGraph& roads, const Polygon2D& area,  const RadialFeature& rf, std::list<RoadVertexDesc>& seeds) {
+	seeds.clear();
+
+	BBox bbox = area.getLoopAABB();
+	QVector2D center = bbox.midPt();
+
+	float theta = Util::uniform_rand() * M_PI * 2.0f;
+	float theta_step = M_PI * 2.0f / rf.numDirections;
+
+	bool prev_valid = false;
+	RoadVertexDesc prev_desc;
+	for (int i = 0; i < rf.numDirections; ++i) {
+		// 頂点を追加
+		QVector2D pt = center + QVector2D(cosf(theta), sinf(theta)) * rf.radius;
+		RoadVertexPtr v = RoadVertexPtr(new RoadVertex(pt));
+		RoadVertexDesc desc = GraphUtil::addVertex(roads, v);
+		roads.graph[desc]->angles.push_back(Util::normalizeAngle(theta));
+
+		if (prev_valid) {
+			// １つ前の頂点との間にエッジを生成
+			GraphUtil::addEdge(roads, prev_desc, desc, 2, 1);
+
+			prev_valid = true;
+		}
+
+		prev_desc = desc;		
+
+		// シードに追加
+		seeds.push_back(desc);
+
+		theta += theta_step;
+	}
+}
+
+/** 
+ * 指定された頂点から、道路を延長していく。
+ * この道路は、放射線上の道路のうちの１つの線を構成する。
+ */
+void RoadGenerator::expandRadialAvenues(RoadGraph& roads, const Polygon2D& area, const RadialFeature& rf, RoadVertexDesc desc) {
+	RoadVertexDesc prev_desc = desc;
+
+	while (true) {
+		float theta = roads.graph[prev_desc]->angles[0];
+		QVector2D pt = roads.graph[prev_desc]->pt + QVector2D(cosf(theta), sinf(theta)) * 200.0f;
+
+		// エリア内かどうかチェック
+		if (!area.contains(pt)) break;
+
+		// 頂点を追加
+		RoadVertexPtr v = RoadVertexPtr(new RoadVertex(pt));
+		RoadVertexDesc desc = GraphUtil::addVertex(roads, v);
+
+		// １つ前の頂点との間にエッジを生成
+		GraphUtil::addEdge(roads, prev_desc, desc, 2, 1);
+
+		prev_desc = desc;
+	}
 }

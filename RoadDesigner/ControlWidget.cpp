@@ -13,6 +13,7 @@ ControlWidget::ControlWidget(MainWindow* mainWin) : QDockWidget("Control Widget"
 	ui.setupUi(this);
 	ui.checkBoxRoadTypeAvenue->setChecked(true);
 	ui.checkBoxRoadTypeLocalStreet->setChecked(true);
+	ui.radioButtonGridPattern1->setChecked(true);
 
 	// register the event handlers
 	connect(ui.checkBoxRoadTypeLocalStreet, SIGNAL(stateChanged(int)), this, SLOT(showLocalStreet(int)));
@@ -38,8 +39,13 @@ void ControlWidget::showLocalStreet(int flag) {
 void ControlWidget::generateGrid() {
 	if (mainWin->glWidget->selectedArea == -1) return;
 
-	GridFeature gf(0);
-	gf.load("grid_feature.xml");
+	GridFeature gf(mainWin->glWidget->selectedArea);
+
+	if (ui.radioButtonGridPattern1->isChecked()) {
+		gf.load("grid_feature1.xml");
+	} else {
+		gf.load("grid_feature2.xml");
+	}
 	RoadGenerator rg;
 	rg.generateRoadNetwork(mainWin->glWidget->roads, mainWin->glWidget->areas[mainWin->glWidget->selectedArea], gf);
 
@@ -50,6 +56,13 @@ void ControlWidget::generateGrid() {
  * Event handler for button [Generate Radial]
  */
 void ControlWidget::generateRadial() {
+	if (mainWin->glWidget->selectedArea == -1) return;
+
+	RadialFeature rf(mainWin->glWidget->selectedArea);
+	rf.load("radial_feature1.xml");
+	RoadGenerator rg;
+	rg.generateRoadNetwork(mainWin->glWidget->roads, mainWin->glWidget->areas[mainWin->glWidget->selectedArea], rf);
+
 	mainWin->glWidget->updateGL();
 }
 

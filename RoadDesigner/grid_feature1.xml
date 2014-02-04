@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<features>
+	<feature type="grid">
+		<angle1>0.1580521</angle1>
+		<angle2>1.7288481</angle2>
+		<length1>
+			<data key="120.0">0.1</data>
+			<data key="140.0">1</data>
+		</length1>
+		<length2>
+			<data key="80.0">0.1</data>
+			<data key="100.0">1</data>
+		</length2>
+	</feature>
+</features>

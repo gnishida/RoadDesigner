@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<features>
+	<feature type="radial">
+		<radius>30.0</radius>
+		<directions>12</directions>
+	</feature>
+</features>

@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'ControlWidget.ui'
 **
-** Created: Mon Feb 3 21:35:26 2014
+** Created: Tue Feb 4 13:11:49 2014
 **      by: Qt User Interface Compiler version 4.8.1
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
@@ -19,6 +19,7 @@
 #include <QtGui/QGroupBox>
 #include <QtGui/QHeaderView>
 #include <QtGui/QPushButton>
+#include <QtGui/QRadioButton>
 #include <QtGui/QWidget>
 
 QT_BEGIN_NAMESPACE
@@ -29,46 +30,59 @@ public:
     QWidget *dockWidgetContents;
     QGroupBox *groupBox_3;
     QPushButton *pushButtonGenerateGrid;
+    QRadioButton *radioButtonGridPattern1;
+    QRadioButton *radioButtonGridPattern1_2;
     QGroupBox *groupBox_6;
     QPushButton *pushButtonGenerateRadial;
-    QGroupBox *groupBox_7;
-    QPushButton *pushButtonDetectGridRadial;
     QCheckBox *checkBoxRoadTypeAvenue;
     QCheckBox *checkBoxRoadTypeLocalStreet;
+    QGroupBox *groupBox_7;
+    QPushButton *pushButtonGenerateRandom;
+    QButtonGroup *buttonGroupGridPattern;
 
     void setupUi(QDockWidget *ControlWidget)
     {
         if (ControlWidget->objectName().isEmpty())
             ControlWidget->setObjectName(QString::fromUtf8("ControlWidget"));
-        ControlWidget->resize(218, 831);
-        ControlWidget->setMinimumSize(QSize(218, 240));
+        ControlWidget->resize(190, 831);
+        ControlWidget->setMinimumSize(QSize(190, 240));
         ControlWidget->setStyleSheet(QString::fromUtf8("background-color: rgb(181, 181, 181);"));
         dockWidgetContents = new QWidget();
         dockWidgetContents->setObjectName(QString::fromUtf8("dockWidgetContents"));
         groupBox_3 = new QGroupBox(dockWidgetContents);
         groupBox_3->setObjectName(QString::fromUtf8("groupBox_3"));
-        groupBox_3->setGeometry(QRect(10, 60, 201, 61));
+        groupBox_3->setGeometry(QRect(10, 60, 171, 131));
         pushButtonGenerateGrid = new QPushButton(groupBox_3);
         pushButtonGenerateGrid->setObjectName(QString::fromUtf8("pushButtonGenerateGrid"));
-        pushButtonGenerateGrid->setGeometry(QRect(40, 20, 121, 31));
+        pushButtonGenerateGrid->setGeometry(QRect(20, 90, 131, 31));
+        radioButtonGridPattern1 = new QRadioButton(groupBox_3);
+        buttonGroupGridPattern = new QButtonGroup(ControlWidget);
+        buttonGroupGridPattern->setObjectName(QString::fromUtf8("buttonGroupGridPattern"));
+        buttonGroupGridPattern->addButton(radioButtonGridPattern1);
+        radioButtonGridPattern1->setObjectName(QString::fromUtf8("radioButtonGridPattern1"));
+        radioButtonGridPattern1->setGeometry(QRect(30, 20, 101, 17));
+        radioButtonGridPattern1_2 = new QRadioButton(groupBox_3);
+        buttonGroupGridPattern->addButton(radioButtonGridPattern1_2);
+        radioButtonGridPattern1_2->setObjectName(QString::fromUtf8("radioButtonGridPattern1_2"));
+        radioButtonGridPattern1_2->setGeometry(QRect(30, 40, 101, 17));
         groupBox_6 = new QGroupBox(dockWidgetContents);
         groupBox_6->setObjectName(QString::fromUtf8("groupBox_6"));
-        groupBox_6->setGeometry(QRect(10, 140, 201, 61));
+        groupBox_6->setGeometry(QRect(10, 210, 171, 61));
         pushButtonGenerateRadial = new QPushButton(groupBox_6);
         pushButtonGenerateRadial->setObjectName(QString::fromUtf8("pushButtonGenerateRadial"));
-        pushButtonGenerateRadial->setGeometry(QRect(40, 20, 121, 31));
-        groupBox_7 = new QGroupBox(dockWidgetContents);
-        groupBox_7->setObjectName(QString::fromUtf8("groupBox_7"));
-        groupBox_7->setGeometry(QRect(10, 710, 201, 61));
-        pushButtonDetectGridRadial = new QPushButton(groupBox_7);
-        pushButtonDetectGridRadial->setObjectName(QString::fromUtf8("pushButtonDetectGridRadial"));
-        pushButtonDetectGridRadial->setGeometry(QRect(40, 20, 121, 31));
+        pushButtonGenerateRadial->setGeometry(QRect(20, 20, 131, 31));
         checkBoxRoadTypeAvenue = new QCheckBox(dockWidgetContents);
         checkBoxRoadTypeAvenue->setObjectName(QString::fromUtf8("checkBoxRoadTypeAvenue"));
-        checkBoxRoadTypeAvenue->setGeometry(QRect(20, 10, 70, 17));
+        checkBoxRoadTypeAvenue->setGeometry(QRect(10, 10, 70, 17));
         checkBoxRoadTypeLocalStreet = new QCheckBox(dockWidgetContents);
         checkBoxRoadTypeLocalStreet->setObjectName(QString::fromUtf8("checkBoxRoadTypeLocalStreet"));
-        checkBoxRoadTypeLocalStreet->setGeometry(QRect(100, 10, 91, 17));
+        checkBoxRoadTypeLocalStreet->setGeometry(QRect(80, 10, 91, 17));
+        groupBox_7 = new QGroupBox(dockWidgetContents);
+        groupBox_7->setObjectName(QString::fromUtf8("groupBox_7"));
+        groupBox_7->setGeometry(QRect(10, 290, 171, 61));
+        pushButtonGenerateRandom = new QPushButton(groupBox_7);
+        pushButtonGenerateRandom->setObjectName(QString::fromUtf8("pushButtonGenerateRandom"));
+        pushButtonGenerateRandom->setGeometry(QRect(20, 20, 131, 31));
         ControlWidget->setWidget(dockWidgetContents);
 
         retranslateUi(ControlWidget);
@@ -80,12 +94,14 @@ public:
     {
         groupBox_3->setTitle(QApplication::translate("ControlWidget", "Grid Pattern", 0, QApplication::UnicodeUTF8));
         pushButtonGenerateGrid->setText(QApplication::translate("ControlWidget", "Generate Grid", 0, QApplication::UnicodeUTF8));
+        radioButtonGridPattern1->setText(QApplication::translate("ControlWidget", "Grid Pattern 1", 0, QApplication::UnicodeUTF8));
+        radioButtonGridPattern1_2->setText(QApplication::translate("ControlWidget", "Grid Pattern 2", 0, QApplication::UnicodeUTF8));
         groupBox_6->setTitle(QApplication::translate("ControlWidget", "Radial Pattern", 0, QApplication::UnicodeUTF8));
         pushButtonGenerateRadial->setText(QApplication::translate("ControlWidget", "Generate Radial", 0, QApplication::UnicodeUTF8));
-        groupBox_7->setTitle(QApplication::translate("ControlWidget", "Grid / Radial Detection", 0, QApplication::UnicodeUTF8));
-        pushButtonDetectGridRadial->setText(QApplication::translate("ControlWidget", "Detect Grid / Radial", 0, QApplication::UnicodeUTF8));
         checkBoxRoadTypeAvenue->setText(QApplication::translate("ControlWidget", "Avenues", 0, QApplication::UnicodeUTF8));
         checkBoxRoadTypeLocalStreet->setText(QApplication::translate("ControlWidget", "Local Streets", 0, QApplication::UnicodeUTF8));
+        groupBox_7->setTitle(QApplication::translate("ControlWidget", "Random Pattern", 0, QApplication::UnicodeUTF8));
+        pushButtonGenerateRandom->setText(QApplication::translate("ControlWidget", "Generate Random", 0, QApplication::UnicodeUTF8));
         Q_UNUSED(ControlWidget);
     } // retranslateUi
 
