@@ -16,6 +16,7 @@ public:
 
 private:
 	void generateHorizontalAvenueSeeds(RoadGraph& roads, const Polygon2D& area, const GridFeature& gf, std::list<RoadVertexDesc>& seeds);
+	void expandHorizontalAvenueSeeds(RoadGraph& roads, const Polygon2D& area, const GridFeature& gf, RoadVertexDesc start_desc, int direction, std::list<RoadVertexDesc>& seeds);
 	std::list<RoadVertexDesc> generateHorizontalAvenues(RoadGraph& roads, const Polygon2D& area, const GridFeature& gf, std::list<RoadVertexDesc>& seeds, int dir, float length);
 	void expandHorizontalAvenue(RoadGraph& roads, const Polygon2D& area, const GridFeature& gf, RoadVertexDesc start_desc, int direction, std::list<RoadVertexDesc>& seeds);
 

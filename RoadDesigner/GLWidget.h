@@ -23,15 +23,12 @@ public:
 	Camera* camera;
 	SimpleFlatTerrain terrain;
 	//RoadGraph roads;
-	//RoadGraph origRoads;
 	RoadGraphRenderer* renderer;
 	QPoint lastPos;
 	//std::vector<Polygon2D> areas;
 	std::vector<RoadArea> areas;
 	int selectedArea;
 	PolygonAreaBuilder selectedAreaBuilder;
-	//std::vector<GridFeature> gridFeatures;
-	//std::vector<RadialFeature> radialFeatures;
 
 	// key status
 	bool shiftPressed;
