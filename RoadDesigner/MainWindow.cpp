@@ -38,6 +38,9 @@ void MainWindow::keyReleaseEvent(QKeyEvent* e) {
 void MainWindow::onNew() {
 	glWidget->roads.clear();
 
+	// clear the areas
+	glWidget->areas.clear();
+
 	// clear the features
 	glWidget->gridFeatures.clear();
 	glWidget->radialFeatures.clear();

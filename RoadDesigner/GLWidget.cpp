@@ -117,6 +117,7 @@ void GLWidget::mousePressEvent(QMouseEvent *e) {
 		}
 		
 		if (selectedAreaBuilder.selecting()) {
+			snap(pos);
 			selectedAreaBuilder.addPoint(pos);
 		}
 	}
@@ -154,6 +155,7 @@ void GLWidget::mouseMoveEvent(QMouseEvent *e) {
 
 		lastPos = e->pos();
 	} else if (selectedAreaBuilder.selecting()) {	// Move the last point of the selected polygonal area
+		snap(pos);
 		selectedAreaBuilder.moveLastPoint(pos);
 	}
 
@@ -258,8 +260,17 @@ void GLWidget::mouseTo2D(int x,int y, QVector2D &result) {
 }
 
 /**
- * Round the position to a grid (100m x 100m)
+ * Round the position to a grid (200m x 200m)
  */
 void GLWidget::snap(QVector2D &pos) {
-	
+	if (pos.x() > 0) {
+		pos.setX(((int)pos.x() + 100) / 200 * 200);
+	} else {
+		pos.setX(((int)pos.x() - 100) / 200 * 200);
+	}
+	if (pos.y() > 0) {
+		pos.setY(((int)pos.y() + 100) / 200 * 200);
+	} else {
+		pos.setY(((int)pos.y() - 100) / 200 * 200);
+	}
 }
