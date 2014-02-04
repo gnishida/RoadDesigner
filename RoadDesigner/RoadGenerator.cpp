@@ -194,7 +194,7 @@ std::list<RoadVertexDesc> RoadGenerator::expandHorizontalAvenues(RoadGraph& road
 /**
  * 指定されたRadial Featureに基づき、円形の道路を生成する。
  */
-void RoadGenerator::generateCircleAvenues(RoadGraph& roads, const Polygon2D& area,  const RadialFeature& rf, std::list<RoadVertexDesc>& seeds) {
+void RoadGenerator::generateCircleAvenues(RoadGraph& roads, const Polygon2D& area, const RadialFeature& rf, std::list<RoadVertexDesc>& seeds) {
 	seeds.clear();
 
 	BBox bbox = area.getLoopAABB();
@@ -204,8 +204,9 @@ void RoadGenerator::generateCircleAvenues(RoadGraph& roads, const Polygon2D& are
 	float theta_step = M_PI * 2.0f / rf.numDirections;
 
 	bool prev_valid = false;
+	RoadVertexDesc first_desc;
 	RoadVertexDesc prev_desc;
-	for (int i = 0; i < rf.numDirections; ++i) {
+	for (int i = 0; i < rf.numDirections; ++i, theta += theta_step) {
 		// 頂点を追加
 		QVector2D pt = center + QVector2D(cosf(theta), sinf(theta)) * rf.radius;
 		RoadVertexPtr v = RoadVertexPtr(new RoadVertex(pt));
@@ -215,17 +216,21 @@ void RoadGenerator::generateCircleAvenues(RoadGraph& roads, const Polygon2D& are
 		if (prev_valid) {
 			// １つ前の頂点との間にエッジを生成
 			GraphUtil::addEdge(roads, prev_desc, desc, 2, 1);
-
+		} else {
+			// １つ目の頂点
 			prev_valid = true;
-		}
 
-		prev_desc = desc;		
+			first_desc = desc;
+		}
 
 		// シードに追加
 		seeds.push_back(desc);
 
-		theta += theta_step;
+		prev_desc = desc;
 	}
+
+	// 最後の頂点と最初の頂点を結ぶエッジを追加
+	GraphUtil::addEdge(roads, prev_desc, first_desc, 2, 1);
 }
 
 /** 
@@ -240,11 +245,28 @@ void RoadGenerator::expandRadialAvenues(RoadGraph& roads, const Polygon2D& area,
 		QVector2D pt = roads.graph[prev_desc]->pt + QVector2D(cosf(theta), sinf(theta)) * 200.0f;
 
 		// エリア内かどうかチェック
-		if (!area.contains(pt)) break;
+		if (!area.contains(pt)) {
+			// エリア外周との交点を求める
+			float tab, tcd;
+			QVector2D intPoint;
+			area.intersect(roads.graph[prev_desc]->pt, pt, &tab, &tcd, intPoint);
+
+			// 外周上に頂点を追加
+			RoadVertexPtr v = RoadVertexPtr(new RoadVertex(intPoint));
+			RoadVertexDesc desc = GraphUtil::addVertex(roads, v);
+
+			// １つ前の頂点との間にエッジを生成
+			GraphUtil::addEdge(roads, prev_desc, desc, 2, 1);
+
+			break;
+		}
 
 		// 頂点を追加
 		RoadVertexPtr v = RoadVertexPtr(new RoadVertex(pt));
 		RoadVertexDesc desc = GraphUtil::addVertex(roads, v);
+
+		// とりあえず、角度は１つ前のものをコピーしておく
+		roads.graph[desc]->angles.push_back(theta);
 
 		// １つ前の頂点との間にエッジを生成
 		GraphUtil::addEdge(roads, prev_desc, desc, 2, 1);

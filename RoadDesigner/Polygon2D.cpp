@@ -1,4 +1,4 @@
-#include "Polygon2D.h"
+﻿#include "Polygon2D.h"
 #include "Util.h"
 #include <QVector2D>
 #include <QMatrix4x4>
@@ -590,6 +590,22 @@ void Polygon2D::tessellate(std::vector<Loop2D>& trapezoids) const {
 
 		if (trapezoid.size() >= 3) trapezoids.push_back(trapezoid);
 	}
+}
+
+/**
+ * このポリゴンと、与えられた線（または線分）との交点を求める
+ */
+bool Polygon2D::intersect(const QVector2D& a, const QVector2D& b, float *tab, float *tcd, QVector2D &intPoint) const {
+	for (int i = 0; i < size(); ++i) {
+		QVector2D c = contour[i];
+		QVector2D d = contour[(i + 1) % size()];
+
+		if (Util::segmentSegmentIntersectXY(a, b, c, d, tab, tcd, true, intPoint)) {
+			return true;
+		}
+	}
+
+	return false;
 }
 
 /**

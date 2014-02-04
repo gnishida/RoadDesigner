@@ -29,10 +29,12 @@ void RadialFeature::load(QString filename) {
  * 与えられたfeatureノード配下のXML情報に基づいて、Radial特徴量を設定する。
  */
 void RadialFeature::load(QDomNode& node) {
+	radii.clear();
+
 	QDomNode child = node.firstChild();
 	while (!child.isNull()) {
 		if (child.toElement().tagName() == "radius") {
-			radius = child.firstChild().nodeValue().toFloat();
+			radii.push_back(child.firstChild().nodeValue().toFloat());
 		} else if (child.toElement().tagName() == "directions") {
 			numDirections = child.firstChild().nodeValue().toInt();
 		}

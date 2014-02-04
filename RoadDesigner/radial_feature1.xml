@@ -2,6 +2,7 @@
 <features>
 	<feature type="radial">
 		<radius>30.0</radius>
+		<radius>85.0</radius>
 		<directions>12</directions>
 	</feature>
 </features>

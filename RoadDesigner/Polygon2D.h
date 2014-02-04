@@ -22,10 +22,8 @@ protected:
 	/** Vector containing 3D points of polygon contour */
 	Loop2D contour;
 
-	QVector2D normalVec;
 	QVector2D centroid;
 
-	//bool isNormalVecValid;
 	bool isCentroidValid;
 
 public:
@@ -35,21 +33,23 @@ public:
 	/**
 	 * Copy constructor.
 	 */
+	/*
 	inline Polygon2D::Polygon2D(const Polygon2D &ref) {	
 		contour = ref.contour;
-		normalVec = ref.normalVec;
 		centroid = ref.centroid;
 	}
+	*/
 
 	/**
 	 * Assignment operator.
 	 */
+	/*
 	inline Polygon2D& operator=(const Polygon2D &ref) {				
 		contour = ref.contour;
-		normalVec = ref.normalVec;
 		centroid = ref.centroid;
 		return (*this);
 	}
+	*/
 
 	const QVector2D& operator[](const int idx) const;
 	QVector2D& operator[](const int idx);
@@ -79,7 +79,8 @@ public:
 	bool contains(const QVector2D& pt) const;
 	void tessellate(std::vector<Loop2D>& trapezoids) const;
 
-	//static QVector3D getLoopNormalVector(const Loop2D &pin);
+	bool intersect(const QVector2D& a, const QVector2D& b, float *tab, float *tcd, QVector2D &intPoint) const;
+
 	static bool reorientFace(Loop2D& pface, bool onlyCheck = false);
 	//static int cleanLoop(const Loop2D& pin, Loop2D &pout, float threshold);
 	static void transformLoop(const Loop2D& pin, Loop2D& pout, QMatrix4x4& transformMat);
