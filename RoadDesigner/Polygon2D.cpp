@@ -544,7 +544,7 @@ bool Polygon2D::contains(const QVector2D& pt) const {
 		for (int j = 0; j < sz; ++j) {
 			QVector2D vec1 = trapezoids[i][(j + 1) % sz] - trapezoids[i][j];
 			QVector2D vec2 = pt - trapezoids[i][j];
-			if (vec1.x() * vec2.y() - vec1.y() * vec2.x() > 0) outside = true;
+			if (vec1.x() * vec2.y() - vec1.y() * vec2.x() < 0) outside = true;
 		}
 
 		if (!outside) return true;
@@ -561,6 +561,10 @@ bool Polygon2D::contains(const QVector2D& pt) const {
 	return false;
 }
 
+/**
+ * このポリゴンを三角形または凸四角形の集合に分割する。
+ * 各図形の頂点は、openでCCWオーダである。
+ */
 void Polygon2D::tessellate(std::vector<Loop2D>& trapezoids) const {
 	trapezoids.clear();
 
