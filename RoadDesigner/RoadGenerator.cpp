@@ -200,12 +200,12 @@ std::list<RoadVertexDesc> RoadGenerator::generateHorizontalAvenues(RoadGraph& ro
 
 	// さらに、右方向に伸ばしてみる
 	if (prev_valid) {
-		//expandHorizontalAvenue(roads, area, gf, prev_desc, 0, newSeeds);
+		expandHorizontalAvenue(roads, area, gf, prev_desc, 0, newSeeds);
 	}
 
 	// 最初のシード頂点を基点とし、左方向に伸ばしてみる
 	if (prev_valid) {
-		//expandHorizontalAvenue(roads, area, gf, start_desc, 2, newSeeds);
+		expandHorizontalAvenue(roads, area, gf, start_desc, 2, newSeeds);
 	}
 
 	return newSeeds;
