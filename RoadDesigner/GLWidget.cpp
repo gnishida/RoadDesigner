@@ -18,6 +18,10 @@ GLWidget::GLWidget(MainWindow* mainWin) : QGLWidget(QGLFormat(QGL::SampleBuffers
 	camera->setLookAt(0.0f, 0.0f, 0.0f);
 	camera->setTranslation(0.0f, 0.0f, (MIN_Z + MAX_Z) / 2.0f);
 
+	terrain.width = 5000.0f;
+	terrain.depth = 5000.0f;
+	terrain.elevation = 0.0f;
+
 	// initialize the width and others
 	roads.setZ((MIN_Z + MAX_Z) / 2.0f);
 
@@ -32,6 +36,9 @@ GLWidget::~GLWidget() {
 }
 
 void GLWidget::drawScene() {
+	terrain.generateMesh();
+	renderer->render(terrain.renderables);
+
 	// draw the road graph
 	roads.generateMesh();
 	renderer->render(roads.renderables);
@@ -104,6 +111,7 @@ void GLWidget::mousePressEvent(QMouseEvent *e) {
 
 	if (e->buttons() & Qt::LeftButton) {
 		if (!selectedAreaBuilder.selecting()) {
+			snap(pos);
 			selectedAreaBuilder.start(pos);
 			setMouseTracking(true);
 		}
@@ -160,7 +168,8 @@ void GLWidget::mouseDoubleClickEvent(QMouseEvent *e) {
 }
 
 void GLWidget::initializeGL() {
-	qglClearColor(QColor(233, 229, 220));
+	//qglClearColor(QColor(233, 229, 220));
+	qglClearColor(QColor(128, 128, 128));
 	glClearDepth(1.0f);
 
 	glTexEnvf( GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_REPLACE );
@@ -246,4 +255,11 @@ void GLWidget::mouseTo2D(int x,int y, QVector2D &result) {
 
 	result.setX(posX);
 	result.setY(posY);
+}
+
+/**
+ * Round the position to a grid (100m x 100m)
+ */
+void GLWidget::snap(QVector2D &pos) {
+	
 }

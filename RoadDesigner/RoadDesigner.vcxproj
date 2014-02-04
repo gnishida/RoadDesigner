@@ -177,6 +177,7 @@
     <ClCompile Include="RoadGraphRenderer.cpp" />
     <ClCompile Include="RoadSegmentationUtil.cpp" />
     <ClCompile Include="RoadVertex.cpp" />
+    <ClCompile Include="SimpleFlatTerrain.cpp" />
     <ClCompile Include="Util.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -242,6 +243,7 @@
     <ClInclude Include="RoadGraphRenderer.h" />
     <ClInclude Include="RoadSegmentationUtil.h" />
     <ClInclude Include="RoadVertex.h" />
+    <ClInclude Include="SimpleFlatTerrain.h" />
     <ClInclude Include="Util.h" />
     <CustomBuild Include="ControlWidget.h">
       <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(QTDIR)\bin\moc.exe;%(FullPath)</AdditionalInputs>

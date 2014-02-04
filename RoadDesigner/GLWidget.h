@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Camera.h"
+#include "SimpleFlatTerrain.h"
 #include "RoadGraph.h"
 #include "RoadGraphRenderer.h"
 #include "PolygonAreaBuilder.h"
@@ -19,6 +20,7 @@ public:
 public:
 	MainWindow* mainWin;
 	Camera* camera;
+	SimpleFlatTerrain terrain;
 	RoadGraph roads;
 	RoadGraph origRoads;
 	RoadGraphRenderer* renderer;
@@ -55,8 +57,7 @@ protected:
 
 private:
 	void mouseTo2D(int x, int y, QVector2D &result);
+	void GLWidget::snap(QVector2D &pos);
 	bool hitTest(const AbstractArea& area, const QVector2D& pt);
-	bool hitTestDistortionPoint(const AbstractArea& area, const QVector2D& pt);
-	bool hitTestResizingPoint(const AbstractArea& area, const QVector2D& pt);
 };
 
