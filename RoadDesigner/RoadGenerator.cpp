@@ -203,34 +203,45 @@ void RoadGenerator::generateCircleAvenues(RoadGraph& roads, const Polygon2D& are
 	float theta = Util::uniform_rand() * M_PI * 2.0f;
 	float theta_step = M_PI * 2.0f / rf.numDirections;
 
-	bool prev_valid = false;
-	RoadVertexDesc first_desc;
-	RoadVertexDesc prev_desc;
+	std::vector<RoadVertexDesc> first_descs;
+	std::vector<RoadVertexDesc> prev_descs;
+	first_descs.reserve(rf.radii.size());
+	prev_descs.reserve(rf.radii.size());
+
 	for (int i = 0; i < rf.numDirections; ++i, theta += theta_step) {
-		// 頂点を追加
-		QVector2D pt = center + QVector2D(cosf(theta), sinf(theta)) * rf.radius;
-		RoadVertexPtr v = RoadVertexPtr(new RoadVertex(pt));
-		RoadVertexDesc desc = GraphUtil::addVertex(roads, v);
-		roads.graph[desc]->angles.push_back(Util::normalizeAngle(theta));
+		for (int j = 0; j < rf.radii.size(); ++j) {
+			// 頂点を追加
+			QVector2D pt = center + QVector2D(cosf(theta), sinf(theta)) * rf.radii[j];
+			RoadVertexPtr v = RoadVertexPtr(new RoadVertex(pt));
+			RoadVertexDesc desc = GraphUtil::addVertex(roads, v);
+			roads.graph[desc]->angles.push_back(Util::normalizeAngle(theta));
 
-		if (prev_valid) {
-			// １つ前の頂点との間にエッジを生成
-			GraphUtil::addEdge(roads, prev_desc, desc, 2, 1);
-		} else {
-			// １つ目の頂点
-			prev_valid = true;
+			if (j > 0) {
+				// １つ内側の頂点との間に、エッジを生成
+				GraphUtil::addEdge(roads, desc - 1, desc, 2, 1);
+			}
 
-			first_desc = desc;
+			if (j == rf.radii.size() - 1) {
+				// 一番外の頂点を、シードに追加
+				seeds.push_back(desc);
+			}
+
+			if (i == 0) {
+				// 最初の頂点を保存しておく
+				first_descs[j] = desc;
+			} else {
+				// 時計方向に１つ前の頂点との間に、エッジを生成
+				GraphUtil::addEdge(roads, prev_descs[j], desc, 2, 1);
+			}
+
+			prev_descs[j] = desc;
 		}
-
-		// シードに追加
-		seeds.push_back(desc);
-
-		prev_desc = desc;
 	}
 
 	// 最後の頂点と最初の頂点を結ぶエッジを追加
-	GraphUtil::addEdge(roads, prev_desc, first_desc, 2, 1);
+	for (int i = 0; i < rf.radii.size(); ++i) {
+		GraphUtil::addEdge(roads, prev_descs[i], first_descs[i], 2, 1);
+	}
 }
 
 /** 

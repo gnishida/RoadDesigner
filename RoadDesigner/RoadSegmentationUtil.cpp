@@ -617,7 +617,7 @@ bool RoadSegmentationUtil::detectCircle(RoadGraph& roads, const Polygon2D& area,
 		if ((center - QVector2D(250, 250)).lengthSquared() < detectCircleThreshold2) {
 			std::cout << "Circle detected: (" << center.x() << "," << center.y() << ") R: " << r << std::endl;
 			rf.center += center - QVector2D(250, 250);
-			rf.radius = r;
+			rf.radii.push_back(r);
 
 			return true;
 		}
