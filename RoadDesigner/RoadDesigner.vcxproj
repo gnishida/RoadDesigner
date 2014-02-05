@@ -162,19 +162,22 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
     </ClCompile>
+    <ClCompile Include="GenericFeature.cpp" />
+    <ClCompile Include="GenericRoadGenerator.cpp" />
     <ClCompile Include="GLWidget.cpp" />
     <ClCompile Include="GraphUtil.cpp" />
     <ClCompile Include="GridFeature.cpp" />
+    <ClCompile Include="GridRoadGenerator.cpp" />
     <ClCompile Include="HoughTransform.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MainWindow.cpp" />
     <ClCompile Include="Polygon2D.cpp" />
     <ClCompile Include="PolygonAreaBuilder.cpp" />
     <ClCompile Include="RadialFeature.cpp" />
+    <ClCompile Include="RadialRoadGenerator.cpp" />
     <ClCompile Include="Renderable.cpp" />
     <ClCompile Include="RoadArea.cpp" />
     <ClCompile Include="RoadEdge.cpp" />
-    <ClCompile Include="RoadGenerator.cpp" />
     <ClCompile Include="RoadGraph.cpp" />
     <ClCompile Include="RoadGraphRenderer.cpp" />
     <ClCompile Include="RoadSegmentationUtil.cpp" />
@@ -232,17 +235,20 @@
     <ClInclude Include="Camera.h" />
     <ClInclude Include="CircleArea.h" />
     <ClInclude Include="ConvexHull.h" />
+    <ClInclude Include="GenericFeature.h" />
+    <ClInclude Include="GenericRoadGenerator.h" />
     <ClInclude Include="GLWidget.h" />
     <ClInclude Include="GraphUtil.h" />
     <ClInclude Include="GridFeature.h" />
+    <ClInclude Include="GridRoadGenerator.h" />
     <ClInclude Include="HoughTransform.h" />
     <ClInclude Include="Polygon2D.h" />
     <ClInclude Include="PolygonAreaBuilder.h" />
     <ClInclude Include="RadialFeature.h" />
+    <ClInclude Include="RadialRoadGenerator.h" />
     <ClInclude Include="Renderable.h" />
     <ClInclude Include="RoadArea.h" />
     <ClInclude Include="RoadEdge.h" />
-    <ClInclude Include="RoadGenerator.h" />
     <ClInclude Include="RoadGraph.h" />
     <ClInclude Include="RoadGraphRenderer.h" />
     <ClInclude Include="RoadSegmentationUtil.h" />

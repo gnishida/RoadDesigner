@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'ControlWidget.ui'
 **
-** Created: Tue Feb 4 15:44:42 2014
+** Created: Tue Feb 4 21:41:08 2014
 **      by: Qt User Interface Compiler version 4.8.1
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
@@ -37,7 +37,7 @@ public:
     QCheckBox *checkBoxRoadTypeAvenue;
     QCheckBox *checkBoxRoadTypeLocalStreet;
     QGroupBox *groupBox_7;
-    QPushButton *pushButtonGenerateRandom;
+    QPushButton *pushButtonGenerateGeneric;
     QButtonGroup *buttonGroupGridPattern;
 
     void setupUi(QDockWidget *ControlWidget)
@@ -80,9 +80,9 @@ public:
         groupBox_7 = new QGroupBox(dockWidgetContents);
         groupBox_7->setObjectName(QString::fromUtf8("groupBox_7"));
         groupBox_7->setGeometry(QRect(10, 290, 171, 61));
-        pushButtonGenerateRandom = new QPushButton(groupBox_7);
-        pushButtonGenerateRandom->setObjectName(QString::fromUtf8("pushButtonGenerateRandom"));
-        pushButtonGenerateRandom->setGeometry(QRect(20, 20, 131, 31));
+        pushButtonGenerateGeneric = new QPushButton(groupBox_7);
+        pushButtonGenerateGeneric->setObjectName(QString::fromUtf8("pushButtonGenerateGeneric"));
+        pushButtonGenerateGeneric->setGeometry(QRect(20, 20, 131, 31));
         ControlWidget->setWidget(dockWidgetContents);
 
         retranslateUi(ControlWidget);
@@ -100,8 +100,8 @@ public:
         pushButtonGenerateRadial->setText(QApplication::translate("ControlWidget", "Generate Radial", 0, QApplication::UnicodeUTF8));
         checkBoxRoadTypeAvenue->setText(QApplication::translate("ControlWidget", "Avenues", 0, QApplication::UnicodeUTF8));
         checkBoxRoadTypeLocalStreet->setText(QApplication::translate("ControlWidget", "Local Streets", 0, QApplication::UnicodeUTF8));
-        groupBox_7->setTitle(QApplication::translate("ControlWidget", "Random Pattern", 0, QApplication::UnicodeUTF8));
-        pushButtonGenerateRandom->setText(QApplication::translate("ControlWidget", "Generate Random", 0, QApplication::UnicodeUTF8));
+        groupBox_7->setTitle(QApplication::translate("ControlWidget", "Generic Pattern", 0, QApplication::UnicodeUTF8));
+        pushButtonGenerateGeneric->setText(QApplication::translate("ControlWidget", "Generate Generic", 0, QApplication::UnicodeUTF8));
         Q_UNUSED(ControlWidget);
     } // retranslateUi
 

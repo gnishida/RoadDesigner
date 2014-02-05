@@ -25,5 +25,6 @@ public slots:
 	void showLocalStreet(int flag);
 	void generateGrid();
 	void generateRadial();
+	void generateGeneric();
 };
 

@@ -128,10 +128,22 @@
     <ClCompile Include="SimpleFlatTerrain.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="RoadGenerator.cpp">
+    <ClCompile Include="RoadArea.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="RoadArea.cpp">
+    <ClCompile Include="GridRoadGenerator.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="RadialRoadGenerator.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GenericFeature.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GenericRoadGenerator.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GenericRoadGenerator.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -228,10 +240,19 @@
     <ClInclude Include="SimpleFlatTerrain.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="RoadGenerator.h">
+    <ClInclude Include="RoadArea.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="RoadArea.h">
+    <ClInclude Include="GridRoadGenerator.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="RadialRoadGenerator.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="GenericRoadGenerator.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="GenericFeature.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

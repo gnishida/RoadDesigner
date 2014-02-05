@@ -140,9 +140,9 @@
      </rect>
     </property>
     <property name="title">
-     <string>Random Pattern</string>
+     <string>Generic Pattern</string>
     </property>
-    <widget class="QPushButton" name="pushButtonGenerateRandom">
+    <widget class="QPushButton" name="pushButtonGenerateGeneric">
      <property name="geometry">
       <rect>
        <x>20</x>
@@ -152,7 +152,7 @@
       </rect>
      </property>
      <property name="text">
-      <string>Generate Random</string>
+      <string>Generate Generic</string>
      </property>
     </widget>
    </widget>
