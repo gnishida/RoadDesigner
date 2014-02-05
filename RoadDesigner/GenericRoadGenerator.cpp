@@ -12,7 +12,7 @@ void GenericRoadGenerator::generateRoadNetwork(RoadArea& roadArea, const Generic
 	std::list<RoadVertexDesc> seeds;
 	std::list<RoadVertexDesc> newSeeds;
 
-	generateInitialSeeds(roadArea.roads, roadArea.area, seeds);
+	generateInitialSeeds(roadArea.roads, roadArea.area, gf, seeds);
 
 	int iteCount = 0;
 
@@ -21,7 +21,7 @@ void GenericRoadGenerator::generateRoadNetwork(RoadArea& roadArea, const Generic
 		RoadVertexDesc desc = seeds.front();
 		seeds.pop_front();
 
-		attemptExpansion(roadArea.roads, roadArea.area, desc, newSeeds, 100.0f, 300.0f);
+		attemptExpansion(roadArea.roads, roadArea.area, desc, 2, gf, newSeeds);
 
 		//append seeds in newSeeds to seeds
 		seeds.splice(seeds.end(), newSeeds);
@@ -33,7 +33,7 @@ void GenericRoadGenerator::generateRoadNetwork(RoadArea& roadArea, const Generic
 	removeDeadEnds(roadArea.roads);
 
 	//======= grow streets
-	if (!generateInitialStreetSeeds(roadArea.roads, seeds)) {
+	if (!generateInitialStreetSeeds(roadArea.roads, gf, seeds)) {
 		return;
 	}
 
@@ -42,7 +42,7 @@ void GenericRoadGenerator::generateRoadNetwork(RoadArea& roadArea, const Generic
 		RoadVertexDesc desc = seeds.front();
 		seeds.pop_front();
 
-		attemptExpansion(roadArea.roads, roadArea.area, desc, newSeeds, 20.0f, 50.0f);
+		attemptExpansion(roadArea.roads, roadArea.area, desc, 1, gf, newSeeds);
 
 		//append seeds in newSeeds to seeds
 		seeds.splice(seeds.end(), newSeeds);
@@ -61,15 +61,15 @@ void GenericRoadGenerator::generateRoadNetwork(RoadArea& roadArea, const Generic
  * @param seeds
  * @param inRoadGraph
  */
-void GenericRoadGenerator::generateInitialSeeds(RoadGraph &roads, Polygon2D &area, std::list<RoadVertexDesc>& seeds) {
+void GenericRoadGenerator::generateInitialSeeds(RoadGraph &roads, Polygon2D &area, const GenericFeature& gf, std::list<RoadVertexDesc>& seeds) {
 	seeds.clear();
 
 	BBox bbox = area.getLoopAABB();
 
 	RoadVertexPtr v = RoadVertexPtr(new RoadVertex(bbox.midPt()));
 	RoadVertexDesc desc = GraphUtil::addVertex(roads, v);
-	roads.graph[desc]->angles = generateRandomDirections(4);
-	roads.graph[desc]->lengths = generateRandomLengths(4, 100.0f, 300.0f);
+	roads.graph[desc]->angles = gf.getAngles(4);
+	roads.graph[desc]->lengths = gf.getLengths(2, 4);
 
 	seeds.push_back(desc);
 }
@@ -77,7 +77,7 @@ void GenericRoadGenerator::generateInitialSeeds(RoadGraph &roads, Polygon2D &are
 /**
  * ローカルストリートのシードを生成する。
  */
-bool GenericRoadGenerator::generateInitialStreetSeeds(RoadGraph &roads, std::list<RoadVertexDesc>& seeds) {
+bool GenericRoadGenerator::generateInitialStreetSeeds(RoadGraph &roads, const GenericFeature& gf, std::list<RoadVertexDesc>& seeds) {
 	std::vector<RoadEdgeDesc> edges;
 
 	// 対象となるエッジをリストアップ
@@ -91,24 +91,24 @@ bool GenericRoadGenerator::generateInitialStreetSeeds(RoadGraph &roads, std::lis
 		}
 	}
 
-	for (int i = 0; i < edges.size(); ++i) {
+	for (int ei = 0; ei < edges.size(); ++ei) {
 		float step = Util::uniform_rand(20.0f, 50.0f);
 		float remained_step = step;
 
-		for (int i = 0; i < roads.graph[edges[i]]->polyLine.size() - 1; ++i) {
-			QVector2D dir = roads.graph[edges[i]]->polyLine[i + 1] - roads.graph[edges[i]]->polyLine[i];
+		for (int i = 0; i < roads.graph[edges[ei]]->polyLine.size() - 1; ++i) {
+			QVector2D dir = roads.graph[edges[ei]]->polyLine[i + 1] - roads.graph[edges[ei]]->polyLine[i];
 			float length = dir.length();
 			float remained_length = length;
 			while (remained_length > remained_step) {
 				remained_length -= remained_step;
 				remained_step = step;
 
-				QVector2D pt = roads.graph[edges[i]]->polyLine[i + 1] - dir * remained_length / length;
-				RoadVertexDesc desc = GraphUtil::splitEdge(roads, edges[i], pt);
+				QVector2D pt = roads.graph[edges[ei]]->polyLine[i + 1] - dir * remained_length / length;
+				RoadVertexDesc desc = GraphUtil::splitEdge(roads, edges[ei], pt);
 
 				// 頂点の情報をセット
-				roads.graph[desc]->angles = generatePerpendicularDirections(dir);
-				roads.graph[desc]->lengths = generateRandomLengths(2, 20.0f, 50.0f);
+				roads.graph[desc]->angles = gf.getPerpendicularAngles(dir);
+				roads.graph[desc]->lengths = gf.getLengths(1, 2);
 
 				// シードに追加
 				seeds.push_back(desc);
@@ -128,7 +128,7 @@ bool GenericRoadGenerator::generateInitialStreetSeeds(RoadGraph &roads, std::lis
 * If new seeds are found, they are added to newSeeds.
 * This function DOES modify the graph
 **/
-void GenericRoadGenerator::attemptExpansion(RoadGraph &roads, Polygon2D &area, RoadVertexDesc &srcDesc, std::list<RoadVertexDesc> &newSeeds, float l1, float l2) {
+void GenericRoadGenerator::attemptExpansion(RoadGraph &roads, Polygon2D &area, RoadVertexDesc &srcDesc, int roadType, const GenericFeature& gf, std::list<RoadVertexDesc> &newSeeds) {
 	newSeeds.clear();
 
 	for (int i = 0; i < roads.graph[srcDesc]->angles.size(); ++i) {
@@ -155,7 +155,12 @@ void GenericRoadGenerator::attemptExpansion(RoadGraph &roads, Polygon2D &area, R
 			intersected = true;
 		}
 
-		float threshold = (std::max)(0.25f * dist, 40.0f);
+		float threshold;
+		if (roadType == 1) {
+			threshold = (std::max)(0.1f * dist, 5.0f);
+		} else {
+			threshold = (std::max)(0.25f * dist, 40.0f);
+		}
 
 		// 近くに頂点があるか？
 		RoadVertexDesc desc;
@@ -189,14 +194,14 @@ void GenericRoadGenerator::attemptExpansion(RoadGraph &roads, Polygon2D &area, R
 					roads.graph[tgtDesc]->onBoundary = true;
 				}
 
-				int numDirections = Util::uniform_rand() * 2 + 3;
-				roads.graph[tgtDesc]->angles = generateRandomDirections(numDirections - 1, roads.graph[srcDesc]->pt - roads.graph[tgtDesc]->pt);
-				roads.graph[tgtDesc]->lengths = generateRandomLengths(numDirections - 1, l1, l2);
+				int numDirections = gf.getDirections(roadType);
+				roads.graph[tgtDesc]->angles = gf.getAngles(numDirections - 1, roads.graph[srcDesc]->pt - roads.graph[tgtDesc]->pt);
+				roads.graph[tgtDesc]->lengths = gf.getLengths(roadType, numDirections - 1);
 			}
 		}
 
 		// エッジを追加
-		RoadEdgeDesc e = GraphUtil::addEdge(roads, srcDesc, tgtDesc, 2, 1);
+		RoadEdgeDesc e = GraphUtil::addEdge(roads, srcDesc, tgtDesc, roadType, 1);
 
 		// シードに追加
 		if (!snapped && !intersected && !outside) {
@@ -235,76 +240,6 @@ bool GenericRoadGenerator::intersects(RoadGraph &roads, const QVector2D& p0, con
 	}	
 
 	return intersect;
-}
-
-/**
- * 指定された数のエッジ方向を生成する。ただし、dirで指定された方向には既にエッジがあるので、この方向は避ける。
- */
-std::vector<float> GenericRoadGenerator::generateRandomDirections(int num) {
-	std::vector<float> angles;
-
-	float angle = Util::uniform_rand(0, M_PI * 2.0f);
-	float angle_step = M_PI * 2.0f / num;
-
-	for (int i = 0; i < num; ++i) {
-		angles.push_back(angle + Util::uniform_rand(-0.2f, 0.2f));
-
-		angle += angle_step;		
-	}
-
-	return angles;
-}
-
-/**
- * 指定された数のエッジ方向を生成する。ただし、dirで指定された方向には既にエッジがあるので、この方向は避ける。
- */
-std::vector<float> GenericRoadGenerator::generateRandomDirections(int num, const QVector2D &dir) {
-	std::vector<float> angles;
-
-	float angle = atan2f(dir.y(), dir.x());
-	float angle_step = M_PI * 2.0f / (num + 1);
-
-	for (int i = 0; i < num; ++i) {
-		angle += angle_step;		
-
-		angles.push_back(angle + Util::uniform_rand(-0.2f, 0.2f));
-	}
-
-	return angles;
-}
-
-/**
- * 指定された方向に垂直な２方向を生成する。
- */
-std::vector<float> GenericRoadGenerator::generatePerpendicularDirections(const QVector2D &dir) {
-	std::vector<float> angles;
-
-	float angle = atan2f(dir.x(), -dir.y());
-	float angle_step = M_PI;
-
-	for (int i = 0; i < 2; ++i) {
-		angles.push_back(angle + Util::uniform_rand(-0.2f, 0.2f));
-
-		angle += angle_step;		
-	}
-
-	return angles;
-}
-
-/**
- * 指定された数のエッジ長を生成する。
- */
-std::vector<float> GenericRoadGenerator::generateRandomLengths(int num, float l1, float l2) {
-	std::vector<float> lengths;
-
-	for (int i = 0; i < num; ++i) {
-		float length = Util::uniform_rand(l1, l2);
-
-		lengths.push_back(length);
-	}
-
-	return lengths;
-
 }
 
 /**

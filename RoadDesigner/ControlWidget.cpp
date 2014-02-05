@@ -79,7 +79,7 @@ void ControlWidget::generateGeneric() {
 	if (mainWin->glWidget->selectedArea == -1) return;
 
 	GenericFeature gf(mainWin->glWidget->selectedArea);
-	gf.load("genericl_feature1.xml");
+	gf.load("generic_feature1.xml");
 	GenericRoadGenerator rg;
 	rg.generateRoadNetwork(mainWin->glWidget->areas[mainWin->glWidget->selectedArea], gf);
 
