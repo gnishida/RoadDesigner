@@ -850,7 +850,7 @@ bool GraphUtil::isIntersect(RoadGraph &roads, RoadEdgeDesc e, QVector2D &intPoin
 /**
  * Check if the poly line intersects with the existing road segments.
  */
-bool GraphUtil::isIntersect(RoadGraph &roads, std::vector<QVector2D>& polyLine, QVector2D &intPoint {
+bool GraphUtil::isIntersect(RoadGraph &roads, std::vector<QVector2D>& polyLine, QVector2D &intPoint) {
 	RoadEdgeIter ei, eend;
 	for (boost::tie(ei, eend) = boost::edges(roads.graph); ei != eend; ++ei) {
 		if (!roads.graph[*ei]->valid) continue;
