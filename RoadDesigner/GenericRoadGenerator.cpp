@@ -32,8 +32,6 @@ void GenericRoadGenerator::generateRoadNetwork(RoadArea& roadArea, const Generic
 	//Remove dead ends
 	removeDeadEnds(roadArea.roads);
 
-	return;
-
 	//======= grow streets
 	if (!generateInitialStreetSeeds(roadArea.roads, seeds)) {
 		return;
@@ -42,8 +40,6 @@ void GenericRoadGenerator::generateRoadNetwork(RoadArea& roadArea, const Generic
 	iteCount = 0;
 	while (!seeds.empty() && iteCount < 1000) {
 		RoadVertexDesc desc = seeds.front();
-
-		bool isPointWithinLimits = false;
 
 		attemptExpansion(roadArea.roads, roadArea.area, desc, newSeeds, 20.0f, 50.0f);
 
@@ -81,27 +77,40 @@ void GenericRoadGenerator::generateInitialSeeds(RoadGraph &roads, Polygon2D &are
  * ローカルストリートのシードを生成する。
  */
 bool GenericRoadGenerator::generateInitialStreetSeeds(RoadGraph &roads, std::list<RoadVertexDesc>& seeds) {
+	std::vector<RoadEdgeDesc> edges;
+
+	// 対象となるエッジをリストアップ
 	RoadEdgeIter ei, eend;
 	for (boost::tie(ei, eend) = boost::edges(roads.graph); ei != eend; ++ei) {
 		if (!roads.graph[*ei]->valid) continue;
 
+		// Avenueエッジのみを対象
+		if (roads.graph[*ei]->type == 2) {
+			edges.push_back(*ei);
+		}
+	}
+
+	for (int i = 0; i < edges.size(); ++i) {
 		float step = Util::uniform_rand(20.0f, 50.0f);
 		float remained_step = step;
 
-		for (int i = 0; i < roads.graph[*ei]->polyLine.size() - 1; ++i) {
-			QVector2D dir = roads.graph[*ei]->polyLine[i + 1] - roads.graph[*ei]->polyLine[i];
+		for (int i = 0; i < roads.graph[edges[i]]->polyLine.size() - 1; ++i) {
+			QVector2D dir = roads.graph[edges[i]]->polyLine[i + 1] - roads.graph[edges[i]]->polyLine[i];
 			float length = dir.length();
 			float remained_length = length;
 			while (remained_length > remained_step) {
 				remained_length -= remained_step;
 				remained_step = step;
 
-				QVector2D pt = roads.graph[*ei]->polyLine[i + 1] - dir * remained_length / length;
-				RoadVertexDesc desc = GraphUtil::splitEdge(roads, *ei, pt);
+				QVector2D pt = roads.graph[edges[i]]->polyLine[i + 1] - dir * remained_length / length;
+				RoadVertexDesc desc = GraphUtil::splitEdge(roads, edges[i], pt);
 
 				// 頂点の情報をセット
 				roads.graph[desc]->angles = generatePerpendicularDirections(dir);
 				roads.graph[desc]->lengths = generateRandomLengths(2, 20.0f, 50.0f);
+
+				// シードに追加
+				seeds.push_back(desc);
 			}
 
 			remained_step -= remained_length;
