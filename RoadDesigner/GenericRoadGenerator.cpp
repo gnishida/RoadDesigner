@@ -40,6 +40,7 @@ void GenericRoadGenerator::generateRoadNetwork(RoadArea& roadArea, const Generic
 	iteCount = 0;
 	while (!seeds.empty() && iteCount < 1000) {
 		RoadVertexDesc desc = seeds.front();
+		seeds.pop_front();
 
 		attemptExpansion(roadArea.roads, roadArea.area, desc, newSeeds, 20.0f, 50.0f);
 
