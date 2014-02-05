@@ -21,7 +21,7 @@ void GenericRoadGenerator::generateRoadNetwork(RoadArea& roadArea, const Generic
 		RoadVertexDesc tmpSeedDesc = initSeeds.front();
 		initSeeds.pop_front();
 
-		attemptExpansion(roadArea.roads, tmpSeedDesc, newSeeds);
+		attemptExpansion(roadArea.roads, roadArea.area, tmpSeedDesc, newSeeds);
 
 		//append seeds in newSeeds to initSeeds
 		initSeeds.splice(initSeeds.end(), newSeeds);
@@ -89,6 +89,8 @@ void GenericRoadGenerator::generateInitialSeeds(RoadGraph &roads, Polygon2D &are
 
 	RoadVertexPtr v = RoadVertexPtr(new RoadVertex(bbox.midPt()));
 	RoadVertexDesc desc = GraphUtil::addVertex(roads, v);
+	roads.graph[desc]->angles = generateRandomDirections(4);
+	roads.graph[desc]->lengths = generateRandomLengths(4);
 
 	seeds.push_back(desc);
 }
@@ -98,7 +100,7 @@ void GenericRoadGenerator::generateInitialSeeds(RoadGraph &roads, Polygon2D &are
 * If new seeds are found, they are added to newSeeds.
 * This function DOES modify the graph
 **/
-void GenericRoadGenerator::attemptExpansion(RoadGraph &roads, RoadVertexDesc &srcDesc, std::list<RoadVertexDesc> &newSeeds) {
+void GenericRoadGenerator::attemptExpansion(RoadGraph &roads, Polygon2D &area, RoadVertexDesc &srcDesc, std::list<RoadVertexDesc> &newSeeds) {
 	newSeeds.clear();
 
 	QVector3D closestIntPt;
@@ -108,34 +110,91 @@ void GenericRoadGenerator::attemptExpansion(RoadGraph &roads, RoadVertexDesc &sr
 		float theta = roads.graph[srcDesc]->angles[i];
 		QVector2D dir(cosf(theta), sinf(theta));
 
-		bool snap = false;
+		bool snapped = false;
 		bool intersected = false;
-		bool isU;
+		bool outside = false;
 
 		float dist = roads.graph[srcDesc]->lengths[i];
 		dist = dist + Util::uniform_rand(dist * -0.3f, dist * 0.3f);
 
-		QVector2D pt = roads.graph[srcDesc]->pt + dir * dist;
-
 		RoadVertexDesc tgtDesc;
+		QVector2D pt = roads.graph[srcDesc]->pt + dir * dist;
 
 		// INTERSECTS -- If edge intersects other edge
 		QVector2D intPoint;
 		RoadEdgeDesc closestEdge;
 		intersected = intersects(roads, roads.graph[srcDesc]->pt, pt, closestEdge, intPoint);
 		if (intersected) {
-			pt = intPoint;
-		}		
+			continue;
+		}
+
+		float threshold = (std::max)(0.25f*deltaDistNoNoise, 40.0f);
+
+		// 近くに頂点があるか？
+		RoadVertexDesc desc;
+		RoadEdgeDesc e_desc;
+		if (GraphUtil::getVertex(roads, pt, threshold, desc)) {
+			tgtDesc = desc;
+			snapped = true;
+		} else if (GraphUtil::getEdge(roads, pt, threshold, e_desc)) {
+			tgtDesc = GraphUtil::splitEdge(roads, e_desc, pt);
+		} else {
+			if (!area.contains(pt)) {
+				// エリア外周との交点を求める
+				float tab, tcd;
+				QVector2D intPoint;
+				area.intersect(roads.graph[srcDesc]->pt, pt, &tab, &tcd, pt);
+				outside = true;
+			}
+
+			// 頂点を追加
+			RoadVertexPtr v = RoadVertexPtr(new RoadVertex(pt));
+			tgtDesc = GraphUtil::addVertex(roads, v);
+
+			int numDirections = Util::uniform_rand() * 2 + 3;
+			roads.graph[tgtDesc]->angles = generateRandomDirections(numDirections - 1, roads.graph[srcDesc]->pt - roads.graph[tgtDesc]->pt);
+			roads.graph[tgtDesc]->lengths = generateRandomLengths(numDirections - 1);
+		}
+
+		// エッジを追加
+		RoadEdgeDesc e = GraphUtil::addEdge(roads, srcDesc, tgtDesc, 2, 1);
+
+		// シードに追加
+		if (!snapped && !intersected && !outside) {
+			newSeeds.push_back(tgtDesc);
+		}
+
+
+
+
+		/*
+		if (!area.contains(pt)) {
+			// エリア外周との交点を求める
+			float tab, tcd;
+			QVector2D intPoint;
+			area.intersect(roads.graph[srcDesc]->pt, pt, &tab, &tcd, intPoint);
+
+			// 外周上に頂点を追加
+			RoadVertexPtr v = RoadVertexPtr(new RoadVertex(intPoint));
+			tgtDesc = GraphUtil::addVertex(roads, v);
+
+			roads.graph[tgtDesc]->angles = generateRandomDirections(3, roads.graph[srcDesc]->pt - roads.graph[tgtDesc]->pt);
+			roads.graph[tgtDesc]->lengths = generateRandomLengths(3);
+
+			// エッジを追加
+			RoadEdgeDesc e = GraphUtil::addEdge(roads, srcDesc, tgtDesc, 2, 1);
+
+			continue;
+		}
 
 		//the threshold should be the max between e.g. 1/4 of the length and e.g. 10m
-		float threshold = (std::max)(0.25f*deltaDistNoNoise, 20.0f);
 		//float threshold = 10.0f;
 
 		if (!intersected) {
 			RoadVertexDesc desc;
 			if (GraphUtil::getVertex(roads, pt, threshold, desc)) {
 				tgtDesc = desc;
-				snap = true;
+				snapped = true;
 			}
 		} else {
 			RoadVertexDesc src = boost::source(closestEdge, roads.graph);
@@ -152,18 +211,18 @@ void GenericRoadGenerator::attemptExpansion(RoadGraph &roads, RoadVertexDesc &sr
 					pt = roads.graph[tgt]->pt;
 					tgtDesc = tgt;
 				}
-				snap = true;
+				snapped = true;
 			}			
 		}
 
 		// ANGLE REDUNDANCY -- if departing segment is redundant
-		/*if (isSegmentRedundant(targetVtxPt, inRoadGraph->getRoadGraph()[srcVertexDesc].getPt(), srcVertexDesc, inRoadGraph, 0.2f*M_PI)) {
+		if (isSegmentRedundant(targetVtxPt, inRoadGraph->getRoadGraph()[srcVertexDesc].getPt(), srcVertexDesc, inRoadGraph, 0.2f*M_PI)) {
 			continue;
-		}*/
-		if (snap) {
-			/*if (isSegmentRedundant(inRoadGraph->getRoadGraph()[srcVertexDesc].getPt(), targetVtxPt, tgtVertexDesc, inRoadGraph, 0.2f * M_PI)) {
+		}
+		if (snapped) {
+			if (isSegmentRedundant(inRoadGraph->getRoadGraph()[srcVertexDesc].getPt(), targetVtxPt, tgtVertexDesc, inRoadGraph, 0.2f * M_PI)) {
 				continue;
-			}*/
+			}
 		}
 
 		if (intersected && !snap) {
@@ -181,29 +240,20 @@ void GenericRoadGenerator::attemptExpansion(RoadGraph &roads, RoadVertexDesc &sr
 			// 頂点を追加
 			RoadVertexPtr v = RoadVertexPtr(new RoadVertex(pt));
 			tgtDesc = GraphUtil::addVertex(roads, v);
+
+			int numDirections = Util::uniform_rand() * 2 + 3;
+			roads.graph[tgtDesc]->angles = generateRandomDirections(numDirections - 1, roads.graph[srcDesc]->pt - roads.graph[tgtDesc]->pt);
+			roads.graph[tgtDesc]->lengths = generateRandomLengths(numDirections - 1);
 		}
 
 		// エッジを追加
 		RoadEdgeDesc e = GraphUtil::addEdge(roads, srcDesc, tgtDesc, 2, 1);
 
 		if (!snap && !intersected) { //if not snap, vertex must be initialized
-			/*
-			inRoadGraph->getRoadGraph()[tgtVertexDesc].setPt(targetVtx.getPt());
-			inRoadGraph->getRoadGraph()[tgtVertexDesc].setDepartingDirections(targetVtx.getDepartingDirections());
-			inRoadGraph->getRoadGraph()[tgtVertexDesc].setDistU(targetVtx.getDistU());
-			inRoadGraph->getRoadGraph()[tgtVertexDesc].setDistV(targetVtx.getDistV());
-			inRoadGraph->getRoadGraph()[tgtVertexDesc].setRandSeed(newRandSeed);
-			inRoadGraph->getRoadGraph()[tgtVertexDesc].setDeltaTheta(newDeltaTheta);
-			inRoadGraph->getRoadGraph()[tgtVertexDesc].setSeed(newIsSeed);
-			inRoadGraph->getRoadGraph()[tgtVertexDesc].setBoundingPgonVertex(newIsBoundingPgonVertex);
-			inRoadGraph->getRoadGraph()[tgtVertexDesc].setIrregularity(targetVtx.getIrregularity());
-			inRoadGraph->getRoadGraph()[tgtVertexDesc].setCurvature(targetVtx.getCurvature());
-			inRoadGraph->getRoadGraph()[tgtVertexDesc].setWidth(targetVtx.getWidth());
-			*/
-
 			//add target vertex to list of seeds
 			newSeeds.push_back(tgtDesc);
-		}		
+		}
+		*/
 	}
 }
 
@@ -237,4 +287,56 @@ bool GenericRoadGenerator::intersects(RoadGraph &roads, const QVector2D& p0, con
 	}	
 
 	return intersect;
+}
+
+/**
+ * 指定された数のエッジ方向を生成する。ただし、dirで指定された方向には既にエッジがあるので、この方向は避ける。
+ */
+std::vector<float> GenericRoadGenerator::generateRandomDirections(int num) {
+	std::vector<float> angles;
+
+	float angle = Util::uniform_rand(0, M_PI * 2.0f);
+	float angle_step = M_PI * 2.0f / num;
+
+	for (int i = 0; i < num; ++i) {
+		angles.push_back(angle);
+
+		angle += angle_step;		
+	}
+
+	return angles;
+}
+
+/**
+ * 指定された数のエッジ方向を生成する。ただし、dirで指定された方向には既にエッジがあるので、この方向は避ける。
+ */
+std::vector<float> GenericRoadGenerator::generateRandomDirections(int num, const QVector2D &dir) {
+	std::vector<float> angles;
+
+	float angle = atan2f(dir.y(), dir.x());
+	float angle_step = M_PI * 2.0f / (num + 1);
+
+	for (int i = 0; i < num; ++i) {
+		angle += angle_step;		
+
+		angles.push_back(angle);
+	}
+
+	return angles;
+}
+
+/**
+ * 指定された数のエッジ長を生成する。
+ */
+std::vector<float> GenericRoadGenerator::generateRandomLengths(int num) {
+	std::vector<float> lengths;
+
+	for (int i = 0; i < num; ++i) {
+		float length = Util::uniform_rand(100.0f, 200.0f);
+
+		lengths.push_back(length);
+	}
+
+	return lengths;
+
 }
