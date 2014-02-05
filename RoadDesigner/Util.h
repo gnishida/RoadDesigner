@@ -27,5 +27,6 @@ public:
 
 	// 乱数関係
 	static float uniform_rand();
+	static float uniform_rand(float a, float b);
 };
 

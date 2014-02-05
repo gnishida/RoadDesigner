@@ -833,14 +833,29 @@ bool GraphUtil::hasCloseEdge(RoadGraph* roads, RoadVertexDesc v1, RoadVertexDesc
 }
 
 /**
+ * Check if the specified edge intersects with other edges.
+ */
+bool GraphUtil::isIntersect(RoadGraph &roads, RoadEdgeDesc e, QVector2D &intPoint) {
+	RoadEdgeIter ei, eend;
+	for (boost::tie(ei, eend) = boost::edges(roads.graph); ei != eend; ++ei) {
+		if (!roads.graph[*ei]->valid) continue;
+		if (e == *ei) continue;
+
+		if (isIntersect(roads, roads.graph[*ei]->polyLine, roads.graph[e]->polyLine, intPoint)) return true;
+	}
+
+	return false;
+}
+
+/**
  * Check if the poly line intersects with the existing road segments.
  */
-bool GraphUtil::isIntersect(RoadGraph* roads, std::vector<QVector2D>& polyLine) {
+bool GraphUtil::isIntersect(RoadGraph &roads, std::vector<QVector2D>& polyLine, QVector2D &intPoint {
 	RoadEdgeIter ei, eend;
-	for (boost::tie(ei, eend) = boost::edges(roads->graph); ei != eend; ++ei) {
-		if (!roads->graph[*ei]->valid) continue;
+	for (boost::tie(ei, eend) = boost::edges(roads.graph); ei != eend; ++ei) {
+		if (!roads.graph[*ei]->valid) continue;
 
-		if (isIntersect(roads, roads->graph[*ei]->polyLine, polyLine)) return true;
+		if (isIntersect(roads, roads.graph[*ei]->polyLine, polyLine, intPoint)) return true;
 	}
 
 	return false;
@@ -849,12 +864,11 @@ bool GraphUtil::isIntersect(RoadGraph* roads, std::vector<QVector2D>& polyLine) 
 /**
  * Check if the two poly lines intersect with each other.
  */
-bool GraphUtil::isIntersect(RoadGraph* roads, std::vector<QVector2D>& polyLine1, std::vector<QVector2D>& polyLine2) {
+bool GraphUtil::isIntersect(RoadGraph &roads, std::vector<QVector2D>& polyLine1, std::vector<QVector2D>& polyLine2, QVector2D &intPoint) {
 	for (int i = 0; i < polyLine1.size() - 1; i++) {
 		for (int j = 0; j < polyLine2.size() - 1; j++) {
 			float tab, tcd;
-			QVector2D intPt;
-			if (Util::segmentSegmentIntersectXY(polyLine1[i], polyLine1[i + 1], polyLine2[j], polyLine2[j + 1], &tab, &tcd, true, intPt)) {
+			if (Util::segmentSegmentIntersectXY(polyLine1[i], polyLine1[i + 1], polyLine2[j], polyLine2[j + 1], &tab, &tcd, true, intPoint)) {
 				return true;
 			}
 		}
