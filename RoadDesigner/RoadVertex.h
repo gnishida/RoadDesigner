@@ -10,6 +10,7 @@ public:
 	bool valid;
 	bool virt;
 
+	bool onBoundary;
 	std::vector<float> angles;
 	std::vector<float> lengths;
 
