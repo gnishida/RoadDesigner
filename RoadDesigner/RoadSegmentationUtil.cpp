@@ -4,16 +4,12 @@
 #include "BBox.h"
 #include "ConvexHull.h"
 #include "HoughTransform.h"
-#include <math.h>
-
-#ifndef Q_MOC_RUN
+//#include <math.h>
 #include <boost/graph/planar_face_traversal.hpp>
 #include <boost/graph/boyer_myrvold_planar_test.hpp>
-#endif
 
-#ifndef SQR(x)
 #define SQR(x)	((x) * (x))
-#endif
+
 
 RoadGraph* roadGraphPtr;
 std::vector<RoadEdgeDesc> plaza;

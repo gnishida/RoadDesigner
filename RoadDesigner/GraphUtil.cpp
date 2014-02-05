@@ -10,7 +10,7 @@
 #include <boost/geometry/geometries/linestring.hpp>
 
 #ifndef M_PI
-#define M_PI	3.141592653
+#define M_PI	3.141592653589793238
 #endif
 
 EdgePair::EdgePair(RoadEdgeDesc edge1, RoadEdgeDesc edge2) {

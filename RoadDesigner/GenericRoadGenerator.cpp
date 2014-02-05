@@ -80,7 +80,7 @@ void GenericRoadGenerator::generateInitialSeeds(RoadGraph &roads, Polygon2D &are
 bool GenericRoadGenerator::generateInitialStreetSeeds(RoadGraph &roads, const GenericFeature& gf, std::list<RoadVertexDesc>& seeds) {
 	std::vector<RoadEdgeDesc> edges;
 
-	// 対象となるエッジをリストアップ
+	// Avenueのエッジをリストアップ
 	RoadEdgeIter ei, eend;
 	for (boost::tie(ei, eend) = boost::edges(roads.graph); ei != eend; ++ei) {
 		if (!roads.graph[*ei]->valid) continue;
@@ -91,8 +91,9 @@ bool GenericRoadGenerator::generateInitialStreetSeeds(RoadGraph &roads, const Ge
 		}
 	}
 
+	// 各Avenueエッジ上に、ストリート生成用のシードを置いていく
 	for (int ei = 0; ei < edges.size(); ++ei) {
-		float step = Util::uniform_rand(20.0f, 50.0f);
+		float step = gf.generateLength(1, Util::uniform_rand());
 		float remained_step = step;
 
 		for (int i = 0; i < roads.graph[edges[ei]]->polyLine.size() - 1; ++i) {
@@ -157,7 +158,7 @@ void GenericRoadGenerator::attemptExpansion(RoadGraph &roads, Polygon2D &area, R
 
 		float threshold;
 		if (roadType == 1) {
-			threshold = (std::max)(0.1f * dist, 5.0f);
+			threshold = (std::max)(0.25f * dist, 10.0f);
 		} else {
 			threshold = (std::max)(0.25f * dist, 40.0f);
 		}
@@ -165,7 +166,7 @@ void GenericRoadGenerator::attemptExpansion(RoadGraph &roads, Polygon2D &area, R
 		// 近くに頂点があるか？
 		RoadVertexDesc desc;
 		RoadEdgeDesc e_desc;
-		if (GraphUtil::getVertex(roads, pt, threshold, desc)) {
+		if (GraphUtil::getVertex(roads, pt, threshold, srcDesc, desc)) {
 			tgtDesc = desc;
 			snapped = true;
 			intersected = false;
@@ -201,7 +202,9 @@ void GenericRoadGenerator::attemptExpansion(RoadGraph &roads, Polygon2D &area, R
 		}
 
 		// エッジを追加
-		RoadEdgeDesc e = GraphUtil::addEdge(roads, srcDesc, tgtDesc, roadType, 1);
+		if (!GraphUtil::hasEdge(roads, srcDesc, tgtDesc)) {
+			GraphUtil::addEdge(roads, srcDesc, tgtDesc, roadType, 1);
+		}
 
 		// シードに追加
 		if (!snapped && !intersected && !outside) {

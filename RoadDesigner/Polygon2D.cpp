@@ -10,6 +10,10 @@
 #include <boost/geometry/multi/multi.hpp>
 #include <boost/polygon/polygon.hpp>
 
+#ifndef M_PI
+#define M_PI		3.141592653589793238
+#endif
+
 void Loop2D::close() {
 	if (size() == 0) return;
 

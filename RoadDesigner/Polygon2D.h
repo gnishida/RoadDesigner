@@ -5,8 +5,8 @@
 #include <QVector2D>
 #include <QVector3D>
 #include "float.h"
-#define _USE_MATH_DEFINES
-#include <math.h>
+//#define _USE_MATH_DEFINES
+//#include <math.h>
 
 class Loop2D : public std::vector<QVector2D> {
 public:
