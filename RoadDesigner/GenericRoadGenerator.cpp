@@ -103,9 +103,6 @@ void GenericRoadGenerator::generateInitialSeeds(RoadGraph &roads, Polygon2D &are
 void GenericRoadGenerator::attemptExpansion(RoadGraph &roads, Polygon2D &area, RoadVertexDesc &srcDesc, std::list<RoadVertexDesc> &newSeeds) {
 	newSeeds.clear();
 
-	QVector3D closestIntPt;
-	float deltaDist, deltaDistNoNoise;
-
 	for (int i = 0; i < roads.graph[srcDesc]->angles.size(); ++i) {
 		float theta = roads.graph[srcDesc]->angles[i];
 		QVector2D dir(cosf(theta), sinf(theta));
@@ -128,7 +125,7 @@ void GenericRoadGenerator::attemptExpansion(RoadGraph &roads, Polygon2D &area, R
 			continue;
 		}
 
-		float threshold = (std::max)(0.25f*deltaDistNoNoise, 40.0f);
+		float threshold = (std::max)(0.25f * dist, 40.0f);
 
 		// 近くに頂点があるか？
 		RoadVertexDesc desc;
@@ -138,6 +135,7 @@ void GenericRoadGenerator::attemptExpansion(RoadGraph &roads, Polygon2D &area, R
 			snapped = true;
 		} else if (GraphUtil::getEdge(roads, pt, threshold, e_desc)) {
 			tgtDesc = GraphUtil::splitEdge(roads, e_desc, pt);
+			snapped = true;
 		} else {
 			if (!area.contains(pt)) {
 				// エリア外周との交点を求める
@@ -299,7 +297,7 @@ std::vector<float> GenericRoadGenerator::generateRandomDirections(int num) {
 	float angle_step = M_PI * 2.0f / num;
 
 	for (int i = 0; i < num; ++i) {
-		angles.push_back(angle);
+		angles.push_back(angle + Util::uniform_rand(-0.2f, 0.2f));
 
 		angle += angle_step;		
 	}
@@ -319,7 +317,7 @@ std::vector<float> GenericRoadGenerator::generateRandomDirections(int num, const
 	for (int i = 0; i < num; ++i) {
 		angle += angle_step;		
 
-		angles.push_back(angle);
+		angles.push_back(angle + Util::uniform_rand(-0.2f, 0.2f));
 	}
 
 	return angles;
