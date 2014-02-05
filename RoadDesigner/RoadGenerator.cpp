@@ -59,7 +59,7 @@ void RoadGenerator::generateRoadNetwork(RoadArea& roadArea, const RadialFeature&
 /**
  * エリアの中心を通る横方向のライン上に、Avenueを生成し、シードとする。
  */
-void RoadGenerator::generateHorizontalAvenueSeeds(RoadGraph& roads, const Polygon2D& area, const GridFeature& gf, std::list<RoadVertexDesc>& seeds) {
+void RoadGenerator::generateHorizontalAvenueSeeds(RoadGraph& roads, Polygon2D& area, const GridFeature& gf, std::list<RoadVertexDesc>& seeds) {
 	seeds.clear();
 
 	BBox bbox = area.getLoopAABB();
@@ -86,7 +86,7 @@ void RoadGenerator::generateHorizontalAvenueSeeds(RoadGraph& roads, const Polygo
  * @param direction				0 -- 右 / 2 -- 左
  * @param seeds					新たにシードに追加される
  */
-void RoadGenerator::expandHorizontalAvenueSeeds(RoadGraph& roads, const Polygon2D& area, const GridFeature& gf, RoadVertexDesc start_desc, int direction, std::list<RoadVertexDesc>& seeds) {
+void RoadGenerator::expandHorizontalAvenueSeeds(RoadGraph& roads, Polygon2D& area, const GridFeature& gf, RoadVertexDesc start_desc, int direction, std::list<RoadVertexDesc>& seeds) {
 	QVector2D pt = roads.graph[start_desc]->pt;
 	float angle = gf.getAngles()[direction];
 	QVector2D dir = QVector2D(cosf(angle), sinf(angle));
@@ -132,7 +132,7 @@ void RoadGenerator::expandHorizontalAvenueSeeds(RoadGraph& roads, const Polygon2
 /**
  * 横方向のシードAvenueを上または下にシフトさせて、横方向のAvenueを生成し、生成された頂点を返却する。
  */
-std::list<RoadVertexDesc> RoadGenerator::generateHorizontalAvenues(RoadGraph& roads, const Polygon2D& area, const GridFeature& gf, std::list<RoadVertexDesc>& seeds, int dir, float length) {
+std::list<RoadVertexDesc> RoadGenerator::generateHorizontalAvenues(RoadGraph& roads, Polygon2D& area, const GridFeature& gf, std::list<RoadVertexDesc>& seeds, int dir, float length) {
 	std::list<RoadVertexDesc> newSeeds;
 
 	std::vector<float> angles = gf.getAngles();
@@ -218,7 +218,7 @@ std::list<RoadVertexDesc> RoadGenerator::generateHorizontalAvenues(RoadGraph& ro
  * @param direction				0 -- 右 / 2 -- 左
  * @param newSeeds				新たにシードに追加される
  */
-void RoadGenerator::expandHorizontalAvenue(RoadGraph& roads, const Polygon2D& area, const GridFeature& gf, RoadVertexDesc start_desc, int direction, std::list<RoadVertexDesc>& seeds) {
+void RoadGenerator::expandHorizontalAvenue(RoadGraph& roads, Polygon2D& area, const GridFeature& gf, RoadVertexDesc start_desc, int direction, std::list<RoadVertexDesc>& seeds) {
 	RoadVertexDesc prev_desc = start_desc;
 
 	QVector2D pt = roads.graph[start_desc]->pt;
@@ -265,7 +265,7 @@ void RoadGenerator::expandHorizontalAvenue(RoadGraph& roads, const Polygon2D& ar
 /**
  * 指定されたRadial Featureに基づき、円形の道路を生成する。
  */
-void RoadGenerator::generateCircleAvenues(RoadGraph& roads, const Polygon2D& area, const RadialFeature& rf, std::list<RoadVertexDesc>& seeds) {
+void RoadGenerator::generateCircleAvenues(RoadGraph& roads, Polygon2D& area, const RadialFeature& rf, std::list<RoadVertexDesc>& seeds) {
 	seeds.clear();
 
 	BBox bbox = area.getLoopAABB();
@@ -319,7 +319,7 @@ void RoadGenerator::generateCircleAvenues(RoadGraph& roads, const Polygon2D& are
  * 指定された頂点から、道路を延長していく。
  * この道路は、放射線上の道路のうちの１つの線を構成する。
  */
-void RoadGenerator::expandRadialAvenues(RoadGraph& roads, const Polygon2D& area, const RadialFeature& rf, RoadVertexDesc desc) {
+void RoadGenerator::expandRadialAvenues(RoadGraph& roads, Polygon2D& area, const RadialFeature& rf, RoadVertexDesc desc) {
 	RoadVertexDesc prev_desc = desc;
 
 	while (true) {

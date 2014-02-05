@@ -113,11 +113,11 @@ Loop2D Loop2D::createRectangle(float width, float height) {
 
 Polygon2D::Polygon2D() {
 	isCentroidValid = false;
+	tessellated = false;
 	//centroid = QVector3D(FLT_MAX, FLT_MAX, FLT_MAX);
 }
 
 Polygon2D::~Polygon2D() {
-	contour.clear();
 }
 
 const QVector2D& Polygon2D::operator[](const int idx) const {	
@@ -137,11 +137,13 @@ void Polygon2D::setContour(const Loop2D& contour) {
 
 	// normalVec and centroid are to be updated later when they are requested
 	isCentroidValid = false;
+	tessellated = false;
 }
 
 void Polygon2D::clear() {
 	contour.clear();
 	isCentroidValid = false;
+	tessellated = false;
 	//centroid = QVector3D(FLT_MAX, FLT_MAX, FLT_MAX);
 }
 
@@ -150,6 +152,7 @@ void Polygon2D::push_back(const QVector2D& point) {
 
 	// normalVec and centroid are to be updated later when they are requested
 	isCentroidValid = false;
+	tessellated = false;
 }
 
 int Polygon2D::size() const {
@@ -533,9 +536,8 @@ bool Polygon2D::reorientFace(bool onlyCheck) {
 	*/
 }
 
-bool Polygon2D::contains(const QVector2D& pt) const {
-	std::vector<Loop2D> trapezoids;
-	tessellate(trapezoids);
+bool Polygon2D::contains(const QVector2D& pt) {
+	tessellate();
 
 	for (int i = 0; i < trapezoids.size(); ++i) {
 		bool outside = false;
@@ -565,10 +567,12 @@ bool Polygon2D::contains(const QVector2D& pt) const {
  * このポリゴンを三角形または凸四角形の集合に分割する。
  * 各図形の頂点は、openでCCWオーダである。
  */
-void Polygon2D::tessellate(std::vector<Loop2D>& trapezoids) const {
+std::vector<Loop2D>& Polygon2D::tessellate() {
+	if (tessellated) return trapezoids;
+
 	trapezoids.clear();
 
-	if (size() < 3) return;
+	if (size() < 3) return trapezoids;
 
 	// create 2D polygon data
 	std::vector<boost::polygon::point_data<double> > polygon;
@@ -612,6 +616,10 @@ void Polygon2D::tessellate(std::vector<Loop2D>& trapezoids) const {
 
 		if (trapezoid.size() >= 3) trapezoids.push_back(trapezoid);
 	}
+
+	tessellated = true;
+
+	return trapezoids;
 }
 
 /**

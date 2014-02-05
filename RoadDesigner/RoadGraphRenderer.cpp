@@ -147,7 +147,7 @@ void RoadGraphRenderer::renderPolyline(const Polygon2D& polyline, GLenum lineTyp
 	render(renderables);
 }
 
-void RoadGraphRenderer::renderConcave(const Polygon2D& polygon, const QColor& color, float height) {
+void RoadGraphRenderer::renderConcave(Polygon2D& polygon, const QColor& color, float height) {
 	std::vector<RenderablePtr> renderables;
 	renderables.push_back(RenderablePtr(new Renderable(GL_TRIANGLES)));
 
@@ -162,8 +162,7 @@ void RoadGraphRenderer::renderConcave(const Polygon2D& polygon, const QColor& co
 	v.normal[1] = 0.0f;
 	v.normal[2] = 1.0f;
 
-	std::vector<Loop2D> trapezoids;
-	polygon.tessellate(trapezoids);
+	std::vector<Loop2D> trapezoids = polygon.tessellate();
 
 	for (int i = 0; i < trapezoids.size(); ++i) {
 		if (trapezoids[i].size() < 3) continue;

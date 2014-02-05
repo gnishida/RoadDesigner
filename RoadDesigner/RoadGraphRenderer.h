@@ -21,6 +21,6 @@ public:
 	void renderPolyline(const Polygon2D& polyline, GLenum lineType, float height);
 
 	//void tessellate(const Loop2D& polygon);
-	void renderConcave(const Polygon2D& polygon, const QColor& color, float height);
+	void renderConcave(Polygon2D& polygon, const QColor& color, float height);
 };
 

@@ -57,7 +57,7 @@ struct faceVisitorForPlazaDetection : public boost::planar_face_traversal_visito
  * @param minMaxBinRatio		最大頻度となるビンの割合が、この値より小さい場合は、顕著な特徴ではないと考え、グリッド検知せずにfalseを返却する
  * @param votingRatioThreshold	各エッジについて、構成するラインが所定のグリッド方向に従っているかの投票率を計算し、この閾値未満なら、グリッドに従っていないと見なす
  */
-void RoadSegmentationUtil::detectGrid(RoadGraph& roads, const Polygon2D& area, int roadType, std::vector<GridFeature>& gridFeatures, int maxIteration, float numBins, float minTotalLength, float minMaxBinRatio, float angleThreshold, float votingRatioThreshold, float extendingDistanceThreshold, float minObbLength) {
+void RoadSegmentationUtil::detectGrid(RoadGraph& roads, Polygon2D& area, int roadType, std::vector<GridFeature>& gridFeatures, int maxIteration, float numBins, float minTotalLength, float minMaxBinRatio, float angleThreshold, float votingRatioThreshold, float extendingDistanceThreshold, float minObbLength) {
 	gridFeatures.clear();
 	for (int i = 0; i < maxIteration; i++) {
 		GridFeature gf(i);
@@ -76,7 +76,7 @@ void RoadSegmentationUtil::detectGrid(RoadGraph& roads, const Polygon2D& area, i
  *
  * @param minObbLength			エッジ群を囲むOriented Bounding Boxの短い方の辺の長さが、この値より小さい場合、グリッド検知せずにfalseを返却する
  */
-bool RoadSegmentationUtil::detectOneGrid(RoadGraph& roads, const Polygon2D& area, int roadType, GridFeature& gf, int numBins, float minTotalLength, float minMaxBinRatio, float angleThreshold, float votingRatioThreshold, float extendingDistanceThreshold, float minObbLength) {
+bool RoadSegmentationUtil::detectOneGrid(RoadGraph& roads, Polygon2D& area, int roadType, GridFeature& gf, int numBins, float minTotalLength, float minMaxBinRatio, float angleThreshold, float votingRatioThreshold, float extendingDistanceThreshold, float minObbLength) {
 	// ヒストグラムの初期化
 	cv::Mat dirMat = cv::Mat::zeros(numBins, 1, CV_32F);
 
@@ -323,7 +323,7 @@ void RoadSegmentationUtil::reduceGridGroup(RoadGraph& roads, GridFeature& gf, QM
  * グリッドのグループの属さないエッジについて、近くに属するエッジがあれば、そのグループの仲間に入れちゃう。
  * これをしてあげないと、例えばラウンドアバウトに挟まれたエッジなどが、グリッドの仲間に入れない。
  */
-void RoadSegmentationUtil::extendGridGroup(RoadGraph& roads, const Polygon2D& area, int roadType, GridFeature& gf, QMap<RoadEdgeDesc, float>& edges, float angleThreshold, float votingRatioThreshold, float distanceThreshold) {
+void RoadSegmentationUtil::extendGridGroup(RoadGraph& roads, Polygon2D& area, int roadType, GridFeature& gf, QMap<RoadEdgeDesc, float>& edges, float angleThreshold, float votingRatioThreshold, float distanceThreshold) {
 	float distanceThreshold2 = distanceThreshold * distanceThreshold;
 
 	RoadEdgeIter ei, eend;
@@ -376,7 +376,7 @@ void RoadSegmentationUtil::extendGridGroup(RoadGraph& roads, const Polygon2D& ar
  * Plazaを検知する
  * Hough transformにより、円を検知する。
  */
-void RoadSegmentationUtil::detectRadial(RoadGraph& roads, const Polygon2D& area, int roadType, std::vector<RadialFeature>& radialFeatures, int maxIteration, float scale1, float scale2, float centerErrorTol2, float angleThreshold2, float scale3, float centerErrorTol3, float angleThreshold3, float sigma, float votingRatioThreshold, float seedDistance, float minSeedDirections, float extendingAngleThreshold) {
+void RoadSegmentationUtil::detectRadial(RoadGraph& roads, Polygon2D& area, int roadType, std::vector<RadialFeature>& radialFeatures, int maxIteration, float scale1, float scale2, float centerErrorTol2, float angleThreshold2, float scale3, float centerErrorTol3, float angleThreshold3, float sigma, float votingRatioThreshold, float seedDistance, float minSeedDirections, float extendingAngleThreshold) {
 	radialFeatures.clear();
 
 	int count = 0;
@@ -423,7 +423,7 @@ void RoadSegmentationUtil::detectRadial(RoadGraph& roads, const Polygon2D& area,
  * Plazaを検知する
  * Hough transformにより、円を検知する。
  */
-bool RoadSegmentationUtil::detectOneRadial(RoadGraph& roads, const Polygon2D& area, int roadType, RadialFeature& rf, float scale1, float scale2, float centerErrorTol2, float angleThreshold2, float scale3, float centerErrorTol3, float angleThreshold3, float detectCircleThreshold, float sigma, float votingRatioThreshold, float seedDistance, float minSeedDirections, float extendingAngleThreshold) {
+bool RoadSegmentationUtil::detectOneRadial(RoadGraph& roads, Polygon2D& area, int roadType, RadialFeature& rf, float scale1, float scale2, float centerErrorTol2, float angleThreshold2, float scale3, float centerErrorTol3, float angleThreshold3, float detectCircleThreshold, float sigma, float votingRatioThreshold, float seedDistance, float minSeedDirections, float extendingAngleThreshold) {
 	// 0.01スケールで、円の中心を求める
 	detectRadialCenterInScaled(roads, area, roadType, scale1, sigma, rf);
 
@@ -448,7 +448,7 @@ bool RoadSegmentationUtil::detectOneRadial(RoadGraph& roads, const Polygon2D& ar
  * Plazaを１つ検知し、円の中心を返却する
  * Hough transformにより、円を検知する。
  */
-void RoadSegmentationUtil::detectRadialCenterInScaled(RoadGraph& roads, const Polygon2D& area, int roadType, float scale, float sigma, RadialFeature& rf) {
+void RoadSegmentationUtil::detectRadialCenterInScaled(RoadGraph& roads, Polygon2D& area, int roadType, float scale, float sigma, RadialFeature& rf) {
 	HoughTransform ht(area, scale);
 
 	RoadEdgeIter ei, eend;
@@ -481,7 +481,7 @@ void RoadSegmentationUtil::detectRadialCenterInScaled(RoadGraph& roads, const Po
  * 円の中心候補のリストを返却する
  * Hough transformにより、円を検知する。
  */
-std::vector<RadialFeature> RoadSegmentationUtil::detectRadialCentersInScaled(RoadGraph& roads, const Polygon2D& area, int roadType, float scale, float sigma, float candidateCenterThreshold, float detectCircleThreshold, float min_dist) {
+std::vector<RadialFeature> RoadSegmentationUtil::detectRadialCentersInScaled(RoadGraph& roads, Polygon2D& area, int roadType, float scale, float sigma, float candidateCenterThreshold, float detectCircleThreshold, float min_dist) {
 	float min_dist2 = min_dist * min_dist;
 
 	HoughTransform ht(area, scale);
@@ -541,7 +541,7 @@ std::vector<RadialFeature> RoadSegmentationUtil::detectRadialCentersInScaled(Roa
  * 円のだいたいの中心点を使って、より正確な円の中心を返却する
  * Hough transformにより、円を検知する。
  */
-void RoadSegmentationUtil::refineRadialCenterInScaled(RoadGraph& roads, const Polygon2D& area, int roadType, float scale, float sigma, RadialFeature& rf, float distanceThreshold, float angleThreshold) {
+void RoadSegmentationUtil::refineRadialCenterInScaled(RoadGraph& roads, Polygon2D& area, int roadType, float scale, float sigma, RadialFeature& rf, float distanceThreshold, float angleThreshold) {
 	float distanceThreshold2 = distanceThreshold * distanceThreshold;
 
 	HoughTransform ht(area, scale);
@@ -589,7 +589,7 @@ void RoadSegmentationUtil::refineRadialCenterInScaled(RoadGraph& roads, const Po
 /**
  * OpenCVのHoughTransform関数で円を検知する。なければ、falseを返却する。
  */
-bool RoadSegmentationUtil::detectCircle(RoadGraph& roads, const Polygon2D& area, int roadType, float detectCircleThreshold, RadialFeature& rf) {
+bool RoadSegmentationUtil::detectCircle(RoadGraph& roads, Polygon2D& area, int roadType, float detectCircleThreshold, RadialFeature& rf) {
 	float detectCircleThreshold2 = detectCircleThreshold * detectCircleThreshold;
 
 	cv::Mat img = cv::Mat::zeros(500, 500, CV_8U);
@@ -629,7 +629,7 @@ bool RoadSegmentationUtil::detectCircle(RoadGraph& roads, const Polygon2D& area,
 /**
  * 与えられた円の中心に基づき、Radialタイプの道路エッジを登録する。
  */
-bool RoadSegmentationUtil::findOneRadial(RoadGraph& roads, const Polygon2D& area, int roadType, float angleThreshold, float votingRatioThreshold, float seedDistance, float minSeedDirections, float extendingAngleThreshold, RadialFeature& rf, QMap<RoadEdgeDesc, bool>& edges) {
+bool RoadSegmentationUtil::findOneRadial(RoadGraph& roads, Polygon2D& area, int roadType, float angleThreshold, float votingRatioThreshold, float seedDistance, float minSeedDirections, float extendingAngleThreshold, RadialFeature& rf, QMap<RoadEdgeDesc, bool>& edges) {
 	RoadEdgeIter ei, eend;
 	for (boost::tie(ei, eend) = boost::edges(roads.graph); ei != eend; ++ei) {
 		if (!roads.graph[*ei]->valid) continue;
@@ -700,7 +700,7 @@ void RoadSegmentationUtil::reduceRadialGroup(RoadGraph& roads, RadialFeature& rf
 /**
  * 指定したグループに属するエッジについて、円の中心から離れる方向に周辺のエッジを辿り、グループに登録していく。
  */
-void RoadSegmentationUtil::extendRadialGroup(RoadGraph& roads, const Polygon2D& area, int roadType, RadialFeature& rf, QMap<RoadEdgeDesc, bool>& edges, float angleThreshold, float dirCheckRatio) {
+void RoadSegmentationUtil::extendRadialGroup(RoadGraph& roads, Polygon2D& area, int roadType, RadialFeature& rf, QMap<RoadEdgeDesc, bool>& edges, float angleThreshold, float dirCheckRatio) {
 	QList<RoadVertexDesc> queue;
 
 	QList<RoadVertexDesc> visited;

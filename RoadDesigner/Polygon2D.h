@@ -21,10 +21,12 @@ class Polygon2D {
 protected:
 	/** Vector containing 3D points of polygon contour */
 	Loop2D contour;
+	std::vector<Loop2D> trapezoids;
 
 	QVector2D centroid;
 
 	bool isCentroidValid;
+	bool tessellated;
 
 public:
 	Polygon2D();
@@ -76,8 +78,9 @@ public:
 	//float computeInset(std::vector<float> offsetDistances, Loop2D &pgonInset, bool computeArea = true);
 	//float computeArea(bool parallelToXY = false);
 	bool reorientFace(bool onlyCheck = false);
-	bool contains(const QVector2D& pt) const;
-	void tessellate(std::vector<Loop2D>& trapezoids) const;
+	bool contains(const QVector2D& pt);
+	//void tessellate(std::vector<Loop2D>& trapezoids) const;
+	std::vector<Loop2D>& tessellate();
 
 	bool intersect(const QVector2D& a, const QVector2D& b, float *tab, float *tcd, QVector2D &intPoint) const;
 
