@@ -298,7 +298,7 @@ std::vector<float> GenericRoadGenerator::generateRandomLengths(int num, float l1
 	std::vector<float> lengths;
 
 	for (int i = 0; i < num; ++i) {
-		float length = Util::uniform_rand(100.0f, 300.0f);
+		float length = Util::uniform_rand(l1, l2);
 
 		lengths.push_back(length);
 	}
