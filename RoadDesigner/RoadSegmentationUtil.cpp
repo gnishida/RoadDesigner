@@ -194,6 +194,9 @@ bool RoadSegmentationUtil::detectOneGrid(RoadGraph& roads, Polygon2D& area, int 
 	}
 	if (len < minTotalLength || len < total_edge_length * minMaxBinRatio) return false;
 
+	// 領域内のエッジの総延長をweightとしてセット
+	gf.weight = len;
+
 	// 候補のエッジ群を囲むconvex hullを求める
 	ConvexHull ch;
 	for (QMap<RoadEdgeDesc, float>::iterator it = edges.begin(); it != edges.end(); ++it) {
@@ -219,9 +222,6 @@ bool RoadSegmentationUtil::detectOneGrid(RoadGraph& roads, Polygon2D& area, int 
 
 	// 領域の中心をセット
 	gf.center = gf._polygon.getCentroid();
-
-	// 領域内のエッジの数をセット
-	gf.weight = edges.size();
 
 	// 最後に、このグループに属するエッジを、RoadGraphオブジェクトに反映させる
 	for (QMap<RoadEdgeDesc, float>::iterator it = edges.begin(); it != edges.end(); ++it) {
@@ -798,9 +798,13 @@ int RoadSegmentationUtil::countNumDirections(RoadGraph& roads, const RadialFeatu
 }
 
 void RoadSegmentationUtil::buildRadialArea(RoadGraph& roads, QMap<RoadEdgeDesc, bool>& edges, RadialFeature& rf) {
+	float length = 0.0f;
+
 	// 候補のエッジ群を囲むconvex hullを求める
 	ConvexHull ch;
 	for (QMap<RoadEdgeDesc, bool>::iterator it = edges.begin(); it != edges.end(); ++it) {
+		length += roads.graph[it.key()]->getLength();
+
 		for (int i = 0; i < roads.graph[it.key()]->polyLine.size(); i++) {
 			ch.addPoint(roads.graph[it.key()]->polyLine[i]);
 		}
@@ -812,6 +816,9 @@ void RoadSegmentationUtil::buildRadialArea(RoadGraph& roads, QMap<RoadEdgeDesc, 
 	for (int i = 0; i < hull.size(); ++i) {
 		rf._polygon.push_back(hull[i]);
 	}
+
+	// エッジの総延長をweightとしてセット
+	rf.weight = length;
 }
 
 /**

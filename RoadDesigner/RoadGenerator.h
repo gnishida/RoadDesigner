@@ -3,14 +3,14 @@
 #include "RoadGraph.h"
 #include "RoadArea.h"
 #include "Polygon2D.h"
-#include "RandomFeature.h"
+#include "RoadFeature.h"
 
-class GenericRoadGenerator {
+class RoadGenerator {
 public:
-	GenericRoadGenerator();
-	~GenericRoadGenerator();
+	RoadGenerator();
+	~RoadGenerator();
 
-	void generateRoadNetwork(RoadArea& roadArea, const GenericFeature& rf);
+	void generateRoadNetwork(RoadArea& roadArea, const RoadFeature& rf);
 
 private:
 };

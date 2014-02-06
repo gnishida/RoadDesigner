@@ -6,9 +6,7 @@
 #include "RadialFeature.h"
 #include "GenericFeature.h"
 #include "RoadSegmentationUtil.h"
-#include "GridRoadGenerator.h"
-#include "RadialRoadGenerator.h"
-#include "GenericRoadGenerator.h"
+#include "RoadGenerator.h"
 
 ControlWidget::ControlWidget(MainWindow* mainWin) : QDockWidget("Control Widget", (QWidget*)mainWin) {
 	this->mainWin = mainWin;
@@ -44,16 +42,17 @@ void ControlWidget::showLocalStreet(int flag) {
 void ControlWidget::generateGrid() {
 	if (mainWin->glWidget->selectedArea == -1) return;
 
-	GridFeature gf(mainWin->glWidget->selectedArea);
+	//GridFeature gf(mainWin->glWidget->selectedArea);
+	RoadFeature rf;
 
 	if (ui.radioButtonGridPattern1->isChecked()) {
-		gf.load("grid_feature1.xml");
+		rf.load("grid_feature1.xml");
 	} else {
-		gf.load("grid_feature2.xml");
+		rf.load("grid_feature2.xml");
 	}
 
-	GridRoadGenerator rg;
-	rg.generateRoadNetwork(mainWin->glWidget->areas[mainWin->glWidget->selectedArea], gf);
+	RoadGenerator rg;
+	rg.generateRoadNetwork(mainWin->glWidget->areas[mainWin->glWidget->selectedArea], rf);
 
 	mainWin->glWidget->updateGL();
 }
@@ -64,9 +63,10 @@ void ControlWidget::generateGrid() {
 void ControlWidget::generateRadial() {
 	if (mainWin->glWidget->selectedArea == -1) return;
 
-	RadialFeature rf(mainWin->glWidget->selectedArea);
+	RoadFeature rf;
 	rf.load("radial_feature1.xml");
-	RadialRoadGenerator rg;
+
+	RoadGenerator rg;
 	rg.generateRoadNetwork(mainWin->glWidget->areas[mainWin->glWidget->selectedArea], rf);
 
 	mainWin->glWidget->updateGL();
@@ -78,10 +78,11 @@ void ControlWidget::generateRadial() {
 void ControlWidget::generateGeneric() {
 	if (mainWin->glWidget->selectedArea == -1) return;
 
-	GenericFeature gf(mainWin->glWidget->selectedArea);
-	gf.load("generic_feature1.xml");
-	GenericRoadGenerator rg;
-	rg.generateRoadNetwork(mainWin->glWidget->areas[mainWin->glWidget->selectedArea], gf);
+	RoadFeature rf;
+	rf.load("generic_feature1.xml");
+
+	RoadGenerator rg;
+	rg.generateRoadNetwork(mainWin->glWidget->areas[mainWin->glWidget->selectedArea], rf);
 
 	mainWin->glWidget->updateGL();
 }

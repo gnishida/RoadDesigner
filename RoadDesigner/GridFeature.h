@@ -28,7 +28,7 @@ public:
 	Polygon2D _polygon;			// 領域を表すポリゴン（時計回り）
 
 public:
-	GridFeature(int group_id) : group_id(group_id) {}
+	GridFeature(int group_id);
 	~GridFeature() {}
 
 	void setAngle(float angle);

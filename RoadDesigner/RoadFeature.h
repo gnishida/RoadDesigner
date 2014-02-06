@@ -22,5 +22,7 @@ public:
 	void addFeature(GridFeature& gf);
 	void addFeature(RadialFeature& rf);
 	void addFeature(GenericFeature& gf);
+
+	void normalize();
 };
 

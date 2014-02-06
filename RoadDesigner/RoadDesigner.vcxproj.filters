@@ -33,6 +33,12 @@
       <Extensions>cpp;moc</Extensions>
       <SourceControlFiles>False</SourceControlFiles>
     </Filter>
+    <Filter Include="Feature">
+      <UniqueIdentifier>{37d6c0c0-7178-44ea-9267-b40f82298cf5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="RoadGenerator">
+      <UniqueIdentifier>{3d632066-3238-4763-baae-23ab233e88af}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -89,9 +95,6 @@
     <ClCompile Include="GraphUtil.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="GridFeature.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="HoughTransform.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -99,9 +102,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="PolygonAreaBuilder.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="RadialFeature.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Renderable.cpp">
@@ -131,23 +131,32 @@
     <ClCompile Include="RoadArea.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="GridRoadGenerator.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="RadialRoadGenerator.cpp">
+    <ClCompile Include="GenericRoadGenerator.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="GenericFeature.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Feature</Filter>
     </ClCompile>
-    <ClCompile Include="GenericRoadGenerator.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="GridFeature.cpp">
+      <Filter>Feature</Filter>
     </ClCompile>
-    <ClCompile Include="GenericRoadGenerator.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="RadialFeature.cpp">
+      <Filter>Feature</Filter>
     </ClCompile>
     <ClCompile Include="RoadFeature.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Feature</Filter>
+    </ClCompile>
+    <ClCompile Include="RoadGenerator.cpp">
+      <Filter>RoadGenerator</Filter>
+    </ClCompile>
+    <ClCompile Include="GenericRoadGenerator.cpp">
+      <Filter>RoadGenerator</Filter>
+    </ClCompile>
+    <ClCompile Include="GridRoadGenerator.cpp">
+      <Filter>RoadGenerator</Filter>
+    </ClCompile>
+    <ClCompile Include="RadialRoadGenerator.cpp">
+      <Filter>RoadGenerator</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -210,9 +219,6 @@
     <ClInclude Include="GraphUtil.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="GridFeature.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="HoughTransform.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -220,9 +226,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="PolygonAreaBuilder.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="RadialFeature.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Renderable.h">
@@ -252,26 +255,35 @@
     <ClInclude Include="RoadArea.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="GridRoadGenerator.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="RadialRoadGenerator.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="GenericRoadGenerator.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="GenericFeature.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="GeneratedFiles\ui_RoadBox.h">
       <Filter>Generated Files</Filter>
     </ClInclude>
     <ClInclude Include="GeneratedFiles\ui_RoadBoxList.h">
       <Filter>Generated Files</Filter>
     </ClInclude>
+    <ClInclude Include="GenericFeature.h">
+      <Filter>Feature</Filter>
+    </ClInclude>
+    <ClInclude Include="GridFeature.h">
+      <Filter>Feature</Filter>
+    </ClInclude>
+    <ClInclude Include="RadialFeature.h">
+      <Filter>Feature</Filter>
+    </ClInclude>
     <ClInclude Include="RoadFeature.h">
-      <Filter>Header Files</Filter>
+      <Filter>Feature</Filter>
+    </ClInclude>
+    <ClInclude Include="GenericRoadGenerator.h">
+      <Filter>RoadGenerator</Filter>
+    </ClInclude>
+    <ClInclude Include="RadialRoadGenerator.h">
+      <Filter>RoadGenerator</Filter>
+    </ClInclude>
+    <ClInclude Include="GridRoadGenerator.h">
+      <Filter>RoadGenerator</Filter>
+    </ClInclude>
+    <ClInclude Include="RoadGenerator.h">
+      <Filter>RoadGenerator</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

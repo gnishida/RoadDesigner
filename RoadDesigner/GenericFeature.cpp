@@ -33,6 +33,8 @@ void GenericFeature::addEdge(float length, int roadType) {
 		avenueLengths[(int)(length / 20) * 20 + 10] += 1;
 		accmAvenueLenCount++;
 	}
+
+	weight += length;
 }
 
 void GenericFeature::addNumDiretions(int numDirections, int roadType) {

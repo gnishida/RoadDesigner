@@ -1,4 +1,4 @@
-#include "RoadFeature.h"
+﻿#include "RoadFeature.h"
 #include <QFile>
 #include <QDomDocument>
 #include <QTextStream>
@@ -74,4 +74,42 @@ void RoadFeature::addFeature(GenericFeature& gf) {
 	genericFeatures.push_back(gf);
 }
 
+/**
+ * 抽出した特徴量を正規化する。
+ * weightの正規化、centerの正規化を行う。
+ */
+void RoadFeature::normalize() {
+	float total_weight = 0.0f;
+	QVector2D total_center;
+
+	// total weight、total centerを計算
+	for (int i = 0; i < gridFeatures.size(); ++i) {
+		total_weight += gridFeatures[i].weight;
+		total_center += gridFeatures[i].center;
+	}
+	for (int i = 0; i < radialFeatures.size(); ++i) {
+		total_weight += radialFeatures[i].weight;
+		total_center += radialFeatures[i].center;
+	}
+	for (int i = 0; i < genericFeatures.size(); ++i) {
+		total_weight += genericFeatures[i].weight;
+		total_center += genericFeatures[i].center;
+	}
+
+	total_center /= (gridFeatures.size() + radialFeatures.size() + genericFeatures.size());
+
+	// total weight、total centerに基づいて、weightとcenterをnormalizeする
+	for (int i = 0; i < gridFeatures.size(); ++i) {
+		gridFeatures[i].weight /= total_weight;
+		gridFeatures[i].center -= total_center;
+	}
+	for (int i = 0; i < radialFeatures.size(); ++i) {
+		radialFeatures[i].weight /= total_weight;
+		radialFeatures[i].center -= total_center;
+	}
+	for (int i = 0; i < genericFeatures.size(); ++i) {
+		genericFeatures[i].weight /= total_weight;
+		genericFeatures[i].center -= total_center;
+	}
+}
 
