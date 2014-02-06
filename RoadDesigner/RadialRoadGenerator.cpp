@@ -12,6 +12,9 @@ RadialRoadGenerator::~RadialRoadGenerator() {
  * Radialパターンの道路網を生成する
  */
 void RadialRoadGenerator::generateRoadNetwork(RoadArea& roadArea, const RadialFeature& rf) {
+	// clear the existing road network
+	roadArea.roads.clear();
+
 	// 円形の道路を生成すると共に、シードを生成する
 	std::list<RoadVertexDesc> seeds;
 	generateCircleAvenues(roadArea.roads, roadArea.area, rf, seeds);

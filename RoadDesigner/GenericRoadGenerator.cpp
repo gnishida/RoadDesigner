@@ -9,6 +9,9 @@ GenericRoadGenerator::~GenericRoadGenerator() {
 }
 
 void GenericRoadGenerator::generateRoadNetwork(RoadArea& roadArea, const GenericFeature& gf) {
+	// clear the existing road network
+	roadArea.roads.clear();
+
 	std::list<RoadVertexDesc> seeds;
 	std::list<RoadVertexDesc> newSeeds;
 
