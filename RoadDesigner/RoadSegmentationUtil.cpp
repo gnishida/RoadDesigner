@@ -219,6 +219,9 @@ bool RoadSegmentationUtil::detectOneGrid(RoadGraph& roads, Polygon2D& area, int 
 		gf._polygon.push_back(hull[i]);
 	}
 
+	// 領域の中心を設定
+	gf.center = gf._polygon.getCentroid();
+
 	// 最後に、このグループに属するエッジを、RoadGraphオブジェクトに反映させる
 	for (QMap<RoadEdgeDesc, float>::iterator it = edges.begin(); it != edges.end(); ++it) {
 		RoadEdgeDesc e = it.key();
@@ -610,16 +613,21 @@ bool RoadSegmentationUtil::detectCircle(RoadGraph& roads, Polygon2D& area, int r
 		QVector2D center(circles[i][0], circles[i][1]);
 		int r = circles[i][2];
 
+		bool duplicated = false;
+		for (int j = 0; j < rf.radii.size(); ++j) {
+			if (fabs(rf.radii[j] - r) < 3.0f) duplicated = true;
+		}
+		if (duplicated) continue;
+
 		if ((center - QVector2D(250, 250)).lengthSquared() < detectCircleThreshold2) {
 			std::cout << "Circle detected: (" << center.x() << "," << center.y() << ") R: " << r << std::endl;
 			rf.center += center - QVector2D(250, 250);
 			rf.radii.push_back(r);
-
-			return true;
 		}
 	}
 
-	return false;
+	if (rf.radii.size() > 0) return true;
+	else return false;
 }
 
 /**
@@ -802,7 +810,60 @@ void RoadSegmentationUtil::buildRadialArea(RoadGraph& roads, QMap<RoadEdgeDesc, 
 }
 
 /**
- * ラウンドアバウトを検知する。
+ * GridでもRadialでもないエッジについて、一般的な特徴量を抽出する。
  */
-void RoadSegmentationUtil::detectRoundabout(RoadGraph& roads, AbstractArea& area) {
+void RoadSegmentationUtil::extractGenericFeature(RoadGraph& roads, const Polygon2D& area, std::vector<GenericFeature>& genericFeatures) {
+	GenericFeature gf(0);
+
+	RoadEdgeIter ei, eend;
+	for (boost::tie(ei, eend) = boost::edges(roads.graph); ei != eend; ++ei) {
+		if (!roads.graph[*ei]->valid) continue;
+
+		// GridまたはRadialのエッジは、スキップ
+		if (roads.graph[*ei]->shapeType > 0) continue;
+
+		RoadVertexDesc src = boost::source(*ei, roads.graph);
+		RoadVertexDesc tgt = boost::target(*ei, roads.graph);
+
+		// エリア外ならスキップ
+		if (!area.contains(roads.graph[src]->pt) && !area.contains(roads.graph[tgt]->pt)) continue;
+
+		int roadType = roads.graph[*ei]->type;
+		float length = roads.graph[*ei]->getLength();
+
+		gf.addEdge(length, roadType);
+	}
+
+	RoadVertexIter vi, vend;
+	for (boost::tie(vi, vend) = boost::vertices(roads.graph); vi != vend; ++vi) {
+		if (!roads.graph[*vi]->valid) continue;
+
+		if (getNumEdges(roads, *vi, 2, 0) > 0) {
+			gf.addNumDiretions(GraphUtil::getNumEdges(roads, *vi, 2), 2);
+		}
+
+		if (getNumEdges(roads, *vi, 1, 0) > 0) {
+			gf.addNumDiretions(GraphUtil::getNumEdges(roads, *vi, 3), 1);
+		}
+	}
+
+	gf.computeFeature();
+
+	genericFeatures.push_back(gf);
+}
+
+int RoadSegmentationUtil::getNumEdges(RoadGraph &roads, RoadVertexDesc v, int roadType, int shapeType) {
+	int count = 0;
+	RoadOutEdgeIter ei, eend;
+	for (boost::tie(ei, eend) = out_edges(v, roads.graph); ei != eend; ++ei) {
+		if (!roads.graph[*ei]->valid) continue;
+		
+		if (!GraphUtil::isRoadTypeMatched(roads.graph[*ei]->type, roadType)) continue;
+
+		if (roads.graph[*ei]->shapeType != shapeType) continue;
+
+		count++;
+	}
+
+	return count;
 }

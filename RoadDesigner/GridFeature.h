@@ -11,6 +11,7 @@
 class GridFeature {
 public:
 	int group_id;
+	QVector2D center;			// エリアの中心
 	float angle1;				// 横方向の角度（第一象限）
 	float angle2;				// 縦方向の角度（第二象限）
 	QMap<float, float> length1;	// 横方向の長さのヒストグラム

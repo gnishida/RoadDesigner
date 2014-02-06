@@ -7,6 +7,93 @@
 #define M_PI	3.141592653589793238
 #endif
 
+GenericFeature::GenericFeature() {
+	accmAvenueLenCount = 0;
+	accmStreetLenCount = 0;
+	accmAvenueDirCount = 0;
+	accmStreetDirCount = 0;
+}
+
+GenericFeature::GenericFeature(int group_id) {
+	this->group_id = group_id;
+
+	accmAvenueLenCount = 0;
+	accmStreetLenCount = 0;
+	accmAvenueDirCount = 0;
+	accmStreetDirCount = 0;
+}
+
+void GenericFeature::addEdge(float length, int roadType) {
+	if (roadType == 1) {
+		streetLengths[(int)(length / 20) * 20 + 10] += 1;
+		accmStreetLenCount++;
+	} else {
+		avenueLengths[(int)(length / 20) * 20 + 10] += 1;
+		accmAvenueLenCount++;
+	}
+}
+
+void GenericFeature::addNumDiretions(int numDirections, int roadType) {
+	if (roadType == 1) {
+		streetNumDirections[numDirections] += 1;
+		accmStreetDirCount++;
+	} else {
+		avenueNumDirections[numDirections] += 1;
+		accmAvenueDirCount++;
+	}
+}
+
+/**
+ * エッジの追加が終わったら、この関数を呼んで、ヒストグラムのnormalizeする。
+ */
+void GenericFeature::computeFeature() {
+	// エッジの長さのヒストグラムをnormalizeする
+	for (QMap<float, float>::iterator it = streetLengths.begin(); it != streetLengths.end(); ++it) {
+		streetLengths[it.key()] /= (float)accmStreetLenCount;
+	}
+	for (QMap<float, float>::iterator it = avenueLengths.begin(); it != avenueLengths.end(); ++it) {
+		avenueLengths[it.key()] /= (float)accmAvenueLenCount;
+	}
+
+	// エッジの長さの累積確率分布を生成
+	float apd = 0.0f;
+	for (QMap<float, float>::iterator it = streetLengths.begin(); it != streetLengths.end(); ++it) {
+		apd += streetLengths[it.key()];
+		streetLengths[it.key()] = apd;
+	}
+	apd = 0.0f;
+	for (QMap<float, float>::iterator it = avenueLengths.begin(); it != avenueLengths.end(); ++it) {
+		apd += avenueLengths[it.key()];
+		avenueLengths[it.key()] = apd;
+	}
+
+	// 交差点のdegreeのヒストグラムをnormalizeする
+	for (QMap<int, float>::iterator it = streetNumDirections.begin(); it != streetNumDirections.end(); ++it) {
+		streetNumDirections[it.key()] /= (float)accmStreetDirCount;
+	}
+	for (QMap<int, float>::iterator it = avenueNumDirections.begin(); it != avenueNumDirections.end(); ++it) {
+		avenueNumDirections[it.key()] /= (float)accmAvenueDirCount;
+	}
+
+	// 交差点のdegreeの累積確率分布を生成
+	apd = 0.0f;
+	for (QMap<int, float>::iterator it = streetNumDirections.begin(); it != streetNumDirections.end(); ++it) {
+		apd += streetNumDirections[it.key()];
+		streetNumDirections[it.key()] = apd;
+	}
+	apd = 0.0f;
+	for (QMap<int, float>::iterator it = avenueNumDirections.begin(); it != avenueNumDirections.end(); ++it) {
+		apd += avenueNumDirections[it.key()];
+		avenueNumDirections[it.key()] = apd;
+	}
+
+	// 累積カウンタをリセットする
+	accmAvenueLenCount = 0;
+	accmStreetLenCount = 0;
+	accmAvenueDirCount = 0;
+	accmStreetDirCount = 0;
+}
+
 std::vector<float> GenericFeature::getAngles(int num) const {
 	std::vector<float> angles;
 
@@ -200,5 +287,104 @@ void GenericFeature::loadStreet(QDomNode& node) {
 		}
 
 		child = child.nextSibling();
+	}
+}
+
+/**
+ * 特徴量をxmlファイルに保存する。
+ */
+void GenericFeature::save(QString filename) {
+	QDomDocument doc;
+
+	QDomElement root = doc.createElement("features");
+	doc.appendChild(root);
+
+	QDomElement node_feature = doc.createElement("feature");
+	node_feature.setAttribute("type", "generic");
+	root.appendChild(node_feature);
+
+	// write avenue node
+	QDomElement node_avenue = doc.createElement("avenue");
+	node_feature.appendChild(node_avenue);
+	saveAvenue(doc, node_avenue);
+
+	// write street node
+	QDomElement node_street = doc.createElement("street");
+	node_feature.appendChild(node_street);
+	saveStreet(doc, node_street);
+
+	// write the dom to the file
+	QFile file(filename);
+	file.open(QIODevice::WriteOnly);
+
+	QTextStream out(&file);
+	doc.save(out, 4);
+}
+
+void GenericFeature::saveAvenue(QDomDocument& doc, QDomNode& node) {
+	// write length node
+	QDomElement node_length = doc.createElement("length");
+	node.appendChild(node_length);
+
+	for (QMap<float, float>::iterator it = avenueLengths.begin(); it != avenueLengths.end(); ++it) {
+		QDomElement node_length_data = doc.createElement("data");
+		QString str;
+		str.setNum(it.key());
+		node_length_data.setAttribute("key", str);
+		node_length.appendChild(node_length_data);
+
+		str.setNum(it.value());
+		QDomText node_length_value = doc.createTextNode(str);
+		node_length_data.appendChild(node_length_value);
+	}
+
+	// write numDirections node
+	QDomElement node_numDirections = doc.createElement("numDirections");
+	node.appendChild(node_numDirections);
+
+	for (QMap<int, float>::iterator it = avenueNumDirections.begin(); it != avenueNumDirections.end(); ++it) {
+		QDomElement node_numDirections_data = doc.createElement("data");
+		QString str;
+		str.setNum(it.key());
+		node_numDirections_data.setAttribute("key", str);
+		node_numDirections.appendChild(node_numDirections_data);
+
+		str.setNum(it.value());
+		QDomText node_numDirections_value = doc.createTextNode(str);
+		node_numDirections_data.appendChild(node_numDirections_value);
+	}
+}
+
+void GenericFeature::saveStreet(QDomDocument& doc, QDomNode& node) {
+	// write length node
+	QDomElement node_length = doc.createElement("length");
+	node.appendChild(node_length);
+
+	for (QMap<float, float>::iterator it = streetLengths.begin(); it != streetLengths.end(); ++it) {
+		QDomElement node_length_data = doc.createElement("data");
+		QString str;
+		str.setNum(it.key());
+		node_length_data.setAttribute("key", str);
+		node_length.appendChild(node_length_data);
+
+		str.setNum(it.value());
+		QDomText node_length_value = doc.createTextNode(str);
+		node_length_data.appendChild(node_length_value);
+	}
+
+	// write numDirections node
+	QDomElement node_numDirections = doc.createElement("numDirections");
+	node.appendChild(node_numDirections);
+
+	for (QMap<int, float>::iterator it = streetNumDirections.begin(); it != streetNumDirections.end(); ++it) {
+		QDomElement node_numDirections_data = doc.createElement("data");
+		QString str;
+		str.setNum(it.key());
+		node_numDirections_data.setAttribute("key", str);
+		node_numDirections.appendChild(node_numDirections_data);
+
+		str.setNum(it.value());
+		QDomText node_numDirections_value = doc.createTextNode(str);
+		node_numDirections_data.appendChild(node_numDirections_value);
 	}
 }

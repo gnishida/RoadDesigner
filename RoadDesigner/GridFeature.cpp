@@ -50,22 +50,22 @@ void GridFeature::addEdge(const QVector2D& edge_vec, float threshold) {
 	if (diff1 == min_diff) {
 		accmDir1 += dir;
 		accmDir2 += QVector2D(-dir.y(), dir.x());
-		length1[(int)(edge_vec.length() / 20) * 20] += 1;
+		length1[(int)(edge_vec.length() / 20) * 20 + 10] += 1;
 		accmLenCount1++;
 	} else if (diff2 == min_diff) {
 		accmDir1 -= dir;
 		accmDir2 -= QVector2D(-dir.y(), dir.x());
-		length1[(int)(edge_vec.length() / 20) * 20] += 1;
+		length1[(int)(edge_vec.length() / 20) * 20 + 10] += 1;
 		accmLenCount1++;
 	} else if (diff3 == min_diff) {
 		accmDir1 += QVector2D(dir.y(), -dir.x());
 		accmDir2 += dir;
-		length2[(int)(edge_vec.length() / 20) * 20] += 1;
+		length2[(int)(edge_vec.length() / 20) * 20 + 10] += 1;
 		accmLenCount2++;
 	} else {
 		accmDir1 -= QVector2D(dir.y(), -dir.x());
 		accmDir2 -= dir;
-		length2[(int)(edge_vec.length() / 20) * 20] += 1;
+		length2[(int)(edge_vec.length() / 20) * 20 + 10] += 1;
 		accmLenCount2++;
 	}
 
@@ -210,7 +210,16 @@ void GridFeature::load(QDomNode& node) {
 
 	QDomNode child = node.firstChild();
 	while (!child.isNull()) {
-		if (child.toElement().tagName() == "angle1") {
+		if (child.toElement().tagName() == "center") {
+			QDomNode child2 = child.firstChild();
+			while (!child2.isNull()) {
+				if (child2.toElement().tagName() == "x") {
+					center.setX(child2.firstChild().nodeValue().toFloat());
+				} else if (child2.toElement().tagName() == "y") {
+					center.setY(child2.firstChild().nodeValue().toFloat());
+				}
+			}
+		} else if (child.toElement().tagName() == "angle1") {
 			angle1 = child.firstChild().nodeValue().toFloat();
 		} else if (child.toElement().tagName() == "angle2") {
 			angle2 = child.firstChild().nodeValue().toFloat();
@@ -251,22 +260,40 @@ void GridFeature::save(QString filename) {
 	node_feature.setAttribute("type", "grid");
 	root.appendChild(node_feature);
 
+	// write center node
+	QDomElement node_center = doc.createElement("center");
+	node_feature.appendChild(node_center);
+
+	QDomElement node_center_x = doc.createElement("x");
+	node_center.appendChild(node_center_x);
+
+	QString str;
+	str.setNum(center.x());
+	QDomText node_center_x_value = doc.createTextNode(str);
+	node_center_x.appendChild(node_center_x_value);
+
+	QDomElement node_center_y = doc.createElement("y");
+	node_center.appendChild(node_center_y);
+
+	str.setNum(center.y());
+	QDomText node_center_y_value = doc.createTextNode(str);
+	node_center_y.appendChild(node_center_y_value);
+	
 	// write angle1 node
 	QDomElement node_angle1 = doc.createElement("angle1");
 	node_feature.appendChild(node_angle1);
 
-	QString str;
 	str.setNum(angle1);
-	QDomText node_angle1_data = doc.createTextNode(str);
-	node_angle1.appendChild(node_angle1_data);
+	QDomText node_angle1_value = doc.createTextNode(str);
+	node_angle1.appendChild(node_angle1_value);
 
 	// write angle2 node
 	QDomElement node_angle2 = doc.createElement("angle2");
 	node_feature.appendChild(node_angle2);
 
 	str.setNum(angle2);
-	QDomText node_angle2_data = doc.createTextNode(str);
-	node_angle2.appendChild(node_angle2_data);
+	QDomText node_angle2_value = doc.createTextNode(str);
+	node_angle2.appendChild(node_angle2_value);
 
 	// write length1 node
 	QDomElement node_length1 = doc.createElement("length1");
