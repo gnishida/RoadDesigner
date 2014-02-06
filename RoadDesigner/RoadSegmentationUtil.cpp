@@ -217,8 +217,11 @@ bool RoadSegmentationUtil::detectOneGrid(RoadGraph& roads, Polygon2D& area, int 
 		gf._polygon.push_back(hull[i]);
 	}
 
-	// 領域の中心を設定
+	// 領域の中心をセット
 	gf.center = gf._polygon.getCentroid();
+
+	// 領域内のエッジの数をセット
+	gf.weight = edges.size();
 
 	// 最後に、このグループに属するエッジを、RoadGraphオブジェクトに反映させる
 	for (QMap<RoadEdgeDesc, float>::iterator it = edges.begin(); it != edges.end(); ++it) {

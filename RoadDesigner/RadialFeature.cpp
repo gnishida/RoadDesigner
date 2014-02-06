@@ -3,6 +3,13 @@
 #include <QDomDocument>
 #include <QTextStream>
 
+RadialFeature::RadialFeature(int group_id) {
+	this->group_id = group_id;
+
+	weight = 0.0f;
+	numDirections = 0;
+}
+
 /**
  * ファイルから、Radialパターンの特徴量を読込む。
  */
@@ -31,6 +38,8 @@ void RadialFeature::load(QString filename) {
  */
 void RadialFeature::load(QDomNode& node) {
 	radii.clear();
+
+	weight = node.toElement().attribute("weight").toFloat();
 
 	QDomNode child = node.firstChild();
 	while (!child.isNull()) {
@@ -64,8 +73,12 @@ void RadialFeature::save(QString filename) {
 }
 
 void RadialFeature::save(QDomDocument& doc, QDomNode& root) {
+	QString str;
+
+	str.setNum(weight);
 	QDomElement node_feature = doc.createElement("feature");
 	node_feature.setAttribute("type", "radial");
+	node_feature.setAttribute("weight", str);
 	root.appendChild(node_feature);
 
 	// write radius node
@@ -84,7 +97,6 @@ void RadialFeature::save(QDomDocument& doc, QDomNode& root) {
 	QDomElement node_numDirections = doc.createElement("numDirections");
 	node_feature.appendChild(node_numDirections);
 
-	QString str;
 	str.setNum(numDirections);
 	QDomText node_numDirections_value = doc.createTextNode(str);
 	node_numDirections.appendChild(node_numDirections_value);

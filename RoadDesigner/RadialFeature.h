@@ -9,13 +9,14 @@ class RadialFeature {
 public:
 	int group_id;
 	QVector2D center;
+	float weight;
 	std::vector<float> radii;
 	int numDirections;
 	
 	Polygon2D _polygon;			// 領域を表すポリゴン（時計回り）
 
 public:
-	RadialFeature(int group_id) : group_id(group_id), numDirections(0) {}
+	RadialFeature(int group_id);
 	~RadialFeature() {}
 
 	void load(QString filename);

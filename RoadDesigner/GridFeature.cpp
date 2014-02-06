@@ -8,6 +8,14 @@
 #define M_PI	3.141592653589793238
 #endif
 
+GridFeature::GridFeature(int group_id) {
+	this->group_id = group_id;
+
+	weight = 0.0f;
+	accmLenCount1 = 0;
+	accmLenCount2 = 0;
+}
+
 /**
  * グリッド方向の近似値を使って、グリッドの角度を仮にセットする。
  */
@@ -208,6 +216,8 @@ void GridFeature::load(QDomNode& node) {
 	length1.clear();
 	length2.clear();
 
+	weight = node.toElement().attribute("weight").toFloat();
+
 	QDomNode child = node.firstChild();
 	while (!child.isNull()) {
 		if (child.toElement().tagName() == "center") {
@@ -267,8 +277,12 @@ void GridFeature::save(QString filename) {
 }
 
 void GridFeature::save(QDomDocument& doc, QDomNode& root) {
+	QString str;
+
+	str.setNum(weight);
 	QDomElement node_feature = doc.createElement("feature");
 	node_feature.setAttribute("type", "grid");
+	node_feature.setAttribute("weight", str);
 	root.appendChild(node_feature);
 
 	// write center node
@@ -278,7 +292,6 @@ void GridFeature::save(QDomDocument& doc, QDomNode& root) {
 	QDomElement node_center_x = doc.createElement("x");
 	node_center.appendChild(node_center_x);
 
-	QString str;
 	str.setNum(center.x());
 	QDomText node_center_x_value = doc.createTextNode(str);
 	node_center_x.appendChild(node_center_x_value);

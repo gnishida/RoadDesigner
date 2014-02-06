@@ -9,6 +9,7 @@ class GenericFeature {
 public:
 	int group_id;
 	QVector2D center;
+	float weight;
 	QMap<float, float> avenueLengths;
 	QMap<int, float> avenueNumDirections;
 	QMap<float, float> streetLengths;

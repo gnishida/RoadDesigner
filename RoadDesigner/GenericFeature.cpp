@@ -8,6 +8,7 @@
 #endif
 
 GenericFeature::GenericFeature() {
+	weight = 0.0f;
 	accmAvenueLenCount = 0;
 	accmStreetLenCount = 0;
 	accmAvenueDirCount = 0;
@@ -17,6 +18,7 @@ GenericFeature::GenericFeature() {
 GenericFeature::GenericFeature(int group_id) {
 	this->group_id = group_id;
 
+	weight = 0.0f;
 	accmAvenueLenCount = 0;
 	accmStreetLenCount = 0;
 	accmAvenueDirCount = 0;
@@ -212,6 +214,13 @@ void GenericFeature::load(QString filename) {
  * 与えられたfeatureノード配下のXML情報に基づいて、グリッド特徴量を設定する。
  */
 void GenericFeature::load(QDomNode& node) {
+	avenueLengths.clear();
+	streetLengths.clear();
+	avenueNumDirections.clear();
+	streetNumDirections.clear();
+
+	weight = node.toElement().attribute("weight").toFloat();
+
 	QDomNode child = node.firstChild();
 	while (!child.isNull()) {
 		if (child.toElement().tagName() == "avenue") {
@@ -310,8 +319,12 @@ void GenericFeature::save(QString filename) {
 }
 
 void GenericFeature::save(QDomDocument& doc, QDomNode& root) {
+	QString str;
+
+	str.setNum(weight);
 	QDomElement node_feature = doc.createElement("feature");
 	node_feature.setAttribute("type", "generic");
+	node_feature.setAttribute("weight", str);
 	root.appendChild(node_feature);
 
 	// write center node
@@ -321,7 +334,6 @@ void GenericFeature::save(QDomDocument& doc, QDomNode& root) {
 	QDomElement node_center_x = doc.createElement("x");
 	node_center.appendChild(node_center_x);
 
-	QString str;
 	str.setNum(center.x());
 	QDomText node_center_x_value = doc.createTextNode(str);
 	node_center_x.appendChild(node_center_x_value);
