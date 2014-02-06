@@ -84,6 +84,16 @@ void GLWidget::keyPressEvent(QKeyEvent *e) {
 	case Qt::Key_X:
 		keyXPressed = true;
 		break;
+	case Qt::Key_Escape:
+		selectedAreaBuilder.cancel();
+		
+		mainWin->mode = MainWindow::MODE_AREA_SELECT;
+		mainWin->ui.actionAreaSelect->setChecked(true);
+		mainWin->ui.actionAreaCreate->setChecked(false);
+
+		updateGL();
+
+		break;
 	}
 }
 

@@ -25,6 +25,11 @@ void PolygonAreaBuilder::end() {
 	_selecting = false;
 }
 
+void PolygonAreaBuilder::cancel() {
+	_polyline.clear();
+	_selecting = false;
+}
+
 bool PolygonAreaBuilder::selected() const {
 	return !_selecting && _polyline.size() >= 3;
 }

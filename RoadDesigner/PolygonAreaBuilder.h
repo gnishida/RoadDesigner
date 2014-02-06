@@ -15,6 +15,7 @@ public:
 	void addPoint(const QVector2D& pt);
 	void moveLastPoint(const QVector2D& pt);
 	void end();
+	void cancel();
 
 	bool selected() const;
 	bool selecting() const;

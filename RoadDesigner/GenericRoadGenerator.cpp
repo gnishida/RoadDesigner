@@ -80,6 +80,7 @@ void GenericRoadGenerator::generateInitialSeeds(RoadGraph &roads, Polygon2D &are
 /**
  * ローカルストリートのシードを生成する。
  */
+/*
 bool GenericRoadGenerator::generateInitialStreetSeeds(RoadGraph &roads, const GenericFeature& gf, std::list<RoadVertexDesc>& seeds) {
 	std::vector<RoadEdgeDesc> edges;
 
@@ -124,8 +125,35 @@ bool GenericRoadGenerator::generateInitialStreetSeeds(RoadGraph &roads, const Ge
 
 	return true;
 }
+*/
+bool GenericRoadGenerator::generateInitialStreetSeeds(RoadGraph &roads, const GenericFeature& gf, std::list<RoadVertexDesc>& seeds) {
+	std::vector<RoadEdgeDesc> edges;
 
+	// degreeが2の頂点を、シードとする
+	RoadVertexIter vi, vend;
+	for (boost::tie(vi, vend) = boost::vertices(roads.graph); vi != vend; ++vi) {
+		if (!roads.graph[*vi]->valid) continue;
 
+		if (GraphUtil::getNumEdges(roads, *vi) != 2) continue;
+
+		RoadEdgeIter ei, eend;
+		for (boost::tie(ei, eend) = boost::edges(roads.graph); ei != eend; ++ei) {
+			if (!roads.graph[*ei]->valid) continue;
+
+			RoadVertexDesc tgt = boost::target(*ei, roads.graph);
+
+			// 頂点の情報をセット
+			roads.graph[*vi]->angles = gf.getPerpendicularAngles(roads.graph[tgt]->pt - roads.graph[*vi]->pt);
+			roads.graph[*vi]->lengths = gf.getLengths(1, 2);
+
+			seeds.push_back(*vi);
+
+			break;
+		}
+	}
+
+	return true;
+}
 
 /**
 * Attempts expansion of a segment in all possible directions and adds new edges to roadGraph.

@@ -1,6 +1,7 @@
 ﻿#include "RadialFeature.h"
 #include <QFile>
 #include <QDomDocument>
+#include <QTextStream>
 
 /**
  * ファイルから、Radialパターンの特徴量を読込む。
