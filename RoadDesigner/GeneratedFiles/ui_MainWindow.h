@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'MainWindow.ui'
 **
-** Created: Tue Feb 4 18:30:10 2014
+** Created: Wed Feb 5 23:16:14 2014
 **      by: Qt User Interface Compiler version 4.8.1
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
@@ -53,7 +53,8 @@ public:
     QMenu *menuFile;
     QMenu *menuWindow;
     QMenu *menuArea;
-    QToolBar *mainToolBar;
+    QToolBar *fileToolBar;
+    QToolBar *areaToolBar;
     QStatusBar *statusBar;
 
     void setupUi(QMainWindow *MainWindow)
@@ -128,6 +129,9 @@ public:
         actionAreaSelect = new QAction(MainWindow);
         actionAreaSelect->setObjectName(QString::fromUtf8("actionAreaSelect"));
         actionAreaSelect->setCheckable(true);
+        QIcon icon8;
+        icon8.addFile(QString::fromUtf8(":/MainWindow/Resources/Select_24x24.png"), QSize(), QIcon::Normal, QIcon::Off);
+        actionAreaSelect->setIcon(icon8);
         actionAreaCreate = new QAction(MainWindow);
         actionAreaCreate->setObjectName(QString::fromUtf8("actionAreaCreate"));
         actionAreaCreate->setCheckable(true);
@@ -147,9 +151,12 @@ public:
         menuArea = new QMenu(menuBar);
         menuArea->setObjectName(QString::fromUtf8("menuArea"));
         MainWindow->setMenuBar(menuBar);
-        mainToolBar = new QToolBar(MainWindow);
-        mainToolBar->setObjectName(QString::fromUtf8("mainToolBar"));
-        MainWindow->addToolBar(Qt::TopToolBarArea, mainToolBar);
+        fileToolBar = new QToolBar(MainWindow);
+        fileToolBar->setObjectName(QString::fromUtf8("fileToolBar"));
+        MainWindow->addToolBar(Qt::TopToolBarArea, fileToolBar);
+        areaToolBar = new QToolBar(MainWindow);
+        areaToolBar->setObjectName(QString::fromUtf8("areaToolBar"));
+        MainWindow->addToolBar(Qt::TopToolBarArea, areaToolBar);
         statusBar = new QStatusBar(MainWindow);
         statusBar->setObjectName(QString::fromUtf8("statusBar"));
         MainWindow->setStatusBar(statusBar);

@@ -30,8 +30,7 @@ void RadialRoadGenerator::generateRoadNetwork(RoadArea& roadArea, const RadialFe
 void RadialRoadGenerator::generateCircleAvenues(RoadGraph& roads, Polygon2D& area, const RadialFeature& rf, std::list<RoadVertexDesc>& seeds) {
 	seeds.clear();
 
-	BBox bbox = area.getLoopAABB();
-	QVector2D center = bbox.midPt();
+	QVector2D center = area.getCentroid();
 
 	float theta = Util::uniform_rand() * M_PI * 2.0f;
 	float theta_step = M_PI * 2.0f / rf.numDirections;

@@ -7,6 +7,12 @@ MainWindow::MainWindow(QWidget *parent, Qt::WFlags flags) : QMainWindow(parent, 
 	// setup the docking widgets
 	controlWidget = new ControlWidget(this);
 
+	// setup the toolbar
+	ui.fileToolBar->addAction(ui.actionNew);
+	ui.fileToolBar->addAction(ui.actionOpen);
+	ui.areaToolBar->addAction(ui.actionAreaSelect);
+	ui.areaToolBar->addAction(ui.actionAreaCreate);
+
 	ui.actionAreaSelect->setChecked(true);
 
 	// register the menu's action handlers

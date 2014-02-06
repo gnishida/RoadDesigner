@@ -64,9 +64,9 @@ void GenericRoadGenerator::generateRoadNetwork(RoadArea& roadArea, const Generic
 void GenericRoadGenerator::generateInitialSeeds(RoadGraph &roads, Polygon2D &area, const GenericFeature& gf, std::list<RoadVertexDesc>& seeds) {
 	seeds.clear();
 
-	BBox bbox = area.getLoopAABB();
+	QVector2D center = area.getCentroid();
 
-	RoadVertexPtr v = RoadVertexPtr(new RoadVertex(bbox.midPt()));
+	RoadVertexPtr v = RoadVertexPtr(new RoadVertex(center));
 	RoadVertexDesc desc = GraphUtil::addVertex(roads, v);
 	roads.graph[desc]->angles = gf.getAngles(4);
 	roads.graph[desc]->lengths = gf.getLengths(2, 4);

@@ -8,5 +8,7 @@
     <file>Resources/Cut_24x24.png</file>
     <file>Resources/Copy_24x24.png</file>
     <file>Resources/New_24x24.png</file>
+    <file>Resources/Select_24x24.png</file>
+    <file>Resources/Create_24x24.png</file>
   </qresource>
 </RCC>
