@@ -4,7 +4,6 @@
 #include "BBox.h"
 #include "ConvexHull.h"
 #include "HoughTransform.h"
-//#include <math.h>
 #include <boost/graph/planar_face_traversal.hpp>
 #include <boost/graph/boyer_myrvold_planar_test.hpp>
 
@@ -812,7 +811,7 @@ void RoadSegmentationUtil::buildRadialArea(RoadGraph& roads, QMap<RoadEdgeDesc, 
 /**
  * GridでもRadialでもないエッジについて、一般的な特徴量を抽出する。
  */
-void RoadSegmentationUtil::extractGenericFeature(RoadGraph& roads, const Polygon2D& area, std::vector<GenericFeature>& genericFeatures) {
+void RoadSegmentationUtil::extractGenericFeature(RoadGraph& roads, Polygon2D& area, std::vector<GenericFeature>& genericFeatures) {
 	GenericFeature gf(0);
 
 	RoadEdgeIter ei, eend;
