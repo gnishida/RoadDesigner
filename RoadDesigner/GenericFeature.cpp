@@ -314,6 +314,25 @@ void GenericFeature::save(QDomDocument& doc, QDomNode& root) {
 	node_feature.setAttribute("type", "generic");
 	root.appendChild(node_feature);
 
+	// write center node
+	QDomElement node_center = doc.createElement("center");
+	node_feature.appendChild(node_center);
+
+	QDomElement node_center_x = doc.createElement("x");
+	node_center.appendChild(node_center_x);
+
+	QString str;
+	str.setNum(center.x());
+	QDomText node_center_x_value = doc.createTextNode(str);
+	node_center_x.appendChild(node_center_x_value);
+
+	QDomElement node_center_y = doc.createElement("y");
+	node_center.appendChild(node_center_y);
+
+	str.setNum(center.y());
+	QDomText node_center_y_value = doc.createTextNode(str);
+	node_center_y.appendChild(node_center_y_value);
+
 	// write avenue node
 	QDomElement node_avenue = doc.createElement("avenue");
 	node_feature.appendChild(node_avenue);
