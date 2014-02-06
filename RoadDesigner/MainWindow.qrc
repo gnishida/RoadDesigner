@@ -10,5 +10,6 @@
     <file>Resources/New_24x24.png</file>
     <file>Resources/Select_24x24.png</file>
     <file>Resources/Create_24x24.png</file>
+    <file>Resources/Sketch_24x24.png</file>
   </qresource>
 </RCC>

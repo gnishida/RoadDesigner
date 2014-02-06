@@ -82,10 +82,12 @@ void MainWindow::onAreaMenu() {
 
 void MainWindow::onAreaSelect() {
 	mode = MODE_AREA_SELECT;
+	ui.actionAreaCreate->setChecked(false);
 }
 
 void MainWindow::onAreaCreate() {
 	mode = MODE_AREA_CREATE;
+	ui.actionAreaSelect->setChecked(false);
 }
 
 void MainWindow::onShowControlWidget() {

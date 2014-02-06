@@ -251,6 +251,10 @@
    <property name="checkable">
     <bool>true</bool>
    </property>
+   <property name="icon">
+    <iconset resource="MainWindow.qrc">
+     <normaloff>:/MainWindow/Resources/Create_24x24.png</normaloff>:/MainWindow/Resources/Create_24x24.png</iconset>
+   </property>
    <property name="text">
     <string>Create</string>
    </property>
@@ -258,6 +262,10 @@
   <action name="actionSketch">
    <property name="checkable">
     <bool>true</bool>
+   </property>
+   <property name="icon">
+    <iconset resource="MainWindow.qrc">
+     <normaloff>:/MainWindow/Resources/Sketch_24x24.png</normaloff>:/MainWindow/Resources/Sketch_24x24.png</iconset>
    </property>
    <property name="text">
     <string>Sketch</string>

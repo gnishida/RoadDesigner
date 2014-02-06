@@ -209,6 +209,8 @@ void GLWidget::mouseDoubleClickEvent(QMouseEvent *e) {
 		areas[selectedArea].roads.setZ(camera->dz);
 
 		mainWin->mode = MainWindow::MODE_AREA_SELECT;
+		mainWin->ui.actionAreaSelect->setChecked(true);
+		mainWin->ui.actionAreaCreate->setChecked(false);
 		break;
 	}
 }

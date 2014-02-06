@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'MainWindow.ui'
 **
-** Created: Wed Feb 5 23:16:14 2014
+** Created: Wed Feb 5 23:18:18 2014
 **      by: Qt User Interface Compiler version 4.8.1
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
@@ -135,9 +135,15 @@ public:
         actionAreaCreate = new QAction(MainWindow);
         actionAreaCreate->setObjectName(QString::fromUtf8("actionAreaCreate"));
         actionAreaCreate->setCheckable(true);
+        QIcon icon9;
+        icon9.addFile(QString::fromUtf8(":/MainWindow/Resources/Create_24x24.png"), QSize(), QIcon::Normal, QIcon::Off);
+        actionAreaCreate->setIcon(icon9);
         actionSketch = new QAction(MainWindow);
         actionSketch->setObjectName(QString::fromUtf8("actionSketch"));
         actionSketch->setCheckable(true);
+        QIcon icon10;
+        icon10.addFile(QString::fromUtf8(":/MainWindow/Resources/Sketch_24x24.png"), QSize(), QIcon::Normal, QIcon::Off);
+        actionSketch->setIcon(icon10);
         centralWidget = new QWidget(MainWindow);
         centralWidget->setObjectName(QString::fromUtf8("centralWidget"));
         MainWindow->setCentralWidget(centralWidget);
