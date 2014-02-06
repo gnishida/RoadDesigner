@@ -53,6 +53,17 @@ void RadialFeature::save(QString filename) {
 	QDomElement root = doc.createElement("features");
 	doc.appendChild(root);
 
+	save(doc, root);
+
+	// write the dom to the file
+	QFile file(filename);
+	file.open(QIODevice::WriteOnly);
+
+	QTextStream out(&file);
+	doc.save(out, 4);
+}
+
+void RadialFeature::save(QDomDocument& doc, QDomNode& root) {
 	QDomElement node_feature = doc.createElement("feature");
 	node_feature.setAttribute("type", "radial");
 	root.appendChild(node_feature);
@@ -77,13 +88,6 @@ void RadialFeature::save(QString filename) {
 	str.setNum(numDirections);
 	QDomText node_numDirections_value = doc.createTextNode(str);
 	node_numDirections.appendChild(node_numDirections_value);
-
-	// write the dom to the file
-	QFile file(filename);
-	file.open(QIODevice::WriteOnly);
-
-	QTextStream out(&file);
-	doc.save(out, 4);
 }
 
 QColor RadialFeature::color() {

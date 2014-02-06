@@ -256,6 +256,17 @@ void GridFeature::save(QString filename) {
 	QDomElement root = doc.createElement("features");
 	doc.appendChild(root);
 
+	save(doc, root);
+
+	// write the dom to the file
+	QFile file(filename);
+	file.open(QIODevice::WriteOnly);
+
+	QTextStream out(&file);
+	doc.save(out, 4);
+}
+
+void GridFeature::save(QDomDocument& doc, QDomNode& root) {
 	QDomElement node_feature = doc.createElement("feature");
 	node_feature.setAttribute("type", "grid");
 	root.appendChild(node_feature);
@@ -326,13 +337,6 @@ void GridFeature::save(QString filename) {
 		QDomText node_length2_value = doc.createTextNode(str);
 		node_length2_data.appendChild(node_length2_value);
 	}
-
-	// write the dom to the file
-	QFile file(filename);
-	file.open(QIODevice::WriteOnly);
-
-	QTextStream out(&file);
-	doc.save(out, 4);
 }
 
 /**

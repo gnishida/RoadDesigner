@@ -15,12 +15,13 @@ public:
 	Polygon2D _polygon;			// 領域を表すポリゴン（時計回り）
 
 public:
-	RadialFeature(int group_id) : group_id(group_id) {}
+	RadialFeature(int group_id) : group_id(group_id), numDirections(0) {}
 	~RadialFeature() {}
 
 	void load(QString filename);
 	void load(QDomNode& node);
 	void save(QString filename);
+	void save(QDomDocument& doc, QDomNode& node);
 
 	QColor color();
 	Polygon2D polygon();

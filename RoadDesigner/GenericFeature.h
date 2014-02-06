@@ -41,6 +41,7 @@ public:
 	void loadStreet(QDomNode& node);
 	
 	void save(QString filename);
+	void save(QDomDocument& doc, QDomNode& node);
 	void saveAvenue(QDomDocument& doc, QDomNode& node);
 	void saveStreet(QDomDocument& doc, QDomNode& node);
 };

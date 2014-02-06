@@ -299,6 +299,17 @@ void GenericFeature::save(QString filename) {
 	QDomElement root = doc.createElement("features");
 	doc.appendChild(root);
 
+	save(doc, root);
+
+	// write the dom to the file
+	QFile file(filename);
+	file.open(QIODevice::WriteOnly);
+
+	QTextStream out(&file);
+	doc.save(out, 4);
+}
+
+void GenericFeature::save(QDomDocument& doc, QDomNode& root) {
 	QDomElement node_feature = doc.createElement("feature");
 	node_feature.setAttribute("type", "generic");
 	root.appendChild(node_feature);
@@ -312,13 +323,6 @@ void GenericFeature::save(QString filename) {
 	QDomElement node_street = doc.createElement("street");
 	node_feature.appendChild(node_street);
 	saveStreet(doc, node_street);
-
-	// write the dom to the file
-	QFile file(filename);
-	file.open(QIODevice::WriteOnly);
-
-	QTextStream out(&file);
-	doc.save(out, 4);
 }
 
 void GenericFeature::saveAvenue(QDomDocument& doc, QDomNode& node) {

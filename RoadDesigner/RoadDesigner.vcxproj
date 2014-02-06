@@ -178,6 +178,7 @@
     <ClCompile Include="Renderable.cpp" />
     <ClCompile Include="RoadArea.cpp" />
     <ClCompile Include="RoadEdge.cpp" />
+    <ClCompile Include="RoadFeature.cpp" />
     <ClCompile Include="RoadGraph.cpp" />
     <ClCompile Include="RoadGraphRenderer.cpp" />
     <ClCompile Include="RoadSegmentationUtil.cpp" />
@@ -251,6 +252,7 @@
     <ClInclude Include="Renderable.h" />
     <ClInclude Include="RoadArea.h" />
     <ClInclude Include="RoadEdge.h" />
+    <ClInclude Include="RoadFeature.h" />
     <ClInclude Include="RoadGraph.h" />
     <ClInclude Include="RoadGraphRenderer.h" />
     <ClInclude Include="RoadSegmentationUtil.h" />

@@ -146,6 +146,9 @@
     <ClCompile Include="GenericRoadGenerator.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="RoadFeature.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="MainWindow.h">
@@ -266,6 +269,9 @@
     </ClInclude>
     <ClInclude Include="GeneratedFiles\ui_RoadBoxList.h">
       <Filter>Generated Files</Filter>
+    </ClInclude>
+    <ClInclude Include="RoadFeature.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
