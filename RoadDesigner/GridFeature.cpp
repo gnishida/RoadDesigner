@@ -239,6 +239,76 @@ void GridFeature::load(QDomNode& node) {
 }
 
 /**
+ * 特徴量をxmlファイルに保存する。
+ */
+void GridFeature::save(QString filename) {
+	QDomDocument doc;
+
+	QDomElement root = doc.createElement("features");
+	doc.appendChild(root);
+
+	QDomElement node_feature = doc.createElement("feature");
+	node_feature.setAttribute("type", "grid");
+	root.appendChild(node_feature);
+
+	// write angle1 node
+	QDomElement node_angle1 = doc.createElement("angle1");
+	node_feature.appendChild(node_angle1);
+
+	QString str;
+	str.setNum(angle1);
+	QDomText node_angle1_data = doc.createTextNode(str);
+	node_angle1.appendChild(node_angle1_data);
+
+	// write angle2 node
+	QDomElement node_angle2 = doc.createElement("angle2");
+	node_feature.appendChild(node_angle2);
+
+	str.setNum(angle2);
+	QDomText node_angle2_data = doc.createTextNode(str);
+	node_angle2.appendChild(node_angle2_data);
+
+	// write length1 node
+	QDomElement node_length1 = doc.createElement("length1");
+	node_feature.appendChild(node_length1);
+
+	for (QMap<float, float>::iterator it = length1.begin(); it != length1.end(); ++it) {
+		QDomElement node_length1_data = doc.createElement("data");
+		QString str;
+		str.setNum(it.key());
+		node_length1_data.setAttribute("key", str);
+		node_length1.appendChild(node_length1_data);
+
+		str.setNum(it.value());
+		QDomText node_length1_value = doc.createTextNode(str);
+		node_length1_data.appendChild(node_length1_value);
+	}
+
+	// write length2 node
+	QDomElement node_length2 = doc.createElement("length2");
+	node_feature.appendChild(node_length2);
+
+	for (QMap<float, float>::iterator it = length2.begin(); it != length2.end(); ++it) {
+		QDomElement node_length2_data = doc.createElement("data");
+		QString str;
+		str.setNum(it.key());
+		node_length2_data.setAttribute("key", str);
+		node_length2.appendChild(node_length2_data);
+
+		str.setNum(it.value());
+		QDomText node_length2_value = doc.createTextNode(str);
+		node_length2_data.appendChild(node_length2_value);
+	}
+
+	// write the dom to the file
+	QFile file(filename);
+	file.open(QIODevice::WriteOnly);
+
+	QTextStream out(&file);
+	doc.save(out, 4);
+}
+
+/**
  * 領域を塗りつぶすための色を自動で生成する。
  */
 QColor GridFeature::color() {

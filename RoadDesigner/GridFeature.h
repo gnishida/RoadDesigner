@@ -40,6 +40,7 @@ public:
 
 	void load(QString filename);
 	void load(QDomNode& node);
+	void save(QString filename);
 
 	QColor color();
 	Polygon2D polygon();
