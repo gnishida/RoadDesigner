@@ -15,7 +15,12 @@ public:
 	RoadFeature() {}
 	~RoadFeature() {}
 
+	void clear();
 	void load(QString filename);
 	void save(QString filename);
+
+	void addFeature(GridFeature& gf);
+	void addFeature(RadialFeature& rf);
+	void addFeature(GenericFeature& gf);
 };
 

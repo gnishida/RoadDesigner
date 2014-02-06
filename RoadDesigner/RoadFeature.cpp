@@ -3,6 +3,12 @@
 #include <QDomDocument>
 #include <QTextStream>
 
+void RoadFeature::clear() {
+	gridFeatures.clear();
+	radialFeatures.clear();
+	genericFeatures.clear();
+}
+
 void RoadFeature::load(QString filename) {
 	QFile file(filename);
 
@@ -55,4 +61,17 @@ void RoadFeature::save(QString filename) {
 	QTextStream out(&file);
 	doc.save(out, 4);
 }
+
+void RoadFeature::addFeature(GridFeature& gf) {
+	gridFeatures.push_back(gf);
+}
+
+void RoadFeature::addFeature(RadialFeature& rf) {
+	radialFeatures.push_back(rf);
+}
+
+void RoadFeature::addFeature(GenericFeature& gf) {
+	genericFeatures.push_back(gf);
+}
+
 

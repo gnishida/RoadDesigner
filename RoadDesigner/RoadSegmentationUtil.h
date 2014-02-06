@@ -2,6 +2,7 @@
 
 #include "RoadGraph.h"
 #include "AbstractArea.h"
+#include "RoadFeature.h"
 #include "GridFeature.h"
 #include "RadialFeature.h"
 #include "GenericFeature.h"
@@ -14,13 +15,13 @@ protected:
 	~RoadSegmentationUtil() {}
 
 public:
-	static void detectGrid(RoadGraph& roads, Polygon2D& area, int roadType, std::vector<GridFeature>& gridFeatures, int maxIteration, float numBins, float minTotalLength, float minMaxBinRatio, float angleThreshold, float votingRatioThreshold, float extendingDistanceThreshold, float minObbLength);
+	static void detectGrid(RoadGraph& roads, Polygon2D& area, int roadType, RoadFeature& roadFeature, int maxIteration, float numBins, float minTotalLength, float minMaxBinRatio, float angleThreshold, float votingRatioThreshold, float extendingDistanceThreshold, float minObbLength);
 	static bool detectOneGrid(RoadGraph& roads, Polygon2D& area, int roadType, GridFeature& gf, int numBins, float minTotalLength, float minMaxBinRatio, float angleThreshold, float votingRatioThreshold, float extendingDistanceThreshold, float minObbLength);
 	static int traverseConnectedEdges(RoadGraph& roads, RoadEdgeDesc e, QMap<RoadEdgeDesc, int>& edges, int segment_id);
 	static void reduceGridGroup(RoadGraph& roads, GridFeature& gf, QMap<RoadEdgeDesc, float>& edges);
 	static void extendGridGroup(RoadGraph& roads, Polygon2D& area, int roadType, GridFeature& gf, QMap<RoadEdgeDesc, float>& edges, float angleThreshold, float votingRatioThreshold, float distanceThreshold);
 
-	static void detectRadial(RoadGraph& roads, Polygon2D& area, int roadType, std::vector<RadialFeature>& radialFeatures, int maxIteration, float scale1, float scale2, float centerErrorTol2, float angleThreshold2, float scale3, float centerErrorTol3, float angleThreshold3, float sigma, float votingRatioThreshold, float seedDistance, float minSeedDirections, float extendingAngleThreshold);
+	static void detectRadial(RoadGraph& roads, Polygon2D& area, int roadType, RoadFeature& roadFeature, int maxIteration, float scale1, float scale2, float centerErrorTol2, float angleThreshold2, float scale3, float centerErrorTol3, float angleThreshold3, float sigma, float votingRatioThreshold, float seedDistance, float minSeedDirections, float extendingAngleThreshold);
 	static bool detectOneRadial(RoadGraph& roads, Polygon2D& area, int roadType, RadialFeature& rf, float scale1, float scale2, float centerErrorTol2, float angleThreshold2, float scale3, float centerErrorTol3, float angleThreshold3, float detectCircleThreshold, float sigma, float votingRatioThreshold, float seedDistance, float minSeedDirections, float extendingAngleThreshold);
 
 	static void detectRadialCenterInScaled(RoadGraph& roads, Polygon2D& area, int roadType, float scale, float sigma, RadialFeature& rf);
@@ -35,7 +36,7 @@ public:
 	static int countNumDirections(RoadGraph& roads, const RadialFeature& rf, QMap<RoadEdgeDesc, bool>& edges, int size);
 	static void buildRadialArea(RoadGraph& roads, QMap<RoadEdgeDesc, bool>& edges, RadialFeature& rf);
 
-	static void extractGenericFeature(RoadGraph& roads, Polygon2D& area, std::vector<GenericFeature>& genericFeatures);
+	static void extractGenericFeature(RoadGraph& roads, Polygon2D& area, RoadFeature& roadFeature);
 	static int getNumEdges(RoadGraph &roads, RoadVertexDesc v, int roadType, int shapeType);
 };
 

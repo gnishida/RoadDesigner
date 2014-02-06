@@ -52,12 +52,11 @@ struct faceVisitorForPlazaDetection : public boost::planar_face_traversal_visito
  * @param minMaxBinRatio		最大頻度となるビンの割合が、この値より小さい場合は、顕著な特徴ではないと考え、グリッド検知せずにfalseを返却する
  * @param votingRatioThreshold	各エッジについて、構成するラインが所定のグリッド方向に従っているかの投票率を計算し、この閾値未満なら、グリッドに従っていないと見なす
  */
-void RoadSegmentationUtil::detectGrid(RoadGraph& roads, Polygon2D& area, int roadType, std::vector<GridFeature>& gridFeatures, int maxIteration, float numBins, float minTotalLength, float minMaxBinRatio, float angleThreshold, float votingRatioThreshold, float extendingDistanceThreshold, float minObbLength) {
-	gridFeatures.clear();
+void RoadSegmentationUtil::detectGrid(RoadGraph& roads, Polygon2D& area, int roadType, RoadFeature& roadFeature, int maxIteration, float numBins, float minTotalLength, float minMaxBinRatio, float angleThreshold, float votingRatioThreshold, float extendingDistanceThreshold, float minObbLength) {
 	for (int i = 0; i < maxIteration; i++) {
 		GridFeature gf(i);
 		if (!detectOneGrid(roads, area, roadType, gf, numBins, minTotalLength, minMaxBinRatio, angleThreshold, votingRatioThreshold, extendingDistanceThreshold, minObbLength)) break;
-		gridFeatures.push_back(gf);
+		roadFeature.addFeature(gf);
 	}
 }
 
@@ -374,9 +373,7 @@ void RoadSegmentationUtil::extendGridGroup(RoadGraph& roads, Polygon2D& area, in
  * Plazaを検知する
  * Hough transformにより、円を検知する。
  */
-void RoadSegmentationUtil::detectRadial(RoadGraph& roads, Polygon2D& area, int roadType, std::vector<RadialFeature>& radialFeatures, int maxIteration, float scale1, float scale2, float centerErrorTol2, float angleThreshold2, float scale3, float centerErrorTol3, float angleThreshold3, float sigma, float votingRatioThreshold, float seedDistance, float minSeedDirections, float extendingAngleThreshold) {
-	radialFeatures.clear();
-
+void RoadSegmentationUtil::detectRadial(RoadGraph& roads, Polygon2D& area, int roadType, RoadFeature& roadFeature, int maxIteration, float scale1, float scale2, float centerErrorTol2, float angleThreshold2, float scale3, float centerErrorTol3, float angleThreshold3, float sigma, float votingRatioThreshold, float seedDistance, float minSeedDirections, float extendingAngleThreshold) {
 	int count = 0;
 	/*
 	for (int i = 0; i < maxIteration; ++i) {
@@ -392,24 +389,24 @@ void RoadSegmentationUtil::detectRadial(RoadGraph& roads, Polygon2D& area, int r
 	for (int i = 0; i < rfs.size(); ++i) {
 		QMap<RoadEdgeDesc, bool> edges;
 		if (findOneRadial(roads, area, roadType, angleThreshold3, votingRatioThreshold, seedDistance, minSeedDirections, extendingAngleThreshold, rfs[i], edges)) {
-			radialFeatures.push_back(rfs[i]);
+			roadFeature.addFeature(rfs[i]);
 		}
 	}
 
-	for (int i = 0; i < radialFeatures.size(); ++i) {
+	for (int i = 0; i < roadFeature.radialFeatures.size(); ++i) {
 		QMap<RoadEdgeDesc, bool> edges;
-		findOneRadial(roads, area, roadType, angleThreshold3, votingRatioThreshold, seedDistance, minSeedDirections, extendingAngleThreshold, rfs[i], edges);
+		findOneRadial(roads, area, roadType, angleThreshold3, votingRatioThreshold, seedDistance, minSeedDirections, extendingAngleThreshold, roadFeature.radialFeatures[i], edges);
 
 		// 残したエッジから周辺のエッジを辿り、方向がほぼ同じなら、候補に登録していく
-		extendRadialGroup(roads, area, roadType, radialFeatures[i], edges, extendingAngleThreshold, votingRatioThreshold);
+		extendRadialGroup(roads, area, roadType, roadFeature.radialFeatures[i], edges, extendingAngleThreshold, votingRatioThreshold);
 
-		buildRadialArea(roads, edges, radialFeatures[i]);
+		buildRadialArea(roads, edges, roadFeature.radialFeatures[i]);
 
 		// 最後に、候補エッジを、実際にグループに登録する
 		for (QMap<RoadEdgeDesc, bool>::iterator it = edges.begin(); it != edges.end(); ++it) {
 			RoadEdgeDesc e = it.key();
 			roads.graph[e]->shapeType = RoadEdge::SHAPE_RADIAL;
-			roads.graph[e]->group = radialFeatures[i].group_id;
+			roads.graph[e]->group = roadFeature.radialFeatures[i].group_id;
 			roads.graph[e]->gridness = 0;
 		}
 
@@ -817,7 +814,7 @@ void RoadSegmentationUtil::buildRadialArea(RoadGraph& roads, QMap<RoadEdgeDesc, 
 /**
  * GridでもRadialでもないエッジについて、一般的な特徴量を抽出する。
  */
-void RoadSegmentationUtil::extractGenericFeature(RoadGraph& roads, Polygon2D& area, std::vector<GenericFeature>& genericFeatures) {
+void RoadSegmentationUtil::extractGenericFeature(RoadGraph& roads, Polygon2D& area, RoadFeature& roadFeature) {
 	GenericFeature gf(0);
 
 	BBox bbox;
@@ -867,7 +864,7 @@ void RoadSegmentationUtil::extractGenericFeature(RoadGraph& roads, Polygon2D& ar
 
 	gf.computeFeature();
 
-	genericFeatures.push_back(gf);
+	roadFeature.addFeature(gf);
 }
 
 int RoadSegmentationUtil::getNumEdges(RoadGraph &roads, RoadVertexDesc v, int roadType, int shapeType) {
