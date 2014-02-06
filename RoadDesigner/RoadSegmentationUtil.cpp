@@ -820,6 +820,8 @@ void RoadSegmentationUtil::buildRadialArea(RoadGraph& roads, QMap<RoadEdgeDesc, 
 void RoadSegmentationUtil::extractGenericFeature(RoadGraph& roads, Polygon2D& area, std::vector<GenericFeature>& genericFeatures) {
 	GenericFeature gf(0);
 
+	BBox bbox;
+
 	RoadEdgeIter ei, eend;
 	for (boost::tie(ei, eend) = boost::edges(roads.graph); ei != eend; ++ei) {
 		if (!roads.graph[*ei]->valid) continue;
@@ -832,6 +834,14 @@ void RoadSegmentationUtil::extractGenericFeature(RoadGraph& roads, Polygon2D& ar
 
 		// エリア外ならスキップ
 		if (!area.contains(roads.graph[src]->pt) && !area.contains(roads.graph[tgt]->pt)) continue;
+
+		// Bounding Boxを更新
+		if (area.contains(roads.graph[src]->pt)) {
+			bbox.addPoint(roads.graph[src]->pt);
+		}
+		if (area.contains(roads.graph[tgt]->pt)) {
+			bbox.addPoint(roads.graph[tgt]->pt);
+		}
 
 		int roadType = roads.graph[*ei]->type;
 		float length = roads.graph[*ei]->getLength();
@@ -851,6 +861,9 @@ void RoadSegmentationUtil::extractGenericFeature(RoadGraph& roads, Polygon2D& ar
 			gf.addNumDiretions(GraphUtil::getNumEdges(roads, *vi, 3), 1);
 		}
 	}
+
+	// 領域の中心を設定
+	gf.center = bbox.midPt();
 
 	gf.computeFeature();
 
