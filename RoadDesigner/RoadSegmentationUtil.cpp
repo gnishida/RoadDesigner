@@ -4,11 +4,11 @@
 #include "BBox.h"
 #include "ConvexHull.h"
 #include "HoughTransform.h"
+#include <math.h>
 #include <boost/graph/planar_face_traversal.hpp>
 #include <boost/graph/boyer_myrvold_planar_test.hpp>
 
 #define SQR(x)	((x) * (x))
-
 
 RoadGraph* roadGraphPtr;
 std::vector<RoadEdgeDesc> plaza;
@@ -586,6 +586,11 @@ void RoadSegmentationUtil::refineRadialCenterInScaled(RoadGraph& roads, Polygon2
 
 /**
  * OpenCVのHoughTransform関数で円を検知する。なければ、falseを返却する。
+ * 予め予測された円の中心を中心とする500m x 500mの正方形の範囲の中で、HoughTransformで円を検知し、
+ * 検知された円に基づいて、円の中心と半径情報を更新する。
+ *
+ * @param detectCircleThreshold		HoughTransformで見つけた円の中心が、予測された円の中心からこのしきい値よりも大きくずれている場合は、スキップ
+ * @param rf						およその円の中心を保持している特徴量
  */
 bool RoadSegmentationUtil::detectCircle(RoadGraph& roads, Polygon2D& area, int roadType, float detectCircleThreshold, RadialFeature& rf) {
 	float detectCircleThreshold2 = detectCircleThreshold * detectCircleThreshold;
@@ -672,7 +677,8 @@ bool RoadSegmentationUtil::findOneRadial(RoadGraph& roads, Polygon2D& area, int 
 	reduceRadialGroup(roads, rf, edges, seedDistance);
 
 	// 中心から伸びるアームの方向を量子化してカウントする
-	if (countNumDirections(roads, rf, edges, 12) < minSeedDirections) return false;
+	rf.numDirections = countNumDirections(roads, rf, edges, 12);
+	if (rf.numDirections < minSeedDirections) return false;
 
 	return true;
 }
