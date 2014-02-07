@@ -248,3 +248,4 @@ void GridRoadGenerator::expandHorizontalAvenue(RoadGraph& roads, Polygon2D& area
 		}
 	}
 }
+

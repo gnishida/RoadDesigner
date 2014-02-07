@@ -158,6 +158,9 @@
     <ClCompile Include="RadialRoadGenerator.cpp">
       <Filter>RoadGenerator</Filter>
     </ClCompile>
+    <ClCompile Include="VoronoiUtil.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="MainWindow.h">
@@ -284,6 +287,9 @@
     </ClInclude>
     <ClInclude Include="RoadGenerator.h">
       <Filter>RoadGenerator</Filter>
+    </ClInclude>
+    <ClInclude Include="VoronoiUtil.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

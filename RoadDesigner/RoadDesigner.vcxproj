@@ -186,6 +186,7 @@
     <ClCompile Include="RoadVertex.cpp" />
     <ClCompile Include="SimpleFlatTerrain.cpp" />
     <ClCompile Include="Util.cpp" />
+    <ClCompile Include="VoronoiUtil.cpp" />
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="MainWindow.h">
@@ -261,6 +262,7 @@
     <ClInclude Include="RoadVertex.h" />
     <ClInclude Include="SimpleFlatTerrain.h" />
     <ClInclude Include="Util.h" />
+    <ClInclude Include="VoronoiUtil.h" />
     <CustomBuild Include="ControlWidget.h">
       <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(QTDIR)\bin\moc.exe;%(FullPath)</AdditionalInputs>
       <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Moc%27ing ControlWidget.h...</Message>

@@ -101,5 +101,7 @@ public:
 
 	/** minimum distance from a loop to another loop (this considers the contour only) */
 	static float distanceXYfromContourAVerticesToContourB(const Loop2D& pA, const Loop2D& pB);
+
+	void intersection(Polygon2D &polygon2);
 };
 

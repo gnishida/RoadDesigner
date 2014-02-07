@@ -953,3 +953,29 @@ float Polygon2D::distanceXYfromContourAVerticesToContourB(const Loop2D& pA, cons
 	return minDist;
 }
 
+typedef boost::geometry::model::d2::point_xy<double> point;
+
+void Polygon2D::intersection(Polygon2D &polygon2) {
+	
+
+	boost::geometry::model::polygon<point> pol1;
+	boost::geometry::model::polygon<point> pol2;
+	std::vector<boost::geometry::model::polygon<point> > result;
+
+	for (int i = 0; i < size(); ++i) {
+		pol1.outer().push_back(point(contour[i].x(), contour[i].y()));
+	}
+	for (int i = 0; i < polygon2.size(); ++i) {
+		pol2.outer().push_back(point(polygon2[i].x(), polygon2[i].y()));
+	}
+
+	boost::geometry::intersection(pol1, pol2, result);
+
+	clear();
+
+	if (result.size() == 0) return;
+
+	for (int i = 0; i < result[0].outer().size(); ++i) {
+		push_back(QVector2D(result[0].outer()[i].x(), result[0].outer()[i].y()));
+	}
+}
