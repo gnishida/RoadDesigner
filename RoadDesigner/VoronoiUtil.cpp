@@ -22,7 +22,6 @@ void VoronoiUtil::voronoi(std::vector<VoronoiVertex> points, Polygon2D& area, st
 		VoronoiVertex v = points[cell_index];
 
 		// ボロノイ図の各セルについて、エッジのサイクルを辿る（反時計回り？）
-		bool started = false;
 		Polygon2D face;
 		do {
 			if (!edge->is_primary()) continue;
@@ -33,46 +32,27 @@ void VoronoiUtil::voronoi(std::vector<VoronoiVertex> points, Polygon2D& area, st
 
 				faces[cell_index].push_back(p0);
 			} else {
-				if (!started) {
-					started = true;
+				// 隣接セルのVoronoi頂点を取得
+				VoronoiVertex v2 = points[edge->twin()->cell()->source_index()];
 
-					// 隣接セルのVoronoi頂点を取得
-					VoronoiVertex v2 = points[edge->twin()->cell()->source_index()];
+				// 隣接セルとのベクトルの垂線ベクトルを計算
+				QVector2D vec(v.pt.y() - v2.pt.y(), v2.pt.x() - v.pt.x());
 
-					// 隣接セルへのベクトルを計算得
-					QVector2D midPt = (v.pt + v2.pt) * 0.5f;
-
-					if (edge->vertex1() != NULL) {
-						QVector2D p1((float)edge->vertex1()->x() * 0.01f, (float)edge->vertex1()->y() * 0.01f);
-
-						// p1から中間点方向に十分長い距離を伸ばした点を取得
-						QVector2D p0 = midPt + (midPt - p1) * 1000.0f;
-
-						faces[cell_index].push_back(p0);
-					} else {
-						QVector2D p0((float)edge->vertex0()->x() * 0.01f, (float)edge->vertex0()->y() * 0.01f);
-
-						// p0から中間点方向に十分長い距離を伸ばした点を取得
-						QVector2D p1 = midPt + (midPt - p0) * 1000.0f;
-
-						faces[cell_index].push_back(p1);
-					}
-				} else {
-					started = false;
-
+				if (edge->vertex0() != NULL) {
 					QVector2D p0((float)edge->vertex0()->x() * 0.01f, (float)edge->vertex0()->y() * 0.01f);
-					faces[cell_index].push_back(p0);
-					
-					// 隣接セルのVoronoi頂点を取得
-					VoronoiVertex v2 = points[edge->twin()->cell()->source_index()];
-
-					// 隣接セルとの中間点を取得
-					QVector2D midPt = (v.pt + v2.pt) * 0.5f;
 
 					// p0から中間点方向に十分長い距離を伸ばした点を取得
-					QVector2D p1 = midPt + (midPt - p0) * 1000.0f;
+					QVector2D p1 = p0 + vec * 1000.0f;
+
+					faces[cell_index].push_back(p1);
+				} else {
+					QVector2D p1((float)edge->vertex1()->x() * 0.01f, (float)edge->vertex1()->y() * 0.01f);
+
+					// p1から中間点方向に十分長い距離を伸ばした点を取得
+					QVector2D p0 = p1 - vec * 1000.0f;
 
 					faces[cell_index].push_back(p0);
+					faces[cell_index].push_back(p1);
 				}
 			}
 

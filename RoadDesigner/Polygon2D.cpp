@@ -955,27 +955,33 @@ float Polygon2D::distanceXYfromContourAVerticesToContourB(const Loop2D& pA, cons
 
 typedef boost::geometry::model::d2::point_xy<double> point;
 
+/**
+ * ２つのポリゴンのintersectionを計算する。
+ */
 void Polygon2D::intersection(Polygon2D &polygon2) {
-	
-
 	boost::geometry::model::polygon<point> pol1;
 	boost::geometry::model::polygon<point> pol2;
 	std::vector<boost::geometry::model::polygon<point> > result;
 
+	// Boost polygonオブジェクトに頂点情報を入れる（Closedポリゴンにする必要がある）
 	for (int i = 0; i < size(); ++i) {
 		pol1.outer().push_back(point(contour[i].x(), contour[i].y()));
 	}
+	pol1.outer().push_back(point(contour[0].x(), contour[0].y()));
 	for (int i = 0; i < polygon2.size(); ++i) {
 		pol2.outer().push_back(point(polygon2[i].x(), polygon2[i].y()));
 	}
+	pol2.outer().push_back(point(polygon2[0].x(), polygon2[0].y()));
 
+	// Boost intersection関数を実行
 	boost::geometry::intersection(pol1, pol2, result);
 
 	clear();
 
 	if (result.size() == 0) return;
 
-	for (int i = 0; i < result[0].outer().size(); ++i) {
+	// 結果に基づいて、このポリゴンオブジェクトを更新（ClosedポリゴンをOpenポリゴンに戻す）
+	for (int i = 0; i < result[0].outer().size() - 1; ++i) {
 		push_back(QVector2D(result[0].outer()[i].x(), result[0].outer()[i].y()));
 	}
 }

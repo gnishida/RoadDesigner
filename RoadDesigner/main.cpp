@@ -11,8 +11,7 @@ int main(int argc, char *argv[]) {
 	area.push_back(QVector2D(-100, 200));
 	area.push_back(QVector2D(200, 200));
 	area.push_back(QVector2D(200, -100));
-	*/
-	/*
+	
 	Polygon2D area2;
 	area2.push_back(QVector2D(50, 50));
 	area2.push_back(QVector2D(50, -1000));
@@ -20,9 +19,8 @@ int main(int argc, char *argv[]) {
 	area2.push_back(QVector2D(-1000, 50));
 
 	area2.intersection(area);
-	*/
+	
 
-	/*
 	std::vector<VoronoiVertex> points;
 	std::vector<Polygon2D> faces;
 	points.push_back(VoronoiVertex(QVector2D(0, 0)));

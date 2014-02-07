@@ -16,6 +16,8 @@ RoadGenerator::~RoadGenerator() {
  * 暫定的な実装。要改善。
  */
 void RoadGenerator::generateRoadNetwork(RoadArea& roadArea, const RoadFeature& rf) {
+	
+
 	if (rf.gridFeatures.size() > 0) {
 		GridRoadGenerator grg;
 		grg.generateRoadNetwork(roadArea, rf.gridFeatures[0]);
