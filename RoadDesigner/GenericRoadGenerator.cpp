@@ -8,14 +8,11 @@ GenericRoadGenerator::GenericRoadGenerator() {
 GenericRoadGenerator::~GenericRoadGenerator() {
 }
 
-void GenericRoadGenerator::generateRoadNetwork(RoadArea& roadArea, const GenericFeature& gf) {
-	// clear the existing road network
-	roadArea.roads.clear();
-
+void GenericRoadGenerator::generateRoadNetwork(RoadGraph &roads, Polygon2D &area, const GenericFeature& gf) {
 	std::list<RoadVertexDesc> seeds;
 	std::list<RoadVertexDesc> newSeeds;
 
-	generateInitialSeeds(roadArea.roads, roadArea.area, gf, seeds);
+	generateInitialSeeds(roads, area, gf, seeds);
 
 	int iteCount = 0;
 
@@ -24,7 +21,7 @@ void GenericRoadGenerator::generateRoadNetwork(RoadArea& roadArea, const Generic
 		RoadVertexDesc desc = seeds.front();
 		seeds.pop_front();
 
-		attemptExpansion(roadArea.roads, roadArea.area, desc, 2, gf, newSeeds);
+		attemptExpansion(roads, area, desc, 2, gf, newSeeds);
 
 		//append seeds in newSeeds to seeds
 		seeds.splice(seeds.end(), newSeeds);
@@ -33,10 +30,10 @@ void GenericRoadGenerator::generateRoadNetwork(RoadArea& roadArea, const Generic
 	}
 
 	//Remove dead ends
-	removeDeadEnds(roadArea.roads);
+	removeDeadEnds(roads);
 
 	//======= grow streets
-	if (!generateInitialStreetSeeds(roadArea.roads, gf, seeds)) {
+	if (!generateInitialStreetSeeds(roads, gf, seeds)) {
 		return;
 	}
 
@@ -45,7 +42,7 @@ void GenericRoadGenerator::generateRoadNetwork(RoadArea& roadArea, const Generic
 		RoadVertexDesc desc = seeds.front();
 		seeds.pop_front();
 
-		attemptExpansion(roadArea.roads, roadArea.area, desc, 1, gf, newSeeds);
+		attemptExpansion(roads, area, desc, 1, gf, newSeeds);
 
 		//append seeds in newSeeds to seeds
 		seeds.splice(seeds.end(), newSeeds);
@@ -54,7 +51,7 @@ void GenericRoadGenerator::generateRoadNetwork(RoadArea& roadArea, const Generic
 	}
 
 	//Remove dead ends
-	removeDeadEnds(roadArea.roads);
+	removeDeadEnds(roads);
 }
 
 /**

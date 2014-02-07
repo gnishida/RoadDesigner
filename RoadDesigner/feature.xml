@@ -1,0 +1,57 @@
+<features>
+    <feature weight="0.764887" type="grid">
+        <center>
+            <x>-181.412</x>
+            <y>423.177</y>
+        </center>
+        <angle1>0.155657</angle1>
+        <angle2>1.72645</angle2>
+        <length1>
+            <data key="10">0.24424</data>
+            <data key="30">0.479263</data>
+            <data key="50">0.589862</data>
+            <data key="70">0.737327</data>
+            <data key="90">0.774194</data>
+            <data key="110">0.820277</data>
+            <data key="130">0.847926</data>
+            <data key="150">1</data>
+        </length1>
+        <length2>
+            <data key="10">0.196429</data>
+            <data key="30">0.380952</data>
+            <data key="50">0.648809</data>
+            <data key="70">0.714286</data>
+            <data key="90">0.755952</data>
+            <data key="110">0.994048</data>
+            <data key="270">1</data>
+        </length2>
+    </feature>
+    <feature weight="0.223069" type="grid">
+        <center>
+            <x>131.476</x>
+            <y>-351.791</y>
+        </center>
+        <angle1>0.781505</angle1>
+        <angle2>2.3523</angle2>
+        <length1>
+            <data key="10">0.236364</data>
+            <data key="30">0.363636</data>
+            <data key="50">0.509091</data>
+            <data key="70">0.690909</data>
+            <data key="90">0.781818</data>
+            <data key="110">0.818182</data>
+            <data key="150">0.872727</data>
+            <data key="170">0.909091</data>
+            <data key="190">0.927273</data>
+            <data key="210">0.945455</data>
+            <data key="270">1</data>
+        </length1>
+        <length2>
+            <data key="10">0.270833</data>
+            <data key="30">0.375</data>
+            <data key="50">0.625</data>
+            <data key="70">0.958333</data>
+            <data key="90">1</data>
+        </length2>
+    </feature>
+</features>

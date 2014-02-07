@@ -4,9 +4,7 @@
 #include <QTextStream>
 
 void RoadFeature::clear() {
-	gridFeatures.clear();
-	radialFeatures.clear();
-	genericFeatures.clear();
+	features.clear();
 }
 
 void RoadFeature::load(QString filename) {
@@ -20,17 +18,17 @@ void RoadFeature::load(QString filename) {
 	while (!node.isNull()) {
 		if (node.toElement().tagName() == "feature") {
 			if (node.toElement().attribute("type") == "grid") {
-				GridFeature gf(gridFeatures.size());
-				gf.load(node);
-				gridFeatures.push_back(gf);
+				GridFeaturePtr gf = GridFeaturePtr(new GridFeature(features.size()));
+				gf->load(node);
+				features.push_back(gf);
 			} else if (node.toElement().attribute("type") == "radial") {
-				RadialFeature rf(radialFeatures.size());
-				rf.load(node);
-				radialFeatures.push_back(rf);
+				RadialFeaturePtr rf = RadialFeaturePtr(new RadialFeature(features.size()));
+				rf->load(node);
+				features.push_back(rf);
 			} else if (node.toElement().attribute("type") == "generic") {
-				GenericFeature gf(genericFeatures.size());
-				gf.load(node);
-				genericFeatures.push_back(gf);
+				GenericFeaturePtr gf = GenericFeaturePtr(new GenericFeature(features.size()));
+				gf->load(node);
+				features.push_back(gf);
 			}
 		}
 
@@ -44,14 +42,8 @@ void RoadFeature::save(QString filename) {
 	QDomElement root = doc.createElement("features");
 	doc.appendChild(root);
 
-	for (int i = 0; i < gridFeatures.size(); ++i) {
-		gridFeatures[i].save(doc, root);
-	}
-	for (int i = 0; i < radialFeatures.size(); ++i) {
-		radialFeatures[i].save(doc, root);
-	}
-	for (int i = 0; i < genericFeatures.size(); ++i) {
-		genericFeatures[i].save(doc, root);
+	for (int i = 0; i < features.size(); ++i) {
+		features[i]->save(doc, root);
 	}
 
 	// write the dom to the file
@@ -62,16 +54,8 @@ void RoadFeature::save(QString filename) {
 	doc.save(out, 4);
 }
 
-void RoadFeature::addFeature(GridFeature& gf) {
-	gridFeatures.push_back(gf);
-}
-
-void RoadFeature::addFeature(RadialFeature& rf) {
-	radialFeatures.push_back(rf);
-}
-
-void RoadFeature::addFeature(GenericFeature& gf) {
-	genericFeatures.push_back(gf);
+void RoadFeature::addFeature(AbstractFeaturePtr feature) {
+	features.push_back(feature);
 }
 
 /**
@@ -83,33 +67,17 @@ void RoadFeature::normalize() {
 	QVector2D total_center;
 
 	// total weight、total centerを計算
-	for (int i = 0; i < gridFeatures.size(); ++i) {
-		total_weight += gridFeatures[i].weight;
-		total_center += gridFeatures[i].center;
-	}
-	for (int i = 0; i < radialFeatures.size(); ++i) {
-		total_weight += radialFeatures[i].weight;
-		total_center += radialFeatures[i].center;
-	}
-	for (int i = 0; i < genericFeatures.size(); ++i) {
-		total_weight += genericFeatures[i].weight;
-		total_center += genericFeatures[i].center;
+	for (int i = 0; i < features.size(); ++i) {
+		total_weight += features[i]->weight();
+		total_center += features[i]->center();
 	}
 
-	total_center /= (gridFeatures.size() + radialFeatures.size() + genericFeatures.size());
+	total_center /= features.size();
 
 	// total weight、total centerに基づいて、weightとcenterをnormalizeする
-	for (int i = 0; i < gridFeatures.size(); ++i) {
-		gridFeatures[i].weight /= total_weight;
-		gridFeatures[i].center -= total_center;
-	}
-	for (int i = 0; i < radialFeatures.size(); ++i) {
-		radialFeatures[i].weight /= total_weight;
-		radialFeatures[i].center -= total_center;
-	}
-	for (int i = 0; i < genericFeatures.size(); ++i) {
-		genericFeatures[i].weight /= total_weight;
-		genericFeatures[i].center -= total_center;
+	for (int i = 0; i < features.size(); ++i) {
+		features[i]->setWeight(features[i]->weight() / total_weight);
+		features[i]->setCenter(features[i]->center() - total_center);
 	}
 }
 

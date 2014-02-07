@@ -10,7 +10,7 @@ public:
 	GridRoadGenerator();
 	~GridRoadGenerator();
 
-	void generateRoadNetwork(RoadArea& roadArea, const GridFeature& gf);
+	void generateRoadNetwork(RoadGraph &roads, Polygon2D &area, const GridFeature& gf);
 
 private:
 	void generateHorizontalAvenueSeeds(RoadGraph& roads, Polygon2D& area, const GridFeature& gf, std::list<RoadVertexDesc>& seeds);

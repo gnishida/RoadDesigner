@@ -10,7 +10,7 @@ public:
 	GenericRoadGenerator();
 	~GenericRoadGenerator();
 
-	void generateRoadNetwork(RoadArea& roadArea, const GenericFeature& gf);
+	void generateRoadNetwork(RoadGraph &roads, Polygon2D &area, const GenericFeature& gf);
 
 private:
 	void generateInitialSeeds(RoadGraph &roads, Polygon2D &area, const GenericFeature& gf, std::list<RoadVertexDesc>& seeds);

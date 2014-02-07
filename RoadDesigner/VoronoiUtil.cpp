@@ -45,7 +45,7 @@ void VoronoiUtil::voronoi(std::vector<VoronoiVertex> points, Polygon2D& area, st
 					QVector2D p1 = p0 + vec * 1000.0f;
 
 					faces[cell_index].push_back(p1);
-				} else {
+				} else if (edge->vertex1() != NULL) {
 					QVector2D p1((float)edge->vertex1()->x() * 0.01f, (float)edge->vertex1()->y() * 0.01f);
 
 					// p1から中間点方向に十分長い距離を伸ばした点を取得
@@ -53,6 +53,13 @@ void VoronoiUtil::voronoi(std::vector<VoronoiVertex> points, Polygon2D& area, st
 
 					faces[cell_index].push_back(p0);
 					faces[cell_index].push_back(p1);
+				} else {
+					// 隣接セルとの中間点を計算
+					QVector2D midPt = (v.pt + v2.pt) * 0.5f;
+
+					faces[cell_index].push_back(midPt + vec * 1000.0f);
+					faces[cell_index].push_back(midPt - vec * 1000.0f);
+					faces[cell_index].push_back(v.pt + (v.pt - v2.pt) * 1000.0f);
 				}
 			}
 

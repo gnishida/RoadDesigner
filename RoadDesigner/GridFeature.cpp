@@ -8,10 +8,10 @@
 #define M_PI	3.141592653589793238
 #endif
 
-GridFeature::GridFeature(int group_id) {
+GridFeature::GridFeature(int group_id) : AbstractFeature() {
+	_type = TYPE_GRID;
 	this->group_id = group_id;
 
-	weight = 0.0f;
 	accmLenCount1 = 0;
 	accmLenCount2 = 0;
 }
@@ -216,7 +216,7 @@ void GridFeature::load(QDomNode& node) {
 	length1.clear();
 	length2.clear();
 
-	weight = node.toElement().attribute("weight").toFloat();
+	_weight = node.toElement().attribute("weight").toFloat();
 
 	QDomNode child = node.firstChild();
 	while (!child.isNull()) {
@@ -224,10 +224,12 @@ void GridFeature::load(QDomNode& node) {
 			QDomNode child2 = child.firstChild();
 			while (!child2.isNull()) {
 				if (child2.toElement().tagName() == "x") {
-					center.setX(child2.firstChild().nodeValue().toFloat());
+					_center.setX(child2.firstChild().nodeValue().toFloat());
 				} else if (child2.toElement().tagName() == "y") {
-					center.setY(child2.firstChild().nodeValue().toFloat());
+					_center.setY(child2.firstChild().nodeValue().toFloat());
 				}
+
+				child2 = child2.nextSibling();
 			}
 		} else if (child.toElement().tagName() == "angle1") {
 			angle1 = child.firstChild().nodeValue().toFloat();
@@ -279,7 +281,7 @@ void GridFeature::save(QString filename) {
 void GridFeature::save(QDomDocument& doc, QDomNode& root) {
 	QString str;
 
-	str.setNum(weight);
+	str.setNum(_weight);
 	QDomElement node_feature = doc.createElement("feature");
 	node_feature.setAttribute("type", "grid");
 	node_feature.setAttribute("weight", str);
@@ -292,14 +294,14 @@ void GridFeature::save(QDomDocument& doc, QDomNode& root) {
 	QDomElement node_center_x = doc.createElement("x");
 	node_center.appendChild(node_center_x);
 
-	str.setNum(center.x());
+	str.setNum(_center.x());
 	QDomText node_center_x_value = doc.createTextNode(str);
 	node_center_x.appendChild(node_center_x_value);
 
 	QDomElement node_center_y = doc.createElement("y");
 	node_center.appendChild(node_center_y);
 
-	str.setNum(center.y());
+	str.setNum(_center.y());
 	QDomText node_center_y_value = doc.createTextNode(str);
 	node_center_y.appendChild(node_center_y_value);
 	

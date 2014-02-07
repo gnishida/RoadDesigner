@@ -131,9 +131,6 @@
     <ClCompile Include="RoadArea.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="GenericRoadGenerator.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="GenericFeature.cpp">
       <Filter>Feature</Filter>
     </ClCompile>
@@ -160,6 +157,12 @@
     </ClCompile>
     <ClCompile Include="VoronoiUtil.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="AbstractFeature.cpp">
+      <Filter>Feature</Filter>
+    </ClCompile>
+    <ClCompile Include="GenericRoadGenerator.cpp">
+      <Filter>RoadGenerator</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -290,6 +293,9 @@
     </ClInclude>
     <ClInclude Include="VoronoiUtil.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="AbstractFeature.h">
+      <Filter>Feature</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

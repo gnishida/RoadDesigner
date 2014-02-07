@@ -11,15 +11,12 @@ GridRoadGenerator::~GridRoadGenerator() {
 /**
  * グリッドパターンの道路網を生成する
  */
-void GridRoadGenerator::generateRoadNetwork(RoadArea& roadArea, const GridFeature& gf) {
-	// clear the existing road network
-	roadArea.roads.clear();
-
+void GridRoadGenerator::generateRoadNetwork(RoadGraph &roads, Polygon2D &area, const GridFeature& gf) {
 	// グリッド方向に合わせたBBoxのサイズを取得
 	Loop2D bboxRotLoop;
 	float angle0 = gf.getAngles()[0];
 	QVector2D dir0 = QVector2D(cos(angle0), sinf(angle0));
-	roadArea.area.getLoopOBB(dir0, bboxRotLoop);
+	area.getLoopOBB(dir0, bboxRotLoop);
 	Polygon2D area2;
 	area2.setContour(bboxRotLoop);
 	
@@ -27,20 +24,20 @@ void GridRoadGenerator::generateRoadNetwork(RoadArea& roadArea, const GridFeatur
 	std::list<RoadVertexDesc> initSeeds;
 
 	// Avenue用のシードを生成
-	generateHorizontalAvenueSeeds(roadArea.roads, area2, gf, initSeeds);
+	generateHorizontalAvenueSeeds(roads, area2, gf, initSeeds);
 
 	// Avenue生成
 	std::list<RoadVertexDesc> seeds = initSeeds;
 	while (!seeds.empty()) {
-		seeds = generateHorizontalAvenues(roadArea.roads, area2, gf, seeds, 1, gf.generateLength(1, Util::uniform_rand()));
+		seeds = generateHorizontalAvenues(roads, area2, gf, seeds, 1, gf.generateLength(1, Util::uniform_rand()));
 	}
 	seeds = initSeeds;
 	while (!seeds.empty()) {
-		seeds = generateHorizontalAvenues(roadArea.roads, area2, gf, seeds, 3, gf.generateLength(3, Util::uniform_rand()));
+		seeds = generateHorizontalAvenues(roads, area2, gf, seeds, 3, gf.generateLength(3, Util::uniform_rand()));
 	}
 
 	// 元々のエリアでcroppingする
-	GraphUtil::extractRoads2(roadArea.roads, roadArea.area);
+	GraphUtil::extractRoads2(roads, area);
 }
 
 /**

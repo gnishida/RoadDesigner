@@ -128,6 +128,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="AbstractArea.cpp" />
+    <ClCompile Include="AbstractFeature.cpp" />
     <ClCompile Include="AbstractForest.cpp" />
     <ClCompile Include="BBox.cpp" />
     <ClCompile Include="BFSForest.cpp" />
@@ -231,6 +232,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AbstractArea.h" />
+    <ClInclude Include="AbstractFeature.h" />
     <ClInclude Include="AbstractForest.h" />
     <ClInclude Include="BBox.h" />
     <ClInclude Include="BFSForest.h" />

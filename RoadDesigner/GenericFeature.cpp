@@ -7,8 +7,9 @@
 #define M_PI	3.141592653589793238
 #endif
 
-GenericFeature::GenericFeature() {
-	weight = 0.0f;
+GenericFeature::GenericFeature() : AbstractFeature() {
+	_type = TYPE_GENERIC;
+
 	accmAvenueLenCount = 0;
 	accmStreetLenCount = 0;
 	accmAvenueDirCount = 0;
@@ -16,9 +17,10 @@ GenericFeature::GenericFeature() {
 }
 
 GenericFeature::GenericFeature(int group_id) {
+	_type = TYPE_GENERIC;
 	this->group_id = group_id;
 
-	weight = 0.0f;
+	_weight = 0.0f;
 	accmAvenueLenCount = 0;
 	accmStreetLenCount = 0;
 	accmAvenueDirCount = 0;
@@ -34,7 +36,7 @@ void GenericFeature::addEdge(float length, int roadType) {
 		accmAvenueLenCount++;
 	}
 
-	weight += length;
+	_weight += length;
 }
 
 void GenericFeature::addNumDiretions(int numDirections, int roadType) {
@@ -221,11 +223,22 @@ void GenericFeature::load(QDomNode& node) {
 	avenueNumDirections.clear();
 	streetNumDirections.clear();
 
-	weight = node.toElement().attribute("weight").toFloat();
+	_weight = node.toElement().attribute("weight").toFloat();
 
 	QDomNode child = node.firstChild();
 	while (!child.isNull()) {
-		if (child.toElement().tagName() == "avenue") {
+		if (child.toElement().tagName() == "center") {
+			QDomNode child2 = child.firstChild();
+			while (!child2.isNull()) {
+				if (child2.toElement().tagName() == "x") {
+					_center.setX(child2.firstChild().nodeValue().toFloat());
+				} else if (child2.toElement().tagName() == "y") {
+					_center.setY(child2.firstChild().nodeValue().toFloat());
+				}
+
+				child2 = child2.nextSibling();
+			}
+		} else if (child.toElement().tagName() == "avenue") {
 			loadAvenue(child);
 		} else if (child.toElement().tagName() == "street") {
 			loadStreet(child);
@@ -323,7 +336,7 @@ void GenericFeature::save(QString filename) {
 void GenericFeature::save(QDomDocument& doc, QDomNode& root) {
 	QString str;
 
-	str.setNum(weight);
+	str.setNum(_weight);
 	QDomElement node_feature = doc.createElement("feature");
 	node_feature.setAttribute("type", "generic");
 	node_feature.setAttribute("weight", str);
@@ -336,14 +349,14 @@ void GenericFeature::save(QDomDocument& doc, QDomNode& root) {
 	QDomElement node_center_x = doc.createElement("x");
 	node_center.appendChild(node_center_x);
 
-	str.setNum(center.x());
+	str.setNum(_center.x());
 	QDomText node_center_x_value = doc.createTextNode(str);
 	node_center_x.appendChild(node_center_x_value);
 
 	QDomElement node_center_y = doc.createElement("y");
 	node_center.appendChild(node_center_y);
 
-	str.setNum(center.y());
+	str.setNum(_center.y());
 	QDomText node_center_y_value = doc.createTextNode(str);
 	node_center_y.appendChild(node_center_y_value);
 

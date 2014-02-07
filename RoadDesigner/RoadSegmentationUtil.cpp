@@ -54,8 +54,8 @@ struct faceVisitorForPlazaDetection : public boost::planar_face_traversal_visito
  */
 void RoadSegmentationUtil::detectGrid(RoadGraph& roads, Polygon2D& area, int roadType, RoadFeature& roadFeature, int maxIteration, float numBins, float minTotalLength, float minMaxBinRatio, float angleThreshold, float votingRatioThreshold, float extendingDistanceThreshold, float minObbLength) {
 	for (int i = 0; i < maxIteration; i++) {
-		GridFeature gf(i);
-		if (!detectOneGrid(roads, area, roadType, gf, numBins, minTotalLength, minMaxBinRatio, angleThreshold, votingRatioThreshold, extendingDistanceThreshold, minObbLength)) break;
+		GridFeaturePtr gf = GridFeaturePtr(new GridFeature(i));
+		if (!detectOneGrid(roads, area, roadType, *gf, numBins, minTotalLength, minMaxBinRatio, angleThreshold, votingRatioThreshold, extendingDistanceThreshold, minObbLength)) break;
 		roadFeature.addFeature(gf);
 	}
 }
@@ -195,7 +195,7 @@ bool RoadSegmentationUtil::detectOneGrid(RoadGraph& roads, Polygon2D& area, int 
 	if (len < minTotalLength || len < total_edge_length * minMaxBinRatio) return false;
 
 	// 領域内のエッジの総延長をweightとしてセット
-	gf.weight = len;
+	gf.setWeight(len);
 
 	// 候補のエッジ群を囲むconvex hullを求める
 	ConvexHull ch;
@@ -221,7 +221,7 @@ bool RoadSegmentationUtil::detectOneGrid(RoadGraph& roads, Polygon2D& area, int 
 	}
 
 	// 領域の中心をセット
-	gf.center = gf._polygon.getCentroid();
+	gf.setCenter(gf._polygon.getCentroid());
 
 	// 最後に、このグループに属するエッジを、RoadGraphオブジェクトに反映させる
 	for (QMap<RoadEdgeDesc, float>::iterator it = edges.begin(); it != edges.end(); ++it) {
@@ -388,28 +388,32 @@ void RoadSegmentationUtil::detectRadial(RoadGraph& roads, Polygon2D& area, int r
 	}
 	*/
 
-	std::vector<RadialFeature> rfs = detectRadialCentersInScaled(roads, area, roadType, scale1, sigma, 30.0f, 20.0f, 150.0f);
+	std::vector<RadialFeaturePtr> rfs = detectRadialCentersInScaled(roads, area, roadType, scale1, sigma, 30.0f, 20.0f, 150.0f);
+	std::vector<RadialFeaturePtr> rfs2;
 	for (int i = 0; i < rfs.size(); ++i) {
 		QMap<RoadEdgeDesc, bool> edges;
-		if (findOneRadial(roads, area, roadType, angleThreshold3, votingRatioThreshold, seedDistance, minSeedDirections, extendingAngleThreshold, rfs[i], edges)) {
-			roadFeature.addFeature(rfs[i]);
+		if (findOneRadial(roads, area, roadType, angleThreshold3, votingRatioThreshold, seedDistance, minSeedDirections, extendingAngleThreshold, *rfs[i], edges)) {
+			rfs2.push_back(rfs[i]);
 		}
 	}
 
-	for (int i = 0; i < roadFeature.radialFeatures.size(); ++i) {
+	for (int i = 0; i < rfs2.size(); ++i) {
 		QMap<RoadEdgeDesc, bool> edges;
-		findOneRadial(roads, area, roadType, angleThreshold3, votingRatioThreshold, seedDistance, minSeedDirections, extendingAngleThreshold, roadFeature.radialFeatures[i], edges);
+		findOneRadial(roads, area, roadType, angleThreshold3, votingRatioThreshold, seedDistance, minSeedDirections, extendingAngleThreshold, *rfs2[i], edges);
 
 		// 残したエッジから周辺のエッジを辿り、方向がほぼ同じなら、候補に登録していく
-		extendRadialGroup(roads, area, roadType, roadFeature.radialFeatures[i], edges, extendingAngleThreshold, votingRatioThreshold);
+		extendRadialGroup(roads, area, roadType, *rfs2[i], edges, extendingAngleThreshold, votingRatioThreshold);
 
-		buildRadialArea(roads, edges, roadFeature.radialFeatures[i]);
+		buildRadialArea(roads, edges, *rfs2[i]);
+
+		// 特徴量として正式に登録する
+		roadFeature.addFeature(rfs2[i]);
 
 		// 最後に、候補エッジを、実際にグループに登録する
 		for (QMap<RoadEdgeDesc, bool>::iterator it = edges.begin(); it != edges.end(); ++it) {
 			RoadEdgeDesc e = it.key();
 			roads.graph[e]->shapeType = RoadEdge::SHAPE_RADIAL;
-			roads.graph[e]->group = roadFeature.radialFeatures[i].group_id;
+			roads.graph[e]->group = rfs2[i]->group_id;
 			roads.graph[e]->gridness = 0;
 		}
 
@@ -434,7 +438,7 @@ bool RoadSegmentationUtil::detectOneRadial(RoadGraph& roads, Polygon2D& area, in
 	// HoughTransformで円を検知
 	if (!detectCircle(roads, area, roadType, detectCircleThreshold, rf)) return false;
 
-	std::cout << "Center: " << rf.center.x() << ", " << rf.center.y() << std::endl;
+	std::cout << "Center: " << rf.center().x() << ", " << rf.center().y() << std::endl;
 
 	QMap<RoadEdgeDesc, bool> edges;
 	if (!findOneRadial(roads, area, roadType, angleThreshold3, votingRatioThreshold, seedDistance, minSeedDirections, extendingAngleThreshold, rf, edges)) return false;
@@ -472,14 +476,14 @@ void RoadSegmentationUtil::detectRadialCenterInScaled(RoadGraph& roads, Polygon2
 		}
 	}
 
-	rf.center = ht.maxPoint();
+	rf.setCenter(ht.maxPoint());
 }
 
 /**
  * 円の中心候補のリストを返却する
  * Hough transformにより、円を検知する。
  */
-std::vector<RadialFeature> RoadSegmentationUtil::detectRadialCentersInScaled(RoadGraph& roads, Polygon2D& area, int roadType, float scale, float sigma, float candidateCenterThreshold, float detectCircleThreshold, float min_dist) {
+std::vector<RadialFeaturePtr> RoadSegmentationUtil::detectRadialCentersInScaled(RoadGraph& roads, Polygon2D& area, int roadType, float scale, float sigma, float candidateCenterThreshold, float detectCircleThreshold, float min_dist) {
 	float min_dist2 = min_dist * min_dist;
 
 	HoughTransform ht(area, scale);
@@ -510,23 +514,23 @@ std::vector<RadialFeature> RoadSegmentationUtil::detectRadialCentersInScaled(Roa
 	
 	// 円の候補について、HoughCircleにより、チェックする
 	int count = 0;
-	std::vector<RadialFeature> rfs;
+	std::vector<RadialFeaturePtr> rfs;
 	for (int i = 0; i < centers.size(); ++i) {
 		// 既に検知された円と近い場合は、スキップ
 		bool skip = false;
 		for (int j = 0; j < rfs.size(); j++) {
-			if ((rfs[j].center - centers[i]).lengthSquared() < min_dist2) {
+			if ((rfs[j]->center() - centers[i]).lengthSquared() < min_dist2) {
 				skip = true;
 				break;
 			}
 		}
 		if (skip) continue;
 
-		RadialFeature rf(count);
-		rf.center = centers[i];
+		RadialFeaturePtr rf = RadialFeaturePtr(new RadialFeature(count));
+		rf->setCenter(centers[i]);
 
 		// HoughCircleにより円が検知されるか？
-		if (detectCircle(roads, area, roadType, detectCircleThreshold, rf)) {
+		if (detectCircle(roads, area, roadType, detectCircleThreshold, *rf)) {
 			rfs.push_back(rf);
 			count++;
 		}
@@ -564,15 +568,15 @@ void RoadSegmentationUtil::refineRadialCenterInScaled(RoadGraph& roads, Polygon2
 			QVector2D v2 = roads.graph[*ei]->polyLine[i + 1];
 
 			// だいたいの中心点から離れすぎたエッジは、スキップする
-			if ((v1 - rf.center).lengthSquared() > distanceThreshold2 && (v2 - rf.center).lengthSquared() > distanceThreshold2) continue;
+			if ((v1 - rf.center()).lengthSquared() > distanceThreshold2 && (v2 - rf.center()).lengthSquared() > distanceThreshold2) continue;
 
 			QVector2D dir = v2 - v1;
 
 			// だいたいの中心点への方向が大きくずれている場合は、スキップする
-			if (Util::diffAngle(v1 - rf.center, dir) > angleThreshold && 
-				Util::diffAngle(v1 - rf.center, -dir) > angleThreshold &&
-				Util::diffAngle(v2 - rf.center, dir) > angleThreshold && 
-				Util::diffAngle(v2 - rf.center, -dir) > angleThreshold) continue;
+			if (Util::diffAngle(v1 - rf.center(), dir) > angleThreshold && 
+				Util::diffAngle(v1 - rf.center(), -dir) > angleThreshold &&
+				Util::diffAngle(v2 - rf.center(), dir) > angleThreshold && 
+				Util::diffAngle(v2 - rf.center(), -dir) > angleThreshold) continue;
 
 			ht.line(v1, v2, sigma);
 		}
@@ -581,7 +585,7 @@ void RoadSegmentationUtil::refineRadialCenterInScaled(RoadGraph& roads, Polygon2
 	// 最大値を取得する
 	QVector2D center = ht.maxPoint();
 
-	rf.center = center;
+	rf.setCenter(center);
 }
 
 /**
@@ -601,8 +605,8 @@ bool RoadSegmentationUtil::detectCircle(RoadGraph& roads, Polygon2D& area, int r
 		if (!roads.graph[*ei]->valid) continue;
 
 		for (int i = 0; i < roads.graph[*ei]->polyLine.size() - 1; ++i) {
-			QVector2D p1 = roads.graph[*ei]->polyLine[i] - rf.center + QVector2D(250, 250);
-			QVector2D p2 = roads.graph[*ei]->polyLine[i + 1] - rf.center + QVector2D(250, 250);
+			QVector2D p1 = roads.graph[*ei]->polyLine[i] - rf.center() + QVector2D(250, 250);
+			QVector2D p2 = roads.graph[*ei]->polyLine[i + 1] - rf.center() + QVector2D(250, 250);
 
 			if (p1.x() < 0 || p1.x() >= 500 || p2.x() < 0 || p2.x() >= 500) continue;
 
@@ -625,7 +629,7 @@ bool RoadSegmentationUtil::detectCircle(RoadGraph& roads, Polygon2D& area, int r
 
 		if ((center - QVector2D(250, 250)).lengthSquared() < detectCircleThreshold2) {
 			std::cout << "Circle detected: (" << center.x() << "," << center.y() << ") R: " << r << std::endl;
-			rf.center += center - QVector2D(250, 250);
+			rf.setCenter(rf.center() + center - QVector2D(250, 250));
 			rf.radii.push_back(r);
 		}
 	}
@@ -659,10 +663,10 @@ bool RoadSegmentationUtil::findOneRadial(RoadGraph& roads, Polygon2D& area, int 
 			QVector2D v2 = roads.graph[*ei]->polyLine[i + 1];
 			QVector2D dir = v2 - v1;
 
-			if (Util::diffAngle(v1 - rf.center, dir) <= angleThreshold ||
-				Util::diffAngle(v1 - rf.center, -dir) <= angleThreshold ||
-				Util::diffAngle(v2 - rf.center, dir) <= angleThreshold || 
-				Util::diffAngle(v2 - rf.center, -dir) <= angleThreshold) {
+			if (Util::diffAngle(v1 - rf.center(), dir) <= angleThreshold ||
+				Util::diffAngle(v1 - rf.center(), -dir) <= angleThreshold ||
+				Util::diffAngle(v2 - rf.center(), dir) <= angleThreshold || 
+				Util::diffAngle(v2 - rf.center(), -dir) <= angleThreshold) {
 				length += dir.length();
 			}
 		}
@@ -698,7 +702,7 @@ void RoadSegmentationUtil::reduceRadialGroup(RoadGraph& roads, RadialFeature& rf
 		RoadVertexDesc tgt = boost::target(it.key(), roads.graph);
 
 		// 円の中心から離れているエッジは、候補から一旦外す
-		if ((roads.graph[src]->pt - rf.center).lengthSquared() > distanceThreshold2 && (roads.graph[tgt]->pt - rf.center).lengthSquared() > distanceThreshold2) {
+		if ((roads.graph[src]->pt - rf.center()).lengthSquared() > distanceThreshold2 && (roads.graph[tgt]->pt - rf.center()).lengthSquared() > distanceThreshold2) {
 			it = edges.erase(it);
 		} else {
 			++it;
@@ -742,7 +746,7 @@ void RoadSegmentationUtil::extendRadialGroup(RoadGraph& roads, Polygon2D& area, 
 			float length = 0.0f;
 			for (int i = 0; i < roads.graph[*ei]->polyLine.size() - 1; i++) {
 				QVector2D dir1 = roads.graph[*ei]->polyLine[i + 1] - roads.graph[*ei]->polyLine[i];
-				QVector2D dir2 = roads.graph[*ei]->polyLine[i] - rf.center;
+				QVector2D dir2 = roads.graph[*ei]->polyLine[i] - rf.center();
 
 				if (Util::diffAngle(dir1, dir2) < angleThreshold || Util::diffAngle(dir1, -dir2) < angleThreshold) {
 					length += dir1.length();
@@ -778,10 +782,10 @@ int RoadSegmentationUtil::countNumDirections(RoadGraph& roads, const RadialFeatu
 
 		// 円の中心から離れている方の頂点と、円の中心を使って、方向を計算する
 		QVector2D vec;
-		if ((roads.graph[src]->pt - rf.center).lengthSquared() > (roads.graph[tgt]->pt - rf.center).lengthSquared()) {
-			vec = roads.graph[src]->pt - rf.center;
+		if ((roads.graph[src]->pt - rf.center()).lengthSquared() > (roads.graph[tgt]->pt - rf.center()).lengthSquared()) {
+			vec = roads.graph[src]->pt - rf.center();
 		} else {
-			vec = roads.graph[tgt]->pt - rf.center;
+			vec = roads.graph[tgt]->pt - rf.center();
 		}
 		float angle = atan2f(vec.y(), vec.x());
 		if (angle < 0) angle += M_PI * 2.0f;
@@ -818,14 +822,14 @@ void RoadSegmentationUtil::buildRadialArea(RoadGraph& roads, QMap<RoadEdgeDesc, 
 	}
 
 	// エッジの総延長をweightとしてセット
-	rf.weight = length;
+	rf.setWeight(length);
 }
 
 /**
  * GridでもRadialでもないエッジについて、一般的な特徴量を抽出する。
  */
 void RoadSegmentationUtil::extractGenericFeature(RoadGraph& roads, Polygon2D& area, RoadFeature& roadFeature) {
-	GenericFeature gf(0);
+	GenericFeaturePtr gf = GenericFeaturePtr(new GenericFeature(0));
 
 	BBox bbox;
 
@@ -853,7 +857,7 @@ void RoadSegmentationUtil::extractGenericFeature(RoadGraph& roads, Polygon2D& ar
 		int roadType = roads.graph[*ei]->type;
 		float length = roads.graph[*ei]->getLength();
 
-		gf.addEdge(length, roadType);
+		gf->addEdge(length, roadType);
 	}
 
 	RoadVertexIter vi, vend;
@@ -861,18 +865,18 @@ void RoadSegmentationUtil::extractGenericFeature(RoadGraph& roads, Polygon2D& ar
 		if (!roads.graph[*vi]->valid) continue;
 
 		if (getNumEdges(roads, *vi, 2, 0) > 0) {
-			gf.addNumDiretions(GraphUtil::getNumEdges(roads, *vi, 2), 2);
+			gf->addNumDiretions(GraphUtil::getNumEdges(roads, *vi, 2), 2);
 		}
 
 		if (getNumEdges(roads, *vi, 1, 0) > 0) {
-			gf.addNumDiretions(GraphUtil::getNumEdges(roads, *vi, 3), 1);
+			gf->addNumDiretions(GraphUtil::getNumEdges(roads, *vi, 3), 1);
 		}
 	}
 
 	// 領域の中心を設定
-	gf.center = bbox.midPt();
+	gf->setCenter(bbox.midPt());
 
-	gf.computeFeature();
+	gf->computeFeature();
 
 	roadFeature.addFeature(gf);
 }

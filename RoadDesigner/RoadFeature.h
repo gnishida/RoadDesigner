@@ -3,13 +3,12 @@
 #include "GridFeature.h"
 #include "RadialFeature.h"
 #include "GenericFeature.h"
+#include "AbstractFeature.h"
 #include <vector>
 
 class RoadFeature {
 public:
-	std::vector<GridFeature> gridFeatures;
-	std::vector<RadialFeature> radialFeatures;
-	std::vector<GenericFeature> genericFeatures;
+	std::vector<AbstractFeaturePtr> features;
 
 public:
 	RoadFeature() {}
@@ -19,9 +18,7 @@ public:
 	void load(QString filename);
 	void save(QString filename);
 
-	void addFeature(GridFeature& gf);
-	void addFeature(RadialFeature& rf);
-	void addFeature(GenericFeature& gf);
+	void addFeature(AbstractFeaturePtr feature);
 
 	void normalize();
 };

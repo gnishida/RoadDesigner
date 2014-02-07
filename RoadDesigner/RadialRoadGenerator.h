@@ -10,7 +10,7 @@ public:
 	RadialRoadGenerator();
 	~RadialRoadGenerator();
 
-	void generateRoadNetwork(RoadArea& roadArea, const RadialFeature& rf);
+	void generateRoadNetwork(RoadGraph &roads, Polygon2D &area, const RadialFeature& rf);
 
 private:
 	void generateCircleAvenues(RoadGraph& roads, Polygon2D& area, const RadialFeature& rf, std::list<RoadVertexDesc>& seeds);

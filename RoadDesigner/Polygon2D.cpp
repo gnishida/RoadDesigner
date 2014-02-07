@@ -540,6 +540,10 @@ bool Polygon2D::reorientFace(bool onlyCheck) {
 	*/
 }
 
+void Polygon2D::reverse() {
+	std::reverse(contour.begin(), contour.end());
+}
+
 bool Polygon2D::contains(const QVector2D& pt) {
 	tessellate();
 

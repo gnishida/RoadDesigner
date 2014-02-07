@@ -1,15 +1,15 @@
 ﻿#pragma once
 
+#include "AbstractFeature.h"
 #include "Polygon2D.h"
 #include <QDomNode>
 #include <QColor>
 #include <QVector2D>
+#include <boost/shared_ptr.hpp>
 
-class RadialFeature {
+class RadialFeature : public AbstractFeature {
 public:
 	int group_id;
-	QVector2D center;
-	float weight;
 	std::vector<float> radii;
 	int numDirections;
 	
@@ -28,3 +28,4 @@ public:
 	Polygon2D polygon();
 };
 
+typedef boost::shared_ptr<RadialFeature> RadialFeaturePtr;

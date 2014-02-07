@@ -1,5 +1,6 @@
 ﻿#pragma once
 
+#include "AbstractFeature.h"
 #include "Polygon2D.h"
 #include <QMap>
 #include <QDomNode>
@@ -7,12 +8,11 @@
 #include <QColor>
 #include <opencv/cv.h>
 #include <opencv/highgui.h>
+#include <boost/shared_ptr.hpp>
 
-class GridFeature {
+class GridFeature : public AbstractFeature {
 public:
 	int group_id;
-	QVector2D center;			// エリアの中心
-	float weight;
 	float angle1;				// 横方向の角度（第一象限）
 	float angle2;				// 縦方向の角度（第二象限）
 	QMap<float, float> length1;	// 横方向の長さのヒストグラム
@@ -49,3 +49,4 @@ public:
 	Polygon2D polygon();
 };
 
+typedef boost::shared_ptr<GridFeature> GridFeaturePtr;

@@ -1,15 +1,15 @@
 ﻿#pragma once
 
+#include "AbstractFeature.h"
 #include <vector>
 #include <QVector2D>
 #include <QMap>
 #include <QDomNode>
+#include <boost/shared_ptr.hpp>
 
-class GenericFeature {
+class GenericFeature : public AbstractFeature {
 public:
 	int group_id;
-	QVector2D center;
-	float weight;
 	QMap<float, float> avenueLengths;
 	QMap<int, float> avenueNumDirections;
 	QMap<float, float> streetLengths;
@@ -47,3 +47,4 @@ public:
 	void saveStreet(QDomDocument& doc, QDomNode& node);
 };
 
+typedef boost::shared_ptr<GenericFeature> GenericFeaturePtr;

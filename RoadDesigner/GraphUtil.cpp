@@ -443,6 +443,23 @@ int GraphUtil::getNumEdges(RoadGraph& roads, RoadVertexDesc v, bool onlyValidEdg
 }
 
 /**
+ * 与えられた頂点から出るエッジのうち、指定されたタイプのエッジの数を返却する。
+ */
+int GraphUtil::getNumEdges(RoadGraph& roads, RoadVertexDesc v, int roadType, bool onlyValidEdge) {
+	int count = 0;
+	RoadOutEdgeIter ei, eend;
+	for (boost::tie(ei, eend) = out_edges(v, roads.graph); ei != eend; ++ei) {
+		if (!roads.graph[*ei]->valid) continue;
+		
+		if (!isRoadTypeMatched(roads.graph[*ei]->type, roadType)) continue;
+
+		count++;
+	}
+
+	return count;
+}
+
+/**
  * Add an edge.
  * This function creates a straight line of edge.
  */

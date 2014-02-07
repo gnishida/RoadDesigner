@@ -85,6 +85,7 @@ public:
 	bool intersect(const QVector2D& a, const QVector2D& b, float *tab, float *tcd, QVector2D &intPoint) const;
 
 	static bool reorientFace(Loop2D& pface, bool onlyCheck = false);
+	void reverse();
 	//static int cleanLoop(const Loop2D& pin, Loop2D &pout, float threshold);
 	static void transformLoop(const Loop2D& pin, Loop2D& pout, QMatrix4x4& transformMat);
 	//static float computeLoopArea(const Loop2D& pin, bool parallelToXY = false);

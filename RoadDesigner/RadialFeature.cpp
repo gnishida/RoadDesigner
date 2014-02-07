@@ -3,10 +3,10 @@
 #include <QDomDocument>
 #include <QTextStream>
 
-RadialFeature::RadialFeature(int group_id) {
+RadialFeature::RadialFeature(int group_id) : AbstractFeature() {
+	_type = TYPE_RADIAL;
 	this->group_id = group_id;
 
-	weight = 0.0f;
 	numDirections = 0;
 }
 
@@ -39,7 +39,7 @@ void RadialFeature::load(QString filename) {
 void RadialFeature::load(QDomNode& node) {
 	radii.clear();
 
-	weight = node.toElement().attribute("weight").toFloat();
+	_weight = node.toElement().attribute("weight").toFloat();
 
 	QDomNode child = node.firstChild();
 	while (!child.isNull()) {
@@ -75,7 +75,7 @@ void RadialFeature::save(QString filename) {
 void RadialFeature::save(QDomDocument& doc, QDomNode& root) {
 	QString str;
 
-	str.setNum(weight);
+	str.setNum(_weight);
 	QDomElement node_feature = doc.createElement("feature");
 	node_feature.setAttribute("type", "radial");
 	node_feature.setAttribute("weight", str);
