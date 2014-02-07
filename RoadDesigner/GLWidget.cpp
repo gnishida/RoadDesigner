@@ -148,6 +148,9 @@ void GLWidget::mousePressEvent(QMouseEvent *e) {
 				snap(pos);
 				selectedAreaBuilder.addPoint(pos);
 			}
+
+			selectedArea = -1;
+
 			break;
 		case MainWindow::MODE_SKETCH:
 			break;
