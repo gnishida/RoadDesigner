@@ -58,6 +58,5 @@ protected:
 private:
 	void mouseTo2D(int x, int y, QVector2D &result);
 	void GLWidget::snap(QVector2D &pos);
-	bool hitTest(const AbstractArea& area, const QVector2D& pt);
 };
 

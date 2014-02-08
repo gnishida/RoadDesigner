@@ -1,7 +1,7 @@
 #include "ControlWidget.h"
 #include "MainWindow.h"
 #include "GLWidget.h"
-#include "GraphUtil.h"
+#include <GraphUtil.h>
 #include "GridFeature.h"
 #include "RadialFeature.h"
 #include "GenericFeature.h"

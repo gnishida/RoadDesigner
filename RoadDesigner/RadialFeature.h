@@ -1,7 +1,7 @@
 ﻿#pragma once
 
 #include "AbstractFeature.h"
-#include "Polygon2D.h"
+#include "../../common/Polygon2D.h"
 #include <QDomNode>
 #include <QColor>
 #include <QVector2D>

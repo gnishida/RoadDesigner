@@ -39,6 +39,9 @@
     <Filter Include="RoadGenerator">
       <UniqueIdentifier>{3d632066-3238-4763-baae-23ab233e88af}</UniqueIdentifier>
     </Filter>
+    <Filter Include="common">
+      <UniqueIdentifier>{8e48add3-edd2-4d5c-9125-3cfd163d466b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -56,25 +59,7 @@
     <ClCompile Include="GeneratedFiles\qrc_MainWindow.cpp">
       <Filter>Generated Files</Filter>
     </ClCompile>
-    <ClCompile Include="AbstractArea.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="AbstractForest.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="BBox.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="BFSForest.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="BFSTree.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Camera.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="CircleArea.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="ControlWidget.cpp">
@@ -92,37 +77,13 @@
     <ClCompile Include="GLWidget.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="GraphUtil.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="HoughTransform.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Polygon2D.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="PolygonAreaBuilder.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Renderable.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="RoadEdge.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="RoadGraph.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="RoadGraphRenderer.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="RoadSegmentationUtil.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="RoadVertex.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Util.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="SimpleFlatTerrain.cpp">
@@ -155,14 +116,41 @@
     <ClCompile Include="RadialRoadGenerator.cpp">
       <Filter>RoadGenerator</Filter>
     </ClCompile>
-    <ClCompile Include="VoronoiUtil.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="AbstractFeature.cpp">
       <Filter>Feature</Filter>
     </ClCompile>
     <ClCompile Include="GenericRoadGenerator.cpp">
       <Filter>RoadGenerator</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common\BBox.cpp">
+      <Filter>common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common\GraphUtil.cpp">
+      <Filter>common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common\Polygon2D.cpp">
+      <Filter>common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common\Renderable.cpp">
+      <Filter>common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common\RoadEdge.cpp">
+      <Filter>common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common\RoadGraph.cpp">
+      <Filter>common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common\RoadVertex.cpp">
+      <Filter>common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common\Util.cpp">
+      <Filter>common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common\VoronoiUtil.cpp">
+      <Filter>common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common\RoadGraphRenderer.cpp">
+      <Filter>common</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -181,12 +169,6 @@
     <CustomBuild Include="ControlWidget.h">
       <Filter>Header Files</Filter>
     </CustomBuild>
-    <CustomBuild Include="RoadBox.ui">
-      <Filter>Form Files</Filter>
-    </CustomBuild>
-    <CustomBuild Include="RoadBoxList.ui">
-      <Filter>Form Files</Filter>
-    </CustomBuild>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GeneratedFiles\ui_MainWindow.h">
@@ -195,25 +177,7 @@
     <ClInclude Include="GeneratedFiles\ui_ControlWidget.h">
       <Filter>Generated Files</Filter>
     </ClInclude>
-    <ClInclude Include="AbstractArea.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="AbstractForest.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="BBox.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="BFSForest.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="BFSTree.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Camera.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="CircleArea.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="ConvexHull.h">
@@ -222,37 +186,13 @@
     <ClInclude Include="GLWidget.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="GraphUtil.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="HoughTransform.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Polygon2D.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="PolygonAreaBuilder.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Renderable.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="RoadEdge.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="RoadGraph.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="RoadGraphRenderer.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="RoadSegmentationUtil.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="RoadVertex.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Util.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="SimpleFlatTerrain.h">
@@ -260,12 +200,6 @@
     </ClInclude>
     <ClInclude Include="RoadArea.h">
       <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="GeneratedFiles\ui_RoadBox.h">
-      <Filter>Generated Files</Filter>
-    </ClInclude>
-    <ClInclude Include="GeneratedFiles\ui_RoadBoxList.h">
-      <Filter>Generated Files</Filter>
     </ClInclude>
     <ClInclude Include="GenericFeature.h">
       <Filter>Feature</Filter>
@@ -291,11 +225,38 @@
     <ClInclude Include="RoadGenerator.h">
       <Filter>RoadGenerator</Filter>
     </ClInclude>
-    <ClInclude Include="VoronoiUtil.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="AbstractFeature.h">
       <Filter>Feature</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\BBox.h">
+      <Filter>common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\GraphUtil.h">
+      <Filter>common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\Polygon2D.h">
+      <Filter>common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\Renderable.h">
+      <Filter>common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\RoadEdge.h">
+      <Filter>common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\RoadGraph.h">
+      <Filter>common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\RoadVertex.h">
+      <Filter>common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\Util.h">
+      <Filter>common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\VoronoiUtil.h">
+      <Filter>common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\common\RoadGraphRenderer.h">
+      <Filter>common</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
