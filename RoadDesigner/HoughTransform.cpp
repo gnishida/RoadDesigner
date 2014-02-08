@@ -6,7 +6,7 @@ HoughTransform::HoughTransform(const Polygon2D& area, float scale) {
 	this->area = area;
 	this->scale = scale;
 
-	bbox = area.getLoopAABB();
+	bbox = area.envelope();
 	htSpace = cv::Mat::zeros(bbox.dy() * scale, bbox.dx() * scale, CV_32F);
 
 	std::cout << "HoughTransform: (" << htSpace.rows << " x " << htSpace.cols << ")" << std::endl;

@@ -13,12 +13,11 @@ GridRoadGenerator::~GridRoadGenerator() {
  */
 void GridRoadGenerator::generateRoadNetwork(RoadGraph &roads, Polygon2D &area, const GridFeature& gf) {
 	// グリッド方向に合わせたBBoxのサイズを取得
-	Loop2D bboxRotLoop;
+	Polygon2D area2;
+	//Polygon2D bboxRotLoop;
 	float angle0 = gf.getAngles()[0];
 	QVector2D dir0 = QVector2D(cos(angle0), sinf(angle0));
-	area.getLoopOBB(dir0, bboxRotLoop);
-	Polygon2D area2;
-	area2.setContour(bboxRotLoop);
+	area.getLoopOBB(dir0, area2);
 	
 	// Avenue用シード
 	std::list<RoadVertexDesc> initSeeds;
@@ -46,7 +45,7 @@ void GridRoadGenerator::generateRoadNetwork(RoadGraph &roads, Polygon2D &area, c
 void GridRoadGenerator::generateHorizontalAvenueSeeds(RoadGraph& roads, Polygon2D& area, const GridFeature& gf, std::list<RoadVertexDesc>& seeds) {
 	seeds.clear();
 
-	BBox bbox = area.getLoopAABB();
+	BBox bbox = area.envelope();
 
 	// エリアの中心に頂点を作成する
 	RoadVertexPtr center_v = RoadVertexPtr(new RoadVertex(bbox.midPt()));
@@ -82,9 +81,8 @@ void GridRoadGenerator::expandHorizontalAvenueSeeds(RoadGraph& roads, Polygon2D&
 		// エリアの外に出たらストップ
 		if (!area.contains(pt)) {
 			// エリア外周との交点を求める
-			float tab, tcd;
 			QVector2D intPoint;
-			area.intersect(roads.graph[prev_desc]->pt, pt, &tab, &tcd, intPoint);
+			area.intersects(roads.graph[prev_desc]->pt, pt, intPoint);
 
 			// 外周上に頂点を追加
 			RoadVertexPtr v = RoadVertexPtr(new RoadVertex(intPoint));
@@ -147,9 +145,8 @@ std::list<RoadVertexDesc> GridRoadGenerator::generateHorizontalAvenues(RoadGraph
 		// エリアの外なら、スキップ
 		if (!area.contains(pt)) {
 			// エリア外周との交点を求める
-			float tab, tcd;
 			QVector2D intPoint;
-			area.intersect(roads.graph[seed_desc]->pt, pt, &tab, &tcd, intPoint);
+			area.intersects(roads.graph[seed_desc]->pt, pt, intPoint);
 
 			// 外周上に頂点を追加
 			RoadVertexPtr v = RoadVertexPtr(new RoadVertex(intPoint));
@@ -215,9 +212,8 @@ void GridRoadGenerator::expandHorizontalAvenue(RoadGraph& roads, Polygon2D& area
 		// エリアの外に出たらストップ
 		if (!area.contains(pt)) {
 			// エリア外周との交点を求める
-			float tab, tcd;
 			QVector2D intPoint;
-			area.intersect(roads.graph[prev_desc]->pt, pt, &tab, &tcd, intPoint);
+			area.intersects(roads.graph[prev_desc]->pt, pt, intPoint);
 
 			// 外周上に頂点を追加
 			RoadVertexPtr v = RoadVertexPtr(new RoadVertex(intPoint));

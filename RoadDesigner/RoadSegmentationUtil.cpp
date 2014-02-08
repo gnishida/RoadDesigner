@@ -204,13 +204,13 @@ bool RoadSegmentationUtil::detectOneGrid(RoadGraph& roads, Polygon2D& area, int 
 			ch.addPoint(roads.graph[it.key()]->polyLine[i]);
 		}
 	}
-	Loop2D hull;
+	Polygon2D hull;
 	ch.convexHull(hull);
 
 	// convex hullのOriented Bounding Boxを求める
 	QVector2D obb_size;
 	QMatrix4x4 obb_mat;
-	Polygon2D::getLoopOBB(hull, obb_size, obb_mat);
+	hull.getLoopOBB(obb_size, obb_mat);
 
 	// もしOBBの短い方のエッジの長さがminObbLength未満なら、グリッドと見なさない
 	if (std::min(obb_size.x(), obb_size.y()) < minObbLength) return false;
@@ -221,7 +221,7 @@ bool RoadSegmentationUtil::detectOneGrid(RoadGraph& roads, Polygon2D& area, int 
 	}
 
 	// 領域の中心をセット
-	gf.setCenter(gf._polygon.getCentroid());
+	gf.setCenter(gf._polygon.centroid());
 
 	// 最後に、このグループに属するエッジを、RoadGraphオブジェクトに反映させる
 	for (QMap<RoadEdgeDesc, float>::iterator it = edges.begin(); it != edges.end(); ++it) {
@@ -813,7 +813,7 @@ void RoadSegmentationUtil::buildRadialArea(RoadGraph& roads, QMap<RoadEdgeDesc, 
 			ch.addPoint(roads.graph[it.key()]->polyLine[i]);
 		}
 	}
-	Loop2D hull;
+	Polygon2D hull;
 	ch.convexHull(hull);
 
 	// 領域を表すポリゴンを設定

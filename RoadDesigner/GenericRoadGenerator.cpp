@@ -64,7 +64,7 @@ void GenericRoadGenerator::generateRoadNetwork(RoadGraph &roads, Polygon2D &area
 void GenericRoadGenerator::generateInitialSeeds(RoadGraph &roads, Polygon2D &area, const GenericFeature& gf, std::list<RoadVertexDesc>& seeds) {
 	seeds.clear();
 
-	QVector2D center = area.getCentroid();
+	QVector2D center = area.centroid();
 
 	RoadVertexPtr v = RoadVertexPtr(new RoadVertex(center));
 	RoadVertexDesc desc = GraphUtil::addVertex(roads, v);
@@ -205,9 +205,7 @@ void GenericRoadGenerator::attemptExpansion(RoadGraph &roads, Polygon2D &area, R
 		} else {
 			if (!area.contains(pt)) {
 				// エリア外周との交点を求める
-				float tab, tcd;
-				QVector2D intPoint;
-				area.intersect(roads.graph[srcDesc]->pt, pt, &tab, &tcd, pt);
+				area.intersects(roads.graph[srcDesc]->pt, pt, pt);
 				outside = true;
 			}
 

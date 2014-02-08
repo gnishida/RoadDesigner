@@ -30,7 +30,7 @@ void RadialRoadGenerator::generateRoadNetwork(RoadGraph &roads, Polygon2D &area,
 void RadialRoadGenerator::generateCircleAvenues(RoadGraph& roads, Polygon2D& area, const RadialFeature& rf, std::list<RoadVertexDesc>& seeds) {
 	seeds.clear();
 
-	QVector2D center = area.getCentroid();
+	QVector2D center = area.centroid();
 
 	float theta = Util::uniform_rand() * M_PI * 2.0f;
 	float theta_step = M_PI * 2.0f / rf.numDirections;
@@ -90,9 +90,8 @@ void RadialRoadGenerator::expandRadialAvenues(RoadGraph& roads, Polygon2D& area,
 		// エリア内かどうかチェック
 		if (!area.contains(pt)) {
 			// エリア外周との交点を求める
-			float tab, tcd;
 			QVector2D intPoint;
-			area.intersect(roads.graph[prev_desc]->pt, pt, &tab, &tcd, intPoint);
+			area.intersects(roads.graph[prev_desc]->pt, pt, intPoint);
 
 			// 外周上に頂点を追加
 			RoadVertexPtr v = RoadVertexPtr(new RoadVertex(intPoint));

@@ -4,7 +4,7 @@ void ConvexHull::addPoint(const QVector2D& point) {
 	boost::geometry::append(all_points, make<point_xy<float> >(point.x(), point.y()));
 }
 
-void ConvexHull::convexHull(Loop2D& hull) {
+void ConvexHull::convexHull(Polygon2D& hull) {
 	hull.clear();
 
 	boost::geometry::model::polygon<point_xy<float> > hull2;

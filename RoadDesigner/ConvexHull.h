@@ -1,12 +1,12 @@
 #pragma once
 
-#include "Polygon2D.h"
 #include <vector>
 #include <QVector2D>
 #include <boost/geometry.hpp>
 #include <boost/geometry/geometries/point_xy.hpp>
 #include <boost/geometry/geometries/polygon.hpp>
 #include <boost/geometry/multi/geometries/multi_point.hpp>
+#include <Polygon2D.h>
 
 using boost::geometry::model::d2::point_xy;
 using boost::geometry::make;
@@ -20,6 +20,6 @@ public:
 	~ConvexHull() {}
 
 	void addPoint(const QVector2D& p);
-	void convexHull(Loop2D& hull);
+	void convexHull(Polygon2D& hull);
 };
 

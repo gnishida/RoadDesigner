@@ -1,11 +1,13 @@
 #pragma once
 
-#include "../../common/Polygon2D.h"
+#include <QVector2D>
+#include <common.h>
+#include <Polygon2D.h>
 
 class PolygonAreaBuilder {
 private:
 	bool _selecting;
-	Loop2D _polyline;
+	Polyline2D _polyline;
 
 public:
 	PolygonAreaBuilder();
