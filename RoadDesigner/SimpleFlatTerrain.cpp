@@ -1,6 +1,5 @@
 #include "SimpleFlatTerrain.h"
-
-#include "Renderable.h"
+#include <common/Renderable.h>
 
 SimpleFlatTerrain::SimpleFlatTerrain() {
 	modified = true;

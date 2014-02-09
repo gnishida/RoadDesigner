@@ -1,8 +1,8 @@
-#include "MainWindow.h"
-#include "Polygon2D.h"
-#include "VoronoiUtil.h"
-#include <QtGui/QApplication>
 #include <list>
+#include <QtGui/QApplication>
+#include <common/Polygon2D.h>
+#include <common/VoronoiUtil.h>
+#include "MainWindow.h"
 
 int main(int argc, char *argv[]) {
 	Polygon2D area;

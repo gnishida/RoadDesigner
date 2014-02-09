@@ -1,8 +1,8 @@
 #pragma once
 
 #include <QVector2D>
-#include <common.h>
-#include <Polygon2D.h>
+#include <common/common.h>
+#include <common/Polygon2D.h>
 
 class PolygonAreaBuilder {
 private:

@@ -1,10 +1,10 @@
 #include "ControlWidget.h"
 #include "MainWindow.h"
 #include "GLWidget.h"
-#include <GraphUtil.h>
-#include "GridFeature.h"
-#include "RadialFeature.h"
-#include "GenericFeature.h"
+#include <common/GraphUtil.h>
+#include <road/feature/GridFeature.h>
+#include <road/feature/RadialFeature.h>
+#include <road/feature/GenericFeature.h>
 #include "RoadSegmentationUtil.h"
 #include "RoadGenerator.h"
 

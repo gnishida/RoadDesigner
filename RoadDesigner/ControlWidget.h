@@ -1,8 +1,8 @@
 #pragma once
 
-#include <qdockwidget.h>
+#include <QDockWidget>
 #include "ui_ControlWidget.h"
-#include "RoadGraph.h"
+#include <common/RoadGraph.h>
 
 class MainWindow;
 class GLWidget;

@@ -1,10 +1,10 @@
-﻿#include "RoadGenerator.h"
-#include "Util.h"
-#include "GraphUtil.h"
+﻿#include <common/Util.h>
+#include <common/GraphUtil.h>
+#include <common/VoronoiUtil.h>
+#include "RoadGenerator.h"
 #include "GridRoadGenerator.h"
 #include "RadialRoadGenerator.h"
 #include "GenericRoadGenerator.h"
-#include "VoronoiUtil.h"
 
 RoadGenerator::RoadGenerator() {
 }

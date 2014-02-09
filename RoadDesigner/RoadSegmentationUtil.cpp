@@ -1,14 +1,12 @@
-﻿#include "RoadSegmentationUtil.h"
-#include "GraphUtil.h"
-#include "Util.h"
-#include "BBox.h"
+﻿#include <boost/graph/planar_face_traversal.hpp>
+#include <boost/graph/boyer_myrvold_planar_test.hpp>
+#include <common/common.h>
+#include <common/Util.h>
+#include <common/GraphUtil.h>
+#include <common/BBox.h>
+#include "RoadSegmentationUtil.h"
 #include "ConvexHull.h"
 #include "HoughTransform.h"
-#include <math.h>
-#include <boost/graph/planar_face_traversal.hpp>
-#include <boost/graph/boyer_myrvold_planar_test.hpp>
-
-#define SQR(x)	((x) * (x))
 
 RoadGraph* roadGraphPtr;
 std::vector<RoadEdgeDesc> plaza;

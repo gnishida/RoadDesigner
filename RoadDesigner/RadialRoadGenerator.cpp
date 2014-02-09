@@ -1,6 +1,6 @@
 ﻿#include "RadialRoadGenerator.h"
-#include "Util.h"
-#include "GraphUtil.h"
+#include <common/Util.h>
+#include <common/GraphUtil.h>
 
 RadialRoadGenerator::RadialRoadGenerator() {
 }

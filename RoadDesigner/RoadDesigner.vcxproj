@@ -78,7 +78,7 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
       <PreprocessorDefinitions>UNICODE;WIN32;QT_LARGEFILE_SUPPORT;QT_DLL;QT_CORE_LIB;QT_GUI_LIB;QT_XML_LIB;QT_OPENGL_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>$(BOOST_ROOT);.\GeneratedFiles;.;$(QTDIR)\include;.\GeneratedFiles\$(ConfigurationName);$(QTDIR)\include\QtCore;$(QTDIR)\include\QtGui;$(QTDIR)\include\QtXml;$(QTDIR)\include\QtOpenGL;$(CV_ROOT)\include;..\..\common\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(BOOST_ROOT);.\GeneratedFiles;.;$(QTDIR)\include;.\GeneratedFiles\$(ConfigurationName);$(QTDIR)\include\QtCore;$(QTDIR)\include\QtGui;$(QTDIR)\include\QtXml;$(QTDIR)\include\QtOpenGL;$(CV_ROOT)\include;..\..\mylib;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <Optimization>Disabled</Optimization>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
@@ -127,17 +127,20 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\common\BBox.cpp" />
-    <ClCompile Include="..\..\common\GraphUtil.cpp" />
-    <ClCompile Include="..\..\common\Polygon2D.cpp" />
-    <ClCompile Include="..\..\common\Renderable.cpp" />
-    <ClCompile Include="..\..\common\RoadEdge.cpp" />
-    <ClCompile Include="..\..\common\RoadGraph.cpp" />
-    <ClCompile Include="..\..\common\RoadGraphRenderer.cpp" />
-    <ClCompile Include="..\..\common\RoadVertex.cpp" />
-    <ClCompile Include="..\..\common\Util.cpp" />
-    <ClCompile Include="..\..\common\VoronoiUtil.cpp" />
-    <ClCompile Include="AbstractFeature.cpp" />
+    <ClCompile Include="..\..\mylib\common\BBox.cpp" />
+    <ClCompile Include="..\..\mylib\common\GraphUtil.cpp" />
+    <ClCompile Include="..\..\mylib\common\Polygon2D.cpp" />
+    <ClCompile Include="..\..\mylib\common\Renderable.cpp" />
+    <ClCompile Include="..\..\mylib\common\RoadEdge.cpp" />
+    <ClCompile Include="..\..\mylib\common\RoadGraph.cpp" />
+    <ClCompile Include="..\..\mylib\common\RoadGraphRenderer.cpp" />
+    <ClCompile Include="..\..\mylib\common\RoadVertex.cpp" />
+    <ClCompile Include="..\..\mylib\common\Util.cpp" />
+    <ClCompile Include="..\..\mylib\road\feature\AbstractFeature.cpp" />
+    <ClCompile Include="..\..\mylib\road\feature\GenericFeature.cpp" />
+    <ClCompile Include="..\..\mylib\road\feature\GridFeature.cpp" />
+    <ClCompile Include="..\..\mylib\road\feature\RadialFeature.cpp" />
+    <ClCompile Include="..\..\mylib\road\feature\RoadFeature.cpp" />
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="ControlWidget.cpp" />
     <ClCompile Include="ConvexHull.cpp" />
@@ -167,19 +170,16 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
     </ClCompile>
-    <ClCompile Include="GenericFeature.cpp" />
     <ClCompile Include="GenericRoadGenerator.cpp" />
     <ClCompile Include="GLWidget.cpp" />
-    <ClCompile Include="GridFeature.cpp" />
     <ClCompile Include="GridRoadGenerator.cpp" />
     <ClCompile Include="HoughTransform.cpp" />
+    <ClCompile Include="KDERoadGenerator.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MainWindow.cpp" />
     <ClCompile Include="PolygonAreaBuilder.cpp" />
-    <ClCompile Include="RadialFeature.cpp" />
     <ClCompile Include="RadialRoadGenerator.cpp" />
     <ClCompile Include="RoadArea.cpp" />
-    <ClCompile Include="RoadFeature.cpp" />
     <ClCompile Include="RoadGenerator.cpp" />
     <ClCompile Include="RoadSegmentationUtil.cpp" />
     <ClCompile Include="SimpleFlatTerrain.cpp" />
@@ -193,7 +193,7 @@
       <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(QTDIR)\bin\moc.exe;%(FullPath)</AdditionalInputs>
       <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Moc%27ing MainWindow.h...</Message>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">.\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp</Outputs>
-      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">"$(QTDIR)\bin\moc.exe" -DBOOST_TT_HAS_OPERATOR_HPP_INCLUDED  -DBOOST_NO_TEMPLATE_PARTIAL_SPECIALIZATION "%(FullPath)" -o ".\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp"  -DUNICODE -DWIN32 -DQT_LARGEFILE_SUPPORT -DQT_DLL -DQT_CORE_LIB -DQT_GUI_LIB -DQT_XML_LIB -DQT_OPENGL_LIB  "-I$(BOOST_ROOT)\." "-I.\GeneratedFiles" "-I." "-I$(QTDIR)\include" "-I.\GeneratedFiles\$(ConfigurationName)\." "-I$(QTDIR)\include\QtCore" "-I$(QTDIR)\include\QtGui" "-I$(QTDIR)\include\QtXml" "-I$(QTDIR)\include\QtOpenGL" "-I$(CV_ROOT)\include" "-I.\..\..\common"</Command>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">"$(QTDIR)\bin\moc.exe" -DBOOST_TT_HAS_OPERATOR_HPP_INCLUDED  -DBOOST_NO_TEMPLATE_PARTIAL_SPECIALIZATION "%(FullPath)" -o ".\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp"  -DUNICODE -DWIN32 -DQT_LARGEFILE_SUPPORT -DQT_DLL -DQT_CORE_LIB -DQT_GUI_LIB -DQT_XML_LIB -DQT_OPENGL_LIB  "-I$(BOOST_ROOT)\." "-I.\GeneratedFiles" "-I." "-I$(QTDIR)\include" "-I.\GeneratedFiles\$(ConfigurationName)\." "-I$(QTDIR)\include\QtCore" "-I$(QTDIR)\include\QtGui" "-I$(QTDIR)\include\QtXml" "-I$(QTDIR)\include\QtOpenGL" "-I$(CV_ROOT)\include" "-I.\..\..\mylib"</Command>
       <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(QTDIR)\bin\moc.exe;%(FullPath)</AdditionalInputs>
       <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Moc%27ing MainWindow.h...</Message>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">.\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp</Outputs>
@@ -226,30 +226,31 @@
     </CustomBuild>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\common\BBox.h" />
-    <ClInclude Include="..\..\common\GraphUtil.h" />
-    <ClInclude Include="..\..\common\Polygon2D.h" />
-    <ClInclude Include="..\..\common\Renderable.h" />
-    <ClInclude Include="..\..\common\RoadEdge.h" />
-    <ClInclude Include="..\..\common\RoadGraph.h" />
-    <ClInclude Include="..\..\common\RoadGraphRenderer.h" />
-    <ClInclude Include="..\..\common\RoadVertex.h" />
-    <ClInclude Include="..\..\common\Util.h" />
-    <ClInclude Include="..\..\common\VoronoiUtil.h" />
-    <ClInclude Include="AbstractFeature.h" />
+    <ClInclude Include="..\..\mylib\common\BBox.h" />
+    <ClInclude Include="..\..\mylib\common\common.h" />
+    <ClInclude Include="..\..\mylib\common\GraphUtil.h" />
+    <ClInclude Include="..\..\mylib\common\Polygon2D.h" />
+    <ClInclude Include="..\..\mylib\common\Renderable.h" />
+    <ClInclude Include="..\..\mylib\common\RoadEdge.h" />
+    <ClInclude Include="..\..\mylib\common\RoadGraph.h" />
+    <ClInclude Include="..\..\mylib\common\RoadGraphRenderer.h" />
+    <ClInclude Include="..\..\mylib\common\RoadVertex.h" />
+    <ClInclude Include="..\..\mylib\common\Util.h" />
+    <ClInclude Include="..\..\mylib\road\feature\AbstractFeature.h" />
+    <ClInclude Include="..\..\mylib\road\feature\GenericFeature.h" />
+    <ClInclude Include="..\..\mylib\road\feature\GridFeature.h" />
+    <ClInclude Include="..\..\mylib\road\feature\RadialFeature.h" />
+    <ClInclude Include="..\..\mylib\road\feature\RoadFeature.h" />
     <ClInclude Include="Camera.h" />
     <ClInclude Include="ConvexHull.h" />
-    <ClInclude Include="GenericFeature.h" />
     <ClInclude Include="GenericRoadGenerator.h" />
     <ClInclude Include="GLWidget.h" />
-    <ClInclude Include="GridFeature.h" />
     <ClInclude Include="GridRoadGenerator.h" />
     <ClInclude Include="HoughTransform.h" />
+    <ClInclude Include="KDERoadGenerator.h" />
     <ClInclude Include="PolygonAreaBuilder.h" />
-    <ClInclude Include="RadialFeature.h" />
     <ClInclude Include="RadialRoadGenerator.h" />
     <ClInclude Include="RoadArea.h" />
-    <ClInclude Include="RoadFeature.h" />
     <ClInclude Include="RoadGenerator.h" />
     <ClInclude Include="RoadSegmentationUtil.h" />
     <ClInclude Include="SimpleFlatTerrain.h" />
@@ -261,7 +262,7 @@
       <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(QTDIR)\bin\moc.exe;%(FullPath)</AdditionalInputs>
       <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Moc%27ing ControlWidget.h...</Message>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">.\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp</Outputs>
-      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">"$(QTDIR)\bin\moc.exe" -DBOOST_TT_HAS_OPERATOR_HPP_INCLUDED  -DBOOST_NO_TEMPLATE_PARTIAL_SPECIALIZATION "%(FullPath)" -o ".\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp"  -DUNICODE -DWIN32 -DQT_LARGEFILE_SUPPORT -DQT_DLL -DQT_CORE_LIB -DQT_GUI_LIB -DQT_XML_LIB -DQT_OPENGL_LIB  "-I$(BOOST_ROOT)\." "-I.\GeneratedFiles" "-I." "-I$(QTDIR)\include" "-I.\GeneratedFiles\$(ConfigurationName)\." "-I$(QTDIR)\include\QtCore" "-I$(QTDIR)\include\QtGui" "-I$(QTDIR)\include\QtXml" "-I$(QTDIR)\include\QtOpenGL" "-I$(CV_ROOT)\include" "-I.\..\..\common"</Command>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">"$(QTDIR)\bin\moc.exe" -DBOOST_TT_HAS_OPERATOR_HPP_INCLUDED  -DBOOST_NO_TEMPLATE_PARTIAL_SPECIALIZATION "%(FullPath)" -o ".\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp"  -DUNICODE -DWIN32 -DQT_LARGEFILE_SUPPORT -DQT_DLL -DQT_CORE_LIB -DQT_GUI_LIB -DQT_XML_LIB -DQT_OPENGL_LIB  "-I$(BOOST_ROOT)\." "-I.\GeneratedFiles" "-I." "-I$(QTDIR)\include" "-I.\GeneratedFiles\$(ConfigurationName)\." "-I$(QTDIR)\include\QtCore" "-I$(QTDIR)\include\QtGui" "-I$(QTDIR)\include\QtXml" "-I$(QTDIR)\include\QtOpenGL" "-I$(CV_ROOT)\include" "-I.\..\..\mylib"</Command>
       <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(QTDIR)\bin\moc.exe;%(FullPath)</AdditionalInputs>
       <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Moc%27ing ControlWidget.h...</Message>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">.\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp</Outputs>

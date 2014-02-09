@@ -1,9 +1,8 @@
 #pragma once
 
-#include "RoadGraph.h"
-#include "RoadArea.h"
-#include "Polygon2D.h"
-#include "RadialFeature.h"
+#include <common/Polygon2D.h>
+#include <common/RoadGraph.h>
+#include <road/feature/RadialFeature.h>
 
 class RadialRoadGenerator {
 public:

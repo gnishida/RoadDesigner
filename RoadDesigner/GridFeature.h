@@ -1,7 +1,5 @@
 ﻿#pragma once
 
-#include "AbstractFeature.h"
-#include "Polygon2D.h"
 #include <QMap>
 #include <QDomNode>
 #include <QVector2D>
@@ -9,6 +7,8 @@
 #include <opencv/cv.h>
 #include <opencv/highgui.h>
 #include <boost/shared_ptr.hpp>
+#include <common/Polygon2D.h>
+#include "AbstractFeature.h"
 
 class GridFeature : public AbstractFeature {
 public:

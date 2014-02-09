@@ -1,9 +1,9 @@
 #pragma once
 
-#include "Polygon2D.h"
-#include "BBox.h"
 #include <opencv/cv.h>
 #include <opencv/highgui.h>
+#include <common/Polygon2D.h>
+#include <common/BBox.h>
 
 class HoughTransform {
 private:

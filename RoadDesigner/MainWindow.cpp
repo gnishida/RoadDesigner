@@ -1,5 +1,5 @@
 #include "MainWindow.h"
-#include "GraphUtil.h"
+#include <common/GraphUtil.h>
 
 MainWindow::MainWindow(QWidget *parent, Qt::WFlags flags) : QMainWindow(parent, flags) {
 	ui.setupUi(this);

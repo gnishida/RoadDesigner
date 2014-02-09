@@ -1,6 +1,6 @@
 ﻿#include "GLWidget.h"
 #include "MainWindow.h"
-#include <GraphUtil.h>
+#include <common/GraphUtil.h>
 #include <gl/GLU.h>
 #include <vector>
 

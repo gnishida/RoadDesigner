@@ -1,15 +1,15 @@
 #pragma once
 
+#include <QString>
+#include <QGLWidget>
+#include <common/RoadGraph.h>
+#include <common/RoadGraphRenderer.h>
+#include <road/feature/GridFeature.h>
+#include <road/feature/RadialFeature.h>
 #include "Camera.h"
 #include "SimpleFlatTerrain.h"
 #include "RoadArea.h"
-#include "RoadGraph.h"
-#include "RoadGraphRenderer.h"
 #include "PolygonAreaBuilder.h"
-#include "GridFeature.h"
-#include "RadialFeature.h"
-#include <QGLWidget>
-#include <QString>
 
 class MainWindow;
 
@@ -22,10 +22,8 @@ public:
 	MainWindow* mainWin;
 	Camera* camera;
 	SimpleFlatTerrain terrain;
-	//RoadGraph roads;
 	RoadGraphRenderer* renderer;
 	QPoint lastPos;
-	//std::vector<Polygon2D> areas;
 	std::vector<RoadArea> areas;
 	int selectedArea;
 	PolygonAreaBuilder selectedAreaBuilder;

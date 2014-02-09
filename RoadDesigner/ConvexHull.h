@@ -6,7 +6,7 @@
 #include <boost/geometry/geometries/point_xy.hpp>
 #include <boost/geometry/geometries/polygon.hpp>
 #include <boost/geometry/multi/geometries/multi_point.hpp>
-#include <Polygon2D.h>
+#include <common/Polygon2D.h>
 
 using boost::geometry::model::d2::point_xy;
 using boost::geometry::make;

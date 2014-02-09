@@ -1,7 +1,7 @@
 #pragma once
 
-#include <Polygon2D.h>
-#include <RoadGraph.h>
+#include <common/Polygon2D.h>
+#include <common/RoadGraph.h>
 
 class RoadArea {
 public:

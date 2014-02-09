@@ -1,6 +1,6 @@
 ﻿#include "GenericRoadGenerator.h"
-#include <Util.h>
-#include <GraphUtil.h>
+#include <common/Util.h>
+#include <common/GraphUtil.h>
 
 GenericRoadGenerator::GenericRoadGenerator() {
 }

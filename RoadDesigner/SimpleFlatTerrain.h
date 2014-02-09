@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Renderable.h"
+#include <common/Renderable.h>
 
 class SimpleFlatTerrain {
 public:
