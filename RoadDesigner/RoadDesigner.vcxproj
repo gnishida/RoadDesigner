@@ -139,6 +139,8 @@
     <ClCompile Include="..\..\mylib\road\feature\AbstractFeature.cpp" />
     <ClCompile Include="..\..\mylib\road\feature\GenericFeature.cpp" />
     <ClCompile Include="..\..\mylib\road\feature\GridFeature.cpp" />
+    <ClCompile Include="..\..\mylib\road\feature\KDEFeature.cpp" />
+    <ClCompile Include="..\..\mylib\road\feature\KDEFeatureItem.cpp" />
     <ClCompile Include="..\..\mylib\road\feature\RadialFeature.cpp" />
     <ClCompile Include="..\..\mylib\road\feature\RoadFeature.cpp" />
     <ClCompile Include="Camera.cpp" />
@@ -239,6 +241,8 @@
     <ClInclude Include="..\..\mylib\road\feature\AbstractFeature.h" />
     <ClInclude Include="..\..\mylib\road\feature\GenericFeature.h" />
     <ClInclude Include="..\..\mylib\road\feature\GridFeature.h" />
+    <ClInclude Include="..\..\mylib\road\feature\KDEFeature.h" />
+    <ClInclude Include="..\..\mylib\road\feature\KDEFeatureItem.h" />
     <ClInclude Include="..\..\mylib\road\feature\RadialFeature.h" />
     <ClInclude Include="..\..\mylib\road\feature\RoadFeature.h" />
     <ClInclude Include="Camera.h" />
@@ -247,7 +251,6 @@
     <ClInclude Include="GLWidget.h" />
     <ClInclude Include="GridRoadGenerator.h" />
     <ClInclude Include="HoughTransform.h" />
-    <ClInclude Include="KDERoadGenerator.h" />
     <ClInclude Include="PolygonAreaBuilder.h" />
     <ClInclude Include="RadialRoadGenerator.h" />
     <ClInclude Include="RoadArea.h" />

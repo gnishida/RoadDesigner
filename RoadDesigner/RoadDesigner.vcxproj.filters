@@ -158,6 +158,12 @@
     <ClCompile Include="..\..\mylib\road\feature\RoadFeature.cpp">
       <Filter>mylib\road\feature</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\mylib\road\feature\KDEFeature.cpp">
+      <Filter>mylib\road\feature</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\mylib\road\feature\KDEFeatureItem.cpp">
+      <Filter>mylib\road\feature</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="MainWindow.h">
@@ -219,9 +225,6 @@
     <ClInclude Include="RoadGenerator.h">
       <Filter>RoadGenerator</Filter>
     </ClInclude>
-    <ClInclude Include="KDERoadGenerator.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\mylib\common\BBox.h">
       <Filter>mylib\common</Filter>
     </ClInclude>
@@ -265,6 +268,12 @@
       <Filter>mylib\road\feature</Filter>
     </ClInclude>
     <ClInclude Include="..\..\mylib\road\feature\RoadFeature.h">
+      <Filter>mylib\road\feature</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\mylib\road\feature\KDEFeature.h">
+      <Filter>mylib\road\feature</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\mylib\road\feature\KDEFeatureItem.h">
       <Filter>mylib\road\feature</Filter>
     </ClInclude>
   </ItemGroup>
