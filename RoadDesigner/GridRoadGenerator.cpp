@@ -14,10 +14,9 @@ GridRoadGenerator::~GridRoadGenerator() {
 void GridRoadGenerator::generateRoadNetwork(RoadGraph &roads, Polygon2D &area, const GridFeature& gf) {
 	// グリッド方向に合わせたBBoxのサイズを取得
 	Polygon2D area2;
-	//Polygon2D bboxRotLoop;
 	float angle0 = gf.getAngles()[0];
 	QVector2D dir0 = QVector2D(cos(angle0), sinf(angle0));
-	area.getLoopOBB(dir0, area2);
+	area.getOBB(dir0, area2);
 	
 	// Avenue用シード
 	std::list<RoadVertexDesc> initSeeds;

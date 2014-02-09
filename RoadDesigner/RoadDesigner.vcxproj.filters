@@ -128,9 +128,6 @@
     <ClCompile Include="..\..\common\GraphUtil.cpp">
       <Filter>common</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\common\Polygon2D.cpp">
-      <Filter>common</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\common\Renderable.cpp">
       <Filter>common</Filter>
     </ClCompile>
@@ -150,6 +147,9 @@
       <Filter>common</Filter>
     </ClCompile>
     <ClCompile Include="..\..\common\RoadGraphRenderer.cpp">
+      <Filter>common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\common\Polygon2D.cpp">
       <Filter>common</Filter>
     </ClCompile>
   </ItemGroup>

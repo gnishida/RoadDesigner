@@ -5,13 +5,23 @@
 #include <list>
 
 int main(int argc, char *argv[]) {
-	/*
 	Polygon2D area;
-	area.push_back(QVector2D(-100, -100));
-	area.push_back(QVector2D(-100, 200));
-	area.push_back(QVector2D(200, 200));
-	area.push_back(QVector2D(200, -100));
-	
+	area.push_back(QVector2D(10, 20));
+	area.push_back(QVector2D(10, 30));
+	area.push_back(QVector2D(20, 30));
+	area.push_back(QVector2D(10, 20));
+
+	Polygon2D obb;
+	QVector2D size = area.getOBB(QVector2D(1, 1), obb);
+
+	Polygon2D area2;
+	area.rotate(90, area2);
+
+	QVector2D intPt;
+	area.intersects(QVector2D(3, 5), QVector2D(3, -5), intPt);
+
+
+	/*
 	Polygon2D area2;
 	area2.push_back(QVector2D(50, 50));
 	area2.push_back(QVector2D(50, -1000));

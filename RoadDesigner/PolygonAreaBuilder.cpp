@@ -45,5 +45,7 @@ Polygon2D PolygonAreaBuilder::polygon() const {
 		area.push_back(_polyline[i]);
 	}
 
+	area.correct();
+
 	return area;
 }
