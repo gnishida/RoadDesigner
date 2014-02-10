@@ -77,19 +77,10 @@
     <ClCompile Include="GeneratedFiles\Release\moc_ControlWidget.cpp">
       <Filter>Generated Files\Release</Filter>
     </ClCompile>
-    <ClCompile Include="ConvexHull.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="GLWidget.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="HoughTransform.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="PolygonAreaBuilder.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="RoadSegmentationUtil.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="SimpleFlatTerrain.cpp">
@@ -112,9 +103,6 @@
     </ClCompile>
     <ClCompile Include="GenericRoadGenerator.cpp">
       <Filter>RoadGenerator</Filter>
-    </ClCompile>
-    <ClCompile Include="KDERoadGenerator.cpp">
-      <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\..\mylib\common\BBox.cpp">
       <Filter>mylib\common</Filter>
@@ -164,6 +152,9 @@
     <ClCompile Include="..\..\mylib\road\feature\KDEFeatureItem.cpp">
       <Filter>mylib\road\feature</Filter>
     </ClCompile>
+    <ClCompile Include="KDERoadGenerator.cpp">
+      <Filter>RoadGenerator</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="MainWindow.h">
@@ -192,19 +183,10 @@
     <ClInclude Include="Camera.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="ConvexHull.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="GLWidget.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="HoughTransform.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="PolygonAreaBuilder.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="RoadSegmentationUtil.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="SimpleFlatTerrain.h">
@@ -275,6 +257,9 @@
     </ClInclude>
     <ClInclude Include="..\..\mylib\road\feature\KDEFeatureItem.h">
       <Filter>mylib\road\feature</Filter>
+    </ClInclude>
+    <ClInclude Include="KDERoadGenerator.h">
+      <Filter>RoadGenerator</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

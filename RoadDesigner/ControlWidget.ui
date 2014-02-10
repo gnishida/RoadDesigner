@@ -42,7 +42,7 @@
       </rect>
      </property>
      <property name="text">
-      <string>Generate Grid</string>
+      <string>Generate</string>
      </property>
     </widget>
     <widget class="QRadioButton" name="radioButtonGridPattern1">
@@ -100,7 +100,7 @@
       </rect>
      </property>
      <property name="text">
-      <string>Generate Radial</string>
+      <string>Generate</string>
      </property>
     </widget>
    </widget>
@@ -134,7 +134,7 @@
     <property name="geometry">
      <rect>
       <x>10</x>
-      <y>290</y>
+      <y>350</y>
       <width>171</width>
       <height>61</height>
      </rect>
@@ -152,10 +152,43 @@
       </rect>
      </property>
      <property name="text">
-      <string>Generate Generic</string>
+      <string>Generate</string>
      </property>
     </widget>
    </widget>
+   <widget class="QGroupBox" name="groupBox_8">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>280</y>
+      <width>171</width>
+      <height>61</height>
+     </rect>
+    </property>
+    <property name="title">
+     <string>KDE Pattern</string>
+    </property>
+    <widget class="QPushButton" name="pushButtonGenerateKDE">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>20</y>
+       <width>131</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Generate</string>
+     </property>
+    </widget>
+   </widget>
+   <zorder>groupBox_3</zorder>
+   <zorder>groupBox_6</zorder>
+   <zorder>checkBoxRoadTypeAvenue</zorder>
+   <zorder>checkBoxRoadTypeLocalStreet</zorder>
+   <zorder>groupBox_7</zorder>
+   <zorder>pushButtonGenerateGeneric</zorder>
+   <zorder>groupBox_8</zorder>
   </widget>
  </widget>
  <resources/>

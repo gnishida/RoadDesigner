@@ -1,0 +1,59 @@
+<features>
+    <feature weight="1" type="kde">
+        <center>
+            <x>0</x>
+            <y>0</y>
+        </center>
+        <item>
+            <edge length="73.3118" angle="1.87769"/>
+            <edge length="71.4498" angle="-1.29108"/>
+            <edge length="69.5332" angle="0.31446"/>
+            <edge length="54.8056" angle="-2.8273"/>
+        </item>
+        <item>
+            <edge length="73.3118" angle="-1.2639"/>
+            <edge length="78.3208" angle="1.87766"/>
+            <edge length="143.108" angle="3.1264"/>
+        </item>
+        <item>
+            <edge length="54.8056" angle="0.314294"/>
+            <edge length="164.263" angle="-2.78045"/>
+            <edge length="376.013" angle="-2.32351"/>
+        </item>
+        <item>
+            <edge length="72.7769" angle="-1.36119"/>
+            <edge length="161.282" angle="-0.354553"/>
+            <edge length="310.281" angle="-1.66502"/>
+        </item>
+        <item>
+            <edge length="71.7088" angle="-2.02768"/>
+            <edge length="83.097" angle="2.68218"/>
+            <edge length="72.7769" angle="1.7804"/>
+        </item>
+        <item>
+            <edge length="71.7088" angle="1.11391"/>
+            <edge length="41.8573" angle="-0.484102"/>
+            <edge length="32.7388" angle="2.62563"/>
+        </item>
+        <item>
+            <edge length="83.7983" angle="2.68721"/>
+            <edge length="11.092" angle="0.370752"/>
+            <edge length="11.8386" angle="-1.34928"/>
+        </item>
+        <item>
+            <edge length="11.092" angle="-2.77084"/>
+            <edge length="161.282" angle="2.78704"/>
+            <edge length="19.6886" angle="-0.0466429"/>
+        </item>
+        <item>
+            <edge length="51.983" angle="0.621153"/>
+            <edge length="19.6886" angle="3.09495"/>
+            <edge length="33.9259" angle="-2.64352"/>
+        </item>
+        <item>
+            <edge length="11.8386" angle="1.79232"/>
+            <edge length="33.9259" angle="0.498076"/>
+            <edge length="194.283" angle="-1.12584"/>
+        </item>
+    </feature>
+</features>

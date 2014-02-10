@@ -5,7 +5,6 @@
 #include <road/feature/GridFeature.h>
 #include <road/feature/RadialFeature.h>
 #include <road/feature/GenericFeature.h>
-#include "RoadSegmentationUtil.h"
 #include "RoadGenerator.h"
 
 ControlWidget::ControlWidget(MainWindow* mainWin) : QDockWidget("Control Widget", (QWidget*)mainWin) {
@@ -21,6 +20,7 @@ ControlWidget::ControlWidget(MainWindow* mainWin) : QDockWidget("Control Widget"
 	connect(ui.checkBoxRoadTypeLocalStreet, SIGNAL(stateChanged(int)), this, SLOT(showLocalStreet(int)));
 	connect(ui.pushButtonGenerateGrid, SIGNAL(clicked()), this, SLOT(generateGrid()));
 	connect(ui.pushButtonGenerateRadial, SIGNAL(clicked()), this, SLOT(generateRadial()));
+	connect(ui.pushButtonGenerateKDE, SIGNAL(clicked()), this, SLOT(generateKDE()));
 	connect(ui.pushButtonGenerateGeneric, SIGNAL(clicked()), this, SLOT(generateGeneric()));
 
 	hide();
@@ -65,6 +65,21 @@ void ControlWidget::generateRadial() {
 
 	RoadFeature rf;
 	rf.load("radial_feature1.xml");
+
+	RoadGenerator rg;
+	rg.generateRoadNetwork(mainWin->glWidget->areas[mainWin->glWidget->selectedArea], rf);
+
+	mainWin->glWidget->updateGL();
+}
+
+/**
+ * Event handler for button [Generate KDE-base]
+ */
+void ControlWidget::generateKDE() {
+	if (mainWin->glWidget->selectedArea == -1) return;
+
+	RoadFeature rf;
+	rf.load("kde_feature1.xml");
 
 	RoadGenerator rg;
 	rg.generateRoadNetwork(mainWin->glWidget->areas[mainWin->glWidget->selectedArea], rf);
