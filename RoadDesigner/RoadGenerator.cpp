@@ -4,17 +4,14 @@
 #include "RoadGenerator.h"
 #include "GridRoadGenerator.h"
 #include "RadialRoadGenerator.h"
+#include "KDERoadGenerator.h"
 #include "GenericRoadGenerator.h"
-
-RoadGenerator::RoadGenerator() {
-}
-
-RoadGenerator::~RoadGenerator() {
-}
 
 /**
  * 道路網を生成する
- * 暫定的な実装。要改善。
+ * 現在の実装では、特徴量のXMLファイル内に最初に記述されたエリアの特徴量だけを使用して、道路網を生成する。
+ * つまり、複数のPlaceTypeには対応していない。
+ * 将来的に、複数のPlaceTypeに対応させたい。
  */
 void RoadGenerator::generateRoadNetwork(RoadArea& roadArea, const RoadFeature& rf) {
 	//roadArea.roads.clear();
@@ -23,39 +20,8 @@ void RoadGenerator::generateRoadNetwork(RoadArea& roadArea, const RoadFeature& r
 
 	GridRoadGenerator rg1;
 	RadialRoadGenerator rg2;
-	GenericRoadGenerator rg3;
-
-	/*
-	QVector2D center = roadArea.area.getCentroid();
-
-	std::vector<VoronoiVertex> points;
-	for (int i = 0; i < rf.features.size(); ++i) {
-		points.push_back(VoronoiVertex(rf.features[i]->center() + center));
-	}
-	std::vector<Polygon2D> faces;
-	VoronoiUtil::voronoi(points, roadArea.area, faces);
-
-	for (int i = 0; i < faces.size(); ++i) {
-		// セルのポリゴンの順を時計回りになおす
-		//faces[i].reverse();
-
-		// このエリアで、各セルをcroppingする（ボロノイが完璧になれば、この処理は不要になるのだが、、、）
-		faces[i].intersection(roadArea.area);
-
-		switch (rf.features[0]->type()) {
-		case AbstractFeature::TYPE_GRID:
-			rg1.generateRoadNetwork(roadArea.roads, faces[i], dynamic_cast<GridFeature&>(*rf.features[0]));
-			break;
-		case AbstractFeature::TYPE_RADIAL:
-			rg2.generateRoadNetwork(roadArea.roads, faces[i], dynamic_cast<RadialFeature&>(*rf.features[0]));
-			break;
-		case AbstractFeature::TYPE_GENERIC:
-			rg3.generateRoadNetwork(roadArea.roads, faces[i], dynamic_cast<GenericFeature&>(*rf.features[0]));
-			break;
-		}
-
-	}
-	*/
+	KDERoadGenerator rg3;
+	GenericRoadGenerator rg4;
 
 	switch (rf.features[0]->type()) {
 	case AbstractFeature::TYPE_GRID:
@@ -64,8 +30,11 @@ void RoadGenerator::generateRoadNetwork(RoadArea& roadArea, const RoadFeature& r
 	case AbstractFeature::TYPE_RADIAL:
 		rg2.generateRoadNetwork(roadArea.roads, roadArea.area, dynamic_cast<RadialFeature&>(*rf.features[0]));
 		break;
+	case AbstractFeature::TYPE_KDE:
+		rg3.generateRoadNetwork(roadArea.roads, roadArea.area, dynamic_cast<KDEFeature&>(*rf.features[0]));
+		break;
 	case AbstractFeature::TYPE_GENERIC:
-		rg3.generateRoadNetwork(roadArea.roads, roadArea.area, dynamic_cast<GenericFeature&>(*rf.features[0]));
+		rg4.generateRoadNetwork(roadArea.roads, roadArea.area, dynamic_cast<GenericFeature&>(*rf.features[0]));
 		break;
 	}
 }

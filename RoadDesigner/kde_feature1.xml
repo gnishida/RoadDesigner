@@ -5,55 +5,55 @@
             <y>0</y>
         </center>
         <item>
-            <edge length="73.3118" angle="1.87769"/>
-            <edge length="71.4498" angle="-1.29108"/>
-            <edge length="69.5332" angle="0.31446"/>
-            <edge length="54.8056" angle="-2.8273"/>
+            <edge x="-22.1473" y="69.8865"/>
+            <edge x="19.7259" y="-68.6729"/>
+            <edge x="66.1235" y="21.5068"/>
+            <edge x="-52.1209" y="-16.9429"/>
         </item>
         <item>
-            <edge length="73.3118" angle="-1.2639"/>
-            <edge length="78.3208" angle="1.87766"/>
-            <edge length="143.108" angle="3.1264"/>
+            <edge x="22.1473" y="-69.8865"/>
+            <edge x="-23.6582" y="74.6621"/>
+            <edge x="-109.857" y="1.66968"/>
         </item>
         <item>
-            <edge length="54.8056" angle="0.314294"/>
-            <edge length="164.263" angle="-2.78045"/>
-            <edge length="376.013" angle="-2.32351"/>
+            <edge x="52.1209" y="16.9429"/>
+            <edge x="-108.045" y="-40.8096"/>
+            <edge x="-102.289" y="-109.204"/>
         </item>
         <item>
-            <edge length="72.7769" angle="-1.36119"/>
-            <edge length="161.282" angle="-0.354553"/>
-            <edge length="310.281" angle="-1.66502"/>
+            <edge x="14.4976" y="-68.1499"/>
+            <edge x="107.832" y="-39.9192"/>
+            <edge x="-22.6183" y="-239.348"/>
         </item>
         <item>
-            <edge length="71.7088" angle="-2.02768"/>
-            <edge length="83.097" angle="2.68218"/>
-            <edge length="72.7769" angle="1.7804"/>
+            <edge x="-31.6345" y="-64.3538"/>
+            <edge x="-74.4811" y="36.8467"/>
+            <edge x="-14.4976" y="68.1499"/>
         </item>
         <item>
-            <edge length="71.7088" angle="1.11391"/>
-            <edge length="41.8573" angle="-0.484102"/>
-            <edge length="32.7388" angle="2.62563"/>
+            <edge x="31.6345" y="64.3538"/>
+            <edge x="37.0476" y="-19.481"/>
+            <edge x="-28.4768" y="16.1523"/>
         </item>
         <item>
-            <edge length="83.7983" angle="2.68721"/>
-            <edge length="11.092" angle="0.370752"/>
-            <edge length="11.8386" angle="-1.34928"/>
+            <edge x="-75.2953" y="36.78"/>
+            <edge x="10.3383" y="4.0188"/>
+            <edge x="2.58228" y="-11.4658"/>
         </item>
         <item>
-            <edge length="11.092" angle="-2.77084"/>
-            <edge length="161.282" angle="2.78704"/>
-            <edge length="19.6886" angle="-0.0466429"/>
+            <edge x="-10.3383" y="-4.0188"/>
+            <edge x="-107.832" y="39.9192"/>
+            <edge x="19.0807" y="-0.890625"/>
         </item>
         <item>
-            <edge length="51.983" angle="0.621153"/>
-            <edge length="19.6886" angle="3.09495"/>
-            <edge length="33.9259" angle="-2.64352"/>
+            <edge x="41.9209" y="30.0007"/>
+            <edge x="-19.0807" y="0.890625"/>
+            <edge x="-26.8367" y="-14.594"/>
         </item>
         <item>
-            <edge length="11.8386" angle="1.79232"/>
-            <edge length="33.9259" angle="0.498076"/>
-            <edge length="194.283" angle="-1.12584"/>
+            <edge x="-2.58228" y="11.4658"/>
+            <edge x="26.8367" y="14.594"/>
+            <edge x="65.2379" y="-136.812"/>
         </item>
     </feature>
 </features>

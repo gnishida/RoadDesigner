@@ -7,8 +7,8 @@
 
 class RoadGenerator {
 public:
-	RoadGenerator();
-	~RoadGenerator();
+	RoadGenerator() {}
+	~RoadGenerator() {}
 
 	void generateRoadNetwork(RoadArea& roadArea, const RoadFeature& rf);
 
