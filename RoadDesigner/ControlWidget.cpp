@@ -64,7 +64,7 @@ void ControlWidget::generateRadial() {
 	if (mainWin->glWidget->selectedArea == -1) return;
 
 	RoadFeature rf;
-	rf.load("radial_feature1.xml");
+	rf.load("radial_feature.xml");
 
 	RoadGenerator rg;
 	rg.generateRoadNetwork(mainWin->glWidget->areas[mainWin->glWidget->selectedArea], rf);
@@ -94,7 +94,7 @@ void ControlWidget::generateGeneric() {
 	if (mainWin->glWidget->selectedArea == -1) return;
 
 	RoadFeature rf;
-	rf.load("generic_feature1.xml");
+	rf.load("generic_feature.xml");
 
 	RoadGenerator rg;
 	rg.generateRoadNetwork(mainWin->glWidget->areas[mainWin->glWidget->selectedArea], rf);

@@ -64,6 +64,12 @@ void KDERoadGenerator::attemptExpansion(RoadGraph &roads, Polygon2D &area, RoadV
 			intersected = true;
 		}
 
+		// Densityをチェック
+		float density = GraphUtil::getNumVertices(roads, pt, 50);
+		if (density >= 1) continue;
+		//float density = GraphUtil::getDensity(roads, pt, 50);
+		//if (density >= kf._density / 400.0f) continue;
+
 		float threshold;
 		if (roadType == 1) {
 			threshold = std::max(0.25f * (float)item.edges[i].length(), 10.0f);
@@ -109,7 +115,7 @@ void KDERoadGenerator::attemptExpansion(RoadGraph &roads, Polygon2D &area, RoadV
 		}
 
 		// シードに追加
-		if (!snapped && !intersected && !outside) {
+		if (!snapped && !intersected && !outside && !item.deadends[i]) {
 			seeds.push_back(tgtDesc);
 		}
 	}
