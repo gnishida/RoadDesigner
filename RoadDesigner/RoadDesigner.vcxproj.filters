@@ -155,6 +155,9 @@
     <ClCompile Include="KDERoadGenerator.cpp">
       <Filter>RoadGenerator</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\mylib\common\TopNSearch.cpp">
+      <Filter>mylib\common</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="MainWindow.h">
@@ -260,6 +263,9 @@
     </ClInclude>
     <ClInclude Include="KDERoadGenerator.h">
       <Filter>RoadGenerator</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\mylib\common\TopNSearch.h">
+      <Filter>mylib\common</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

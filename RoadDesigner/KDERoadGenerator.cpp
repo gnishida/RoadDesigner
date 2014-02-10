@@ -1,5 +1,6 @@
 ﻿#include <common/Util.h>
 #include <common/GraphUtil.h>
+#include <common/TopNSearch.h>
 #include "KDERoadGenerator.h"
 
 void KDERoadGenerator::generateRoadNetwork(RoadGraph &roads, Polygon2D &area, const KDEFeature& kf) {
@@ -11,7 +12,7 @@ void KDERoadGenerator::generateRoadNetwork(RoadGraph &roads, Polygon2D &area, co
 		RoadVertexDesc desc = seeds.front();
 		seeds.pop_front();
 
-		attemptExpansion(roads, area, desc, 2, kf, seeds);
+		attemptExpansion(roads, area, desc, 1, kf, seeds);
 	}
 }
 
@@ -42,7 +43,7 @@ void KDERoadGenerator::attemptExpansion(RoadGraph &roads, Polygon2D &area, RoadV
 		RoadVertexDesc tgt = boost::target(*ei, roads.graph);
 		QVector2D dir = roads.graph[tgt]->pt - roads.graph[srcDesc]->pt;
 
-		item = kf.getItem(dir);
+		item = getItem(kf, dir);
 	}
 	
 	for (int i = 0; i < item.edges.size(); ++i) {
@@ -143,4 +144,29 @@ bool KDERoadGenerator::intersects(RoadGraph &roads, const QVector2D& p0, const Q
 	}	
 
 	return intersect;
+}
+
+/**
+ * 与えられたエッジの方向、長さを含むデータを検索し、近いものを返却する。
+ */
+KDEFeatureItem KDERoadGenerator::getItem(const KDEFeature& kf, const QVector2D &edge) {
+	TopNSearch<int> tns;
+
+	//float min_dist = std::numeric_limits<float>::max();
+	//int id = -1;
+
+	for (int i = 0; i < kf.items.size(); ++i) {
+		float dist = kf.items[i].getMinDistance(edge);
+		tns.add(dist, i);
+		/*
+		if (dist < min_dist) {
+			min_dist = dist;
+			id = i;
+		}*/
+	}
+
+	QList<int> topn = tns.topN(3, TopNSearch<int>::ORDER_DESC);
+	int id = Util::uniform_rand(0, topn.size());
+
+	return kf.items[id];
 }

@@ -18,6 +18,10 @@ GLWidget::GLWidget(MainWindow* mainWin) : QGLWidget(QGLFormat(QGL::SampleBuffers
 	camera->setLookAt(0.0f, 0.0f, 0.0f);
 	camera->setTranslation(0.0f, 0.0f, (MIN_Z + MAX_Z) / 2.0f);
 
+	QString str;
+	str.setNum(camera->dz);
+	mainWin->ui.statusBar->showMessage(str);
+
 	terrain.width = 5000.0f;
 	terrain.depth = 5000.0f;
 	terrain.elevation = 0.0f;
@@ -184,6 +188,10 @@ void GLWidget::mouseMoveEvent(QMouseEvent *e) {
 		camera->changeXYZTranslation(0, 0, -dy * camera->dz * 0.02f);
 		if (camera->dz < MIN_Z) camera->dz = MIN_Z;
 		if (camera->dz > MAX_Z) camera->dz = MAX_Z;
+
+		QString str;
+		str.setNum(camera->dz);
+		mainWin->ui.statusBar->showMessage(str);
 
 		// tell the Z coordinate to the road graph so that road graph updates rendering related variables.
 		for (int i = 0; i < areas.size(); ++i) {

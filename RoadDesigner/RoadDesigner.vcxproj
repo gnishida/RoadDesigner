@@ -135,6 +135,7 @@
     <ClCompile Include="..\..\mylib\common\RoadGraph.cpp" />
     <ClCompile Include="..\..\mylib\common\RoadGraphRenderer.cpp" />
     <ClCompile Include="..\..\mylib\common\RoadVertex.cpp" />
+    <ClCompile Include="..\..\mylib\common\TopNSearch.cpp" />
     <ClCompile Include="..\..\mylib\common\Util.cpp" />
     <ClCompile Include="..\..\mylib\road\feature\AbstractFeature.cpp" />
     <ClCompile Include="..\..\mylib\road\feature\GenericFeature.cpp" />
@@ -234,6 +235,7 @@
     <ClInclude Include="..\..\mylib\common\RoadGraph.h" />
     <ClInclude Include="..\..\mylib\common\RoadGraphRenderer.h" />
     <ClInclude Include="..\..\mylib\common\RoadVertex.h" />
+    <ClInclude Include="..\..\mylib\common\TopNSearch.h" />
     <ClInclude Include="..\..\mylib\common\Util.h" />
     <ClInclude Include="..\..\mylib\road\feature\AbstractFeature.h" />
     <ClInclude Include="..\..\mylib\road\feature\GenericFeature.h" />
