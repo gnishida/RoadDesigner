@@ -50,7 +50,7 @@ void GLWidget::drawScene() {
 
 	// draw the selecting polyline
 	if (selectedAreaBuilder.selecting()) {
-		renderer->renderPolyline(selectedAreaBuilder.polygon(), GL_LINE_STIPPLE, height);
+		renderer->renderPolyline(selectedAreaBuilder.polyline(), GL_LINE_STIPPLE, height);
 	}
 
 	// draw the areas

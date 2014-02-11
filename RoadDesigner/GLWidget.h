@@ -4,12 +4,12 @@
 #include <QGLWidget>
 #include <common/RoadGraph.h>
 #include <common/RoadGraphRenderer.h>
+#include <common/PolygonAreaBuilder.h>
 #include <road/feature/GridFeature.h>
 #include <road/feature/RadialFeature.h>
 #include "Camera.h"
 #include "SimpleFlatTerrain.h"
 #include "RoadArea.h"
-#include "PolygonAreaBuilder.h"
 
 class MainWindow;
 

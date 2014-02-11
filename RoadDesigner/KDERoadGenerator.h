@@ -16,6 +16,6 @@ private:
 
 	void attemptExpansion(RoadGraph &roads, Polygon2D &area, RoadVertexDesc &srcDesc, int roadType, const KDEFeature& kf, std::list<RoadVertexDesc> &seeds);
 	bool intersects(RoadGraph &roads, const QVector2D& p0, const QVector2D& p1, RoadEdgeDesc &eiClosest, QVector2D &closestIntPt);
-	KDEFeatureItem getItem(const KDEFeature& kf, const QVector2D &edge);
+	KDEFeatureItem getItem(const KDEFeature& kf, int roadType, const Polyline2D &edge);
 };
 

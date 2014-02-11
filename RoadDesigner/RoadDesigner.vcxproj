@@ -130,6 +130,7 @@
     <ClCompile Include="..\..\mylib\common\BBox.cpp" />
     <ClCompile Include="..\..\mylib\common\GraphUtil.cpp" />
     <ClCompile Include="..\..\mylib\common\Polygon2D.cpp" />
+    <ClCompile Include="..\..\mylib\common\PolygonAreaBuilder.cpp" />
     <ClCompile Include="..\..\mylib\common\Renderable.cpp" />
     <ClCompile Include="..\..\mylib\common\RoadEdge.cpp" />
     <ClCompile Include="..\..\mylib\common\RoadGraph.cpp" />
@@ -178,7 +179,6 @@
     <ClCompile Include="KDERoadGenerator.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MainWindow.cpp" />
-    <ClCompile Include="PolygonAreaBuilder.cpp" />
     <ClCompile Include="RadialRoadGenerator.cpp" />
     <ClCompile Include="RoadArea.cpp" />
     <ClCompile Include="RoadGenerator.cpp" />
@@ -230,6 +230,7 @@
     <ClInclude Include="..\..\mylib\common\common.h" />
     <ClInclude Include="..\..\mylib\common\GraphUtil.h" />
     <ClInclude Include="..\..\mylib\common\Polygon2D.h" />
+    <ClInclude Include="..\..\mylib\common\PolygonAreaBuilder.h" />
     <ClInclude Include="..\..\mylib\common\Renderable.h" />
     <ClInclude Include="..\..\mylib\common\RoadEdge.h" />
     <ClInclude Include="..\..\mylib\common\RoadGraph.h" />
@@ -249,7 +250,6 @@
     <ClInclude Include="GLWidget.h" />
     <ClInclude Include="GridRoadGenerator.h" />
     <ClInclude Include="KDERoadGenerator.h" />
-    <ClInclude Include="PolygonAreaBuilder.h" />
     <ClInclude Include="RadialRoadGenerator.h" />
     <ClInclude Include="RoadArea.h" />
     <ClInclude Include="RoadGenerator.h" />
