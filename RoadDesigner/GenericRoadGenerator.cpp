@@ -185,7 +185,7 @@ void GenericRoadGenerator::attemptExpansion(RoadGraph &roads, Polygon2D &area, R
 		}
 
 		float threshold;
-		if (roadType == 1) {
+		if (roadType == RoadEdge::TYPE_STREET) {
 			threshold = (std::max)(0.25f * dist, 10.0f);
 		} else {
 			threshold = (std::max)(0.25f * dist, 40.0f);
