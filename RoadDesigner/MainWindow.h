@@ -31,6 +31,7 @@ protected:
 public slots:
 	void onNew();
 	void onOpen();
+	void onSave();
 	void onAreaMenu();
 	void onAreaSelect();
 	void onAreaCreate();

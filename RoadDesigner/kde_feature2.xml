@@ -1,0 +1,1454 @@
+<features>
+    <feature weight="1" type="kde">
+        <center>
+            <x>0</x>
+            <y>0</y>
+        </center>
+        <avenue density="22.2552">
+            <item>
+                <edge deadend="false">
+                    <point x="-17.8069" y="-5.83301"/>
+                </edge>
+                <edge deadend="false">
+                    <point x="-17.8069" y="-5.83301"/>
+                    <point x="-100.906" y="-30.0337"/>
+                    <point x="-110.195" y="-33.2065"/>
+                    <point x="-153.49" y="-47.6001"/>
+                    <point x="-158.194" y="-49.1699"/>
+                    <point x="-242.267" y="-73.9829"/>
+                    <point x="-406.503" y="-124.031"/>
+                    <point x="-425.787" y="-128.538"/>
+                </edge>
+                <edge deadend="false">
+                    <point x="31.0817" y="10.1968"/>
+                    <point x="41.0673" y="13.4697"/>
+                    <point x="119.506" y="40.0864"/>
+                </edge>
+                <edge deadend="false">
+                    <point x="31.0817" y="10.1968"/>
+                    <point x="41.0673" y="13.4697"/>
+                    <point x="119.506" y="40.0864"/>
+                    <point x="279.917" y="89.6118"/>
+                    <point x="303.702" y="96.6362"/>
+                </edge>
+                <edge deadend="false">
+                    <point x="31.0817" y="10.1968"/>
+                    <point x="41.0673" y="13.4697"/>
+                    <point x="119.506" y="40.0864"/>
+                </edge>
+            </item>
+            <item>
+                <edge deadend="false">
+                    <point x="59.9333" y="-192.393"/>
+                    <point x="74.7191" y="-240.07"/>
+                </edge>
+                <edge deadend="false">
+                    <point x="117.987" y="38.1943"/>
+                    <point x="205.868" y="69.8657"/>
+                </edge>
+                <edge deadend="false">
+                    <point x="-85.442" y="258.374"/>
+                    <point x="-111.593" y="349.622"/>
+                </edge>
+            </item>
+            <item>
+                <edge deadend="false">
+                    <point x="-23.0898" y="-7.85303"/>
+                    <point x="-172.122" y="-56.3047"/>
+                </edge>
+                <edge deadend="false">
+                    <point x="-23.0898" y="-7.85303"/>
+                    <point x="-172.122" y="-56.3047"/>
+                    <point x="-262.761" y="-83.6113"/>
+                    <point x="-309.848" y="-98.3389"/>
+                    <point x="-405.758" y="-128.339"/>
+                    <point x="-453.274" y="-144.236"/>
+                    <point x="-535.62" y="-171.787"/>
+                </edge>
+                <edge deadend="false">
+                    <point x="-23.0898" y="-7.85303"/>
+                    <point x="-172.122" y="-56.3047"/>
+                    <point x="-262.761" y="-83.6113"/>
+                    <point x="-309.848" y="-98.3389"/>
+                    <point x="-405.758" y="-128.339"/>
+                    <point x="-453.274" y="-144.236"/>
+                    <point x="-535.62" y="-171.787"/>
+                    <point x="-725.299" y="-223.277"/>
+                </edge>
+                <edge deadend="false">
+                    <point x="26.1505" y="-91.2476"/>
+                    <point x="111.593" y="-349.622"/>
+                </edge>
+                <edge deadend="true">
+                    <point x="-31.6953" y="104.585"/>
+                    <point x="-53.2739" y="174.995"/>
+                </edge>
+            </item>
+            <item>
+                <edge deadend="true">
+                    <point x="13.576" y="-39.3633"/>
+                    <point x="26.7449" y="-80.9209"/>
+                </edge>
+                <edge deadend="false">
+                    <point x="217.53" y="65.2305"/>
+                </edge>
+                <edge deadend="false">
+                    <point x="-12.2532" y="37.2988"/>
+                    <point x="-67.7292" y="206.878"/>
+                    <point x="-78.2575" y="238.588"/>
+                    <point x="-85.391" y="273.301"/>
+                    <point x="-90.3173" y="301.035"/>
+                    <point x="-99.9902" y="346.312"/>
+                </edge>
+            </item>
+            <item>
+                <edge deadend="false">
+                    <point x="-9.78165" y="26.4092"/>
+                    <point x="-25.3063" y="60.376"/>
+                    <point x="-39.9204" y="96.0688"/>
+                </edge>
+                <edge deadend="false">
+                    <point x="-23.7842" y="-7.02441"/>
+                    <point x="-184.196" y="-56.5498"/>
+                </edge>
+                <edge deadend="false">
+                    <point x="-23.7842" y="-7.02441"/>
+                    <point x="-184.196" y="-56.5498"/>
+                    <point x="-262.634" y="-83.1665"/>
+                    <point x="-272.62" y="-86.4395"/>
+                    <point x="-303.702" y="-96.6362"/>
+                </edge>
+                <edge deadend="false">
+                    <point x="9.67291" y="-45.2769"/>
+                    <point x="14.5993" y="-73.0112"/>
+                    <point x="21.7327" y="-107.724"/>
+                    <point x="32.261" y="-139.434"/>
+                    <point x="87.737" y="-309.013"/>
+                    <point x="99.9902" y="-346.312"/>
+                </edge>
+            </item>
+            <item>
+                <edge deadend="false">
+                    <point x="14.614" y="-35.6929"/>
+                    <point x="30.1387" y="-69.6597"/>
+                    <point x="39.9204" y="-96.0688"/>
+                </edge>
+                <edge deadend="false">
+                    <point x="-16.1948" y="57.1826"/>
+                    <point x="-28.6714" y="98.436"/>
+                    <point x="-58.7208" y="194.269"/>
+                    <point x="-72.2158" y="246.441"/>
+                    <point x="-85.6116" y="288.347"/>
+                    <point x="-150.419" y="496.173"/>
+                </edge>
+                <edge deadend="false">
+                    <point x="-16.1948" y="57.1826"/>
+                    <point x="-28.6714" y="98.436"/>
+                    <point x="-58.7208" y="194.269"/>
+                    <point x="-72.2158" y="246.441"/>
+                    <point x="-85.6116" y="288.347"/>
+                    <point x="-150.419" y="496.173"/>
+                </edge>
+            </item>
+            <item>
+                <edge deadend="false">
+                    <point x="19.2847" y="4.50732"/>
+                    <point x="183.52" y="54.5552"/>
+                    <point x="267.593" y="79.3682"/>
+                </edge>
+                <edge deadend="false">
+                    <point x="19.2847" y="4.50732"/>
+                    <point x="183.52" y="54.5552"/>
+                    <point x="267.593" y="79.3682"/>
+                    <point x="272.297" y="80.938"/>
+                </edge>
+                <edge deadend="false">
+                    <point x="19.2847" y="4.50732"/>
+                    <point x="183.52" y="54.5552"/>
+                    <point x="267.593" y="79.3682"/>
+                    <point x="272.297" y="80.938"/>
+                    <point x="315.592" y="95.3315"/>
+                </edge>
+                <edge deadend="false">
+                    <point x="19.2847" y="4.50732"/>
+                    <point x="183.52" y="54.5552"/>
+                    <point x="267.593" y="79.3682"/>
+                    <point x="272.297" y="80.938"/>
+                    <point x="315.592" y="95.3315"/>
+                    <point x="324.882" y="98.5044"/>
+                    <point x="407.98" y="122.705"/>
+                </edge>
+                <edge deadend="false">
+                    <point x="19.2847" y="4.50732"/>
+                    <point x="183.52" y="54.5552"/>
+                    <point x="267.593" y="79.3682"/>
+                    <point x="272.297" y="80.938"/>
+                    <point x="315.592" y="95.3315"/>
+                    <point x="324.882" y="98.5044"/>
+                    <point x="407.98" y="122.705"/>
+                    <point x="425.787" y="128.538"/>
+                </edge>
+                <edge deadend="false">
+                    <point x="19.2847" y="4.50732"/>
+                    <point x="183.52" y="54.5552"/>
+                    <point x="267.593" y="79.3682"/>
+                </edge>
+                <edge deadend="false">
+                    <point x="-26.3514" y="100.331"/>
+                    <point x="-96.5912" y="338.11"/>
+                </edge>
+                <edge deadend="false">
+                    <point x="33.4146" y="-100.494"/>
+                    <point x="116.246" y="-348.977"/>
+                </edge>
+            </item>
+            <item>
+                <edge deadend="false">
+                    <point x="-229.677" y="-69.3193"/>
+                </edge>
+                <edge deadend="false">
+                    <point x="-82.8312" y="248.483"/>
+                    <point x="-116.246" y="348.977"/>
+                </edge>
+                <edge deadend="false">
+                    <point x="57.3868" y="-187.719"/>
+                    <point x="71.6323" y="-228.795"/>
+                    <point x="76.8164" y="-287.446"/>
+                    <point x="93.2712" y="-342.925"/>
+                </edge>
+            </item>
+            <item>
+                <edge deadend="false">
+                    <point x="189.679" y="51.4902"/>
+                </edge>
+                <edge deadend="false">
+                    <point x="189.679" y="51.4902"/>
+                    <point x="272.025" y="79.0415"/>
+                    <point x="319.541" y="94.938"/>
+                    <point x="415.451" y="124.938"/>
+                    <point x="462.538" y="139.666"/>
+                    <point x="553.178" y="166.973"/>
+                    <point x="702.209" y="215.424"/>
+                    <point x="725.299" y="223.277"/>
+                </edge>
+                <edge deadend="false">
+                    <point x="25.204" y="-68.813"/>
+                    <point x="38.5918" y="-94.8257"/>
+                    <point x="116.608" y="-346.113"/>
+                </edge>
+                <edge deadend="false">
+                    <point x="-16.4548" y="55.479"/>
+                    <point x="-21.6389" y="114.13"/>
+                    <point x="-35.8843" y="155.207"/>
+                    <point x="-93.2712" y="342.925"/>
+                </edge>
+            </item>
+            <item>
+                <edge deadend="false">
+                    <point x="4.70349" y="1.56982"/>
+                </edge>
+                <edge deadend="false">
+                    <point x="-84.0734" y="-24.813"/>
+                    <point x="-248.309" y="-74.8608"/>
+                    <point x="-267.593" y="-79.3682"/>
+                </edge>
+                <edge deadend="false">
+                    <point x="-84.0734" y="-24.813"/>
+                    <point x="-248.309" y="-74.8608"/>
+                    <point x="-267.593" y="-79.3682"/>
+                </edge>
+            </item>
+            <item>
+                <edge deadend="false">
+                    <point x="-4.70349" y="-1.56982"/>
+                </edge>
+                <edge deadend="false">
+                    <point x="43.2957" y="14.3936"/>
+                </edge>
+                <edge deadend="false">
+                    <point x="-4.70349" y="-1.56982"/>
+                    <point x="-88.7769" y="-26.3828"/>
+                    <point x="-253.012" y="-76.4307"/>
+                    <point x="-272.297" y="-80.938"/>
+                </edge>
+            </item>
+            <item>
+                <edge deadend="false">
+                    <point x="-43.2957" y="-14.3936"/>
+                </edge>
+                <edge deadend="false">
+                    <point x="9.28912" y="3.17285"/>
+                    <point x="92.3879" y="27.3735"/>
+                </edge>
+                <edge deadend="false">
+                    <point x="-43.2957" y="-14.3936"/>
+                    <point x="-47.9991" y="-15.9634"/>
+                    <point x="-132.073" y="-40.7764"/>
+                    <point x="-296.308" y="-90.8242"/>
+                    <point x="-315.592" y="-95.3315"/>
+                </edge>
+            </item>
+            <item>
+                <edge deadend="false">
+                    <point x="17.8069" y="5.83301"/>
+                </edge>
+                <edge deadend="false">
+                    <point x="-83.0988" y="-24.2007"/>
+                    <point x="-92.3879" y="-27.3735"/>
+                </edge>
+                <edge deadend="false">
+                    <point x="-83.0988" y="-24.2007"/>
+                    <point x="-92.3879" y="-27.3735"/>
+                    <point x="-135.684" y="-41.7671"/>
+                    <point x="-140.387" y="-43.3369"/>
+                    <point x="-224.461" y="-68.1499"/>
+                    <point x="-388.696" y="-118.198"/>
+                    <point x="-407.98" y="-122.705"/>
+                </edge>
+            </item>
+            <item>
+                <edge deadend="false">
+                    <point x="160.412" y="49.5254"/>
+                    <point x="184.196" y="56.5498"/>
+                </edge>
+                <edge deadend="false">
+                    <point x="-78.4384" y="-26.6167"/>
+                    <point x="-88.424" y="-29.8896"/>
+                    <point x="-119.506" y="-40.0864"/>
+                </edge>
+                <edge deadend="false">
+                    <point x="-78.4384" y="-26.6167"/>
+                    <point x="-88.424" y="-29.8896"/>
+                    <point x="-119.506" y="-40.0864"/>
+                </edge>
+            </item>
+            <item>
+                <edge deadend="false">
+                    <point x="-31.0718" y="23.0098"/>
+                </edge>
+                <edge deadend="false">
+                    <point x="-12.3087" y="-32.5166"/>
+                </edge>
+                <edge deadend="false">
+                    <point x="229.677" y="69.3193"/>
+                </edge>
+            </item>
+            <item>
+                <edge deadend="false">
+                    <point x="31.0718" y="-23.0098"/>
+                </edge>
+                <edge deadend="false">
+                    <point x="18.7631" y="-55.5264"/>
+                </edge>
+                <edge deadend="false">
+                    <point x="-15.4388" y="-2.00391"/>
+                    <point x="-53.7194" y="-12.145"/>
+                </edge>
+            </item>
+            <item>
+                <edge deadend="false">
+                    <point x="-185.295" y="623.289"/>
+                </edge>
+                <edge deadend="false">
+                    <point x="38.2805" y="10.1411"/>
+                    <point x="53.7194" y="12.145"/>
+                </edge>
+                <edge deadend="false">
+                    <point x="-55.8938" y="-16.0635"/>
+                    <point x="-79.5397" y="-14.5386"/>
+                    <point x="-101.996" y="-23.7666"/>
+                </edge>
+            </item>
+            <item>
+                <edge deadend="false">
+                    <point x="186.837" y="-624.758"/>
+                </edge>
+                <edge deadend="false">
+                    <point x="29.8485" y="11.8892"/>
+                    <point x="40.2832" y="24.0117"/>
+                </edge>
+                <edge deadend="false">
+                    <point x="-67.4113" y="-15.5176"/>
+                    <point x="-85.399" y="-31.125"/>
+                    <point x="-111.455" y="-37.5146"/>
+                </edge>
+            </item>
+            <item>
+                <edge deadend="false">
+                    <point x="12.3087" y="32.5166"/>
+                </edge>
+                <edge deadend="false">
+                    <point x="-18.7631" y="55.5264"/>
+                </edge>
+                <edge deadend="false">
+                    <point x="-10.4347" y="-12.1226"/>
+                    <point x="-40.2832" y="-24.0117"/>
+                </edge>
+            </item>
+            <item>
+                <edge deadend="false">
+                    <point x="-95.9102" y="-30.0005"/>
+                </edge>
+                <edge deadend="false">
+                    <point x="47.0873" y="14.7275"/>
+                    <point x="137.727" y="42.0342"/>
+                </edge>
+                <edge deadend="false">
+                    <point x="47.0873" y="14.7275"/>
+                    <point x="137.727" y="42.0342"/>
+                </edge>
+            </item>
+            <item>
+                <edge deadend="false">
+                    <point x="18.2164" y="-39.6968"/>
+                </edge>
+                <edge deadend="false">
+                    <point x="-7.60828" y="19.2915"/>
+                </edge>
+                <edge deadend="false">
+                    <point x="-13.3501" y="7.02393"/>
+                    <point x="-35.8595" y="-0.54541"/>
+                    <point x="-49.3263" y="-7.1582"/>
+                </edge>
+            </item>
+            <item>
+                <edge deadend="false">
+                    <point x="-4.79004" y="12.3008"/>
+                </edge>
+                <edge deadend="false">
+                    <point x="13.4668" y="6.61279"/>
+                    <point x="35.9762" y="14.1821"/>
+                    <point x="49.3263" y="7.1582"/>
+                </edge>
+                <edge deadend="false">
+                    <point x="0.686523" y="-12.1338"/>
+                    <point x="-75.3267" y="-37.0469"/>
+                    <point x="-81.6794" y="-43.7373"/>
+                    <point x="-83.0288" y="-51.5073"/>
+                    <point x="-33.1866" y="-209.604"/>
+                    <point x="-30.3145" y="-220.847"/>
+                </edge>
+                <edge deadend="false">
+                    <point x="0.686523" y="-12.1338"/>
+                    <point x="-75.3267" y="-37.0469"/>
+                    <point x="-81.6794" y="-43.7373"/>
+                    <point x="-83.0288" y="-51.5073"/>
+                    <point x="-33.1866" y="-209.604"/>
+                    <point x="-30.3145" y="-220.847"/>
+                </edge>
+            </item>
+            <item>
+                <edge deadend="false">
+                    <point x="6.10681" y="1.87012"/>
+                </edge>
+                <edge deadend="false">
+                    <point x="-184.737" y="-56.7842"/>
+                </edge>
+                <edge deadend="false">
+                    <point x="8.99097" y="-31.7261"/>
+                    <point x="23.7686" y="-81.3081"/>
+                </edge>
+            </item>
+            <item>
+                <edge deadend="false">
+                    <point x="-183.547" y="-59.333"/>
+                </edge>
+                <edge deadend="false">
+                    <point x="5.49609" y="1.77002"/>
+                </edge>
+                <edge deadend="false">
+                    <point x="-14.7776" y="49.582"/>
+                    <point x="-23.7686" y="81.3081"/>
+                </edge>
+            </item>
+            <item>
+                <edge deadend="false">
+                    <point x="12.0734" y="16.5977"/>
+                </edge>
+                <edge deadend="false">
+                    <point x="-18.2164" y="39.6968"/>
+                </edge>
+                <edge deadend="false">
+                    <point x="14.0385" y="-45.9194"/>
+                    <point x="36.264" y="-118.611"/>
+                </edge>
+            </item>
+            <item>
+                <edge deadend="false">
+                    <point x="-12.0734" y="-16.5977"/>
+                </edge>
+                <edge deadend="false">
+                    <point x="30.234" y="9.40674"/>
+                </edge>
+                <edge deadend="false">
+                    <point x="-23.9194" y="84.603"/>
+                </edge>
+            </item>
+            <item>
+                <edge deadend="false">
+                    <point x="-30.234" y="-9.40674"/>
+                </edge>
+                <edge deadend="false">
+                    <point x="183.547" y="59.333"/>
+                </edge>
+                <edge deadend="false">
+                    <point x="-14.6172" y="48.1792"/>
+                    <point x="-24.9586" y="83.8569"/>
+                </edge>
+            </item>
+            <item>
+                <edge deadend="false">
+                    <point x="-5.49609" y="-1.77002"/>
+                </edge>
+                <edge deadend="false">
+                    <point x="25.6058" y="8.22656"/>
+                </edge>
+                <edge deadend="false">
+                    <point x="127.208" y="-413.485"/>
+                    <point x="188.811" y="-609.485"/>
+                </edge>
+            </item>
+            <item>
+                <edge deadend="false">
+                    <point x="-25.6058" y="-8.22656"/>
+                </edge>
+                <edge deadend="false">
+                    <point x="-22.7399" y="81.1411"/>
+                </edge>
+                <edge deadend="false">
+                    <point x="26.0559" y="6.38965"/>
+                    <point x="44.0437" y="21.9971"/>
+                    <point x="111.455" y="37.5146"/>
+                </edge>
+            </item>
+            <item>
+                <edge deadend="false">
+                    <point x="4.79004" y="-12.3008"/>
+                </edge>
+                <edge deadend="false">
+                    <point x="16.6709" y="-0.611816"/>
+                    <point x="39.3088" y="5.55518"/>
+                    <point x="46.5081" y="14.1489"/>
+                </edge>
+                <edge deadend="false">
+                    <point x="-83.7507" y="276.351"/>
+                    <point x="-108.1" y="360.475"/>
+                </edge>
+            </item>
+            <item>
+                <edge deadend="false">
+                    <point x="7.60828" y="-19.2915"/>
+                </edge>
+                <edge deadend="false">
+                    <point x="-9.6344" y="35.4888"/>
+                </edge>
+                <edge deadend="false">
+                    <point x="-7.19922" y="-8.59375"/>
+                    <point x="-29.8372" y="-14.7607"/>
+                    <point x="-46.5081" y="-14.1489"/>
+                </edge>
+            </item>
+            <item>
+                <edge deadend="false">
+                    <point x="22.7399" y="-81.1411"/>
+                </edge>
+                <edge deadend="false">
+                    <point x="-26.0238" y="-7.95947"/>
+                </edge>
+                <edge deadend="false">
+                    <point x="22.4559" y="9.22803"/>
+                    <point x="46.1018" y="7.70312"/>
+                    <point x="101.996" y="23.7666"/>
+                </edge>
+            </item>
+            <item>
+                <edge deadend="false">
+                    <point x="184.737" y="56.7842"/>
+                </edge>
+                <edge deadend="false">
+                    <point x="-29.1948" y="-8.66064"/>
+                </edge>
+                <edge deadend="false">
+                    <point x="10.3414" y="-35.6777"/>
+                    <point x="24.9586" y="-83.8569"/>
+                </edge>
+            </item>
+            <item>
+                <edge deadend="false">
+                    <point x="95.9102" y="30.0005"/>
+                </edge>
+                <edge deadend="false">
+                    <point x="95.9102" y="30.0005"/>
+                    <point x="142.998" y="44.728"/>
+                    <point x="233.637" y="72.0347"/>
+                </edge>
+                <edge deadend="false">
+                    <point x="-47.5157" y="-15.8965"/>
+                    <point x="-129.862" y="-43.4478"/>
+                </edge>
+                <edge deadend="false">
+                    <point x="-47.5157" y="-15.8965"/>
+                    <point x="-129.862" y="-43.4478"/>
+                </edge>
+            </item>
+            <item>
+                <edge deadend="false">
+                    <point x="23.9194" y="-84.603"/>
+                </edge>
+                <edge deadend="false">
+                    <point x="29.1948" y="8.66064"/>
+                </edge>
+                <edge deadend="false">
+                    <point x="-23.613" y="-6.72363"/>
+                </edge>
+            </item>
+            <item>
+                <edge deadend="false">
+                    <point x="26.0238" y="7.95947"/>
+                </edge>
+                <edge deadend="false">
+                    <point x="-6.10681" y="-1.87012"/>
+                </edge>
+                <edge deadend="false">
+                    <point x="-47.9543" y="147.632"/>
+                    <point x="-122.69" y="385.577"/>
+                    <point x="-191.865" y="605.478"/>
+                </edge>
+            </item>
+            <item>
+                <edge deadend="false">
+                    <point x="23.613" y="6.72363"/>
+                </edge>
+                <edge deadend="false">
+                    <point x="9.6344" y="-35.4888"/>
+                </edge>
+                <edge deadend="false">
+                    <point x="-16.6963" y="54.8135"/>
+                    <point x="-51.043" y="166.968"/>
+                    <point x="-81.4033" y="267.1"/>
+                    <point x="-99.2037" y="323.361"/>
+                </edge>
+            </item>
+            <item>
+                <edge deadend="false">
+                    <point x="149.032" y="48.4517"/>
+                    <point x="172.122" y="56.3047"/>
+                </edge>
+                <edge deadend="false">
+                    <point x="-90.6393" y="-27.3066"/>
+                    <point x="-137.727" y="-42.0342"/>
+                </edge>
+                <edge deadend="false">
+                    <point x="-90.6393" y="-27.3066"/>
+                    <point x="-137.727" y="-42.0342"/>
+                    <point x="-233.637" y="-72.0347"/>
+                </edge>
+                <edge deadend="false">
+                    <point x="-90.6393" y="-27.3066"/>
+                    <point x="-137.727" y="-42.0342"/>
+                    <point x="-233.637" y="-72.0347"/>
+                    <point x="-281.153" y="-87.9312"/>
+                    <point x="-363.499" y="-115.482"/>
+                </edge>
+                <edge deadend="false">
+                    <point x="-90.6393" y="-27.3066"/>
+                    <point x="-137.727" y="-42.0342"/>
+                </edge>
+            </item>
+            <item>
+                <edge deadend="false">
+                    <point x="-189.679" y="-51.4902"/>
+                </edge>
+                <edge deadend="false">
+                    <point x="82.3461" y="27.5513"/>
+                    <point x="129.862" y="43.4478"/>
+                </edge>
+                <edge deadend="false">
+                    <point x="82.3461" y="27.5513"/>
+                    <point x="129.862" y="43.4478"/>
+                    <point x="225.772" y="73.4482"/>
+                    <point x="272.859" y="88.1758"/>
+                    <point x="363.499" y="115.482"/>
+                </edge>
+                <edge deadend="false">
+                    <point x="82.3461" y="27.5513"/>
+                    <point x="129.862" y="43.4478"/>
+                    <point x="225.772" y="73.4482"/>
+                    <point x="272.859" y="88.1758"/>
+                    <point x="363.499" y="115.482"/>
+                    <point x="512.53" y="163.934"/>
+                    <point x="535.62" y="171.787"/>
+                </edge>
+                <edge deadend="false">
+                    <point x="82.3461" y="27.5513"/>
+                    <point x="129.862" y="43.4478"/>
+                </edge>
+            </item>
+            <item>
+                <edge deadend="false">
+                    <point x="-100.192" y="315.034"/>
+                </edge>
+                <edge deadend="false">
+                    <point x="3.16138" y="-9.41748"/>
+                </edge>
+                <edge deadend="false">
+                    <point x="10.8319" y="0.26709"/>
+                    <point x="42.2556" y="10.0635"/>
+                    <point x="44.9658" y="15.5293"/>
+                </edge>
+            </item>
+            <item>
+                <edge deadend="false">
+                    <point x="-3.16138" y="9.41748"/>
+                </edge>
+                <edge deadend="false">
+                    <point x="24.349" y="-84.124"/>
+                    <point x="108.1" y="-360.475"/>
+                </edge>
+                <edge deadend="false">
+                    <point x="7.59583" y="5.92188"/>
+                    <point x="36.8447" y="14.1152"/>
+                    <point x="45.7697" y="12.5234"/>
+                </edge>
+            </item>
+            <item>
+                <edge deadend="false">
+                    <point x="77.0289" y="-253.998"/>
+                </edge>
+                <edge deadend="false">
+                    <point x="6.30994" y="6.5791"/>
+                    <point x="133.148" y="45.0957"/>
+                    <point x="140.883" y="44.4502"/>
+                </edge>
+                <edge deadend="false">
+                    <point x="-2.87219" y="11.2432"/>
+                    <point x="-52.7144" y="169.339"/>
+                    <point x="-51.365" y="177.109"/>
+                    <point x="-45.0122" y="183.8"/>
+                    <point x="31.001" y="208.713"/>
+                    <point x="30.3145" y="220.847"/>
+                </edge>
+                <edge deadend="false">
+                    <point x="-2.87219" y="11.2432"/>
+                    <point x="-52.7144" y="169.339"/>
+                    <point x="-51.365" y="177.109"/>
+                    <point x="-45.0122" y="183.8"/>
+                    <point x="31.001" y="208.713"/>
+                    <point x="30.3145" y="220.847"/>
+                </edge>
+            </item>
+            <item>
+                <edge deadend="false">
+                    <point x="-77.0289" y="253.998"/>
+                </edge>
+                <edge deadend="false">
+                    <point x="142.403" y="44.7949"/>
+                </edge>
+                <edge deadend="false">
+                    <point x="33.2844" y="-109.794"/>
+                    <point x="55.531" y="-183.187"/>
+                </edge>
+            </item>
+            <item>
+                <edge deadend="false">
+                    <point x="4.0188" y="-15.9297"/>
+                    <point x="6.76208" y="-25.2471"/>
+                </edge>
+                <edge deadend="false">
+                    <point x="-22.2256" y="72.6914"/>
+                    <point x="-36.264" y="118.611"/>
+                </edge>
+                <edge deadend="false">
+                    <point x="4.0188" y="-15.9297"/>
+                    <point x="6.76208" y="-25.2471"/>
+                </edge>
+            </item>
+            <item>
+                <edge deadend="false">
+                    <point x="-142.403" y="-44.7949"/>
+                </edge>
+                <edge deadend="false">
+                    <point x="-20.7677" y="67.7935"/>
+                    <point x="-62.7749" y="205.195"/>
+                    <point x="-78.549" y="253.653"/>
+                </edge>
+                <edge deadend="false">
+                    <point x="10.0837" y="-32.4385"/>
+                    <point x="45.3925" y="-145.951"/>
+                    <point x="61.7877" y="-198.65"/>
+                </edge>
+            </item>
+            <item>
+                <edge deadend="false">
+                    <point x="-3.96521" y="12.4233"/>
+                </edge>
+                <edge deadend="false">
+                    <point x="-8.92493" y="1.5918"/>
+                    <point x="-38.1738" y="-6.60156"/>
+                    <point x="-45.7697" y="-12.5234"/>
+                </edge>
+                <edge deadend="false">
+                    <point x="17.8004" y="-56.2607"/>
+                    <point x="48.1608" y="-156.393"/>
+                    <point x="82.5074" y="-268.547"/>
+                    <point x="99.2037" y="-323.361"/>
+                </edge>
+            </item>
+            <item>
+                <edge deadend="false">
+                    <point x="-7.73535" y="0.645508"/>
+                    <point x="-134.573" y="-37.8711"/>
+                    <point x="-140.883" y="-44.4502"/>
+                </edge>
+                <edge deadend="false">
+                    <point x="-2.74329" y="9.31738"/>
+                    <point x="-6.76208" y="25.2471"/>
+                </edge>
+                <edge deadend="false">
+                    <point x="15.774" y="-48.4575"/>
+                    <point x="57.7812" y="-185.859"/>
+                    <point x="78.549" y="-253.653"/>
+                </edge>
+                <edge deadend="false">
+                    <point x="-2.74329" y="9.31738"/>
+                    <point x="-6.76208" y="25.2471"/>
+                </edge>
+            </item>
+            <item>
+                <edge deadend="false">
+                    <point x="3.96521" y="-12.4233"/>
+                </edge>
+                <edge deadend="false">
+                    <point x="-2.71021" y="-5.46582"/>
+                    <point x="-34.1339" y="-15.2622"/>
+                    <point x="-44.9658" y="-15.5293"/>
+                </edge>
+                <edge deadend="false">
+                    <point x="-20.2228" y="68.3057"/>
+                    <point x="-43.1461" y="142.066"/>
+                    <point x="-65.8982" y="216.427"/>
+                    <point x="-83.5382" y="270.974"/>
+                </edge>
+            </item>
+        </avenue>
+        <street density="83.6795">
+            <item>
+                <edge deadend="true">
+                    <point x="4.00748" y="-18.1895"/>
+                </edge>
+                <edge deadend="true">
+                    <point x="30.7178" y="8.89453"/>
+                    <point x="56.8713" y="16.4639"/>
+                </edge>
+                <edge deadend="false">
+                    <point x="-21.9214" y="-6.95752"/>
+                    <point x="-36.1071" y="-6.95752"/>
+                    <point x="-42.8682" y="9.94092"/>
+                    <point x="-50.3044" y="32.9282"/>
+                    <point x="-59.4336" y="57.9307"/>
+                    <point x="-62.1338" y="64.3535"/>
+                </edge>
+            </item>
+            <item>
+                <edge deadend="false">
+                    <point x="2.70013" y="-6.42285"/>
+                    <point x="11.8293" y="-31.4253"/>
+                    <point x="19.2655" y="-54.4126"/>
+                    <point x="26.0266" y="-71.311"/>
+                    <point x="40.2124" y="-71.311"/>
+                    <point x="62.1338" y="-64.3535"/>
+                </edge>
+                <edge deadend="true">
+                    <point x="-8.11142" y="29.0659"/>
+                    <point x="-11.4867" y="38.1826"/>
+                    <point x="-7.4368" y="45.6191"/>
+                    <point x="5.74176" y="51.3628"/>
+                    <point x="18.9203" y="55.7603"/>
+                </edge>
+                <edge deadend="false">
+                    <point x="-28.7249" y="-10.4751"/>
+                    <point x="-52.0392" y="-16.2192"/>
+                </edge>
+            </item>
+            <item>
+                <edge deadend="true">
+                    <point x="-42.392" y="124.789"/>
+                </edge>
+                <edge deadend="false">
+                    <point x="-35.2384" y="-10.7314"/>
+                    <point x="-64.178" y="-2.66064"/>
+                </edge>
+                <edge deadend="false">
+                    <point x="64.1354" y="14.4609"/>
+                    <point x="126.137" y="27.8633"/>
+                </edge>
+            </item>
+            <item>
+                <edge deadend="false">
+                    <point x="72.9844" y="22.6089"/>
+                </edge>
+                <edge deadend="true">
+                    <point x="-39.4233" y="121.182"/>
+                </edge>
+                <edge deadend="false">
+                    <point x="-62.0018" y="-13.4023"/>
+                    <point x="-126.137" y="-27.8633"/>
+                </edge>
+            </item>
+            <item>
+                <edge deadend="false">
+                    <point x="-72.9844" y="-22.6089"/>
+                </edge>
+                <edge deadend="true">
+                    <point x="-34.5469" y="96.8813"/>
+                </edge>
+                <edge deadend="true">
+                    <point x="13.1588" y="-38.7617"/>
+                </edge>
+            </item>
+            <item>
+                <edge deadend="false">
+                    <point x="-38.2366" y="-39.9976"/>
+                </edge>
+                <edge deadend="true">
+                    <point x="-10.6505" y="12.8794"/>
+                    <point x="-9.50464" y="24.9463"/>
+                    <point x="41.0759" y="40.4644"/>
+                </edge>
+                <edge deadend="false">
+                    <point x="96.3761" y="36.0864"/>
+                    <point x="192.616" y="64.3535"/>
+                </edge>
+            </item>
+            <item>
+                <edge deadend="false">
+                    <point x="6.52582" y="-21.3623"/>
+                </edge>
+                <edge deadend="false">
+                    <point x="38.2705" y="10.9204"/>
+                    <point x="73.1925" y="-108.948"/>
+                    <point x="147.333" y="-84.8145"/>
+                </edge>
+                <edge deadend="false">
+                    <point x="-96.2395" y="-28.2671"/>
+                    <point x="-192.616" y="-64.3535"/>
+                </edge>
+            </item>
+            <item>
+                <edge deadend="false">
+                    <point x="72.4354" y="22.4531"/>
+                    <point x="97.476" y="-56.9287"/>
+                    <point x="151.762" y="-43.8154"/>
+                </edge>
+                <edge deadend="true">
+                    <point x="52.535" y="-164.998"/>
+                    <point x="112.649" y="-147.621"/>
+                </edge>
+                <edge deadend="true">
+                    <point x="-58.213" y="-14.313"/>
+                </edge>
+            </item>
+            <item>
+                <edge deadend="true">
+                    <point x="30.751" y="-95.3228"/>
+                </edge>
+                <edge deadend="true">
+                    <point x="51.0615" y="14.3379"/>
+                    <point x="22.8281" y="114.96"/>
+                </edge>
+                <edge deadend="false">
+                    <point x="-54.2864" y="-13.1133"/>
+                    <point x="-79.3269" y="66.2686"/>
+                    <point x="-151.762" y="43.8154"/>
+                </edge>
+            </item>
+            <item>
+                <edge deadend="true">
+                    <point x="33.4637" y="-114.893"/>
+                </edge>
+                <edge deadend="false">
+                    <point x="51.0319" y="16.564"/>
+                </edge>
+                <edge deadend="true">
+                    <point x="-15.5479" y="48.3237"/>
+                    <point x="-27.0346" y="82.7993"/>
+                </edge>
+            </item>
+            <item>
+                <edge deadend="true">
+                    <point x="-5.19684" y="17.6445"/>
+                </edge>
+                <edge deadend="false">
+                    <point x="-51.0319" y="-16.564"/>
+                </edge>
+                <edge deadend="false">
+                    <point x="23.3143" y="5.74414"/>
+                    <point x="52.0392" y="16.2192"/>
+                </edge>
+            </item>
+            <item>
+                <edge deadend="false">
+                    <point x="-25.7354" y="13.0576"/>
+                </edge>
+                <edge deadend="true">
+                    <point x="31.0381" y="0"/>
+                    <point x="50.0016" y="3.23926"/>
+                    <point x="87.939" y="16.0854"/>
+                    <point x="97.9776" y="24.0781"/>
+                    <point x="108.584" y="34.4531"/>
+                    <point x="116.136" y="54.2349"/>
+                </edge>
+                <edge deadend="false">
+                    <point x="-9.19232" y="-4.80908"/>
+                    <point x="-19.4774" y="-9.17285"/>
+                    <point x="-29.6449" y="-10.3975"/>
+                </edge>
+            </item>
+            <item>
+                <edge deadend="false">
+                    <point x="25.7354" y="-13.0576"/>
+                </edge>
+                <edge deadend="false">
+                    <point x="-32.2644" y="101.924"/>
+                </edge>
+                <edge deadend="false">
+                    <point x="-1.85266" y="-18.813"/>
+                    <point x="-3.90955" y="-23.4551"/>
+                </edge>
+            </item>
+            <item>
+                <edge deadend="false">
+                    <point x="3.65247" y="21.5293"/>
+                </edge>
+                <edge deadend="true">
+                    <point x="-12.6956" y="-6.25635"/>
+                    <point x="-19.7991" y="-3.10596"/>
+                </edge>
+                <edge deadend="true">
+                    <point x="-1.98145" y="-11.7222"/>
+                    <point x="-7.95947" y="-18.5127"/>
+                    <point x="-49.3678" y="-31.9043"/>
+                    <point x="-62.1278" y="-35.7783"/>
+                </edge>
+            </item>
+            <item>
+                <edge deadend="false">
+                    <point x="10.1675" y="1.22461"/>
+                    <point x="20.4526" y="5.58838"/>
+                    <point x="29.6449" y="10.3975"/>
+                </edge>
+                <edge deadend="false">
+                    <point x="-5.40991" y="-12.2227"/>
+                    <point x="-9.43762" y="-26.5942"/>
+                    <point x="-9.43713" y="-39.0396"/>
+                    <point x="-11.2687" y="-49.459"/>
+                </edge>
+                <edge deadend="false">
+                    <point x="2.05688" y="4.64209"/>
+                    <point x="3.90955" y="23.4551"/>
+                </edge>
+            </item>
+            <item>
+                <edge deadend="false">
+                    <point x="-3.65247" y="-21.5293"/>
+                </edge>
+                <edge deadend="true">
+                    <point x="21.9529" y="-3.37305"/>
+                    <point x="75.9715" y="12.7236"/>
+                </edge>
+                <edge deadend="false">
+                    <point x="1.83154" y="10.4194"/>
+                    <point x="1.83105" y="22.8647"/>
+                    <point x="5.85876" y="37.2363"/>
+                    <point x="11.2687" y="49.459"/>
+                </edge>
+            </item>
+            <item>
+                <edge deadend="false">
+                    <point x="32.2644" y="-101.924"/>
+                </edge>
+                <edge deadend="true">
+                    <point x="83.9212" y="26.5605"/>
+                </edge>
+                <edge deadend="true">
+                    <point x="-97.4954" y="-30.8467"/>
+                    <point x="-106.956" y="-34.1528"/>
+                    <point x="-106.377" y="-43.1475"/>
+                    <point x="-82.8127" y="-119.012"/>
+                </edge>
+            </item>
+            <item>
+                <edge deadend="false">
+                    <point x="36.2173" y="-72.4131"/>
+                </edge>
+                <edge deadend="false">
+                    <point x="38.2366" y="39.9976"/>
+                </edge>
+                <edge deadend="false">
+                    <point x="-77.0116" y="-23.5659"/>
+                </edge>
+            </item>
+            <item>
+                <edge deadend="false">
+                    <point x="-36.2173" y="72.4131"/>
+                </edge>
+                <edge deadend="true">
+                    <point x="17.8179" y="-9.77393"/>
+                    <point x="73.8838" y="6.86816"/>
+                    <point x="40.226" y="108.625"/>
+                </edge>
+                <edge deadend="true">
+                    <point x="-8.04407" y="-43.1143"/>
+                    <point x="8.61707" y="-60.9253"/>
+                    <point x="72.4182" y="-41.3887"/>
+                </edge>
+            </item>
+            <item>
+                <edge deadend="false">
+                    <point x="77.0116" y="23.5659"/>
+                </edge>
+                <edge deadend="false">
+                    <point x="0.00170898" y="-30.457"/>
+                </edge>
+                <edge deadend="true">
+                    <point x="-13.8024" y="47.7114"/>
+                    <point x="77.5874" y="77.5894"/>
+                </edge>
+            </item>
+            <item>
+                <edge deadend="false">
+                    <point x="-12.7615" y="15.707"/>
+                </edge>
+                <edge deadend="false">
+                    <point x="1.24463" y="-32.0044"/>
+                </edge>
+                <edge deadend="false">
+                    <point x="28.9396" y="-8.0708"/>
+                    <point x="64.178" y="2.66064"/>
+                </edge>
+            </item>
+            <item>
+                <edge deadend="false">
+                    <point x="12.7615" y="-15.707"/>
+                </edge>
+                <edge deadend="true">
+                    <point x="-22.8789" y="72.2354"/>
+                </edge>
+                <edge deadend="false">
+                    <point x="-9.65417" y="11.8779"/>
+                    <point x="-27.4729" y="29.1211"/>
+                    <point x="-52.1908" y="31.4258"/>
+                    <point x="-97.7682" y="15.8184"/>
+                </edge>
+            </item>
+            <item>
+                <edge deadend="false">
+                    <point x="-26.8378" y="-22.8984"/>
+                </edge>
+                <edge deadend="true">
+                    <point x="-28.5697" y="92.0503"/>
+                </edge>
+                <edge deadend="false">
+                    <point x="45.5774" y="15.6074"/>
+                    <point x="70.2953" y="13.3027"/>
+                    <point x="88.114" y="-3.94043"/>
+                    <point x="97.7682" y="-15.8184"/>
+                </edge>
+            </item>
+            <item>
+                <edge deadend="false">
+                    <point x="26.8378" y="22.8984"/>
+                </edge>
+                <edge deadend="true">
+                    <point x="28.1731" y="-91.3931"/>
+                </edge>
+                <edge deadend="true">
+                    <point x="-20.6927" y="59.1997"/>
+                </edge>
+            </item>
+            <item>
+                <edge deadend="false">
+                    <point x="-74.1406" y="-24.1338"/>
+                    <point x="-109.063" y="95.7349"/>
+                    <point x="-147.333" y="84.8145"/>
+                </edge>
+                <edge deadend="false">
+                    <point x="-20.1233" y="61.5044"/>
+                    <point x="-2.47729" y="67.0591"/>
+                </edge>
+                <edge deadend="false">
+                    <point x="13.2228" y="-45.396"/>
+                    <point x="32.1865" y="-39.0728"/>
+                </edge>
+            </item>
+            <item>
+                <edge deadend="false">
+                    <point x="34.6638" y="-106.132"/>
+                </edge>
+                <edge deadend="false">
+                    <point x="-17.646" y="-5.55469"/>
+                    <point x="2.47729" y="-67.0591"/>
+                </edge>
+                <edge deadend="true">
+                    <point x="20.603" y="6.48975"/>
+                    <point x="-4.42786" y="82.3765"/>
+                </edge>
+            </item>
+            <item>
+                <edge deadend="true">
+                    <point x="32.1848" y="10.9204"/>
+                </edge>
+                <edge deadend="false">
+                    <point x="-34.6638" y="106.132"/>
+                </edge>
+                <edge deadend="false">
+                    <point x="-18.9637" y="-6.32324"/>
+                    <point x="-32.1865" y="39.0728"/>
+                </edge>
+            </item>
+            <item>
+                <edge deadend="false">
+                    <point x="-0.00170898" y="30.457"/>
+                </edge>
+                <edge deadend="true">
+                    <point x="15.5143" y="-6.90186"/>
+                    <point x="33.3348" y="-63.2295"/>
+                </edge>
+                <edge deadend="true">
+                    <point x="-10.348" y="-33.3403"/>
+                    <point x="20.1173" y="-130.467"/>
+                </edge>
+            </item>
+            <item>
+                <edge deadend="false">
+                    <point x="-6.52582" y="21.3623"/>
+                </edge>
+                <edge deadend="true">
+                    <point x="-33.3419" y="-10.5752"/>
+                    <point x="-12.0715" y="-78.9697"/>
+                </edge>
+                <edge deadend="true">
+                    <point x="43.0978" y="-141.042"/>
+                    <point x="-1.72931" y="-154.834"/>
+                </edge>
+            </item>
+            <item>
+                <edge deadend="true">
+                    <point x="57.8182" y="-181.072"/>
+                </edge>
+                <edge deadend="true">
+                    <point x="37.7006" y="31.5479"/>
+                    <point x="51.1562" y="57.207"/>
+                </edge>
+                <edge deadend="false">
+                    <point x="-36.4471" y="-30.5015"/>
+                    <point x="-81.0157" y="-44.728"/>
+                </edge>
+            </item>
+            <item>
+                <edge deadend="false">
+                    <point x="88.0995" y="26.6499"/>
+                </edge>
+                <edge deadend="true">
+                    <point x="-49.8474" y="164.909"/>
+                    <point x="74.6157" y="201.667"/>
+                </edge>
+                <edge deadend="true">
+                    <point x="-37.7896" y="-8.48291"/>
+                    <point x="-54.1517" y="-4.87549"/>
+                    <point x="-63.1" y="2.23779"/>
+                </edge>
+            </item>
+            <item>
+                <edge deadend="false">
+                    <point x="-88.0995" y="-26.6499"/>
+                </edge>
+                <edge deadend="true">
+                    <point x="-33.3453" y="106.655"/>
+                </edge>
+                <edge deadend="true">
+                    <point x="88.5068" y="26.7612"/>
+                    <point x="29.8744" y="215.281"/>
+                </edge>
+            </item>
+            <item>
+                <edge deadend="false">
+                    <point x="73.4204" y="23.4438"/>
+                </edge>
+                <edge deadend="true">
+                    <point x="-13.0404" y="39.396"/>
+                    <point x="107.649" y="76.187"/>
+                </edge>
+                <edge deadend="true">
+                    <point x="-18.7916" y="-6.00049"/>
+                    <point x="32.3632" y="-172.1"/>
+                </edge>
+            </item>
+            <item>
+                <edge deadend="false">
+                    <point x="-73.4204" y="-23.4438"/>
+                </edge>
+                <edge deadend="true">
+                    <point x="33.0887" y="-111.631"/>
+                </edge>
+                <edge deadend="false">
+                    <point x="44.5687" y="14.2266"/>
+                    <point x="81.0157" y="44.728"/>
+                </edge>
+            </item>
+            <item>
+                <edge deadend="true">
+                    <point x="41.4847" y="-130.099"/>
+                </edge>
+                <edge deadend="false">
+                    <point x="-13.692" y="-39.8638"/>
+                    <point x="-28.8414" y="-41.4663"/>
+                </edge>
+                <edge deadend="true">
+                    <point x="-17.7104" y="55.5483"/>
+                    <point x="37.4875" y="73.9941"/>
+                </edge>
+            </item>
+            <item>
+                <edge deadend="false">
+                    <point x="-72.9077" y="-7.70361"/>
+                </edge>
+                <edge deadend="true">
+                    <point x="-37.146" y="115.972"/>
+                </edge>
+                <edge deadend="false">
+                    <point x="15.1494" y="1.60254"/>
+                    <point x="28.8414" y="41.4663"/>
+                </edge>
+            </item>
+            <item>
+                <edge deadend="false">
+                    <point x="72.9077" y="7.70361"/>
+                </edge>
+                <edge deadend="false">
+                    <point x="-64.058" y="-6.75684"/>
+                </edge>
+                <edge deadend="true">
+                    <point x="-6.77141" y="21.3735"/>
+                    <point x="-54.48" y="7.01318"/>
+                </edge>
+            </item>
+            <item>
+                <edge deadend="false">
+                    <point x="64.058" y="6.75684"/>
+                </edge>
+                <edge deadend="true">
+                    <point x="27.3964" y="-85.6606"/>
+                </edge>
+                <edge deadend="true">
+                    <point x="-11.1103" y="-1.18018"/>
+                    <point x="-33.5247" y="68.3613"/>
+                </edge>
+            </item>
+            <item>
+                <edge deadend="true">
+                    <point x="50.9126" y="31.3584"/>
+                </edge>
+                <edge deadend="false">
+                    <point x="-14.2602" y="-8.7832"/>
+                </edge>
+                <edge deadend="true">
+                    <point x="-36.1074" y="112.488"/>
+                </edge>
+            </item>
+            <item>
+                <edge deadend="false">
+                    <point x="14.2602" y="8.7832"/>
+                </edge>
+                <edge deadend="false">
+                    <point x="-24.7173" y="8.62695"/>
+                </edge>
+                <edge deadend="false">
+                    <point x="-11.4959" y="-21.2622"/>
+                    <point x="-28.7347" y="-12.6348"/>
+                </edge>
+            </item>
+            <item>
+                <edge deadend="false">
+                    <point x="24.7173" y="-8.62695"/>
+                </edge>
+                <edge deadend="false">
+                    <point x="-4.01749" y="-21.2617"/>
+                </edge>
+                <edge deadend="false">
+                    <point x="-33.9111" y="101.156"/>
+                    <point x="-71.8171" y="88.7773"/>
+                </edge>
+            </item>
+            <item>
+                <edge deadend="false">
+                    <point x="4.01749" y="21.2617"/>
+                </edge>
+                <edge deadend="false">
+                    <point x="17.2389" y="-8.62744"/>
+                    <point x="28.7347" y="12.6348"/>
+                </edge>
+                <edge deadend="true">
+                    <point x="-8.05685" y="-6.32324"/>
+                    <point x="-94.2611" y="-32.1938"/>
+                </edge>
+            </item>
+            <item>
+                <edge deadend="false">
+                    <point x="-74.7407" y="-24.4121"/>
+                </edge>
+                <edge deadend="false">
+                    <point x="37.9061" y="12.3789"/>
+                    <point x="71.8171" y="-88.7773"/>
+                </edge>
+                <edge deadend="true">
+                    <point x="3.99683" y="-35.9004"/>
+                    <point x="26.4115" y="-105.441"/>
+                </edge>
+            </item>
+            <item>
+                <edge deadend="false">
+                    <point x="74.7407" y="24.4121"/>
+                </edge>
+                <edge deadend="true">
+                    <point x="-18.397" y="57.4741"/>
+                    <point x="-52.8853" y="45.4072"/>
+                    <point x="-18.9734" y="-62.0718"/>
+                </edge>
+                <edge deadend="true">
+                    <point x="22.4149" y="-72.4136"/>
+                    <point x="-20.6872" y="-85.627"/>
+                </edge>
+            </item>
+            <item>
+                <edge deadend="true">
+                    <point x="29.314" y="-90.2358"/>
+                </edge>
+                <edge deadend="true">
+                    <point x="75.2875" y="22.9873"/>
+                    <point x="91.7658" y="-27.5962"/>
+                </edge>
+                <edge deadend="true">
+                    <point x="-33.9107" y="110.351"/>
+                    <point x="13.7884" y="125.29"/>
+                </edge>
+            </item>
+            <item>
+                <edge deadend="false">
+                    <point x="-1.24463" y="32.0044"/>
+                </edge>
+                <edge deadend="true">
+                    <point x="-14.4425" y="-5.62158"/>
+                    <point x="-35.1351" y="57.6079"/>
+                    <point x="-42.0355" y="65.0771"/>
+                    <point x="-52.0959" y="62.2051"/>
+                    <point x="-51.2278" y="55.3037"/>
+                </edge>
+                <edge deadend="true">
+                    <point x="14.5823" y="-4.46387"/>
+                    <point x="76.938" y="12.7793"/>
+                </edge>
+            </item>
+        </street>
+    </feature>
+</features>
