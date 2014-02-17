@@ -31,9 +31,12 @@ struct faceVisitor : public boost::planar_face_traversal_visitor {
 };
 
 void KDERoadGenerator::generateRoadNetwork(RoadGraph &roads, Polygon2D &area, const KDEFeature& kf) {
-	srand(1234567);
+	srand(12345);
 
 	std::list<RoadVertexDesc> seeds;
+
+	// Boulevardを生成
+	generateBoulevard(roads, area);
 
 	while (true) {
 		// Avenueを生成
@@ -46,7 +49,7 @@ void KDERoadGenerator::generateRoadNetwork(RoadGraph &roads, Polygon2D &area, co
 			seeds.pop_front();
 
 			std::cout << "attemptExpansion (avenue): " << i << std::endl;
-			//if (i == 4) break;
+			if (i == 4) break;
 			attemptExpansion(roads, area, desc, RoadEdge::TYPE_AVENUE, kf, seeds);
 		}
 
@@ -54,7 +57,11 @@ void KDERoadGenerator::generateRoadNetwork(RoadGraph &roads, Polygon2D &area, co
 		GraphUtil::clean(roads);
 		GraphUtil::reduce(roads);
 		GraphUtil::clean(roads);
+
+		break;
 	}
+
+	return;
 
 	// Avenueをできる限りつなぐ
 	//connectAvenues(roads, 400.0f);
@@ -69,6 +76,27 @@ void KDERoadGenerator::generateRoadNetwork(RoadGraph &roads, Polygon2D &area, co
 		std::cout << "attemptExpansion (street): " << i << std::endl;
 		//if (i == 3) break;
 		attemptExpansion(roads, area, desc, RoadEdge::TYPE_STREET, kf, seeds);
+	}
+}
+
+/**
+ * Areaの境界上に、Boulevardを生成する。
+ */
+void KDERoadGenerator::generateBoulevard(RoadGraph &roads, Polygon2D &area) {
+	RoadVertexDesc prevDesc;
+
+	for (int i = 0; i < area.size(); ++i) {
+		RoadVertexDesc desc;
+		if (!GraphUtil::getVertex(roads, area[i], 0.1f, desc)) {
+			RoadVertexPtr v = RoadVertexPtr(new RoadVertex(area[i]));
+			desc = GraphUtil::addVertex(roads, v);
+		}
+
+		if (i > 0) {
+			GraphUtil::addEdge(roads, prevDesc, desc, RoadEdge::TYPE_BOULEVARD, 1);
+		}
+
+		prevDesc = desc;
 	}
 }
 
@@ -92,6 +120,7 @@ void KDERoadGenerator::generateAvenueSeeds(RoadGraph &roads, Polygon2D &area, co
 	std::cout << "Num seeds: " << numSeeds << std::endl;
 
 	TopNSearch<QVector2D> tns;
+	/*
 	for (int i = 0; i < 1000; ++i) {
 		QVector2D pt;
 		bool retry = true;
@@ -118,7 +147,22 @@ void KDERoadGenerator::generateAvenueSeeds(RoadGraph &roads, Polygon2D &area, co
 			tns.add(density, pt);
 		}
 	}
+	*/
+	float min_dist = std::numeric_limits<float>::max();
+	int min_index = -1;
+	for (int i = 0; i < gf.items(RoadEdge::TYPE_AVENUE).size(); ++i) {
+		float dist = gf.items(RoadEdge::TYPE_AVENUE)[i].pt.lengthSquared();
+		if (dist < min_dist) {
+			min_dist = dist;
+			min_index = i;
+		}
+	}
 
+	RoadVertexPtr v = RoadVertexPtr(new RoadVertex(gf.items(RoadEdge::TYPE_AVENUE)[min_index].pt));
+	RoadVertexDesc desc = GraphUtil::addVertex(roads, v);
+	seeds.push_back(desc);
+
+	/*
 	if (tns.size() > 0) {
 		QList<QVector2D> result = tns.topN(1, TopNSearch<QVector2D>::ORDER_ASC);
 		
@@ -127,6 +171,7 @@ void KDERoadGenerator::generateAvenueSeeds(RoadGraph &roads, Polygon2D &area, co
 		RoadVertexDesc desc = GraphUtil::addVertex(roads, v);
 		seeds.push_back(desc);
 	}
+	*/
 }
 
 /**
@@ -205,7 +250,7 @@ void KDERoadGenerator::generateStreetSeeds(RoadGraph &roads, const KDEFeature& k
 		if (!faces[i]->contains(center)) continue;
 
 		RoadVertexPtr v = RoadVertexPtr(new RoadVertex(center));
-		v->seed = true;
+		//v->seed = true;
 		RoadVertexDesc desc = GraphUtil::addVertex(roads, v);
 
 		seeds.push_back(desc);
@@ -213,11 +258,14 @@ void KDERoadGenerator::generateStreetSeeds(RoadGraph &roads, const KDEFeature& k
 }
 
 void KDERoadGenerator::attemptExpansion(RoadGraph &roads, Polygon2D &area, RoadVertexDesc &srcDesc, int roadType, const KDEFeature& kf, std::list<RoadVertexDesc> &seeds) {
+	QVector2D center = area.centroid();
+
 	KDEFeatureItem item;
 
 	if (GraphUtil::getNumEdges(roads, srcDesc) == 0) {
-		int id = Util::uniform_rand(0, kf.items(roadType).size());
-		item = kf.items(roadType)[id];
+		item = getItem(kf, roadType, roads.graph[srcDesc]->pt - center);
+		//int id = Util::uniform_rand(0, kf.items(roadType).size());
+		//item = kf.items(roadType)[id];
 	} else {
 		RoadOutEdgeIter ei, eend;
 		boost::tie(ei, eend) = out_edges(srcDesc, roads.graph);
@@ -226,7 +274,7 @@ void KDERoadGenerator::attemptExpansion(RoadGraph &roads, Polygon2D &area, RoadV
 		if ((polyline[0] - roads.graph[srcDesc]->pt).lengthSquared() > (polyline[0] - roads.graph[tgt]->pt).lengthSquared()) {
 			std::reverse(polyline.begin(), polyline.end());
 		}
-		item = getItem(kf, roadType, polyline);
+		item = getItem(kf, roadType, roads.graph[srcDesc]->pt - center, polyline);
 	}
 	
 	for (int i = 0; i < item.edges.size(); ++i) {
@@ -239,6 +287,7 @@ void KDERoadGenerator::attemptExpansion(RoadGraph &roads, Polygon2D &area, RoadV
  */
 bool KDERoadGenerator::growRoadSegment(RoadGraph &roads, Polygon2D &area, RoadVertexDesc &srcDesc, int roadType, const KDEFeature& kf, const Polyline2D &edge, std::list<RoadVertexDesc> &seeds) {
 	RoadVertexDesc tgtDesc;
+	RoadVertexDesc snapDesc;
 
 	bool snapped = false;
 	bool intersected = false;
@@ -264,30 +313,55 @@ bool KDERoadGenerator::growRoadSegment(RoadGraph &roads, Polygon2D &area, RoadVe
 		// Densityをチェック
 		if (roadType == RoadEdge::TYPE_STREET) {
 			float density = GraphUtil::getNumVertices(roads, pt, 50);
-			if (density > (kf.density(roadType) + kf.density(RoadEdge::TYPE_AVENUE)) * 50.0f * 50.0f * M_PI) return false;
+			if (density >= (kf.density(roadType) + kf.density(RoadEdge::TYPE_AVENUE)) * 50.0f * 50.0f * M_PI) return false;
 		} else {
-			float density = GraphUtil::getNumVertices(roads, pt, 400);
-			if (density > kf.density(roadType) * 400.0f * 400.0f * M_PI) return false;
+			//float density = GraphUtil::getNumVertices(roads, pt, 400);
+			//if (density >= kf.density(roadType) * 400.0f * 400.0f * M_PI) return false;
 		}
 
 		float threshold;
 		if (roadType == RoadEdge::TYPE_STREET || j < edge.size() - 1) {
-			threshold = std::max(0.25f * (float)edge[j].length(), 10.0f);
+			//threshold = std::max(0.25f * (float)edge[j].length(), 10.0f);
+			threshold = 10.0f;
 		} else {
-			threshold = (std::max)(0.25f * (float)edge[j].length(), 40.0f);
+			//threshold = (std::max)(0.25f * (float)edge[j].length(), 40.0f);
+			threshold = 40.0f;
 		}
 
 		// 近くに頂点があるか？
 		RoadVertexDesc desc;
 		RoadEdgeDesc e_desc;
+
+		/*
+		QVector2D closestPt;
+
+		float min_dist_v = getNearestVertex(roads, pt, srcDesc, desc);
+		float min_dist_e = getNearestEdge(roads, pt, srcDesc, e_desc, closestPt);
+		if (min_dist_v < threshold) {
+			snapped = true;
+			snapDesc = desc;
+			intersected = false;
+		} else if (min_dist_e < (float)edge[j].length() * 0.25f) {
+			snapped = true;
+			snapDesc = GraphUtil::splitEdge(roads, e_desc, closestPt);
+			intersected = false;
+		} else {
+			if (!area.contains(pt)) {
+				// エリア外周との交点を求める
+				area.intersects(roads.graph[srcDesc]->pt, pt, pt);
+				outside = true;
+			}
+		}
+		*/
+		
 		if (canSnap(roads, pt, threshold, srcDesc, desc)) {
-			tgtDesc = desc;
-			pt = roads.graph[tgtDesc]->pt;
+			snapDesc = desc;
+			//pt = roads.graph[tgtDesc]->pt;
 			snapped = true;
 			intersected = false;
 		} else if (GraphUtil::getEdge(roads, pt, srcDesc, threshold, e_desc)) {
-			tgtDesc = GraphUtil::splitEdge(roads, e_desc, pt);
-			pt = roads.graph[tgtDesc]->pt;
+			snapDesc = GraphUtil::splitEdge(roads, e_desc, pt);
+			//pt = roads.graph[tgtDesc]->pt;
 			snapped = true;
 			intersected = false;
 		} else {
@@ -308,7 +382,7 @@ bool KDERoadGenerator::growRoadSegment(RoadGraph &roads, Polygon2D &area, RoadVe
 		if (snapped || intersected || outside) break;
 	}
 
-	if (!snapped && !intersected) {
+	if (!intersected) {
 		// 頂点を追加
 		RoadVertexPtr v = RoadVertexPtr(new RoadVertex(pt));
 		tgtDesc = GraphUtil::addVertex(roads, v);
@@ -322,6 +396,11 @@ bool KDERoadGenerator::growRoadSegment(RoadGraph &roads, Polygon2D &area, RoadVe
 	if (!GraphUtil::hasEdge(roads, srcDesc, tgtDesc)) {
 		RoadEdgeDesc e = GraphUtil::addEdge(roads, srcDesc, tgtDesc, roadType, 1);
 		roads.graph[e]->polyLine = polyline;
+	}
+
+	if (snapped) {
+		//GraphUtil::addEdge(roads, srcDesc, snapDesc, roadType, 1);
+		GraphUtil::snapVertex(roads, tgtDesc, snapDesc);
 	}
 
 	// シードに追加
@@ -366,32 +445,73 @@ bool KDERoadGenerator::intersects(RoadGraph &roads, const QVector2D& p0, const Q
 
 /**
  * 与えられたエッジの方向、長さを含むデータを検索し、近いものを返却する。
+ *
+ * @param kf					特徴量
+ * @param roadType				道路タイプ
+ * @param offsetPosOfVertex		与えられた頂点の、このエリアの中心からのオフセット位置
+ * @param edge					与えられた頂点に既に登録済みのエッジのpolyline（頂点から出る方向に、並べ替え済み）
  */
-KDEFeatureItem KDERoadGenerator::getItem(const KDEFeature& kf, int roadType, const Polyline2D &edge) {
-	TopNSearch<int> tns;
+KDEFeatureItem KDERoadGenerator::getItem(const KDEFeature& kf, int roadType, const QVector2D &offsetPosOfVertex, const Polyline2D &existingEdge) {
+	float fitting_weight = 1.0f;
+	float distribution_weight = 1.0f;
 
+	float min_diff = std::numeric_limits<float>::max();
+	int min_index = -1;
 	for (int i = 0; i < kf.items(roadType).size(); ++i) {
-		float dist = kf.items(roadType)[i].getMinDistance(edge);
-		tns.add(dist, i);
-	}
-	QList<int> topn = tns.topN(1, TopNSearch<int>::ORDER_DESC);
-	int id = Util::uniform_rand(0, topn.size());
+		// エッジのフィッティング度を計算
+		float fitting_diff = kf.items(roadType)[i].getMinDistance(existingEdge);
 
-	KDEFeatureItem item = kf.items(roadType)[id];
+		// 位置のフィッティング度を計算
+		float distributoin_diff = (kf.items(roadType)[i].pt - offsetPosOfVertex).length();
+
+		// フィッティングスコアを計算
+		float diff = fitting_diff * fitting_weight + distributoin_diff * distribution_weight;
+		if (diff < min_diff) {
+			min_diff = diff;
+			min_index = i;
+		}
+	}
+
+	KDEFeatureItem item = kf.items(roadType)[min_index];
 
 	// 与えられたエッジの方向に近いエッジを削除する
 	float min_angle = std::numeric_limits<float>::max();
 	int min_edge_index = -1;
 	for (int i = 0; i < item.edges.size(); ++i) {
-		float angle = Util::diffAngle(item.edges[i][0], edge[1] - edge[0]);
+		float angle = Util::diffAngle(item.edges[i][0], existingEdge[1] - existingEdge[0]);
 		if (angle < min_angle) {
 			min_angle = angle;
 			min_edge_index = i;
 		}
 	}
-	if (min_angle < 0.5f) {
+	if (min_angle < 0.6f) {
 		item.edges.erase(item.edges.begin() + min_edge_index);
 	}
+
+	return item;
+}
+
+/**
+ * 与えられたエッジの方向、長さを含むデータを検索し、近いものを返却する。
+ *
+ * @param kf					特徴量
+ * @param roadType				道路タイプ
+ * @param offsetPosOfVertex		与えられた頂点の、このエリアの中心からのオフセット位置
+ */
+KDEFeatureItem KDERoadGenerator::getItem(const KDEFeature& kf, int roadType, const QVector2D &offsetPosOfVertex) {
+	float min_diff = std::numeric_limits<float>::max();
+	int min_index = -1;
+	for (int i = 0; i < kf.items(roadType).size(); ++i) {
+		// 位置のフィッティング度を計算
+		float diff = (kf.items(roadType)[i].pt - offsetPosOfVertex).length();
+
+		if (diff < min_diff) {
+			min_diff = diff;
+			min_index = i;
+		}
+	}
+
+	KDEFeatureItem item = kf.items(roadType)[min_index];
 
 	return item;
 }
@@ -422,6 +542,63 @@ bool KDERoadGenerator::canSnap(RoadGraph& roads, const QVector2D& pos, float thr
 
 	if (min_dist <= threshold * threshold) return true;
 	else return false;
+}
+
+float KDERoadGenerator::getNearestVertex(RoadGraph& roads, const QVector2D& pos, RoadVertexDesc srcDesc, RoadVertexDesc& snapDesc) {
+	float min_dist = std::numeric_limits<float>::max();
+
+	RoadEdgeIter ei, eend;
+	for (boost::tie(ei, eend) = boost::edges(roads.graph); ei != eend; ++ei) {
+		if (!roads.graph[*ei]->valid) continue;
+
+		RoadVertexDesc src = boost::source(*ei, roads.graph);
+		RoadVertexDesc tgt = boost::target(*ei, roads.graph);
+
+		if (src == srcDesc || tgt == srcDesc) continue;
+
+		float dist1 = (roads.graph[src]->pt - pos).lengthSquared();
+		float dist2 = (roads.graph[tgt]->pt - pos).lengthSquared();
+		if (dist1 < min_dist) {
+			min_dist = dist1;
+			snapDesc = src;
+		}
+		if (dist2 < min_dist) {
+			min_dist = dist2;
+			snapDesc = tgt;
+		}
+	}
+
+	return min_dist;
+}
+
+float KDERoadGenerator::getNearestEdge(RoadGraph& roads, const QVector2D& pt, RoadVertexDesc srcDesc, RoadEdgeDesc& snapEdge, QVector2D &closestPt) {
+	float min_dist = std::numeric_limits<float>::max();
+	RoadEdgeDesc min_e;
+
+	RoadEdgeIter ei, eend;
+	for (boost::tie(ei, eend) = boost::edges(roads.graph); ei != eend; ++ei) {
+		if (!roads.graph[*ei]->valid) continue;
+
+		RoadVertexDesc src = boost::source(*ei, roads.graph);
+		RoadVertexDesc tgt = boost::target(*ei, roads.graph);
+
+		if (!roads.graph[src]->valid) continue;
+		if (!roads.graph[tgt]->valid) continue;
+
+		if (src == srcDesc || tgt == srcDesc) continue;
+
+		QVector2D pt2;
+		for (int i = 0; i < roads.graph[*ei]->polyLine.size() - 1; i++) {
+			float dist = Util::pointSegmentDistanceXY(roads.graph[*ei]->polyLine[i], roads.graph[*ei]->polyLine[i + 1], pt, pt2);
+			if (dist < min_dist) {
+				min_dist = dist;
+				snapEdge = *ei;
+				closestPt = pt2;
+			}
+		}
+	}
+
+	return min_dist;
 }
 
 /**
@@ -481,13 +658,13 @@ void KDERoadGenerator::connectAvenues(RoadGraph &roads, float threshold) {
 		}
 
 		if (min_dist_v < threshold2) {
-			GraphUtil::snapVertex(roads, deadendVertices[i], min_v_desc);
+			//GraphUtil::snapVertex(roads, deadendVertices[i], min_v_desc);
+			GraphUtil::addEdge(roads, deadendVertices[i], min_v_desc, RoadEdge::TYPE_AVENUE, 1);
 		} else {
-			// とりあえず、どっちかの頂点にスナップさせとく
-			RoadVertexDesc src = boost::source(min_e_desc, roads.graph);
-			RoadVertexDesc tgt = boost::target(min_e_desc, roads.graph);
+			RoadVertexDesc desc = GraphUtil::splitEdge(roads, min_e_desc, roads.graph[deadendVertices[i]]->pt);
 
-			//GraphUtil::snapVertex(roads, deadendVertices[i], src);
+			//GraphUtil::snapVertex(roads, deadendVertices[i], desc);
+			GraphUtil::addEdge(roads, deadendVertices[i], desc, RoadEdge::TYPE_AVENUE, 1);
 		}
 	}
 }
