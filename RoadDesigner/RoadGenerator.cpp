@@ -13,7 +13,7 @@
  * つまり、複数のPlaceTypeには対応していない。
  * 将来的に、複数のPlaceTypeに対応させたい。
  */
-void RoadGenerator::generateRoadNetwork(RoadArea& roadArea, const RoadFeature& rf) {
+void RoadGenerator::generateRoadNetwork(RoadArea& roadArea, const RoadFeature& rf, int numIterations, bool isGenerateLocalStreets) {
 	//roadArea.roads.clear();
 
 	if (rf.features.size() == 0) return;
@@ -31,7 +31,7 @@ void RoadGenerator::generateRoadNetwork(RoadArea& roadArea, const RoadFeature& r
 		rg2.generateRoadNetwork(roadArea.roads, roadArea.area, dynamic_cast<RadialFeature&>(*rf.features[0]));
 		break;
 	case AbstractFeature::TYPE_KDE:
-		rg3.generateRoadNetwork(roadArea.roads, roadArea.area, dynamic_cast<KDEFeature&>(*rf.features[0]));
+		rg3.generateRoadNetwork(roadArea.roads, roadArea.area, dynamic_cast<KDEFeature&>(*rf.features[0]), numIterations, isGenerateLocalStreets);
 		break;
 	case AbstractFeature::TYPE_GENERIC:
 		rg4.generateRoadNetwork(roadArea.roads, roadArea.area, dynamic_cast<GenericFeature&>(*rf.features[0]));

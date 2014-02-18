@@ -158,6 +158,12 @@
     <ClCompile Include="..\..\mylib\common\PolygonAreaBuilder.cpp">
       <Filter>mylib\common</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\mylib\common\Polyline2D.cpp">
+      <Filter>mylib\common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\mylib\road\feature\KDEFeatureItemEdge.cpp">
+      <Filter>mylib\road\feature</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="MainWindow.h">
@@ -266,6 +272,12 @@
     </ClInclude>
     <ClInclude Include="..\..\mylib\common\PolygonAreaBuilder.h">
       <Filter>mylib\common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\mylib\common\Polyline2D.h">
+      <Filter>mylib\common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\mylib\road\feature\KDEFeatureItemEdge.h">
+      <Filter>mylib\road\feature</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

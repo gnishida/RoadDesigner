@@ -131,6 +131,7 @@
     <ClCompile Include="..\..\mylib\common\GraphUtil.cpp" />
     <ClCompile Include="..\..\mylib\common\Polygon2D.cpp" />
     <ClCompile Include="..\..\mylib\common\PolygonAreaBuilder.cpp" />
+    <ClCompile Include="..\..\mylib\common\Polyline2D.cpp" />
     <ClCompile Include="..\..\mylib\common\Renderable.cpp" />
     <ClCompile Include="..\..\mylib\common\RoadEdge.cpp" />
     <ClCompile Include="..\..\mylib\common\RoadGraph.cpp" />
@@ -143,6 +144,7 @@
     <ClCompile Include="..\..\mylib\road\feature\GridFeature.cpp" />
     <ClCompile Include="..\..\mylib\road\feature\KDEFeature.cpp" />
     <ClCompile Include="..\..\mylib\road\feature\KDEFeatureItem.cpp" />
+    <ClCompile Include="..\..\mylib\road\feature\KDEFeatureItemEdge.cpp" />
     <ClCompile Include="..\..\mylib\road\feature\RadialFeature.cpp" />
     <ClCompile Include="..\..\mylib\road\feature\RoadFeature.cpp" />
     <ClCompile Include="Camera.cpp" />
@@ -231,6 +233,7 @@
     <ClInclude Include="..\..\mylib\common\GraphUtil.h" />
     <ClInclude Include="..\..\mylib\common\Polygon2D.h" />
     <ClInclude Include="..\..\mylib\common\PolygonAreaBuilder.h" />
+    <ClInclude Include="..\..\mylib\common\Polyline2D.h" />
     <ClInclude Include="..\..\mylib\common\Renderable.h" />
     <ClInclude Include="..\..\mylib\common\RoadEdge.h" />
     <ClInclude Include="..\..\mylib\common\RoadGraph.h" />
@@ -243,6 +246,7 @@
     <ClInclude Include="..\..\mylib\road\feature\GridFeature.h" />
     <ClInclude Include="..\..\mylib\road\feature\KDEFeature.h" />
     <ClInclude Include="..\..\mylib\road\feature\KDEFeatureItem.h" />
+    <ClInclude Include="..\..\mylib\road\feature\KDEFeatureItemEdge.h" />
     <ClInclude Include="..\..\mylib\road\feature\RadialFeature.h" />
     <ClInclude Include="..\..\mylib\road\feature\RoadFeature.h" />
     <ClInclude Include="Camera.h" />

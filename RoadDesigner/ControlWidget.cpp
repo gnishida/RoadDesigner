@@ -15,8 +15,11 @@ ControlWidget::ControlWidget(MainWindow* mainWin) : QDockWidget("Control Widget"
 	ui.checkBoxRoadTypeAvenue->setChecked(true);
 	ui.checkBoxRoadTypeLocalStreet->setChecked(true);
 	ui.radioButtonGridPattern1->setChecked(true);
+	ui.lineEditIteration->setText("0");
+	ui.checkBoxLocalStreets->setChecked(false);
 
 	// register the event handlers
+	connect(ui.pushButtonClear, SIGNAL(clicked()), this, SLOT(clear()));
 	connect(ui.checkBoxRoadTypeLocalStreet, SIGNAL(stateChanged(int)), this, SLOT(showLocalStreet(int)));
 	connect(ui.pushButtonGenerateGrid, SIGNAL(clicked()), this, SLOT(generateGrid()));
 	connect(ui.pushButtonGenerateRadial, SIGNAL(clicked()), this, SLOT(generateRadial()));
@@ -28,6 +31,12 @@ ControlWidget::ControlWidget(MainWindow* mainWin) : QDockWidget("Control Widget"
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////
 // Event handlers
+
+void ControlWidget::clear() {
+	mainWin->glWidget->areas[mainWin->glWidget->selectedArea].roads.clear();
+
+	mainWin->glWidget->updateGL();
+}
 
 void ControlWidget::showLocalStreet(int flag) {
 	//mainWin->glWidget->roads.showLocalStreets = ui.checkBoxRoadTypeLocalStreet->isChecked();
@@ -78,11 +87,14 @@ void ControlWidget::generateRadial() {
 void ControlWidget::generateKDE() {
 	if (mainWin->glWidget->selectedArea == -1) return;
 
+	int iteration = ui.lineEditIteration->text().toInt();
+	bool localStreets = ui.checkBoxLocalStreets->isChecked();
+
 	RoadFeature rf;
 	rf.load("kde_feature.xml");
 
 	RoadGenerator rg;
-	rg.generateRoadNetwork(mainWin->glWidget->areas[mainWin->glWidget->selectedArea], rf);
+	rg.generateRoadNetwork(mainWin->glWidget->areas[mainWin->glWidget->selectedArea], rf, iteration, localStreets);
 
 	mainWin->glWidget->updateGL();
 }

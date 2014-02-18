@@ -22,6 +22,7 @@ public:
 	void setRoadEdge(RoadEdgePtr selectedEdge);
 
 public slots:
+	void clear();
 	void showLocalStreet(int flag);
 	void generateGrid();
 	void generateRadial();
