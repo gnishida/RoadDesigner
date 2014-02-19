@@ -24,7 +24,10 @@ private:
 	KDEFeatureItem getItem(const KDEFeature& kf, int roadType, const QVector2D &pt, const Polyline2D &edge);
 	KDEFeatureItem getItem(const KDEFeature& kf, int roadType, const QVector2D &pt);
 
-	bool canSnap(RoadGraph& roads, const QVector2D& pos, float threshold, RoadVertexDesc srcDesc, RoadVertexDesc& snapDesc);
+	bool canSnapToVertex(RoadGraph& roads, const QVector2D& pos, float threshold, RoadVertexDesc srcDesc, RoadVertexDesc& snapDesc);
+	bool canSnapToEdge(RoadGraph& roads, const QVector2D& pos, float threshold, RoadVertexDesc srcDesc, RoadEdgeDesc& snapEdge, QVector2D &closestPt);
+
+
 	float getNearestVertex(RoadGraph& roads, const QVector2D& pos, RoadVertexDesc srcDesc, RoadVertexDesc& snapDesc);
 	float getNearestEdge(RoadGraph& roads, const QVector2D& pt, RoadVertexDesc srcDesc, RoadEdgeDesc& snapEdge, QVector2D &closestPt);
 	void connectAvenues(RoadGraph &roads, float threshold);

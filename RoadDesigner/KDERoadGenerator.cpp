@@ -332,51 +332,27 @@ bool KDERoadGenerator::growRoadSegment(RoadGraph &roads, Polygon2D &area, RoadVe
 		float threshold;
 		if (roadType == RoadEdge::TYPE_STREET || j < edge.edge.size() - 1) {
 			//threshold = std::max(0.25f * (float)edge[j].length(), 10.0f);
-			threshold = 10.0f;
+			threshold = std::min(0.25f * (float)edge.edge[j].length(), 10.0f);
 		} else {
 			//threshold = (std::max)(0.25f * (float)edge[j].length(), 40.0f);
-			threshold = 40.0f;
+			threshold = std::min(0.25f * (float)edge.edge[j].length(), 40.0f);
 		}
 
 		// 近くに頂点があるか？
 		RoadVertexDesc desc;
 		RoadEdgeDesc e_desc;
-
-		/*
-		QVector2D closestPt;
-
-		float min_dist_v = getNearestVertex(roads, pt, srcDesc, desc);
-		float min_dist_e = getNearestEdge(roads, pt, srcDesc, e_desc, closestPt);
-		if (min_dist_v < threshold) {
-			snapped = true;
+		QVector2D closestPt;		
+		if (canSnapToVertex(roads, pt, threshold, srcDesc, desc)) {
 			snapDesc = desc;
-			intersected = false;
-		} else if (min_dist_e < (float)edge[j].length() * 0.25f) {
-			snapped = true;
-			snapDesc = GraphUtil::splitEdge(roads, e_desc, closestPt);
-			intersected = false;
-		} else {
-			if (!area.contains(pt)) {
-				// エリア外周との交点を求める
-				area.intersects(roads.graph[srcDesc]->pt, pt, pt);
-				outside = true;
-			}
-		}
-		*/
-		
-		if (canSnap(roads, pt, threshold, srcDesc, desc)) {
-			snapDesc = desc;
-			//pt = roads.graph[tgtDesc]->pt;
 			snapped = true;
 			intersected = false;
-		} else if (GraphUtil::getEdge(roads, pt, srcDesc, threshold, e_desc)) {
+		} else if (canSnapToEdge(roads, pt, threshold, srcDesc, e_desc, closestPt)) {
 			// 実験。既存のエッジを分割させないよう、キャンセルさせてみる
 			if (roads.graph[e_desc]->type == roadType) {
 				return false;
 			}
 
 			snapDesc = GraphUtil::splitEdge(roads, e_desc, pt);
-			//pt = roads.graph[tgtDesc]->pt;
 			snapped = true;
 			intersected = false;
 		} else {
@@ -541,7 +517,17 @@ KDEFeatureItem KDERoadGenerator::getItem(const KDEFeature& kf, int roadType, con
 	return item;
 }
 
-bool KDERoadGenerator::canSnap(RoadGraph& roads, const QVector2D& pos, float threshold, RoadVertexDesc srcDesc, RoadVertexDesc& snapDesc) {
+/**
+ * 近くの頂点にsnapすべきか、チェックする。
+ * srcDescから伸ばしてきたエッジの先端posに近い頂点を探し、エッジの延長方向とのなす角度が90度以下で、距離が閾値以下のものがあるか探す。
+ * 
+ * @param pos				エッジ先端
+ * @param threshold			距離の閾値
+ * @param srcDesc			この頂点からエッジを延ばしている
+ * @param snapDesc			最も近い頂点
+ * @return					もしsnapすべき頂点があれば、trueを返却する
+ */
+bool KDERoadGenerator::canSnapToVertex(RoadGraph& roads, const QVector2D& pos, float threshold, RoadVertexDesc srcDesc, RoadVertexDesc& snapDesc) {
 	float min_dist = std::numeric_limits<float>::max();
 
 	RoadEdgeIter ei, eend;
@@ -553,19 +539,57 @@ bool KDERoadGenerator::canSnap(RoadGraph& roads, const QVector2D& pos, float thr
 
 		if (src == srcDesc || tgt == srcDesc) continue;
 
-		float dist1 = (roads.graph[src]->pt - pos).lengthSquared();
-		float dist2 = (roads.graph[tgt]->pt - pos).lengthSquared();
-		if (dist1 < min_dist) {
-			min_dist = dist1;
-			snapDesc = src;
+		if (QVector2D::dotProduct(roads.graph[src]->pt - roads.graph[srcDesc]->pt, pos - roads.graph[srcDesc]->pt) > 0) {
+			float dist1 = (roads.graph[src]->pt - pos).lengthSquared();
+			if (dist1 < min_dist) {
+				min_dist = dist1;
+				snapDesc = src;
+			}
 		}
-		if (dist2 < min_dist) {
-			min_dist = dist2;
-			snapDesc = tgt;
+
+		if (QVector2D::dotProduct(roads.graph[tgt]->pt - roads.graph[srcDesc]->pt, pos - roads.graph[srcDesc]->pt) > 0) {
+			float dist2 = (roads.graph[tgt]->pt - pos).lengthSquared();
+			if (dist2 < min_dist) {
+				min_dist = dist2;
+				snapDesc = tgt;
+			}
 		}
 	}
 
 	if (min_dist <= threshold * threshold) return true;
+	else return false;
+}
+
+/**
+ * 近くのエッジにsnapすべきか、チェックする。
+ * srcDescから伸ばしてきたエッジの先端posに近いエッジを探し、エッジの延長方向とのなす角度が90度以下で、距離が閾値以下のものがあるか探す。
+ * 
+ * @param pos				エッジ先端
+ * @param threshold			距離の閾値
+ * @param srcDesc			この頂点からエッジを延ばしている
+ * @param snapDesc			最も近い頂点
+ * @return					もしsnapすべき頂点があれば、trueを返却する
+ */
+bool KDERoadGenerator::canSnapToEdge(RoadGraph& roads, const QVector2D& pos, float threshold, RoadVertexDesc srcDesc, RoadEdgeDesc& snapEdge, QVector2D &closestPt) {
+	float min_dist = std::numeric_limits<float>::max();
+
+	RoadEdgeIter ei, eend;
+	for (boost::tie(ei, eend) = boost::edges(roads.graph); ei != eend; ++ei) {
+		if (!roads.graph[*ei]->valid) continue;
+
+		QVector2D closePt;
+		float dist = GraphUtil::distance(roads, pos, *ei, closePt);
+
+		if (QVector2D::dotProduct(closePt - roads.graph[srcDesc]->pt, pos - roads.graph[srcDesc]->pt) > 0) {
+			if (dist < min_dist) {
+				min_dist = dist;
+				snapEdge = *ei;
+				closestPt = closePt;
+			}
+		}
+	}		
+
+	if (min_dist < threshold) return true;
 	else return false;
 }
 
@@ -665,6 +689,7 @@ void KDERoadGenerator::connectAvenues(RoadGraph &roads, float threshold) {
 		}
 
 		// 最も近いエッジを探す
+		QVector2D closestPt;
 		float min_dist_e = std::numeric_limits<float>::max();
 		RoadEdgeDesc min_e_desc;
 		RoadEdgeIter ei, eend;
@@ -675,10 +700,12 @@ void KDERoadGenerator::connectAvenues(RoadGraph &roads, float threshold) {
 			RoadVertexDesc tgt = boost::target(*ei, roads.graph);
 			if (src == deadendVertices[i] || tgt == deadendVertices[i]) continue;
 
-			float dist = GraphUtil::distance(roads, roads.graph[deadendVertices[i]]->pt, *ei);
+			QVector2D closePt;
+			float dist = GraphUtil::distance(roads, roads.graph[deadendVertices[i]]->pt, *ei, closePt);
 			if (dist < min_dist_e) {
 				min_dist_e = dist;
 				min_e_desc = *ei;
+				closestPt = closePt;
 			}
 		}
 
