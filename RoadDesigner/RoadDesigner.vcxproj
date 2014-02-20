@@ -128,15 +128,10 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="..\..\mylib\common\BBox.cpp" />
-    <ClCompile Include="..\..\mylib\common\GraphUtil.cpp" />
     <ClCompile Include="..\..\mylib\common\Polygon2D.cpp" />
     <ClCompile Include="..\..\mylib\common\PolygonAreaBuilder.cpp" />
     <ClCompile Include="..\..\mylib\common\Polyline2D.cpp" />
     <ClCompile Include="..\..\mylib\common\Renderable.cpp" />
-    <ClCompile Include="..\..\mylib\common\RoadEdge.cpp" />
-    <ClCompile Include="..\..\mylib\common\RoadGraph.cpp" />
-    <ClCompile Include="..\..\mylib\common\RoadGraphRenderer.cpp" />
-    <ClCompile Include="..\..\mylib\common\RoadVertex.cpp" />
     <ClCompile Include="..\..\mylib\common\TopNSearch.cpp" />
     <ClCompile Include="..\..\mylib\common\Util.cpp" />
     <ClCompile Include="..\..\mylib\road\feature\AbstractFeature.cpp" />
@@ -147,6 +142,17 @@
     <ClCompile Include="..\..\mylib\road\feature\KDEFeatureItemEdge.cpp" />
     <ClCompile Include="..\..\mylib\road\feature\RadialFeature.cpp" />
     <ClCompile Include="..\..\mylib\road\feature\RoadFeature.cpp" />
+    <ClCompile Include="..\..\mylib\road\generator\GenericRoadGenerator.cpp" />
+    <ClCompile Include="..\..\mylib\road\generator\GridRoadGenerator.cpp" />
+    <ClCompile Include="..\..\mylib\road\generator\KDERoadGenerator.cpp" />
+    <ClCompile Include="..\..\mylib\road\generator\RadialRoadGenerator.cpp" />
+    <ClCompile Include="..\..\mylib\road\generator\RoadGenerator.cpp" />
+    <ClCompile Include="..\..\mylib\road\GraphUtil.cpp" />
+    <ClCompile Include="..\..\mylib\road\RoadArea.cpp" />
+    <ClCompile Include="..\..\mylib\road\RoadEdge.cpp" />
+    <ClCompile Include="..\..\mylib\road\RoadGraph.cpp" />
+    <ClCompile Include="..\..\mylib\road\RoadGraphRenderer.cpp" />
+    <ClCompile Include="..\..\mylib\road\RoadVertex.cpp" />
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="ControlWidget.cpp" />
     <ClCompile Include="GeneratedFiles\Debug\moc_ControlWidget.cpp">
@@ -175,15 +181,9 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
     </ClCompile>
-    <ClCompile Include="GenericRoadGenerator.cpp" />
     <ClCompile Include="GLWidget.cpp" />
-    <ClCompile Include="GridRoadGenerator.cpp" />
-    <ClCompile Include="KDERoadGenerator.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MainWindow.cpp" />
-    <ClCompile Include="RadialRoadGenerator.cpp" />
-    <ClCompile Include="RoadArea.cpp" />
-    <ClCompile Include="RoadGenerator.cpp" />
     <ClCompile Include="SimpleFlatTerrain.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -230,15 +230,10 @@
   <ItemGroup>
     <ClInclude Include="..\..\mylib\common\BBox.h" />
     <ClInclude Include="..\..\mylib\common\common.h" />
-    <ClInclude Include="..\..\mylib\common\GraphUtil.h" />
     <ClInclude Include="..\..\mylib\common\Polygon2D.h" />
     <ClInclude Include="..\..\mylib\common\PolygonAreaBuilder.h" />
     <ClInclude Include="..\..\mylib\common\Polyline2D.h" />
     <ClInclude Include="..\..\mylib\common\Renderable.h" />
-    <ClInclude Include="..\..\mylib\common\RoadEdge.h" />
-    <ClInclude Include="..\..\mylib\common\RoadGraph.h" />
-    <ClInclude Include="..\..\mylib\common\RoadGraphRenderer.h" />
-    <ClInclude Include="..\..\mylib\common\RoadVertex.h" />
     <ClInclude Include="..\..\mylib\common\TopNSearch.h" />
     <ClInclude Include="..\..\mylib\common\Util.h" />
     <ClInclude Include="..\..\mylib\road\feature\AbstractFeature.h" />
@@ -249,14 +244,19 @@
     <ClInclude Include="..\..\mylib\road\feature\KDEFeatureItemEdge.h" />
     <ClInclude Include="..\..\mylib\road\feature\RadialFeature.h" />
     <ClInclude Include="..\..\mylib\road\feature\RoadFeature.h" />
+    <ClInclude Include="..\..\mylib\road\generator\GenericRoadGenerator.h" />
+    <ClInclude Include="..\..\mylib\road\generator\GridRoadGenerator.h" />
+    <ClInclude Include="..\..\mylib\road\generator\KDERoadGenerator.h" />
+    <ClInclude Include="..\..\mylib\road\generator\RadialRoadGenerator.h" />
+    <ClInclude Include="..\..\mylib\road\generator\RoadGenerator.h" />
+    <ClInclude Include="..\..\mylib\road\GraphUtil.h" />
+    <ClInclude Include="..\..\mylib\road\RoadArea.h" />
+    <ClInclude Include="..\..\mylib\road\RoadEdge.h" />
+    <ClInclude Include="..\..\mylib\road\RoadGraph.h" />
+    <ClInclude Include="..\..\mylib\road\RoadGraphRenderer.h" />
+    <ClInclude Include="..\..\mylib\road\RoadVertex.h" />
     <ClInclude Include="Camera.h" />
-    <ClInclude Include="GenericRoadGenerator.h" />
     <ClInclude Include="GLWidget.h" />
-    <ClInclude Include="GridRoadGenerator.h" />
-    <ClInclude Include="KDERoadGenerator.h" />
-    <ClInclude Include="RadialRoadGenerator.h" />
-    <ClInclude Include="RoadArea.h" />
-    <ClInclude Include="RoadGenerator.h" />
     <ClInclude Include="SimpleFlatTerrain.h" />
     <CustomBuild Include="ControlWidget.h">
       <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(QTDIR)\bin\moc.exe;%(FullPath)</AdditionalInputs>

@@ -1,24 +1,11 @@
+#include <road/GraphUtil.h>
 #include "MainWindow.h"
-#include <common/GraphUtil.h>
 
 MainWindow::MainWindow(QWidget *parent, Qt::WFlags flags) : QMainWindow(parent, flags) {
 	ui.setupUi(this);
 
 	// setup the docking widgets
 	controlWidget = new ControlWidget(this);
-
-	// set up the roads list widget
-	/*
-	std::vector<QString> exampleRoads;
-	exampleRoads.push_back("template\\new-york_44.gsm");
-	exampleRoads.push_back("template\\paris_18.gsm");
-	exampleRoads.push_back("template\\paris_54.gsm");
-	exampleRoads.push_back("template\\west-lafayette_7.gsm");
-	dockRoadBoxList = new QDockWidget(tr("Example Roads"), this);
-	roadBoxList = new RoadBoxList(this, exampleRoads, 3000.0f);
-	dockRoadBoxList->setWidget(roadBoxList);
-	dockRoadBoxList->hide();
-	*/
 
 	// setup the toolbar
 	ui.fileToolBar->addAction(ui.actionNew);

@@ -1,11 +1,11 @@
 #include "ControlWidget.h"
 #include "MainWindow.h"
 #include "GLWidget.h"
-#include <common/GraphUtil.h>
+#include <road/GraphUtil.h>
 #include <road/feature/GridFeature.h>
 #include <road/feature/RadialFeature.h>
 #include <road/feature/GenericFeature.h>
-#include "RoadGenerator.h"
+#include <road/generator/RoadGenerator.h>
 
 ControlWidget::ControlWidget(MainWindow* mainWin) : QDockWidget("Control Widget", (QWidget*)mainWin) {
 	this->mainWin = mainWin;

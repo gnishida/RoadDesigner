@@ -2,14 +2,14 @@
 
 #include <QString>
 #include <QGLWidget>
-#include <common/RoadGraph.h>
-#include <common/RoadGraphRenderer.h>
 #include <common/PolygonAreaBuilder.h>
+#include <road/RoadGraph.h>
+#include <road/RoadGraphRenderer.h>
+#include <road/RoadArea.h>
 #include <road/feature/GridFeature.h>
 #include <road/feature/RadialFeature.h>
 #include "Camera.h"
 #include "SimpleFlatTerrain.h"
-#include "RoadArea.h"
 
 class MainWindow;
 
