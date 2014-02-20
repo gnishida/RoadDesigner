@@ -69,7 +69,7 @@ void KDERoadGenerator::generateRoadNetwork(RoadGraph &roads, Polygon2D &area, co
 	// Local streetを生成
 	generateStreetSeeds(roads, kf, seeds);
 
-	for (int i = 0; !seeds.empty() && i < 1000; ++i) {
+	for (int i = 0; !seeds.empty() && i < numIterations; ++i) {
 		RoadVertexDesc desc = seeds.front();
 		seeds.pop_front();
 
