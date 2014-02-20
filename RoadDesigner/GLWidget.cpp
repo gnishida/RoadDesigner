@@ -26,9 +26,6 @@ GLWidget::GLWidget(MainWindow* mainWin) : QGLWidget(QGLFormat(QGL::SampleBuffers
 	terrain.depth = 5000.0f;
 	terrain.elevation = 0.0f;
 
-	// initialize the width and others
-	//roads.setZ((MIN_Z + MAX_Z) / 2.0f);
-
 	// initialize the key status
 	shiftPressed = false;
 	controlPressed = false;
