@@ -131,21 +131,6 @@
     <ClCompile Include="..\..\mylib\road\feature\KDEFeatureItemEdge.cpp">
       <Filter>mylib\road\feature</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\mylib\road\generator\GenericRoadGenerator.cpp">
-      <Filter>mylib\road\generator</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\mylib\road\generator\GridRoadGenerator.cpp">
-      <Filter>mylib\road\generator</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\mylib\road\generator\KDERoadGenerator.cpp">
-      <Filter>mylib\road\generator</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\mylib\road\generator\RadialRoadGenerator.cpp">
-      <Filter>mylib\road\generator</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\mylib\road\generator\RoadGenerator.cpp">
-      <Filter>mylib\road\generator</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\mylib\road\RoadArea.cpp">
       <Filter>mylib\road</Filter>
     </ClCompile>
@@ -163,6 +148,21 @@
     </ClCompile>
     <ClCompile Include="..\..\mylib\road\GraphUtil.cpp">
       <Filter>mylib\road</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\mylib\road\generator\GenericRoadGenerator.cpp">
+      <Filter>mylib\road\generator</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\mylib\road\generator\GridRoadGenerator.cpp">
+      <Filter>mylib\road\generator</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\mylib\road\generator\KDERoadGenerator.cpp">
+      <Filter>mylib\road\generator</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\mylib\road\generator\RadialRoadGenerator.cpp">
+      <Filter>mylib\road\generator</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\mylib\road\generator\RoadGenerator.cpp">
+      <Filter>mylib\road\generator</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -246,21 +246,6 @@
     <ClInclude Include="..\..\mylib\road\feature\KDEFeatureItemEdge.h">
       <Filter>mylib\road\feature</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\mylib\road\generator\GenericRoadGenerator.h">
-      <Filter>mylib\road\generator</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\mylib\road\generator\GridRoadGenerator.h">
-      <Filter>mylib\road\generator</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\mylib\road\generator\KDERoadGenerator.h">
-      <Filter>mylib\road\generator</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\mylib\road\generator\RadialRoadGenerator.h">
-      <Filter>mylib\road\generator</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\mylib\road\generator\RoadGenerator.h">
-      <Filter>mylib\road\generator</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\mylib\road\RoadArea.h">
       <Filter>mylib\road</Filter>
     </ClInclude>
@@ -278,6 +263,21 @@
     </ClInclude>
     <ClInclude Include="..\..\mylib\road\GraphUtil.h">
       <Filter>mylib\road</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\mylib\road\generator\GenericRoadGenerator.h">
+      <Filter>mylib\road\generator</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\mylib\road\generator\GridRoadGenerator.h">
+      <Filter>mylib\road\generator</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\mylib\road\generator\KDERoadGenerator.h">
+      <Filter>mylib\road\generator</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\mylib\road\generator\RadialRoadGenerator.h">
+      <Filter>mylib\road\generator</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\mylib\road\generator\RoadGenerator.h">
+      <Filter>mylib\road\generator</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
