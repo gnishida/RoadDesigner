@@ -15,7 +15,7 @@ ControlWidget::ControlWidget(MainWindow* mainWin) : QDockWidget("Control Widget"
 	ui.checkBoxRoadTypeAvenue->setChecked(true);
 	ui.checkBoxRoadTypeLocalStreet->setChecked(true);
 	ui.radioButtonGridPattern1->setChecked(true);
-	ui.lineEditIteration->setText("0");
+	ui.lineEditIteration->setText("1000");
 	ui.checkBoxLocalStreets->setChecked(false);
 
 	// register the event handlers
