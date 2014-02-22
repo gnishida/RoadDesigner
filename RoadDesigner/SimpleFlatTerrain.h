@@ -16,5 +16,7 @@ public:
 	SimpleFlatTerrain(float elevation, int width, int depth);
 	~SimpleFlatTerrain() {}
 
+	void init(float width, float depth, float elevation);
+
 	void generateMesh();
 };

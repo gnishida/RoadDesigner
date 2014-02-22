@@ -83,9 +83,6 @@
     <ClCompile Include="SimpleFlatTerrain.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="GenericRoadGenerator.cpp">
-      <Filter>RoadGenerator</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\mylib\common\BBox.cpp">
       <Filter>mylib\common</Filter>
     </ClCompile>
@@ -163,6 +160,9 @@
     </ClCompile>
     <ClCompile Include="..\..\mylib\road\generator\RoadGenerator.cpp">
       <Filter>mylib\road\generator</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\mylib\road\RoadAreaSet.cpp">
+      <Filter>mylib\road</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -278,6 +278,9 @@
     </ClInclude>
     <ClInclude Include="..\..\mylib\road\generator\RoadGenerator.h">
       <Filter>mylib\road\generator</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\mylib\road\RoadAreaSet.h">
+      <Filter>mylib\road</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -32,6 +32,7 @@ public slots:
 	void onNew();
 	void onOpen();
 	void onSave();
+	void onSaveRoads();
 	void onAreaMenu();
 	void onAreaSelect();
 	void onAreaCreate();

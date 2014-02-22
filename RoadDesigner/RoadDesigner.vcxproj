@@ -149,6 +149,7 @@
     <ClCompile Include="..\..\mylib\road\generator\RoadGenerator.cpp" />
     <ClCompile Include="..\..\mylib\road\GraphUtil.cpp" />
     <ClCompile Include="..\..\mylib\road\RoadArea.cpp" />
+    <ClCompile Include="..\..\mylib\road\RoadAreaSet.cpp" />
     <ClCompile Include="..\..\mylib\road\RoadEdge.cpp" />
     <ClCompile Include="..\..\mylib\road\RoadGraph.cpp" />
     <ClCompile Include="..\..\mylib\road\RoadGraphRenderer.cpp" />
@@ -251,6 +252,7 @@
     <ClInclude Include="..\..\mylib\road\generator\RoadGenerator.h" />
     <ClInclude Include="..\..\mylib\road\GraphUtil.h" />
     <ClInclude Include="..\..\mylib\road\RoadArea.h" />
+    <ClInclude Include="..\..\mylib\road\RoadAreaSet.h" />
     <ClInclude Include="..\..\mylib\road\RoadEdge.h" />
     <ClInclude Include="..\..\mylib\road\RoadGraph.h" />
     <ClInclude Include="..\..\mylib\road\RoadGraphRenderer.h" />

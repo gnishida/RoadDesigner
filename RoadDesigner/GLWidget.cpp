@@ -16,15 +16,13 @@ GLWidget::GLWidget(MainWindow* mainWin) : QGLWidget(QGLFormat(QGL::SampleBuffers
 	// set up the camera
 	camera = new Camera();
 	camera->setLookAt(0.0f, 0.0f, 0.0f);
-	camera->setTranslation(0.0f, 0.0f, (MIN_Z + MAX_Z) / 2.0f);
+	camera->setTranslation(0.0f, 0.0f, MAX_Z);
 
 	QString str;
 	str.setNum(camera->dz);
 	mainWin->ui.statusBar->showMessage(str);
 
-	terrain.width = 5000.0f;
-	terrain.depth = 5000.0f;
-	terrain.elevation = 0.0f;
+	terrain.init(10000.0f, 10000.0f, 0.0f);
 
 	// initialize the key status
 	shiftPressed = false;
@@ -85,6 +83,11 @@ void GLWidget::keyPressEvent(QKeyEvent *e) {
 	case Qt::Key_X:
 		keyXPressed = true;
 		break;
+	case Qt::Key_Delete:
+		if (selectedArea >= 0) {
+			areas.remove(selectedArea);
+			selectedArea = -1;
+		}
 	case Qt::Key_Escape:
 		selectedAreaBuilder.cancel();
 		
@@ -222,7 +225,7 @@ void GLWidget::mouseDoubleClickEvent(QMouseEvent *e) {
 		break;
 	case MainWindow::MODE_AREA_CREATE:
 		selectedAreaBuilder.end();
-		areas.push_back(RoadArea(selectedAreaBuilder.polygon()));
+		areas.add(RoadArea(selectedAreaBuilder.polygon()));
 		selectedArea = areas.size() - 1;
 		areas[selectedArea].roads.setZ(camera->dz);
 

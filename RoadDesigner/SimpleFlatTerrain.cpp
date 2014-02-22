@@ -12,6 +12,13 @@ SimpleFlatTerrain::SimpleFlatTerrain(float elevation, int width, int depth) {
 	modified = true;
 }
 
+void SimpleFlatTerrain::init(float width, float depth, float elevation) {
+	this->width = width;
+	this->depth = depth;
+	this->elevation = elevation;
+	modified = true;
+}
+
 void SimpleFlatTerrain::generateMesh() {
 	renderables.clear();
 

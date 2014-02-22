@@ -6,6 +6,7 @@
 #include <road/RoadGraph.h>
 #include <road/RoadGraphRenderer.h>
 #include <road/RoadArea.h>
+#include <road/RoadAreaSet.h>
 #include <road/feature/GridFeature.h>
 #include <road/feature/RadialFeature.h>
 #include "Camera.h"
@@ -24,7 +25,7 @@ public:
 	SimpleFlatTerrain terrain;
 	RoadGraphRenderer* renderer;
 	QPoint lastPos;
-	std::vector<RoadArea> areas;
+	RoadAreaSet areas;
 	int selectedArea;
 	PolygonAreaBuilder selectedAreaBuilder;
 
