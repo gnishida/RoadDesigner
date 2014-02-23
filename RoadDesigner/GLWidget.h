@@ -2,7 +2,7 @@
 
 #include <QString>
 #include <QGLWidget>
-#include <common/PolygonAreaBuilder.h>
+#include <common/PolygonBuilder.h>
 #include <road/RoadGraph.h>
 #include <road/RoadGraphRenderer.h>
 #include <road/RoadArea.h>
@@ -27,7 +27,8 @@ public:
 	QPoint lastPos;
 	RoadAreaSet areas;
 	int selectedArea;
-	PolygonAreaBuilder selectedAreaBuilder;
+	PolygonBuilder areaBuilder;
+	PolygonBuilder roadsBuilder;
 
 	// key status
 	bool shiftPressed;

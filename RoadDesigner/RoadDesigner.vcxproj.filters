@@ -119,9 +119,6 @@
     <ClCompile Include="..\..\mylib\common\TopNSearch.cpp">
       <Filter>mylib\common</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\mylib\common\PolygonAreaBuilder.cpp">
-      <Filter>mylib\common</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\mylib\common\Polyline2D.cpp">
       <Filter>mylib\common</Filter>
     </ClCompile>
@@ -163,6 +160,9 @@
     </ClCompile>
     <ClCompile Include="..\..\mylib\road\RoadAreaSet.cpp">
       <Filter>mylib\road</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\mylib\common\PolygonBuilder.cpp">
+      <Filter>mylib\common</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -237,9 +237,6 @@
     <ClInclude Include="..\..\mylib\common\TopNSearch.h">
       <Filter>mylib\common</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\mylib\common\PolygonAreaBuilder.h">
-      <Filter>mylib\common</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\mylib\common\Polyline2D.h">
       <Filter>mylib\common</Filter>
     </ClInclude>
@@ -281,6 +278,9 @@
     </ClInclude>
     <ClInclude Include="..\..\mylib\road\RoadAreaSet.h">
       <Filter>mylib\road</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\mylib\common\PolygonBuilder.h">
+      <Filter>mylib\common</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

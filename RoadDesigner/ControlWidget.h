@@ -22,11 +22,13 @@ public:
 	void setRoadEdge(RoadEdgePtr selectedEdge);
 
 public slots:
+	void showRoad(int flag);
 	void clear();
 	void showLocalStreet(int flag);
 	void generateGrid();
 	void generateRadial();
 	void generateKDE();
 	void generateGeneric();
+	void connect();
 };
 

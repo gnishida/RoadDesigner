@@ -11,5 +11,7 @@
     <file>Resources/Select_24x24.png</file>
     <file>Resources/Create_24x24.png</file>
     <file>Resources/Sketch_24x24.png</file>
+    <file>Resources/SketchH_24x24.png</file>
+    <file>Resources/SketchB_24x24.png</file>
   </qresource>
 </RCC>

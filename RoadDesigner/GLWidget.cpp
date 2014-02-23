@@ -18,11 +18,13 @@ GLWidget::GLWidget(MainWindow* mainWin) : QGLWidget(QGLFormat(QGL::SampleBuffers
 	camera->setLookAt(0.0f, 0.0f, 0.0f);
 	camera->setTranslation(0.0f, 0.0f, MAX_Z);
 
+	areas.setZ(camera->dz);
+
 	QString str;
 	str.setNum(camera->dz);
 	mainWin->ui.statusBar->showMessage(str);
 
-	terrain.init(10000.0f, 10000.0f, 0.0f);
+	terrain.init(15000.0f, 15000.0f, 0.0f);
 
 	// initialize the key status
 	shiftPressed = false;
@@ -43,9 +45,14 @@ void GLWidget::drawScene() {
 	// define the height for other items
 	float height = (float)((int)(camera->dz * 0.012f)) * 0.15f;
 
-	// draw the selecting polyline
-	if (selectedAreaBuilder.selecting()) {
-		renderer->renderPolyline(selectedAreaBuilder.polyline(), GL_LINE_STIPPLE, height);
+	// draw the building area
+	if (areaBuilder.selecting()) {
+		renderer->renderPolyline(areaBuilder.polyline(), QColor(0, 0, 255), GL_LINE_STIPPLE, height);
+	}
+
+	// draw the building highway
+	if (roadsBuilder.selecting()) {
+		renderer->renderPolyline(roadsBuilder.polyline(), QColor(255, 0, 0), GL_LINE_STIPPLE, height);
 	}
 
 	// draw the areas
@@ -60,6 +67,10 @@ void GLWidget::drawScene() {
 		areas[i].roads.generateMesh();
 		renderer->render(areas[i].roads.renderables);
 	}
+
+	// draw the highways
+	areas.roads.generateMesh();
+	renderer->render(areas.roads.renderables);
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -89,7 +100,7 @@ void GLWidget::keyPressEvent(QKeyEvent *e) {
 			selectedArea = -1;
 		}
 	case Qt::Key_Escape:
-		selectedAreaBuilder.cancel();
+		areaBuilder.cancel();
 		
 		mainWin->mode = MainWindow::MODE_AREA_SELECT;
 		mainWin->ui.actionAreaSelect->setChecked(true);
@@ -142,21 +153,41 @@ void GLWidget::mousePressEvent(QMouseEvent *e) {
 			}
 			break;
 		case MainWindow::MODE_AREA_CREATE:
-			if (!selectedAreaBuilder.selecting()) {
+			if (!areaBuilder.selecting()) {
 				snap(pos);
-				selectedAreaBuilder.start(pos);
+				areaBuilder.start(pos);
 				setMouseTracking(true);
 			}
 		
-			if (selectedAreaBuilder.selecting()) {
+			if (areaBuilder.selecting()) {
 				snap(pos);
-				selectedAreaBuilder.addPoint(pos);
+				areaBuilder.addPoint(pos);
 			}
 
 			selectedArea = -1;
 
 			break;
-		case MainWindow::MODE_SKETCH:
+		case MainWindow::MODE_HIGHWAY_SKETCH:
+			if (!roadsBuilder.selecting()) {
+				roadsBuilder.start(pos);
+				setMouseTracking(true);
+			}
+
+			if (roadsBuilder.selecting()) {
+				roadsBuilder.addPoint(pos);
+			}
+
+			break;
+		case MainWindow::MODE_BOULEVARD_SKETCH:
+			if (!roadsBuilder.selecting()) {
+				roadsBuilder.start(pos);
+				setMouseTracking(true);
+			}
+
+			if (roadsBuilder.selecting()) {
+				roadsBuilder.addPoint(pos);
+			}
+
 			break;
 		}
 	}
@@ -194,9 +225,7 @@ void GLWidget::mouseMoveEvent(QMouseEvent *e) {
 		mainWin->ui.statusBar->showMessage(str);
 
 		// tell the Z coordinate to the road graph so that road graph updates rendering related variables.
-		for (int i = 0; i < areas.size(); ++i) {
-			areas[i].roads.setZ(camera->dz);
-		}
+		areas.setZ(camera->dz);
 
 		lastPos = e->pos();
 	} else {
@@ -204,12 +233,20 @@ void GLWidget::mouseMoveEvent(QMouseEvent *e) {
 		case MainWindow::MODE_AREA_SELECT:
 			break;
 		case MainWindow::MODE_AREA_CREATE:
-			if (selectedAreaBuilder.selecting()) {	// Move the last point of the selected polygonal area
+			if (areaBuilder.selecting()) {	// Move the last point of the selected polygonal area
 				snap(pos);
-				selectedAreaBuilder.moveLastPoint(pos);
+				areaBuilder.moveLastPoint(pos);
 			}
 			break;
-		case MainWindow::MODE_SKETCH:
+		case MainWindow::MODE_HIGHWAY_SKETCH:
+			if (roadsBuilder.selecting()) {
+				roadsBuilder.moveLastPoint(pos);
+			}
+			break;
+		case MainWindow::MODE_BOULEVARD_SKETCH:
+			if (roadsBuilder.selecting()) {
+				roadsBuilder.moveLastPoint(pos);
+			}
 			break;
 		}
 	}
@@ -224,14 +261,36 @@ void GLWidget::mouseDoubleClickEvent(QMouseEvent *e) {
 	case MainWindow::MODE_AREA_SELECT:
 		break;
 	case MainWindow::MODE_AREA_CREATE:
-		selectedAreaBuilder.end();
-		areas.add(RoadArea(selectedAreaBuilder.polygon()));
+		areaBuilder.end();
+		areas.add(RoadArea(areaBuilder.polygon()));
 		selectedArea = areas.size() - 1;
 		areas[selectedArea].roads.setZ(camera->dz);
 
 		mainWin->mode = MainWindow::MODE_AREA_SELECT;
 		mainWin->ui.actionAreaSelect->setChecked(true);
 		mainWin->ui.actionAreaCreate->setChecked(false);
+		break;
+	case MainWindow::MODE_HIGHWAY_SKETCH:
+		roadsBuilder.end();
+
+		areas.addRoads(RoadEdge::TYPE_HIGHWAY, 2, true, roadsBuilder.polyline());
+
+		mainWin->mode = MainWindow::MODE_AREA_SELECT;
+		mainWin->ui.actionAreaSelect->setChecked(true);
+		mainWin->ui.actionAreaCreate->setChecked(false);
+		mainWin->ui.actionHighwaySketch->setChecked(false);
+		mainWin->ui.actionBoulevardSketch->setChecked(false);
+		break;
+	case MainWindow::MODE_BOULEVARD_SKETCH:
+		roadsBuilder.end();
+
+		areas.addRoads(RoadEdge::TYPE_BOULEVARD, 1, false, roadsBuilder.polyline());
+
+		mainWin->mode = MainWindow::MODE_AREA_SELECT;
+		mainWin->ui.actionAreaSelect->setChecked(true);
+		mainWin->ui.actionAreaCreate->setChecked(false);
+		mainWin->ui.actionHighwaySketch->setChecked(false);
+		mainWin->ui.actionBoulevardSketch->setChecked(false);
 		break;
 	}
 }

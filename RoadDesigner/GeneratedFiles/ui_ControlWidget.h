@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'ControlWidget.ui'
 **
-** Created: Thu Feb 20 14:16:25 2014
+** Created: Sun Feb 23 17:50:21 2014
 **      by: Qt User Interface Compiler version 4.8.1
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
@@ -42,10 +42,15 @@ public:
     QPushButton *pushButtonGenerateGeneric;
     QGroupBox *groupBox_8;
     QPushButton *pushButtonGenerateKDE;
+    QPushButton *pushButtonClear;
+    QGroupBox *groupBox;
+    QCheckBox *checkBoxAddAvenuesOnBoundary;
     QLabel *label;
     QLineEdit *lineEditIteration;
     QCheckBox *checkBoxLocalStreets;
-    QPushButton *pushButtonClear;
+    QCheckBox *checkBoxRoadTypeHighway;
+    QCheckBox *checkBoxRoadTypeBoulevard;
+    QPushButton *pushButtonConnect;
     QButtonGroup *buttonGroupGridPattern;
 
     void setupUi(QDockWidget *ControlWidget)
@@ -59,7 +64,7 @@ public:
         dockWidgetContents->setObjectName(QString::fromUtf8("dockWidgetContents"));
         groupBox_3 = new QGroupBox(dockWidgetContents);
         groupBox_3->setObjectName(QString::fromUtf8("groupBox_3"));
-        groupBox_3->setGeometry(QRect(10, 160, 171, 111));
+        groupBox_3->setGeometry(QRect(10, 210, 171, 111));
         pushButtonGenerateGrid = new QPushButton(groupBox_3);
         pushButtonGenerateGrid->setObjectName(QString::fromUtf8("pushButtonGenerateGrid"));
         pushButtonGenerateGrid->setGeometry(QRect(20, 70, 131, 31));
@@ -75,41 +80,56 @@ public:
         radioButtonGridPattern1_2->setGeometry(QRect(30, 40, 101, 17));
         groupBox_6 = new QGroupBox(dockWidgetContents);
         groupBox_6->setObjectName(QString::fromUtf8("groupBox_6"));
-        groupBox_6->setGeometry(QRect(10, 280, 171, 61));
+        groupBox_6->setGeometry(QRect(10, 330, 171, 61));
         pushButtonGenerateRadial = new QPushButton(groupBox_6);
         pushButtonGenerateRadial->setObjectName(QString::fromUtf8("pushButtonGenerateRadial"));
         pushButtonGenerateRadial->setGeometry(QRect(20, 20, 131, 31));
         checkBoxRoadTypeAvenue = new QCheckBox(dockWidgetContents);
         checkBoxRoadTypeAvenue->setObjectName(QString::fromUtf8("checkBoxRoadTypeAvenue"));
-        checkBoxRoadTypeAvenue->setGeometry(QRect(10, 10, 70, 17));
+        checkBoxRoadTypeAvenue->setGeometry(QRect(10, 30, 70, 17));
         checkBoxRoadTypeLocalStreet = new QCheckBox(dockWidgetContents);
         checkBoxRoadTypeLocalStreet->setObjectName(QString::fromUtf8("checkBoxRoadTypeLocalStreet"));
-        checkBoxRoadTypeLocalStreet->setGeometry(QRect(80, 10, 91, 17));
+        checkBoxRoadTypeLocalStreet->setGeometry(QRect(90, 30, 91, 17));
         groupBox_7 = new QGroupBox(dockWidgetContents);
         groupBox_7->setObjectName(QString::fromUtf8("groupBox_7"));
-        groupBox_7->setGeometry(QRect(10, 420, 171, 61));
+        groupBox_7->setGeometry(QRect(10, 470, 171, 61));
         pushButtonGenerateGeneric = new QPushButton(groupBox_7);
         pushButtonGenerateGeneric->setObjectName(QString::fromUtf8("pushButtonGenerateGeneric"));
         pushButtonGenerateGeneric->setGeometry(QRect(20, 20, 131, 31));
         groupBox_8 = new QGroupBox(dockWidgetContents);
         groupBox_8->setObjectName(QString::fromUtf8("groupBox_8"));
-        groupBox_8->setGeometry(QRect(10, 350, 171, 61));
+        groupBox_8->setGeometry(QRect(10, 400, 171, 61));
         pushButtonGenerateKDE = new QPushButton(groupBox_8);
         pushButtonGenerateKDE->setObjectName(QString::fromUtf8("pushButtonGenerateKDE"));
         pushButtonGenerateKDE->setGeometry(QRect(20, 20, 131, 31));
-        label = new QLabel(dockWidgetContents);
-        label->setObjectName(QString::fromUtf8("label"));
-        label->setGeometry(QRect(20, 60, 46, 16));
-        lineEditIteration = new QLineEdit(dockWidgetContents);
-        lineEditIteration->setObjectName(QString::fromUtf8("lineEditIteration"));
-        lineEditIteration->setGeometry(QRect(100, 60, 61, 20));
-        lineEditIteration->setAlignment(Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter);
-        checkBoxLocalStreets = new QCheckBox(dockWidgetContents);
-        checkBoxLocalStreets->setObjectName(QString::fromUtf8("checkBoxLocalStreets"));
-        checkBoxLocalStreets->setGeometry(QRect(20, 90, 131, 17));
         pushButtonClear = new QPushButton(dockWidgetContents);
         pushButtonClear->setObjectName(QString::fromUtf8("pushButtonClear"));
-        pushButtonClear->setGeometry(QRect(30, 120, 131, 31));
+        pushButtonClear->setGeometry(QRect(30, 170, 131, 31));
+        groupBox = new QGroupBox(dockWidgetContents);
+        groupBox->setObjectName(QString::fromUtf8("groupBox"));
+        groupBox->setGeometry(QRect(10, 60, 171, 101));
+        checkBoxAddAvenuesOnBoundary = new QCheckBox(groupBox);
+        checkBoxAddAvenuesOnBoundary->setObjectName(QString::fromUtf8("checkBoxAddAvenuesOnBoundary"));
+        checkBoxAddAvenuesOnBoundary->setGeometry(QRect(10, 50, 151, 17));
+        label = new QLabel(groupBox);
+        label->setObjectName(QString::fromUtf8("label"));
+        label->setGeometry(QRect(10, 20, 46, 16));
+        lineEditIteration = new QLineEdit(groupBox);
+        lineEditIteration->setObjectName(QString::fromUtf8("lineEditIteration"));
+        lineEditIteration->setGeometry(QRect(70, 20, 91, 20));
+        lineEditIteration->setAlignment(Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter);
+        checkBoxLocalStreets = new QCheckBox(groupBox);
+        checkBoxLocalStreets->setObjectName(QString::fromUtf8("checkBoxLocalStreets"));
+        checkBoxLocalStreets->setGeometry(QRect(10, 70, 131, 17));
+        checkBoxRoadTypeHighway = new QCheckBox(dockWidgetContents);
+        checkBoxRoadTypeHighway->setObjectName(QString::fromUtf8("checkBoxRoadTypeHighway"));
+        checkBoxRoadTypeHighway->setGeometry(QRect(10, 10, 70, 17));
+        checkBoxRoadTypeBoulevard = new QCheckBox(dockWidgetContents);
+        checkBoxRoadTypeBoulevard->setObjectName(QString::fromUtf8("checkBoxRoadTypeBoulevard"));
+        checkBoxRoadTypeBoulevard->setGeometry(QRect(90, 10, 91, 17));
+        pushButtonConnect = new QPushButton(dockWidgetContents);
+        pushButtonConnect->setObjectName(QString::fromUtf8("pushButtonConnect"));
+        pushButtonConnect->setGeometry(QRect(30, 550, 131, 31));
         ControlWidget->setWidget(dockWidgetContents);
 
         retranslateUi(ControlWidget);
@@ -131,9 +151,14 @@ public:
         pushButtonGenerateGeneric->setText(QApplication::translate("ControlWidget", "Generate", 0, QApplication::UnicodeUTF8));
         groupBox_8->setTitle(QApplication::translate("ControlWidget", "KDE Pattern", 0, QApplication::UnicodeUTF8));
         pushButtonGenerateKDE->setText(QApplication::translate("ControlWidget", "Generate", 0, QApplication::UnicodeUTF8));
+        pushButtonClear->setText(QApplication::translate("ControlWidget", "Clear", 0, QApplication::UnicodeUTF8));
+        groupBox->setTitle(QApplication::translate("ControlWidget", "Options", 0, QApplication::UnicodeUTF8));
+        checkBoxAddAvenuesOnBoundary->setText(QApplication::translate("ControlWidget", "Add Avenues on Boundary", 0, QApplication::UnicodeUTF8));
         label->setText(QApplication::translate("ControlWidget", "Iteration:", 0, QApplication::UnicodeUTF8));
         checkBoxLocalStreets->setText(QApplication::translate("ControlWidget", "Generate Local Streets", 0, QApplication::UnicodeUTF8));
-        pushButtonClear->setText(QApplication::translate("ControlWidget", "Clear", 0, QApplication::UnicodeUTF8));
+        checkBoxRoadTypeHighway->setText(QApplication::translate("ControlWidget", "Highways", 0, QApplication::UnicodeUTF8));
+        checkBoxRoadTypeBoulevard->setText(QApplication::translate("ControlWidget", "Boulevards", 0, QApplication::UnicodeUTF8));
+        pushButtonConnect->setText(QApplication::translate("ControlWidget", "Connect", 0, QApplication::UnicodeUTF8));
         Q_UNUSED(ControlWidget);
     } // retranslateUi
 

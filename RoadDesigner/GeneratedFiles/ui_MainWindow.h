@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'MainWindow.ui'
 **
-** Created: Sat Feb 22 18:07:15 2014
+** Created: Sun Feb 23 17:38:28 2014
 **      by: Qt User Interface Compiler version 4.8.1
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
@@ -47,9 +47,12 @@ public:
     QAction *actionShowArea;
     QAction *actionAreaSelect;
     QAction *actionAreaCreate;
-    QAction *actionSketch;
+    QAction *actionHighwaySketch;
     QAction *actionSave_2;
     QAction *actionSaveRoads;
+    QAction *actionLoad_Highways;
+    QAction *actionSave_Highways;
+    QAction *actionBoulevardSketch;
     QWidget *centralWidget;
     QMenuBar *menuBar;
     QMenu *menuFile;
@@ -140,16 +143,25 @@ public:
         QIcon icon9;
         icon9.addFile(QString::fromUtf8(":/MainWindow/Resources/Create_24x24.png"), QSize(), QIcon::Normal, QIcon::Off);
         actionAreaCreate->setIcon(icon9);
-        actionSketch = new QAction(MainWindow);
-        actionSketch->setObjectName(QString::fromUtf8("actionSketch"));
-        actionSketch->setCheckable(true);
+        actionHighwaySketch = new QAction(MainWindow);
+        actionHighwaySketch->setObjectName(QString::fromUtf8("actionHighwaySketch"));
+        actionHighwaySketch->setCheckable(true);
         QIcon icon10;
-        icon10.addFile(QString::fromUtf8(":/MainWindow/Resources/Sketch_24x24.png"), QSize(), QIcon::Normal, QIcon::Off);
-        actionSketch->setIcon(icon10);
+        icon10.addFile(QString::fromUtf8("Resources/SketchH_24x24.png"), QSize(), QIcon::Normal, QIcon::Off);
+        actionHighwaySketch->setIcon(icon10);
         actionSave_2 = new QAction(MainWindow);
         actionSave_2->setObjectName(QString::fromUtf8("actionSave_2"));
         actionSaveRoads = new QAction(MainWindow);
         actionSaveRoads->setObjectName(QString::fromUtf8("actionSaveRoads"));
+        actionLoad_Highways = new QAction(MainWindow);
+        actionLoad_Highways->setObjectName(QString::fromUtf8("actionLoad_Highways"));
+        actionSave_Highways = new QAction(MainWindow);
+        actionSave_Highways->setObjectName(QString::fromUtf8("actionSave_Highways"));
+        actionBoulevardSketch = new QAction(MainWindow);
+        actionBoulevardSketch->setObjectName(QString::fromUtf8("actionBoulevardSketch"));
+        QIcon icon11;
+        icon11.addFile(QString::fromUtf8(":/MainWindow/Resources/SketchB_24x24.png"), QSize(), QIcon::Normal, QIcon::Off);
+        actionBoulevardSketch->setIcon(icon11);
         centralWidget = new QWidget(MainWindow);
         centralWidget->setObjectName(QString::fromUtf8("centralWidget"));
         MainWindow->setCentralWidget(centralWidget);
@@ -187,7 +199,8 @@ public:
         menuArea->addAction(actionAreaSelect);
         menuArea->addAction(actionAreaCreate);
         menuArea->addSeparator();
-        menuArea->addAction(actionSketch);
+        menuArea->addAction(actionHighwaySketch);
+        menuArea->addAction(actionBoulevardSketch);
 
         retranslateUi(MainWindow);
 
@@ -229,9 +242,12 @@ public:
         actionShowArea->setText(QApplication::translate("MainWindow", "Show Area", 0, QApplication::UnicodeUTF8));
         actionAreaSelect->setText(QApplication::translate("MainWindow", "Select", 0, QApplication::UnicodeUTF8));
         actionAreaCreate->setText(QApplication::translate("MainWindow", "Create", 0, QApplication::UnicodeUTF8));
-        actionSketch->setText(QApplication::translate("MainWindow", "Sketch", 0, QApplication::UnicodeUTF8));
+        actionHighwaySketch->setText(QApplication::translate("MainWindow", "Highway Sketch", 0, QApplication::UnicodeUTF8));
         actionSave_2->setText(QApplication::translate("MainWindow", "Save", 0, QApplication::UnicodeUTF8));
         actionSaveRoads->setText(QApplication::translate("MainWindow", "Save Roads", 0, QApplication::UnicodeUTF8));
+        actionLoad_Highways->setText(QApplication::translate("MainWindow", "Load Highways", 0, QApplication::UnicodeUTF8));
+        actionSave_Highways->setText(QApplication::translate("MainWindow", "Save Highways", 0, QApplication::UnicodeUTF8));
+        actionBoulevardSketch->setText(QApplication::translate("MainWindow", "Boulevard Sketch", 0, QApplication::UnicodeUTF8));
         menuFile->setTitle(QApplication::translate("MainWindow", "File", 0, QApplication::UnicodeUTF8));
         menuWindow->setTitle(QApplication::translate("MainWindow", "Window", 0, QApplication::UnicodeUTF8));
         menuArea->setTitle(QApplication::translate("MainWindow", "Area", 0, QApplication::UnicodeUTF8));

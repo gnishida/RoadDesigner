@@ -1,4 +1,4 @@
-#include "ControlWidget.h"
+﻿#include "ControlWidget.h"
 #include "MainWindow.h"
 #include "GLWidget.h"
 #include <road/GraphUtil.h>
@@ -12,6 +12,8 @@ ControlWidget::ControlWidget(MainWindow* mainWin) : QDockWidget("Control Widget"
 
 	// set up the UI
 	ui.setupUi(this);
+	ui.checkBoxRoadTypeHighway->setChecked(true);
+	ui.checkBoxRoadTypeBoulevard->setChecked(true);
 	ui.checkBoxRoadTypeAvenue->setChecked(true);
 	ui.checkBoxRoadTypeLocalStreet->setChecked(true);
 	ui.radioButtonGridPattern1->setChecked(true);
@@ -19,18 +21,40 @@ ControlWidget::ControlWidget(MainWindow* mainWin) : QDockWidget("Control Widget"
 	ui.checkBoxLocalStreets->setChecked(false);
 
 	// register the event handlers
+	connect(ui.checkBoxRoadTypeHighway, SIGNAL(stateChanged(int)), this, SLOT(showRoad(int)));
+	connect(ui.checkBoxRoadTypeBoulevard, SIGNAL(stateChanged(int)), this, SLOT(showRoad(int)));
+	connect(ui.checkBoxRoadTypeAvenue, SIGNAL(stateChanged(int)), this, SLOT(showRoad(int)));
+	connect(ui.checkBoxRoadTypeLocalStreet, SIGNAL(stateChanged(int)), this, SLOT(showRoad(int)));
 	connect(ui.pushButtonClear, SIGNAL(clicked()), this, SLOT(clear()));
 	connect(ui.checkBoxRoadTypeLocalStreet, SIGNAL(stateChanged(int)), this, SLOT(showLocalStreet(int)));
 	connect(ui.pushButtonGenerateGrid, SIGNAL(clicked()), this, SLOT(generateGrid()));
 	connect(ui.pushButtonGenerateRadial, SIGNAL(clicked()), this, SLOT(generateRadial()));
 	connect(ui.pushButtonGenerateKDE, SIGNAL(clicked()), this, SLOT(generateKDE()));
 	connect(ui.pushButtonGenerateGeneric, SIGNAL(clicked()), this, SLOT(generateGeneric()));
+	connect(ui.pushButtonConnect, SIGNAL(clicked()), this, SLOT(connect()));
 
 	hide();
 }
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////
 // Event handlers
+
+void ControlWidget::showRoad(int flag) {
+	mainWin->glWidget->areas.roads.showHighways = ui.checkBoxRoadTypeHighway->isChecked();
+	mainWin->glWidget->areas.roads.showBoulevard = ui.checkBoxRoadTypeBoulevard->isChecked();
+	mainWin->glWidget->areas.roads.showAvenues = ui.checkBoxRoadTypeAvenue->isChecked();
+	mainWin->glWidget->areas.roads.showLocalStreets = ui.checkBoxRoadTypeLocalStreet->isChecked();
+	mainWin->glWidget->areas.roads.setModified();
+	for (int i = 0; i < mainWin->glWidget->areas.size(); ++i) {
+		mainWin->glWidget->areas[i].roads.showHighways = ui.checkBoxRoadTypeHighway->isChecked();
+		mainWin->glWidget->areas[i].roads.showBoulevard = ui.checkBoxRoadTypeBoulevard->isChecked();
+		mainWin->glWidget->areas[i].roads.showAvenues = ui.checkBoxRoadTypeAvenue->isChecked();
+		mainWin->glWidget->areas[i].roads.showLocalStreets = ui.checkBoxRoadTypeLocalStreet->isChecked();
+		mainWin->glWidget->areas[i].roads.setModified();
+	}
+
+	mainWin->glWidget->updateGL();
+}
 
 void ControlWidget::clear() {
 	mainWin->glWidget->areas[mainWin->glWidget->selectedArea].roads.clear();
@@ -61,7 +85,7 @@ void ControlWidget::generateGrid() {
 	}
 
 	RoadGenerator rg;
-	rg.generateRoadNetwork(mainWin->glWidget->areas[mainWin->glWidget->selectedArea], rf);
+	rg.generateRoadNetwork(mainWin->glWidget->areas.roads, mainWin->glWidget->areas[mainWin->glWidget->selectedArea].area, rf);
 
 	mainWin->glWidget->updateGL();
 }
@@ -76,7 +100,7 @@ void ControlWidget::generateRadial() {
 	rf.load("radial_feature.xml");
 
 	RoadGenerator rg;
-	rg.generateRoadNetwork(mainWin->glWidget->areas[mainWin->glWidget->selectedArea], rf);
+	rg.generateRoadNetwork(mainWin->glWidget->areas.roads, mainWin->glWidget->areas[mainWin->glWidget->selectedArea].area, rf);
 
 	mainWin->glWidget->updateGL();
 }
@@ -87,14 +111,23 @@ void ControlWidget::generateRadial() {
 void ControlWidget::generateKDE() {
 	if (mainWin->glWidget->selectedArea == -1) return;
 
+	QString filename = QFileDialog::getOpenFileName(this, tr("Open Feature file..."), "", tr("StreetMap Files (*.xml)"));
+
+	if (filename.isEmpty()) {
+		printf("Unable to open file\n");
+		return;
+	}
+
 	int iteration = ui.lineEditIteration->text().toInt();
+	bool addAvenuesOnBoundary = ui.checkBoxAddAvenuesOnBoundary->isChecked();
 	bool localStreets = ui.checkBoxLocalStreets->isChecked();
 
 	RoadFeature rf;
-	rf.load("kde_feature.xml");
+	rf.load(filename);
 
 	RoadGenerator rg;
-	rg.generateRoadNetwork(mainWin->glWidget->areas[mainWin->glWidget->selectedArea], rf, iteration, localStreets);
+	//rg.generateRoadNetwork(mainWin->glWidget->areas[mainWin->glWidget->selectedArea], rf, iteration, localStreets);
+	rg.generateRoadNetwork(mainWin->glWidget->areas[mainWin->glWidget->selectedArea].roads, mainWin->glWidget->areas[mainWin->glWidget->selectedArea].area, rf, addAvenuesOnBoundary, iteration, localStreets);
 
 	mainWin->glWidget->updateGL();
 }
@@ -109,8 +142,14 @@ void ControlWidget::generateGeneric() {
 	rf.load("generic_feature.xml");
 
 	RoadGenerator rg;
-	rg.generateRoadNetwork(mainWin->glWidget->areas[mainWin->glWidget->selectedArea], rf);
+	rg.generateRoadNetwork(mainWin->glWidget->areas.roads, mainWin->glWidget->areas[mainWin->glWidget->selectedArea].area, rf);
 
 	mainWin->glWidget->updateGL();
 }
 
+/**
+ * エリア間の境界上で、エッジができる限りつながるように、微調整する。
+ */
+void ControlWidget::connect() {
+
+}

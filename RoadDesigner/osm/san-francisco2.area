@@ -1,0 +1,152 @@
+<areas roads="C:/Users/gen/Documents/GitHub/RoadDesigner/RoadDesigner/osm/san-francisco2.area.gsm">
+    <area>
+        <point x="-3200" y="3400"/>
+        <point x="-3000" y="4600"/>
+        <point x="-3000" y="4600"/>
+        <point x="-1600" y="4200"/>
+        <point x="-600" y="4200"/>
+        <point x="-400" y="3200"/>
+        <point x="-1800" y="3000"/>
+        <point x="-3200" y="3000"/>
+        <point x="-3200" y="3400"/>
+    </area>
+    <area>
+        <point x="-1200" y="1600"/>
+        <point x="-1000" y="800"/>
+        <point x="-1000" y="800"/>
+        <point x="-4800" y="800"/>
+        <point x="-4800" y="1800"/>
+        <point x="-1200" y="1800"/>
+        <point x="-1200" y="1600"/>
+    </area>
+    <area>
+        <point x="-1000" y="-400"/>
+        <point x="0" y="-400"/>
+        <point x="200" y="-1800"/>
+        <point x="0" y="-3000"/>
+        <point x="-1000" y="-3000"/>
+        <point x="-1600" y="-1800"/>
+        <point x="-1800" y="-800"/>
+        <point x="-1800" y="-800"/>
+        <point x="-1000" y="-400"/>
+    </area>
+    <area>
+        <point x="4000" y="3800"/>
+        <point x="4400" y="3400"/>
+        <point x="4400" y="3400"/>
+        <point x="4200" y="2400"/>
+        <point x="3000" y="1400"/>
+        <point x="1200" y="1400"/>
+        <point x="4000" y="3800"/>
+    </area>
+    <area>
+        <point x="0" y="-3000"/>
+        <point x="200" y="-1800"/>
+        <point x="200" y="-1800"/>
+        <point x="0" y="-400"/>
+        <point x="-1000" y="-400"/>
+        <point x="1200" y="1400"/>
+        <point x="3000" y="1400"/>
+        <point x="4200" y="2400"/>
+        <point x="4400" y="1600"/>
+        <point x="4400" y="-1000"/>
+        <point x="2800" y="-1000"/>
+        <point x="2800" y="-2200"/>
+        <point x="2600" y="-2800"/>
+        <point x="800" y="-3000"/>
+        <point x="0" y="-3000"/>
+    </area>
+    <area>
+        <point x="2600" y="-2800"/>
+        <point x="2800" y="-2200"/>
+        <point x="2800" y="-2200"/>
+        <point x="2800" y="-1000"/>
+        <point x="4400" y="-1000"/>
+        <point x="4800" y="-1400"/>
+        <point x="4800" y="-4800"/>
+        <point x="3200" y="-4800"/>
+        <point x="2600" y="-2800"/>
+    </area>
+    <area>
+        <point x="-1800" y="3000"/>
+        <point x="-400" y="3200"/>
+        <point x="-400" y="3200"/>
+        <point x="-600" y="4200"/>
+        <point x="1600" y="4800"/>
+        <point x="3000" y="4800"/>
+        <point x="4000" y="3800"/>
+        <point x="1200" y="1400"/>
+        <point x="1200" y="1800"/>
+        <point x="-1200" y="1600"/>
+        <point x="-1200" y="1800"/>
+        <point x="-1200" y="2800"/>
+        <point x="-1800" y="3000"/>
+    </area>
+    <area>
+        <point x="-1200" y="1600"/>
+        <point x="1200" y="1800"/>
+        <point x="1200" y="1800"/>
+        <point x="1200" y="1800"/>
+        <point x="1200" y="1400"/>
+        <point x="-1000" y="-400"/>
+        <point x="-1000" y="800"/>
+        <point x="-1200" y="1600"/>
+    </area>
+    <area>
+        <point x="-2200" y="-4000"/>
+        <point x="-2200" y="-4800"/>
+        <point x="-2200" y="-4800"/>
+        <point x="-4800" y="-4800"/>
+        <point x="-4800" y="-4000"/>
+        <point x="-4200" y="-4000"/>
+        <point x="-3800" y="-3600"/>
+        <point x="-3400" y="-3800"/>
+        <point x="-3000" y="-3600"/>
+        <point x="-2200" y="-4000"/>
+    </area>
+    <area>
+        <point x="-2200" y="-4000"/>
+        <point x="-3000" y="-3600"/>
+        <point x="-3000" y="-3600"/>
+        <point x="-3400" y="-3800"/>
+        <point x="-3800" y="-3600"/>
+        <point x="-4200" y="-4000"/>
+        <point x="-4800" y="-4000"/>
+        <point x="-4800" y="800"/>
+        <point x="-1000" y="800"/>
+        <point x="-1000" y="-400"/>
+        <point x="-1800" y="-800"/>
+        <point x="-1600" y="-1800"/>
+        <point x="-1000" y="-3000"/>
+        <point x="-2200" y="-4000"/>
+    </area>
+    <area>
+        <point x="200" y="-4800"/>
+        <point x="800" y="-3000"/>
+        <point x="2600" y="-2800"/>
+        <point x="3200" y="-4800"/>
+        <point x="3200" y="-4800"/>
+        <point x="200" y="-4800"/>
+    </area>
+    <area>
+        <point x="200" y="-4800"/>
+        <point x="-2200" y="-4800"/>
+        <point x="-2200" y="-4000"/>
+        <point x="-1000" y="-3000"/>
+        <point x="0" y="-3000"/>
+        <point x="800" y="-3000"/>
+        <point x="800" y="-3000"/>
+        <point x="200" y="-4800"/>
+    </area>
+    <area>
+        <point x="-3200" y="3400"/>
+        <point x="-3200" y="3000"/>
+        <point x="-3200" y="3000"/>
+        <point x="-1800" y="3000"/>
+        <point x="-1200" y="2800"/>
+        <point x="-1200" y="1800"/>
+        <point x="-4800" y="1800"/>
+        <point x="-4800" y="3200"/>
+        <point x="-3200" y="3400"/>
+    </area>
+</areas>

@@ -54,7 +54,8 @@
     <addaction name="actionAreaSelect"/>
     <addaction name="actionAreaCreate"/>
     <addaction name="separator"/>
-    <addaction name="actionSketch"/>
+    <addaction name="actionHighwaySketch"/>
+    <addaction name="actionBoulevardSketch"/>
    </widget>
    <addaction name="menuFile"/>
    <addaction name="menuArea"/>
@@ -262,16 +263,16 @@
     <string>Create</string>
    </property>
   </action>
-  <action name="actionSketch">
+  <action name="actionHighwaySketch">
    <property name="checkable">
     <bool>true</bool>
    </property>
    <property name="icon">
-    <iconset resource="MainWindow.qrc">
-     <normaloff>:/MainWindow/Resources/Sketch_24x24.png</normaloff>:/MainWindow/Resources/Sketch_24x24.png</iconset>
+    <iconset>
+     <normaloff>Resources/SketchH_24x24.png</normaloff>Resources/SketchH_24x24.png</iconset>
    </property>
    <property name="text">
-    <string>Sketch</string>
+    <string>Highway Sketch</string>
    </property>
   </action>
   <action name="actionSave_2">
@@ -282,6 +283,25 @@
   <action name="actionSaveRoads">
    <property name="text">
     <string>Save Roads</string>
+   </property>
+  </action>
+  <action name="actionLoad_Highways">
+   <property name="text">
+    <string>Load Highways</string>
+   </property>
+  </action>
+  <action name="actionSave_Highways">
+   <property name="text">
+    <string>Save Highways</string>
+   </property>
+  </action>
+  <action name="actionBoulevardSketch">
+   <property name="icon">
+    <iconset resource="MainWindow.qrc">
+     <normaloff>:/MainWindow/Resources/SketchB_24x24.png</normaloff>:/MainWindow/Resources/SketchB_24x24.png</iconset>
+   </property>
+   <property name="text">
+    <string>Boulevard Sketch</string>
    </property>
   </action>
  </widget>
