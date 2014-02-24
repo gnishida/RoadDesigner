@@ -71,6 +71,7 @@ void MainWindow::onOpen() {
 
 	QApplication::setOverrideCursor(Qt::WaitCursor);
 	glWidget->areas.load(filename);
+	glWidget->areas.setZ(glWidget->camera->dz);
 	glWidget->updateGL();
 	QApplication::restoreOverrideCursor();
 }

@@ -29,6 +29,6 @@ public slots:
 	void generateRadial();
 	void generateKDE();
 	void generateGeneric();
-	void connect();
+	void connectRoads();
 };
 

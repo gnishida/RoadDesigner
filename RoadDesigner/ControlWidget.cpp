@@ -6,6 +6,7 @@
 #include <road/feature/RadialFeature.h>
 #include <road/feature/GenericFeature.h>
 #include <road/generator/RoadGenerator.h>
+#include <road/generator/KDERoadGenerator.h>
 
 ControlWidget::ControlWidget(MainWindow* mainWin) : QDockWidget("Control Widget", (QWidget*)mainWin) {
 	this->mainWin = mainWin;
@@ -31,7 +32,7 @@ ControlWidget::ControlWidget(MainWindow* mainWin) : QDockWidget("Control Widget"
 	connect(ui.pushButtonGenerateRadial, SIGNAL(clicked()), this, SLOT(generateRadial()));
 	connect(ui.pushButtonGenerateKDE, SIGNAL(clicked()), this, SLOT(generateKDE()));
 	connect(ui.pushButtonGenerateGeneric, SIGNAL(clicked()), this, SLOT(generateGeneric()));
-	connect(ui.pushButtonConnect, SIGNAL(clicked()), this, SLOT(connect()));
+	connect(ui.pushButtonConnect, SIGNAL(clicked()), this, SLOT(connectRoads()));
 
 	hide();
 }
@@ -126,9 +127,8 @@ void ControlWidget::generateKDE() {
 	rf.load(filename);
 
 	RoadGenerator rg;
-	//rg.generateRoadNetwork(mainWin->glWidget->areas[mainWin->glWidget->selectedArea], rf, iteration, localStreets);
-	rg.generateRoadNetwork(mainWin->glWidget->areas[mainWin->glWidget->selectedArea].roads, mainWin->glWidget->areas[mainWin->glWidget->selectedArea].area, rf, addAvenuesOnBoundary, iteration, localStreets);
-
+	//rg.generateRoadNetwork(mainWin->glWidget->areas[mainWin->glWidget->selectedArea].roads, mainWin->glWidget->areas[mainWin->glWidget->selectedArea].area, rf, addAvenuesOnBoundary, iteration, localStreets);
+	rg.generateRoadNetwork(mainWin->glWidget->areas.roads, mainWin->glWidget->areas[mainWin->glWidget->selectedArea].area, rf, addAvenuesOnBoundary, iteration, localStreets);
 	mainWin->glWidget->updateGL();
 }
 
@@ -150,6 +150,10 @@ void ControlWidget::generateGeneric() {
 /**
  * エリア間の境界上で、エッジができる限りつながるように、微調整する。
  */
-void ControlWidget::connect() {
+void ControlWidget::connectRoads() {
+	mainWin->glWidget->areas.mergeRoads();
+	KDERoadGenerator::connectRoads(mainWin->glWidget->areas.roads, 200.0f, 0.15f);
+	//KDERoadGenerator::connectRoads2(mainWin->glWidget->areas, 300.0f, 0.2f);
 
+	mainWin->glWidget->updateGL();
 }
