@@ -164,6 +164,9 @@
     <ClCompile Include="..\..\mylib\common\PolygonBuilder.cpp">
       <Filter>mylib\common</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\mylib\road\generator\KDERoadGenerator2.cpp">
+      <Filter>mylib\road\generator</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="MainWindow.h">
@@ -281,6 +284,9 @@
     </ClInclude>
     <ClInclude Include="..\..\mylib\common\PolygonBuilder.h">
       <Filter>mylib\common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\mylib\road\generator\KDERoadGenerator2.h">
+      <Filter>mylib\road\generator</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

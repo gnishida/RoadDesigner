@@ -7,6 +7,7 @@
 #include <road/feature/GenericFeature.h>
 #include <road/generator/RoadGenerator.h>
 #include <road/generator/KDERoadGenerator.h>
+#include <road/generator/KDERoadGenerator2.h>
 
 ControlWidget::ControlWidget(MainWindow* mainWin) : QDockWidget("Control Widget", (QWidget*)mainWin) {
 	this->mainWin = mainWin;
