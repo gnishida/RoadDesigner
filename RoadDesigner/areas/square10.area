@@ -1,0 +1,10 @@
+<areas roads="square10.area.gsm">
+    <area>
+        <point x="-600" y="800"/>
+        <point x="1400" y="800"/>
+        <point x="1400" y="-1200"/>
+        <point x="-600" y="-1200"/>
+        <point x="-600" y="-1200"/>
+        <point x="-600" y="800"/>
+    </area>
+</areas>

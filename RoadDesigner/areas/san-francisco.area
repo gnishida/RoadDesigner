@@ -1,4 +1,4 @@
-<areas roads="C:/Users/gen/Documents/GitHub/RoadDesigner/RoadDesigner/osm/san-francisco3.area.gsm">
+<areas roads="san-francisco.area.gsm">
     <area>
         <point x="-3200" y="3400"/>
         <point x="-3000" y="4600"/>
