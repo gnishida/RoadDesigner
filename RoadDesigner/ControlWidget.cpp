@@ -22,7 +22,7 @@ ControlWidget::ControlWidget(MainWindow* mainWin) : QDockWidget("Control Widget"
 	ui.checkBoxLocalStreets->setChecked(false);
 	ui.lineEditWeightEdge->setText("1");
 	ui.lineEditWeightLocation->setText("1");
-	ui.lineEditWeightRepetition->setText("200000");
+	ui.lineEditWeightRepetition->setText("2000000");
 
 	// register the event handlers
 	connect(ui.checkBoxRoadTypeHighway, SIGNAL(stateChanged(int)), this, SLOT(showRoad(int)));
@@ -32,6 +32,7 @@ ControlWidget::ControlWidget(MainWindow* mainWin) : QDockWidget("Control Widget"
 	connect(ui.pushButtonGenerateKDE, SIGNAL(clicked()), this, SLOT(generateKDE()));
 	connect(ui.pushButtonClear, SIGNAL(clicked()), this, SLOT(clear()));
 	connect(ui.pushButtonConnect, SIGNAL(clicked()), this, SLOT(connectRoads()));
+	connect(ui.pushButtonRemoveDeadend, SIGNAL(clicked()), this, SLOT(removeDeadends()));
 
 	hide();
 }
@@ -106,6 +107,12 @@ void ControlWidget::connectRoads() {
 	mainWin->glWidget->areas.mergeRoads();
 	KDERoadGenerator2::connectRoads(mainWin->glWidget->areas.roads, mainWin->glWidget->areas, 200.0f, 0.15f);
 	//KDERoadGenerator::connectRoads2(mainWin->glWidget->areas, 300.0f, 0.2f);
+
+	mainWin->glWidget->updateGL();
+}
+
+void ControlWidget::removeDeadends() {
+	GraphUtil::removeDeadEnd(mainWin->glWidget->areas.roads);
 
 	mainWin->glWidget->updateGL();
 }

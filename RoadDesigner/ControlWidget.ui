@@ -52,7 +52,7 @@
       <x>10</x>
       <y>310</y>
       <width>171</width>
-      <height>241</height>
+      <height>281</height>
      </rect>
     </property>
     <property name="title">
@@ -142,6 +142,19 @@
      </property>
      <property name="text">
       <string>Orientation:</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="pushButtonRemoveDeadend">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>240</y>
+       <width>131</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Remove Deadends</string>
      </property>
     </widget>
    </widget>

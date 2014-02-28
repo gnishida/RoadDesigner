@@ -26,5 +26,6 @@ public slots:
 	void generateKDE();
 	void clear();
 	void connectRoads();
+	void removeDeadends();
 };
 

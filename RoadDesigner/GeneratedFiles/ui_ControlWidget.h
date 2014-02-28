@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'ControlWidget.ui'
 **
-** Created: Fri Feb 28 12:49:21 2014
+** Created: Fri Feb 28 13:23:59 2014
 **      by: Qt User Interface Compiler version 4.8.1
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
@@ -38,6 +38,7 @@ public:
     QPushButton *pushButtonConnect;
     QDial *dialOrientation;
     QLabel *label_2;
+    QPushButton *pushButtonRemoveDeadend;
     QGroupBox *groupBox;
     QCheckBox *checkBoxAddAvenuesOnBoundary;
     QLabel *label;
@@ -71,7 +72,7 @@ public:
         checkBoxRoadTypeLocalStreet->setGeometry(QRect(90, 30, 91, 17));
         groupBox_8 = new QGroupBox(dockWidgetContents);
         groupBox_8->setObjectName(QString::fromUtf8("groupBox_8"));
-        groupBox_8->setGeometry(QRect(10, 310, 171, 241));
+        groupBox_8->setGeometry(QRect(10, 310, 171, 281));
         pushButtonGenerateKDE = new QPushButton(groupBox_8);
         pushButtonGenerateKDE->setObjectName(QString::fromUtf8("pushButtonGenerateKDE"));
         pushButtonGenerateKDE->setGeometry(QRect(20, 120, 131, 31));
@@ -95,6 +96,9 @@ public:
         label_2 = new QLabel(groupBox_8);
         label_2->setObjectName(QString::fromUtf8("label_2"));
         label_2->setGeometry(QRect(20, 20, 61, 16));
+        pushButtonRemoveDeadend = new QPushButton(groupBox_8);
+        pushButtonRemoveDeadend->setObjectName(QString::fromUtf8("pushButtonRemoveDeadend"));
+        pushButtonRemoveDeadend->setGeometry(QRect(20, 240, 131, 31));
         groupBox = new QGroupBox(dockWidgetContents);
         groupBox->setObjectName(QString::fromUtf8("groupBox"));
         groupBox->setGeometry(QRect(10, 60, 171, 121));
@@ -160,6 +164,7 @@ public:
         pushButtonClear->setText(QApplication::translate("ControlWidget", "Clear", 0, QApplication::UnicodeUTF8));
         pushButtonConnect->setText(QApplication::translate("ControlWidget", "Connect", 0, QApplication::UnicodeUTF8));
         label_2->setText(QApplication::translate("ControlWidget", "Orientation:", 0, QApplication::UnicodeUTF8));
+        pushButtonRemoveDeadend->setText(QApplication::translate("ControlWidget", "Remove Deadends", 0, QApplication::UnicodeUTF8));
         groupBox->setTitle(QApplication::translate("ControlWidget", "Options", 0, QApplication::UnicodeUTF8));
         checkBoxAddAvenuesOnBoundary->setText(QApplication::translate("ControlWidget", "Add Avenues on Boundary", 0, QApplication::UnicodeUTF8));
         label->setText(QApplication::translate("ControlWidget", "Iteration:", 0, QApplication::UnicodeUTF8));
