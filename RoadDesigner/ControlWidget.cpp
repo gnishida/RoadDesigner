@@ -18,7 +18,6 @@ ControlWidget::ControlWidget(MainWindow* mainWin) : QDockWidget("Control Widget"
 	ui.checkBoxRoadTypeBoulevard->setChecked(true);
 	ui.checkBoxRoadTypeAvenue->setChecked(true);
 	ui.checkBoxRoadTypeLocalStreet->setChecked(true);
-	ui.radioButtonGridPattern1->setChecked(true);
 	ui.lineEditIteration->setText("1000");
 	ui.checkBoxLocalStreets->setChecked(false);
 
@@ -27,12 +26,8 @@ ControlWidget::ControlWidget(MainWindow* mainWin) : QDockWidget("Control Widget"
 	connect(ui.checkBoxRoadTypeBoulevard, SIGNAL(stateChanged(int)), this, SLOT(showRoad(int)));
 	connect(ui.checkBoxRoadTypeAvenue, SIGNAL(stateChanged(int)), this, SLOT(showRoad(int)));
 	connect(ui.checkBoxRoadTypeLocalStreet, SIGNAL(stateChanged(int)), this, SLOT(showRoad(int)));
-	connect(ui.pushButtonClear, SIGNAL(clicked()), this, SLOT(clear()));
-	connect(ui.checkBoxRoadTypeLocalStreet, SIGNAL(stateChanged(int)), this, SLOT(showLocalStreet(int)));
-	connect(ui.pushButtonGenerateGrid, SIGNAL(clicked()), this, SLOT(generateGrid()));
-	connect(ui.pushButtonGenerateRadial, SIGNAL(clicked()), this, SLOT(generateRadial()));
 	connect(ui.pushButtonGenerateKDE, SIGNAL(clicked()), this, SLOT(generateKDE()));
-	connect(ui.pushButtonGenerateGeneric, SIGNAL(clicked()), this, SLOT(generateGeneric()));
+	connect(ui.pushButtonClear, SIGNAL(clicked()), this, SLOT(clear()));
 	connect(ui.pushButtonConnect, SIGNAL(clicked()), this, SLOT(connectRoads()));
 
 	hide();
@@ -58,55 +53,6 @@ void ControlWidget::showRoad(int flag) {
 	mainWin->glWidget->updateGL();
 }
 
-void ControlWidget::clear() {
-	mainWin->glWidget->areas[mainWin->glWidget->selectedArea].roads.clear();
-
-	mainWin->glWidget->updateGL();
-}
-
-void ControlWidget::showLocalStreet(int flag) {
-	//mainWin->glWidget->roads.showLocalStreets = ui.checkBoxRoadTypeLocalStreet->isChecked();
-	//mainWin->glWidget->roads.setModified();
-
-	mainWin->glWidget->updateGL();
-}
-
-/**
- * Event handler for button [Generate Grid]
- */
-void ControlWidget::generateGrid() {
-	if (mainWin->glWidget->selectedArea == -1) return;
-
-	//GridFeature gf(mainWin->glWidget->selectedArea);
-	RoadFeature rf;
-
-	if (ui.radioButtonGridPattern1->isChecked()) {
-		rf.load("grid_feature1.xml");
-	} else {
-		rf.load("grid_feature2.xml");
-	}
-
-	RoadGenerator rg;
-	rg.generateRoadNetwork(mainWin->glWidget->areas.roads, mainWin->glWidget->areas[mainWin->glWidget->selectedArea].area, rf);
-
-	mainWin->glWidget->updateGL();
-}
-
-/**
- * Event handler for button [Generate Radial]
- */
-void ControlWidget::generateRadial() {
-	if (mainWin->glWidget->selectedArea == -1) return;
-
-	RoadFeature rf;
-	rf.load("radial_feature.xml");
-
-	RoadGenerator rg;
-	rg.generateRoadNetwork(mainWin->glWidget->areas.roads, mainWin->glWidget->areas[mainWin->glWidget->selectedArea].area, rf);
-
-	mainWin->glWidget->updateGL();
-}
-
 /**
  * Event handler for button [Generate KDE-base]
  */
@@ -123,9 +69,14 @@ void ControlWidget::generateKDE() {
 	int iteration = ui.lineEditIteration->text().toInt();
 	bool addAvenuesOnBoundary = ui.checkBoxAddAvenuesOnBoundary->isChecked();
 	bool localStreets = ui.checkBoxLocalStreets->isChecked();
+	int orientation = ui.dialOrientation->value() - 180;
 
 	RoadFeature rf;
 	rf.load(filename);
+
+	if (orientation != 0) {
+		rf.rotate(orientation);
+	}
 
 	RoadGenerator rg;
 	//rg.generateRoadNetwork(mainWin->glWidget->areas[mainWin->glWidget->selectedArea].roads, mainWin->glWidget->areas[mainWin->glWidget->selectedArea].area, rf, addAvenuesOnBoundary, iteration, localStreets);
@@ -133,17 +84,8 @@ void ControlWidget::generateKDE() {
 	mainWin->glWidget->updateGL();
 }
 
-/**
- * Event handler for button [Generate Generic]
- */
-void ControlWidget::generateGeneric() {
-	if (mainWin->glWidget->selectedArea == -1) return;
-
-	RoadFeature rf;
-	rf.load("generic_feature.xml");
-
-	RoadGenerator rg;
-	rg.generateRoadNetwork(mainWin->glWidget->areas.roads, mainWin->glWidget->areas[mainWin->glWidget->selectedArea].area, rf);
+void ControlWidget::clear() {
+	mainWin->glWidget->areas[mainWin->glWidget->selectedArea].roads.clear();
 
 	mainWin->glWidget->updateGL();
 }
