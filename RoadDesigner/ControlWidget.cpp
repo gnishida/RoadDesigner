@@ -79,8 +79,8 @@ void ControlWidget::generateKDE() {
 	}
 
 	RoadGenerator rg;
-	//rg.generateRoadNetwork(mainWin->glWidget->areas[mainWin->glWidget->selectedArea].roads, mainWin->glWidget->areas[mainWin->glWidget->selectedArea].area, rf, addAvenuesOnBoundary, iteration, localStreets);
-	rg.generateRoadNetwork(mainWin->glWidget->areas.roads, mainWin->glWidget->areas[mainWin->glWidget->selectedArea].area, rf, addAvenuesOnBoundary, iteration, localStreets);
+	rg.generateRoadNetwork(mainWin->glWidget->areas[mainWin->glWidget->selectedArea].roads, mainWin->glWidget->areas[mainWin->glWidget->selectedArea].area, rf, addAvenuesOnBoundary, iteration, localStreets);
+	//rg.generateRoadNetwork(mainWin->glWidget->areas.roads, mainWin->glWidget->areas[mainWin->glWidget->selectedArea].area, rf, addAvenuesOnBoundary, iteration, localStreets);
 	mainWin->glWidget->updateGL();
 }
 
