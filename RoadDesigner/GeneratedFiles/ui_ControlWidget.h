@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'ControlWidget.ui'
 **
-** Created: Thu Feb 27 15:51:37 2014
+** Created: Fri Feb 28 12:49:21 2014
 **      by: Qt User Interface Compiler version 4.8.1
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
@@ -43,9 +43,16 @@ public:
     QLabel *label;
     QLineEdit *lineEditIteration;
     QCheckBox *checkBoxLocalStreets;
+    QCheckBox *checkBoxInvadingCheck;
     QCheckBox *checkBoxRoadTypeHighway;
     QCheckBox *checkBoxRoadTypeBoulevard;
-    QButtonGroup *buttonGroupGridPattern;
+    QGroupBox *groupBox_2;
+    QLabel *label_3;
+    QLabel *label_4;
+    QLabel *label_5;
+    QLineEdit *lineEditWeightEdge;
+    QLineEdit *lineEditWeightLocation;
+    QLineEdit *lineEditWeightRepetition;
 
     void setupUi(QDockWidget *ControlWidget)
     {
@@ -64,7 +71,7 @@ public:
         checkBoxRoadTypeLocalStreet->setGeometry(QRect(90, 30, 91, 17));
         groupBox_8 = new QGroupBox(dockWidgetContents);
         groupBox_8->setObjectName(QString::fromUtf8("groupBox_8"));
-        groupBox_8->setGeometry(QRect(10, 180, 171, 241));
+        groupBox_8->setGeometry(QRect(10, 310, 171, 241));
         pushButtonGenerateKDE = new QPushButton(groupBox_8);
         pushButtonGenerateKDE->setObjectName(QString::fromUtf8("pushButtonGenerateKDE"));
         pushButtonGenerateKDE->setGeometry(QRect(20, 120, 131, 31));
@@ -90,26 +97,53 @@ public:
         label_2->setGeometry(QRect(20, 20, 61, 16));
         groupBox = new QGroupBox(dockWidgetContents);
         groupBox->setObjectName(QString::fromUtf8("groupBox"));
-        groupBox->setGeometry(QRect(10, 60, 171, 101));
+        groupBox->setGeometry(QRect(10, 60, 171, 121));
         checkBoxAddAvenuesOnBoundary = new QCheckBox(groupBox);
         checkBoxAddAvenuesOnBoundary->setObjectName(QString::fromUtf8("checkBoxAddAvenuesOnBoundary"));
-        checkBoxAddAvenuesOnBoundary->setGeometry(QRect(10, 50, 151, 17));
+        checkBoxAddAvenuesOnBoundary->setGeometry(QRect(10, 70, 151, 17));
         label = new QLabel(groupBox);
         label->setObjectName(QString::fromUtf8("label"));
-        label->setGeometry(QRect(10, 20, 46, 16));
+        label->setGeometry(QRect(10, 20, 46, 21));
         lineEditIteration = new QLineEdit(groupBox);
         lineEditIteration->setObjectName(QString::fromUtf8("lineEditIteration"));
         lineEditIteration->setGeometry(QRect(70, 20, 91, 20));
         lineEditIteration->setAlignment(Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter);
         checkBoxLocalStreets = new QCheckBox(groupBox);
         checkBoxLocalStreets->setObjectName(QString::fromUtf8("checkBoxLocalStreets"));
-        checkBoxLocalStreets->setGeometry(QRect(10, 70, 131, 17));
+        checkBoxLocalStreets->setGeometry(QRect(10, 90, 131, 17));
+        checkBoxInvadingCheck = new QCheckBox(groupBox);
+        checkBoxInvadingCheck->setObjectName(QString::fromUtf8("checkBoxInvadingCheck"));
+        checkBoxInvadingCheck->setGeometry(QRect(10, 50, 151, 17));
         checkBoxRoadTypeHighway = new QCheckBox(dockWidgetContents);
         checkBoxRoadTypeHighway->setObjectName(QString::fromUtf8("checkBoxRoadTypeHighway"));
         checkBoxRoadTypeHighway->setGeometry(QRect(10, 10, 70, 17));
         checkBoxRoadTypeBoulevard = new QCheckBox(dockWidgetContents);
         checkBoxRoadTypeBoulevard->setObjectName(QString::fromUtf8("checkBoxRoadTypeBoulevard"));
         checkBoxRoadTypeBoulevard->setGeometry(QRect(90, 10, 91, 17));
+        groupBox_2 = new QGroupBox(dockWidgetContents);
+        groupBox_2->setObjectName(QString::fromUtf8("groupBox_2"));
+        groupBox_2->setGeometry(QRect(10, 200, 171, 91));
+        label_3 = new QLabel(groupBox_2);
+        label_3->setObjectName(QString::fromUtf8("label_3"));
+        label_3->setGeometry(QRect(10, 20, 81, 21));
+        label_4 = new QLabel(groupBox_2);
+        label_4->setObjectName(QString::fromUtf8("label_4"));
+        label_4->setGeometry(QRect(10, 40, 81, 21));
+        label_5 = new QLabel(groupBox_2);
+        label_5->setObjectName(QString::fromUtf8("label_5"));
+        label_5->setGeometry(QRect(10, 60, 81, 21));
+        lineEditWeightEdge = new QLineEdit(groupBox_2);
+        lineEditWeightEdge->setObjectName(QString::fromUtf8("lineEditWeightEdge"));
+        lineEditWeightEdge->setGeometry(QRect(90, 20, 71, 20));
+        lineEditWeightEdge->setAlignment(Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter);
+        lineEditWeightLocation = new QLineEdit(groupBox_2);
+        lineEditWeightLocation->setObjectName(QString::fromUtf8("lineEditWeightLocation"));
+        lineEditWeightLocation->setGeometry(QRect(90, 40, 71, 20));
+        lineEditWeightLocation->setAlignment(Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter);
+        lineEditWeightRepetition = new QLineEdit(groupBox_2);
+        lineEditWeightRepetition->setObjectName(QString::fromUtf8("lineEditWeightRepetition"));
+        lineEditWeightRepetition->setGeometry(QRect(90, 60, 71, 20));
+        lineEditWeightRepetition->setAlignment(Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter);
         ControlWidget->setWidget(dockWidgetContents);
 
         retranslateUi(ControlWidget);
@@ -130,8 +164,13 @@ public:
         checkBoxAddAvenuesOnBoundary->setText(QApplication::translate("ControlWidget", "Add Avenues on Boundary", 0, QApplication::UnicodeUTF8));
         label->setText(QApplication::translate("ControlWidget", "Iteration:", 0, QApplication::UnicodeUTF8));
         checkBoxLocalStreets->setText(QApplication::translate("ControlWidget", "Generate Local Streets", 0, QApplication::UnicodeUTF8));
+        checkBoxInvadingCheck->setText(QApplication::translate("ControlWidget", "Invading Check", 0, QApplication::UnicodeUTF8));
         checkBoxRoadTypeHighway->setText(QApplication::translate("ControlWidget", "Highways", 0, QApplication::UnicodeUTF8));
         checkBoxRoadTypeBoulevard->setText(QApplication::translate("ControlWidget", "Boulevards", 0, QApplication::UnicodeUTF8));
+        groupBox_2->setTitle(QApplication::translate("ControlWidget", "Weight", 0, QApplication::UnicodeUTF8));
+        label_3->setText(QApplication::translate("ControlWidget", "Edge Geometry:", 0, QApplication::UnicodeUTF8));
+        label_4->setText(QApplication::translate("ControlWidget", "Location:", 0, QApplication::UnicodeUTF8));
+        label_5->setText(QApplication::translate("ControlWidget", "Repetition:", 0, QApplication::UnicodeUTF8));
         Q_UNUSED(ControlWidget);
     } // retranslateUi
 
