@@ -20,6 +20,7 @@ ControlWidget::ControlWidget(MainWindow* mainWin) : QDockWidget("Control Widget"
 	ui.checkBoxRoadTypeLocalStreet->setChecked(true);
 	ui.lineEditIteration->setText("1000");
 	ui.checkBoxLocalStreets->setChecked(false);
+	ui.checkBoxInvadingCheck->setChecked(false);
 	ui.lineEditWeightEdge->setText("1");
 	ui.lineEditWeightLocation->setText("1");
 	ui.lineEditWeightRepetition->setText("2000000");
@@ -95,7 +96,10 @@ void ControlWidget::generateKDE() {
 }
 
 void ControlWidget::clear() {
-	mainWin->glWidget->areas[mainWin->glWidget->selectedArea].roads.clear();
+	if (mainWin->glWidget->selectedArea >= 0) {
+		mainWin->glWidget->areas[mainWin->glWidget->selectedArea].roads.clear();
+		mainWin->glWidget->vertexSelected = false;
+	}
 
 	mainWin->glWidget->updateGL();
 }
@@ -105,8 +109,7 @@ void ControlWidget::clear() {
  */
 void ControlWidget::connectRoads() {
 	mainWin->glWidget->areas.mergeRoads();
-	KDERoadGenerator2::connectRoads(mainWin->glWidget->areas.roads, mainWin->glWidget->areas, 200.0f, 0.15f);
-	//KDERoadGenerator::connectRoads2(mainWin->glWidget->areas, 300.0f, 0.2f);
+	KDERoadGenerator::connectRoads(mainWin->glWidget->areas.roads, mainWin->glWidget->areas, 200.0f, 0.15f);
 
 	mainWin->glWidget->updateGL();
 }

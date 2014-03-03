@@ -29,6 +29,8 @@ public:
 	int selectedArea;
 	PolygonBuilder areaBuilder;
 	PolygonBuilder roadsBuilder;
+	bool vertexSelected;
+	RoadVertexDesc selectedVertex;
 
 	// key status
 	bool shiftPressed;

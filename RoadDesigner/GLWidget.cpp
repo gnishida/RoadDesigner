@@ -1,8 +1,9 @@
-﻿#include "GLWidget.h"
+﻿#include <vector>
+#include "GLWidget.h"
 #include "MainWindow.h"
 #include <road/GraphUtil.h>
 #include <gl/GLU.h>
-#include <vector>
+#include <road/generator/RoadGeneratorHelper.h>
 
 float GLWidget::MIN_Z = 150.0f;
 float GLWidget::MAX_Z = 11520.0f;
@@ -33,6 +34,7 @@ GLWidget::GLWidget(MainWindow* mainWin) : QGLWidget(QGLFormat(QGL::SampleBuffers
 	keyXPressed = false;
 
 	selectedArea = -1;
+	vertexSelected = false;
 }
 
 GLWidget::~GLWidget() {
@@ -71,6 +73,17 @@ void GLWidget::drawScene() {
 	// draw the highways
 	areas.roads.generateMesh();
 	renderer->render(areas.roads.renderables);
+
+	// draw the kernel
+	if (vertexSelected && selectedArea >= 0 && areas[selectedArea].roads.graph[selectedVertex]->kernel.id != -1) {
+		RoadGraph kernel_graph;
+		RoadGeneratorHelper::buildGraphFromKernel(kernel_graph, areas[selectedArea].roads.graph[selectedVertex]->kernel, areas[selectedArea].area.centroid());
+		kernel_graph.setZ(camera->dz);
+		kernel_graph.highwayHeight += 10;
+		kernel_graph.avenueHeight += 10;
+		kernel_graph.generateMesh();
+		renderer->render(kernel_graph.renderables);
+	}
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -145,9 +158,17 @@ void GLWidget::mousePressEvent(QMouseEvent *e) {
 		switch (mainWin->mode) {
 		case MainWindow::MODE_AREA_SELECT:
 			selectedArea = -1;
+			vertexSelected = false;
 			for (int i = 0; i < areas.size(); ++i) {
 				if (areas[i].area.contains(pos)) {
 					selectedArea = i;
+
+					if (GraphUtil::getVertex(areas[i].roads, pos, 500, selectedVertex)) {
+						vertexSelected = true;
+					} else {
+						vertexSelected = false;
+					}
+
 					break;
 				}
 			}
