@@ -77,7 +77,7 @@ void GLWidget::drawScene() {
 	// draw the kernel
 	if (vertexSelected && selectedArea >= 0 && areas[selectedArea].roads.graph[selectedVertex]->kernel.id != -1) {
 		RoadGraph kernel_graph;
-		RoadGeneratorHelper::buildGraphFromKernel(kernel_graph, areas[selectedArea].roads.graph[selectedVertex]->kernel, areas[selectedArea].area.centroid());
+		RoadGeneratorHelper::buildGraphFromKernel(kernel_graph, areas[selectedArea].roads.graph[selectedVertex]->kernel, areas[selectedArea].area.envelope().midPt());
 		kernel_graph.setZ(camera->dz);
 		kernel_graph.highwayHeight += 10;
 		kernel_graph.avenueHeight += 10;

@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'ControlWidget.ui'
 **
-** Created: Fri Feb 28 13:23:59 2014
+** Created: Tue Mar 4 14:51:55 2014
 **      by: Qt User Interface Compiler version 4.8.1
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
@@ -22,6 +22,7 @@
 #include <QtGui/QLabel>
 #include <QtGui/QLineEdit>
 #include <QtGui/QPushButton>
+#include <QtGui/QRadioButton>
 #include <QtGui/QWidget>
 
 QT_BEGIN_NAMESPACE
@@ -42,7 +43,7 @@ public:
     QGroupBox *groupBox;
     QCheckBox *checkBoxAddAvenuesOnBoundary;
     QLabel *label;
-    QLineEdit *lineEditIteration;
+    QLineEdit *lineEditNumIterations;
     QCheckBox *checkBoxLocalStreets;
     QCheckBox *checkBoxInvadingCheck;
     QCheckBox *checkBoxRoadTypeHighway;
@@ -54,6 +55,11 @@ public:
     QLineEdit *lineEditWeightEdge;
     QLineEdit *lineEditWeightLocation;
     QLineEdit *lineEditWeightRepetition;
+    QGroupBox *groupBox_3;
+    QRadioButton *radioButtonMultiSeeds;
+    QRadioButton *radioButtonOneSeed;
+    QCheckBox *checkBoxAreaScaling;
+    QButtonGroup *buttonGroup;
 
     void setupUi(QDockWidget *ControlWidget)
     {
@@ -72,7 +78,7 @@ public:
         checkBoxRoadTypeLocalStreet->setGeometry(QRect(90, 30, 91, 17));
         groupBox_8 = new QGroupBox(dockWidgetContents);
         groupBox_8->setObjectName(QString::fromUtf8("groupBox_8"));
-        groupBox_8->setGeometry(QRect(10, 310, 171, 281));
+        groupBox_8->setGeometry(QRect(10, 390, 171, 281));
         pushButtonGenerateKDE = new QPushButton(groupBox_8);
         pushButtonGenerateKDE->setObjectName(QString::fromUtf8("pushButtonGenerateKDE"));
         pushButtonGenerateKDE->setGeometry(QRect(20, 120, 131, 31));
@@ -108,10 +114,10 @@ public:
         label = new QLabel(groupBox);
         label->setObjectName(QString::fromUtf8("label"));
         label->setGeometry(QRect(10, 20, 46, 21));
-        lineEditIteration = new QLineEdit(groupBox);
-        lineEditIteration->setObjectName(QString::fromUtf8("lineEditIteration"));
-        lineEditIteration->setGeometry(QRect(70, 20, 91, 20));
-        lineEditIteration->setAlignment(Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter);
+        lineEditNumIterations = new QLineEdit(groupBox);
+        lineEditNumIterations->setObjectName(QString::fromUtf8("lineEditNumIterations"));
+        lineEditNumIterations->setGeometry(QRect(70, 20, 91, 20));
+        lineEditNumIterations->setAlignment(Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter);
         checkBoxLocalStreets = new QCheckBox(groupBox);
         checkBoxLocalStreets->setObjectName(QString::fromUtf8("checkBoxLocalStreets"));
         checkBoxLocalStreets->setGeometry(QRect(10, 90, 131, 17));
@@ -126,7 +132,7 @@ public:
         checkBoxRoadTypeBoulevard->setGeometry(QRect(90, 10, 91, 17));
         groupBox_2 = new QGroupBox(dockWidgetContents);
         groupBox_2->setObjectName(QString::fromUtf8("groupBox_2"));
-        groupBox_2->setGeometry(QRect(10, 200, 171, 91));
+        groupBox_2->setGeometry(QRect(10, 290, 171, 91));
         label_3 = new QLabel(groupBox_2);
         label_3->setObjectName(QString::fromUtf8("label_3"));
         label_3->setGeometry(QRect(10, 20, 81, 21));
@@ -148,6 +154,22 @@ public:
         lineEditWeightRepetition->setObjectName(QString::fromUtf8("lineEditWeightRepetition"));
         lineEditWeightRepetition->setGeometry(QRect(90, 60, 71, 20));
         lineEditWeightRepetition->setAlignment(Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter);
+        groupBox_3 = new QGroupBox(dockWidgetContents);
+        groupBox_3->setObjectName(QString::fromUtf8("groupBox_3"));
+        groupBox_3->setGeometry(QRect(10, 190, 171, 91));
+        radioButtonMultiSeeds = new QRadioButton(groupBox_3);
+        buttonGroup = new QButtonGroup(ControlWidget);
+        buttonGroup->setObjectName(QString::fromUtf8("buttonGroup"));
+        buttonGroup->addButton(radioButtonMultiSeeds);
+        radioButtonMultiSeeds->setObjectName(QString::fromUtf8("radioButtonMultiSeeds"));
+        radioButtonMultiSeeds->setGeometry(QRect(10, 40, 121, 17));
+        radioButtonOneSeed = new QRadioButton(groupBox_3);
+        buttonGroup->addButton(radioButtonOneSeed);
+        radioButtonOneSeed->setObjectName(QString::fromUtf8("radioButtonOneSeed"));
+        radioButtonOneSeed->setGeometry(QRect(10, 20, 121, 17));
+        checkBoxAreaScaling = new QCheckBox(groupBox_3);
+        checkBoxAreaScaling->setObjectName(QString::fromUtf8("checkBoxAreaScaling"));
+        checkBoxAreaScaling->setGeometry(QRect(10, 60, 111, 17));
         ControlWidget->setWidget(dockWidgetContents);
 
         retranslateUi(ControlWidget);
@@ -176,6 +198,10 @@ public:
         label_3->setText(QApplication::translate("ControlWidget", "Edge Geometry:", 0, QApplication::UnicodeUTF8));
         label_4->setText(QApplication::translate("ControlWidget", "Location:", 0, QApplication::UnicodeUTF8));
         label_5->setText(QApplication::translate("ControlWidget", "Repetition:", 0, QApplication::UnicodeUTF8));
+        groupBox_3->setTitle(QApplication::translate("ControlWidget", "For Larger Area", 0, QApplication::UnicodeUTF8));
+        radioButtonMultiSeeds->setText(QApplication::translate("ControlWidget", "Multiple Seeds", 0, QApplication::UnicodeUTF8));
+        radioButtonOneSeed->setText(QApplication::translate("ControlWidget", "One Seed", 0, QApplication::UnicodeUTF8));
+        checkBoxAreaScaling->setText(QApplication::translate("ControlWidget", "Area Scaling", 0, QApplication::UnicodeUTF8));
         Q_UNUSED(ControlWidget);
     } // retranslateUi
 

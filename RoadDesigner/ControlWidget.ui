@@ -50,7 +50,7 @@
     <property name="geometry">
      <rect>
       <x>10</x>
-      <y>310</y>
+      <y>390</y>
       <width>171</width>
       <height>281</height>
      </rect>
@@ -196,7 +196,7 @@
       <string>Iteration:</string>
      </property>
     </widget>
-    <widget class="QLineEdit" name="lineEditIteration">
+    <widget class="QLineEdit" name="lineEditNumIterations">
      <property name="geometry">
       <rect>
        <x>70</x>
@@ -266,7 +266,7 @@
     <property name="geometry">
      <rect>
       <x>10</x>
-      <y>200</y>
+      <y>290</y>
       <width>171</width>
       <height>91</height>
      </rect>
@@ -353,8 +353,69 @@
      </property>
     </widget>
    </widget>
+   <widget class="QGroupBox" name="groupBox_3">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>190</y>
+      <width>171</width>
+      <height>91</height>
+     </rect>
+    </property>
+    <property name="title">
+     <string>For Larger Area</string>
+    </property>
+    <widget class="QRadioButton" name="radioButtonMultiSeeds">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>40</y>
+       <width>121</width>
+       <height>17</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Multiple Seeds</string>
+     </property>
+     <attribute name="buttonGroup">
+      <string notr="true">buttonGroup</string>
+     </attribute>
+    </widget>
+    <widget class="QRadioButton" name="radioButtonOneSeed">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>20</y>
+       <width>121</width>
+       <height>17</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>One Seed</string>
+     </property>
+     <attribute name="buttonGroup">
+      <string notr="true">buttonGroup</string>
+     </attribute>
+    </widget>
+    <widget class="QCheckBox" name="checkBoxAreaScaling">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>60</y>
+       <width>111</width>
+       <height>17</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Area Scaling</string>
+     </property>
+    </widget>
+   </widget>
   </widget>
  </widget>
  <resources/>
  <connections/>
+ <buttongroups>
+  <buttongroup name="buttonGroup"/>
+ </buttongroups>
 </ui>

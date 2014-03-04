@@ -1,6 +1,7 @@
 ﻿#include "ControlWidget.h"
 #include "MainWindow.h"
 #include "GLWidget.h"
+#include <common/global.h>
 #include <road/GraphUtil.h>
 #include <road/feature/GridFeature.h>
 #include <road/feature/RadialFeature.h>
@@ -18,9 +19,10 @@ ControlWidget::ControlWidget(MainWindow* mainWin) : QDockWidget("Control Widget"
 	ui.checkBoxRoadTypeBoulevard->setChecked(true);
 	ui.checkBoxRoadTypeAvenue->setChecked(true);
 	ui.checkBoxRoadTypeLocalStreet->setChecked(true);
-	ui.lineEditIteration->setText("1000");
+	ui.lineEditNumIterations->setText("1000");
 	ui.checkBoxLocalStreets->setChecked(false);
 	ui.checkBoxInvadingCheck->setChecked(false);
+	ui.radioButtonMultiSeeds->setChecked(true);
 	ui.lineEditWeightEdge->setText("1");
 	ui.lineEditWeightLocation->setText("1");
 	ui.lineEditWeightRepetition->setText("2000000");
@@ -71,16 +73,19 @@ void ControlWidget::generateKDE() {
 		return;
 	}
 
-	bool invadingCheck = ui.checkBoxInvadingCheck->isChecked();
-	int iteration = ui.lineEditIteration->text().toInt();
-	bool addAvenuesOnBoundary = ui.checkBoxAddAvenuesOnBoundary->isChecked();
-	bool localStreets = ui.checkBoxLocalStreets->isChecked();
+	G::global()["invadingCheck"] = ui.checkBoxInvadingCheck->isChecked();
+	G::global()["numIterations"] = ui.lineEditNumIterations->text().toInt();
+	G::global()["addAvenuesOnBoundary"] = ui.checkBoxAddAvenuesOnBoundary->isChecked();
+	G::global()["generateLocalStreets"] = ui.checkBoxLocalStreets->isChecked();
+	G::global()["weightEdge"] = ui.lineEditWeightEdge->text().toFloat();
+	G::global()["weightLocation"] = ui.lineEditWeightLocation->text().toFloat();
+	G::global()["weightRepetition"] = ui.lineEditWeightRepetition->text().toFloat();
 
-	float weightEdge = ui.lineEditWeightEdge->text().toFloat();
-	float weightLocation = ui.lineEditWeightLocation->text().toFloat();
-	float weightRepetition = ui.lineEditWeightRepetition->text().toFloat();
+	G::global()["multiSeeds"] = ui.radioButtonMultiSeeds->isChecked();
+	G::global()["areaScaling"] = ui.checkBoxAreaScaling->isChecked();
 
 	int orientation = ui.dialOrientation->value() - 180;
+	bool areaScaling = ui.checkBoxAreaScaling->isChecked();
 
 	RoadFeature rf;
 	rf.load(filename);
@@ -89,8 +94,13 @@ void ControlWidget::generateKDE() {
 		rf.rotate(orientation);
 	}
 
+	if (areaScaling) {
+		rf.scale(mainWin->glWidget->areas[mainWin->glWidget->selectedArea].area);
+	}
+
+
 	RoadGenerator rg;
-	rg.generateRoadNetwork(mainWin->glWidget->areas[mainWin->glWidget->selectedArea].roads, mainWin->glWidget->areas[mainWin->glWidget->selectedArea].area, rf, invadingCheck, weightEdge, weightLocation, weightRepetition, addAvenuesOnBoundary, iteration, localStreets);
+	rg.generateRoadNetwork(mainWin->glWidget->areas[mainWin->glWidget->selectedArea].roads, mainWin->glWidget->areas[mainWin->glWidget->selectedArea].area, rf);
 	//rg.generateRoadNetwork(mainWin->glWidget->areas.roads, mainWin->glWidget->areas[mainWin->glWidget->selectedArea].area, rf, addAvenuesOnBoundary, iteration, localStreets);
 	mainWin->glWidget->updateGL();
 }

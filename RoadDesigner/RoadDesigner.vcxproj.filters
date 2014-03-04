@@ -170,6 +170,9 @@
     <ClCompile Include="..\..\mylib\road\generator\RoadGeneratorHelper.cpp">
       <Filter>mylib\road\generator</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\mylib\common\global.cpp">
+      <Filter>mylib\common</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="MainWindow.h">
@@ -293,6 +296,9 @@
     </ClInclude>
     <ClInclude Include="..\..\mylib\road\generator\RoadGeneratorHelper.h">
       <Filter>mylib\road\generator</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\mylib\common\global.h">
+      <Filter>mylib\common</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
