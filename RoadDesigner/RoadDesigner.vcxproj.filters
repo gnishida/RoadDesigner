@@ -164,9 +164,6 @@
     <ClCompile Include="..\..\mylib\common\PolygonBuilder.cpp">
       <Filter>mylib\common</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\mylib\road\generator\KDERoadGenerator2.cpp">
-      <Filter>mylib\road\generator</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\mylib\road\generator\RoadGeneratorHelper.cpp">
       <Filter>mylib\road\generator</Filter>
     </ClCompile>
@@ -290,9 +287,6 @@
     </ClInclude>
     <ClInclude Include="..\..\mylib\common\PolygonBuilder.h">
       <Filter>mylib\common</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\mylib\road\generator\KDERoadGenerator2.h">
-      <Filter>mylib\road\generator</Filter>
     </ClInclude>
     <ClInclude Include="..\..\mylib\road\generator\RoadGeneratorHelper.h">
       <Filter>mylib\road\generator</Filter>
