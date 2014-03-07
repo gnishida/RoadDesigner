@@ -16,12 +16,22 @@ PropertyWidget::PropertyWidget(MainWindow* mainWin) : QDockWidget("Property Widg
 void PropertyWidget::setRoadVertex(RoadGraph &roads, RoadVertexDesc vertexDesc, RoadVertexPtr selectedVertex) {
 	QString desc("");
 	QString location("");
+	QString parent("");
+	QString uncles("");
 	QString neighbors("");
 	QString kernel("");
 
 	desc.setNum(vertexDesc);
 
 	location = QString("(%1, %2)").arg(roads.graph[vertexDesc]->pt.x(), 0, 'f', 0).arg(roads.graph[vertexDesc]->pt.y(), 0, 'f', 0);
+
+	if (roads.graph[vertexDesc]->properties.contains("parent")) {
+		parent.setNum(roads.graph[vertexDesc]->properties["parent"].toInt());
+	}
+
+	if (roads.graph[vertexDesc]->properties.contains("uncles")) {
+		uncles = roads.graph[vertexDesc]->properties["uncles"].toString();
+	}
 
 	std::vector<RoadVertexDesc> n = GraphUtil::getNeighbors(roads, vertexDesc);
 	for (int i = 0; i < n.size(); i++) {
@@ -36,6 +46,8 @@ void PropertyWidget::setRoadVertex(RoadGraph &roads, RoadVertexDesc vertexDesc, 
 
 	ui.lineEditVertexDesc->setText(desc);
 	ui.lineEditVertexPos->setText(location);
+	ui.lineEditVertexParent->setText(parent);
+	ui.textEditVertexUncles->setText(uncles);
 	ui.textEditVertexNeighbors->setText(neighbors);
 	ui.lineEditKernel->setText(kernel);
 }
@@ -86,6 +98,8 @@ void PropertyWidget::setRoadEdge(RoadEdgePtr selectedEdge) {
 void PropertyWidget::resetRoadVertex() {
 	ui.lineEditVertexDesc->setText("");
 	ui.lineEditVertexPos->setText("");
+	ui.lineEditVertexParent->setText("");
+	ui.textEditVertexUncles->setText("");
 	ui.textEditVertexNeighbors->setText("");
 	ui.lineEditKernel->setText("");
 }

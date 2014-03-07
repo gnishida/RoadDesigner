@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'ControlWidget.ui'
 **
-** Created: Thu Mar 6 20:19:17 2014
+** Created: Fri Mar 7 16:14:58 2014
 **      by: Qt User Interface Compiler version 4.8.1
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
@@ -46,6 +46,7 @@ public:
     QLineEdit *lineEditNumIterations;
     QCheckBox *checkBoxLocalStreets;
     QCheckBox *checkBoxInvadingCheck;
+    QCheckBox *checkBoxSaveSnappingImages;
     QCheckBox *checkBoxRoadTypeHighway;
     QCheckBox *checkBoxRoadTypeBoulevard;
     QGroupBox *groupBox_2;
@@ -59,17 +60,20 @@ public:
     QRadioButton *radioButtonMultiSeeds;
     QRadioButton *radioButtonOneSeed;
     QCheckBox *checkBoxAreaScaling;
+    QCheckBox *checkBoxConnectAvenues;
+    QCheckBox *checkBoxCropping;
+    QCheckBox *checkBoxSaveConnectingImages;
     QGroupBox *groupBox_4;
     QRadioButton *radioButtonCartesianCoordinate;
     QRadioButton *radioButtonPolarCoordinate;
-    QButtonGroup *buttonGroup;
     QButtonGroup *buttonGroup_2;
+    QButtonGroup *buttonGroup;
 
     void setupUi(QDockWidget *ControlWidget)
     {
         if (ControlWidget->objectName().isEmpty())
             ControlWidget->setObjectName(QString::fromUtf8("ControlWidget"));
-        ControlWidget->resize(190, 831);
+        ControlWidget->resize(190, 899);
         ControlWidget->setMinimumSize(QSize(190, 240));
         ControlWidget->setStyleSheet(QString::fromUtf8("background-color: rgb(181, 181, 181);"));
         dockWidgetContents = new QWidget();
@@ -82,7 +86,7 @@ public:
         checkBoxRoadTypeLocalStreet->setGeometry(QRect(90, 30, 91, 17));
         groupBox_8 = new QGroupBox(dockWidgetContents);
         groupBox_8->setObjectName(QString::fromUtf8("groupBox_8"));
-        groupBox_8->setGeometry(QRect(10, 470, 171, 281));
+        groupBox_8->setGeometry(QRect(10, 550, 171, 281));
         pushButtonGenerateKDE = new QPushButton(groupBox_8);
         pushButtonGenerateKDE->setObjectName(QString::fromUtf8("pushButtonGenerateKDE"));
         pushButtonGenerateKDE->setGeometry(QRect(20, 120, 131, 31));
@@ -111,7 +115,7 @@ public:
         pushButtonRemoveDeadend->setGeometry(QRect(20, 240, 131, 31));
         groupBox = new QGroupBox(dockWidgetContents);
         groupBox->setObjectName(QString::fromUtf8("groupBox"));
-        groupBox->setGeometry(QRect(10, 60, 171, 121));
+        groupBox->setGeometry(QRect(10, 60, 171, 141));
         checkBoxAddAvenuesOnBoundary = new QCheckBox(groupBox);
         checkBoxAddAvenuesOnBoundary->setObjectName(QString::fromUtf8("checkBoxAddAvenuesOnBoundary"));
         checkBoxAddAvenuesOnBoundary->setGeometry(QRect(10, 70, 151, 17));
@@ -128,6 +132,9 @@ public:
         checkBoxInvadingCheck = new QCheckBox(groupBox);
         checkBoxInvadingCheck->setObjectName(QString::fromUtf8("checkBoxInvadingCheck"));
         checkBoxInvadingCheck->setGeometry(QRect(10, 50, 151, 17));
+        checkBoxSaveSnappingImages = new QCheckBox(groupBox);
+        checkBoxSaveSnappingImages->setObjectName(QString::fromUtf8("checkBoxSaveSnappingImages"));
+        checkBoxSaveSnappingImages->setGeometry(QRect(10, 110, 141, 17));
         checkBoxRoadTypeHighway = new QCheckBox(dockWidgetContents);
         checkBoxRoadTypeHighway->setObjectName(QString::fromUtf8("checkBoxRoadTypeHighway"));
         checkBoxRoadTypeHighway->setGeometry(QRect(10, 10, 70, 17));
@@ -136,7 +143,7 @@ public:
         checkBoxRoadTypeBoulevard->setGeometry(QRect(90, 10, 91, 17));
         groupBox_2 = new QGroupBox(dockWidgetContents);
         groupBox_2->setObjectName(QString::fromUtf8("groupBox_2"));
-        groupBox_2->setGeometry(QRect(10, 370, 171, 91));
+        groupBox_2->setGeometry(QRect(10, 450, 171, 91));
         label_3 = new QLabel(groupBox_2);
         label_3->setObjectName(QString::fromUtf8("label_3"));
         label_3->setGeometry(QRect(10, 20, 81, 21));
@@ -160,7 +167,7 @@ public:
         lineEditWeightRepetition->setAlignment(Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter);
         groupBox_3 = new QGroupBox(dockWidgetContents);
         groupBox_3->setObjectName(QString::fromUtf8("groupBox_3"));
-        groupBox_3->setGeometry(QRect(10, 190, 171, 91));
+        groupBox_3->setGeometry(QRect(10, 210, 171, 151));
         radioButtonMultiSeeds = new QRadioButton(groupBox_3);
         buttonGroup = new QButtonGroup(ControlWidget);
         buttonGroup->setObjectName(QString::fromUtf8("buttonGroup"));
@@ -173,10 +180,19 @@ public:
         radioButtonOneSeed->setGeometry(QRect(10, 20, 121, 17));
         checkBoxAreaScaling = new QCheckBox(groupBox_3);
         checkBoxAreaScaling->setObjectName(QString::fromUtf8("checkBoxAreaScaling"));
-        checkBoxAreaScaling->setGeometry(QRect(10, 60, 111, 17));
+        checkBoxAreaScaling->setGeometry(QRect(10, 120, 111, 17));
+        checkBoxConnectAvenues = new QCheckBox(groupBox_3);
+        checkBoxConnectAvenues->setObjectName(QString::fromUtf8("checkBoxConnectAvenues"));
+        checkBoxConnectAvenues->setGeometry(QRect(20, 60, 121, 17));
+        checkBoxCropping = new QCheckBox(groupBox_3);
+        checkBoxCropping->setObjectName(QString::fromUtf8("checkBoxCropping"));
+        checkBoxCropping->setGeometry(QRect(20, 100, 121, 17));
+        checkBoxSaveConnectingImages = new QCheckBox(groupBox_3);
+        checkBoxSaveConnectingImages->setObjectName(QString::fromUtf8("checkBoxSaveConnectingImages"));
+        checkBoxSaveConnectingImages->setGeometry(QRect(20, 80, 141, 17));
         groupBox_4 = new QGroupBox(dockWidgetContents);
         groupBox_4->setObjectName(QString::fromUtf8("groupBox_4"));
-        groupBox_4->setGeometry(QRect(10, 290, 171, 71));
+        groupBox_4->setGeometry(QRect(10, 370, 171, 71));
         radioButtonCartesianCoordinate = new QRadioButton(groupBox_4);
         buttonGroup_2 = new QButtonGroup(ControlWidget);
         buttonGroup_2->setObjectName(QString::fromUtf8("buttonGroup_2"));
@@ -209,6 +225,7 @@ public:
         label->setText(QApplication::translate("ControlWidget", "Iteration:", 0, QApplication::UnicodeUTF8));
         checkBoxLocalStreets->setText(QApplication::translate("ControlWidget", "Generate Local Streets", 0, QApplication::UnicodeUTF8));
         checkBoxInvadingCheck->setText(QApplication::translate("ControlWidget", "Invading Check", 0, QApplication::UnicodeUTF8));
+        checkBoxSaveSnappingImages->setText(QApplication::translate("ControlWidget", "Save Snapping Images", 0, QApplication::UnicodeUTF8));
         checkBoxRoadTypeHighway->setText(QApplication::translate("ControlWidget", "Highways", 0, QApplication::UnicodeUTF8));
         checkBoxRoadTypeBoulevard->setText(QApplication::translate("ControlWidget", "Boulevards", 0, QApplication::UnicodeUTF8));
         groupBox_2->setTitle(QApplication::translate("ControlWidget", "Weight", 0, QApplication::UnicodeUTF8));
@@ -219,6 +236,9 @@ public:
         radioButtonMultiSeeds->setText(QApplication::translate("ControlWidget", "Multiple Seeds", 0, QApplication::UnicodeUTF8));
         radioButtonOneSeed->setText(QApplication::translate("ControlWidget", "One Seed", 0, QApplication::UnicodeUTF8));
         checkBoxAreaScaling->setText(QApplication::translate("ControlWidget", "Area Scaling", 0, QApplication::UnicodeUTF8));
+        checkBoxConnectAvenues->setText(QApplication::translate("ControlWidget", "Connect Avenues", 0, QApplication::UnicodeUTF8));
+        checkBoxCropping->setText(QApplication::translate("ControlWidget", "Cropping", 0, QApplication::UnicodeUTF8));
+        checkBoxSaveConnectingImages->setText(QApplication::translate("ControlWidget", "Save Connecting Images", 0, QApplication::UnicodeUTF8));
         groupBox_4->setTitle(QApplication::translate("ControlWidget", "Coordinates System", 0, QApplication::UnicodeUTF8));
         radioButtonCartesianCoordinate->setText(QApplication::translate("ControlWidget", "Cartesian Coordinates", 0, QApplication::UnicodeUTF8));
         radioButtonPolarCoordinate->setText(QApplication::translate("ControlWidget", "Polar Coordinates", 0, QApplication::UnicodeUTF8));

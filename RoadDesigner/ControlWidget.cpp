@@ -8,7 +8,6 @@
 #include <road/feature/GenericFeature.h>
 #include <road/generator/RoadGenerator.h>
 #include <road/generator/KDERoadGenerator.h>
-#include <road/generator/KDERoadGenerator2.h>
 
 ControlWidget::ControlWidget(MainWindow* mainWin) : QDockWidget("Control Widget", (QWidget*)mainWin) {
 	this->mainWin = mainWin;
@@ -78,11 +77,15 @@ void ControlWidget::generateKDE() {
 	G::global()["numIterations"] = ui.lineEditNumIterations->text().toInt();
 	G::global()["addAvenuesOnBoundary"] = ui.checkBoxAddAvenuesOnBoundary->isChecked();
 	G::global()["generateLocalStreets"] = ui.checkBoxLocalStreets->isChecked();
+	G::global()["saveSnappingImages"] = ui.checkBoxSaveSnappingImages->isChecked();
 	G::global()["weightEdge"] = ui.lineEditWeightEdge->text().toFloat();
 	G::global()["weightLocation"] = ui.lineEditWeightLocation->text().toFloat();
 	G::global()["weightRepetition"] = ui.lineEditWeightRepetition->text().toFloat();
 
 	G::global()["multiSeeds"] = ui.radioButtonMultiSeeds->isChecked();
+	G::global()["connectAvenues"] = ui.checkBoxConnectAvenues->isChecked();
+	G::global()["saveConnectingImages"] = ui.checkBoxSaveConnectingImages->isChecked();
+	G::global()["cropping"] = ui.checkBoxCropping->isChecked();
 	G::global()["areaScaling"] = ui.checkBoxAreaScaling->isChecked();
 
 	G::global()["coordiniates"] = ui.radioButtonCartesianCoordinate->isChecked() ? "cartesian" : "polar";
@@ -112,6 +115,7 @@ void ControlWidget::clear() {
 	if (mainWin->glWidget->selectedArea >= 0) {
 		mainWin->glWidget->areas[mainWin->glWidget->selectedArea].roads.clear();
 		mainWin->glWidget->selectedVertex = NULL;
+		mainWin->glWidget->selectedEdge = NULL;
 	}
 
 	mainWin->glWidget->updateGL();

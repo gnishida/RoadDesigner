@@ -168,18 +168,19 @@ void GLWidget::mousePressEvent(QMouseEvent *e) {
 	if (e->buttons() & Qt::LeftButton) {
 		switch (mainWin->mode) {
 		case MainWindow::MODE_AREA_SELECT:
+			selectedArea = -1;
 			selectedVertex = NULL;
 			selectedEdge = NULL;
 			for (int i = 0; i < areas.size(); ++i) {
 				if (areas[i].area.contains(pos)) {
 					selectedArea = i;
 
-					if (GraphUtil::getVertex(areas[i].roads, pos, 40, selectedVertexDesc)) {
+					if (GraphUtil::getVertex(areas[i].roads, pos, 10, selectedVertexDesc)) {
 						selectedVertex = areas[i].roads.graph[selectedVertexDesc];
 						mainWin->propertyWidget->setRoadVertex(areas[i].roads, selectedVertexDesc, selectedVertex);
 						mainWin->propertyWidget->resetRoadEdge();
 					} else {
-						if (GraphUtil::getEdge(areas[i].roads, pos, 40, selectedEdgeDesc)) {
+						if (GraphUtil::getEdge(areas[i].roads, pos, 10, selectedEdgeDesc)) {
 							selectedEdge = areas[i].roads.graph[selectedEdgeDesc];
 							mainWin->propertyWidget->resetRoadVertex();
 							mainWin->propertyWidget->setRoadEdge(selectedEdge);
