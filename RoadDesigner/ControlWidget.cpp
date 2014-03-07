@@ -23,6 +23,7 @@ ControlWidget::ControlWidget(MainWindow* mainWin) : QDockWidget("Control Widget"
 	ui.checkBoxLocalStreets->setChecked(false);
 	ui.checkBoxInvadingCheck->setChecked(false);
 	ui.radioButtonMultiSeeds->setChecked(true);
+	ui.radioButtonCartesianCoordinate->setChecked(true);
 	ui.lineEditWeightEdge->setText("1");
 	ui.lineEditWeightLocation->setText("1");
 	ui.lineEditWeightRepetition->setText("2000000");
@@ -84,6 +85,8 @@ void ControlWidget::generateKDE() {
 	G::global()["multiSeeds"] = ui.radioButtonMultiSeeds->isChecked();
 	G::global()["areaScaling"] = ui.checkBoxAreaScaling->isChecked();
 
+	G::global()["coordiniates"] = ui.radioButtonCartesianCoordinate->isChecked() ? "cartesian" : "polar";
+
 	int orientation = ui.dialOrientation->value() - 180;
 	bool areaScaling = ui.checkBoxAreaScaling->isChecked();
 
@@ -108,7 +111,7 @@ void ControlWidget::generateKDE() {
 void ControlWidget::clear() {
 	if (mainWin->glWidget->selectedArea >= 0) {
 		mainWin->glWidget->areas[mainWin->glWidget->selectedArea].roads.clear();
-		mainWin->glWidget->vertexSelected = false;
+		mainWin->glWidget->selectedVertex = NULL;
 	}
 
 	mainWin->glWidget->updateGL();

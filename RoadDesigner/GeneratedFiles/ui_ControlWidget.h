@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'ControlWidget.ui'
 **
-** Created: Tue Mar 4 14:51:55 2014
+** Created: Thu Mar 6 20:19:17 2014
 **      by: Qt User Interface Compiler version 4.8.1
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
@@ -59,7 +59,11 @@ public:
     QRadioButton *radioButtonMultiSeeds;
     QRadioButton *radioButtonOneSeed;
     QCheckBox *checkBoxAreaScaling;
+    QGroupBox *groupBox_4;
+    QRadioButton *radioButtonCartesianCoordinate;
+    QRadioButton *radioButtonPolarCoordinate;
     QButtonGroup *buttonGroup;
+    QButtonGroup *buttonGroup_2;
 
     void setupUi(QDockWidget *ControlWidget)
     {
@@ -78,7 +82,7 @@ public:
         checkBoxRoadTypeLocalStreet->setGeometry(QRect(90, 30, 91, 17));
         groupBox_8 = new QGroupBox(dockWidgetContents);
         groupBox_8->setObjectName(QString::fromUtf8("groupBox_8"));
-        groupBox_8->setGeometry(QRect(10, 390, 171, 281));
+        groupBox_8->setGeometry(QRect(10, 470, 171, 281));
         pushButtonGenerateKDE = new QPushButton(groupBox_8);
         pushButtonGenerateKDE->setObjectName(QString::fromUtf8("pushButtonGenerateKDE"));
         pushButtonGenerateKDE->setGeometry(QRect(20, 120, 131, 31));
@@ -132,7 +136,7 @@ public:
         checkBoxRoadTypeBoulevard->setGeometry(QRect(90, 10, 91, 17));
         groupBox_2 = new QGroupBox(dockWidgetContents);
         groupBox_2->setObjectName(QString::fromUtf8("groupBox_2"));
-        groupBox_2->setGeometry(QRect(10, 290, 171, 91));
+        groupBox_2->setGeometry(QRect(10, 370, 171, 91));
         label_3 = new QLabel(groupBox_2);
         label_3->setObjectName(QString::fromUtf8("label_3"));
         label_3->setGeometry(QRect(10, 20, 81, 21));
@@ -170,6 +174,19 @@ public:
         checkBoxAreaScaling = new QCheckBox(groupBox_3);
         checkBoxAreaScaling->setObjectName(QString::fromUtf8("checkBoxAreaScaling"));
         checkBoxAreaScaling->setGeometry(QRect(10, 60, 111, 17));
+        groupBox_4 = new QGroupBox(dockWidgetContents);
+        groupBox_4->setObjectName(QString::fromUtf8("groupBox_4"));
+        groupBox_4->setGeometry(QRect(10, 290, 171, 71));
+        radioButtonCartesianCoordinate = new QRadioButton(groupBox_4);
+        buttonGroup_2 = new QButtonGroup(ControlWidget);
+        buttonGroup_2->setObjectName(QString::fromUtf8("buttonGroup_2"));
+        buttonGroup_2->addButton(radioButtonCartesianCoordinate);
+        radioButtonCartesianCoordinate->setObjectName(QString::fromUtf8("radioButtonCartesianCoordinate"));
+        radioButtonCartesianCoordinate->setGeometry(QRect(10, 20, 131, 17));
+        radioButtonPolarCoordinate = new QRadioButton(groupBox_4);
+        buttonGroup_2->addButton(radioButtonPolarCoordinate);
+        radioButtonPolarCoordinate->setObjectName(QString::fromUtf8("radioButtonPolarCoordinate"));
+        radioButtonPolarCoordinate->setGeometry(QRect(10, 40, 131, 17));
         ControlWidget->setWidget(dockWidgetContents);
 
         retranslateUi(ControlWidget);
@@ -202,6 +219,9 @@ public:
         radioButtonMultiSeeds->setText(QApplication::translate("ControlWidget", "Multiple Seeds", 0, QApplication::UnicodeUTF8));
         radioButtonOneSeed->setText(QApplication::translate("ControlWidget", "One Seed", 0, QApplication::UnicodeUTF8));
         checkBoxAreaScaling->setText(QApplication::translate("ControlWidget", "Area Scaling", 0, QApplication::UnicodeUTF8));
+        groupBox_4->setTitle(QApplication::translate("ControlWidget", "Coordinates System", 0, QApplication::UnicodeUTF8));
+        radioButtonCartesianCoordinate->setText(QApplication::translate("ControlWidget", "Cartesian Coordinates", 0, QApplication::UnicodeUTF8));
+        radioButtonPolarCoordinate->setText(QApplication::translate("ControlWidget", "Polar Coordinates", 0, QApplication::UnicodeUTF8));
         Q_UNUSED(ControlWidget);
     } // retranslateUi
 

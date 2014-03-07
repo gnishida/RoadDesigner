@@ -46,6 +46,7 @@
      <string>Window</string>
     </property>
     <addaction name="actionControlWidget"/>
+    <addaction name="actionPropertyWidget"/>
    </widget>
    <widget class="QMenu" name="menuArea">
     <property name="title">
@@ -302,6 +303,11 @@
    </property>
    <property name="text">
     <string>Boulevard Sketch</string>
+   </property>
+  </action>
+  <action name="actionPropertyWidget">
+   <property name="text">
+    <string>Property Widget</string>
    </property>
   </action>
  </widget>

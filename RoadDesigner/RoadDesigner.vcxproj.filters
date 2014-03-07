@@ -170,6 +170,15 @@
     <ClCompile Include="..\..\mylib\common\global.cpp">
       <Filter>mylib\common</Filter>
     </ClCompile>
+    <ClCompile Include="PropertyWidget.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_PropertyWidget.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_PropertyWidget.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="MainWindow.h">
@@ -185,6 +194,12 @@
       <Filter>Form Files</Filter>
     </CustomBuild>
     <CustomBuild Include="ControlWidget.h">
+      <Filter>Header Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="PropertyWidget.ui">
+      <Filter>Form Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="PropertyWidget.h">
       <Filter>Header Files</Filter>
     </CustomBuild>
   </ItemGroup>
@@ -293,6 +308,9 @@
     </ClInclude>
     <ClInclude Include="..\..\mylib\common\global.h">
       <Filter>mylib\common</Filter>
+    </ClInclude>
+    <ClInclude Include="GeneratedFiles\ui_PropertyWidget.h">
+      <Filter>Generated Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

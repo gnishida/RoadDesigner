@@ -4,6 +4,7 @@
 #include <QtGui/QMainWindow>
 #include "ui_MainWindow.h"
 #include "ControlWidget.h"
+#include "PropertyWidget.h"
 #include "GLWidget.h"
 #include <QToolBar>
 
@@ -16,6 +17,7 @@ public:
 public:
 	Ui::MainWindow ui;
 	ControlWidget* controlWidget;
+	PropertyWidget* propertyWidget;
 	GLWidget* glWidget;
 
 	int mode;
@@ -39,6 +41,7 @@ public slots:
 	void onHighwaySketch();
 	void onBoulevardSketch();
 	void onShowControlWidget();
+	void onShowPropertyWidget();
 };
 
 #endif // MAINWINDOW_H

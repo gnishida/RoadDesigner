@@ -50,7 +50,7 @@
     <property name="geometry">
      <rect>
       <x>10</x>
-      <y>390</y>
+      <y>470</y>
       <width>171</width>
       <height>281</height>
      </rect>
@@ -266,7 +266,7 @@
     <property name="geometry">
      <rect>
       <x>10</x>
-      <y>290</y>
+      <y>370</y>
       <width>171</width>
       <height>91</height>
      </rect>
@@ -411,11 +411,57 @@
      </property>
     </widget>
    </widget>
+   <widget class="QGroupBox" name="groupBox_4">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>290</y>
+      <width>171</width>
+      <height>71</height>
+     </rect>
+    </property>
+    <property name="title">
+     <string>Coordinates System</string>
+    </property>
+    <widget class="QRadioButton" name="radioButtonCartesianCoordinate">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>20</y>
+       <width>131</width>
+       <height>17</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Cartesian Coordinates</string>
+     </property>
+     <attribute name="buttonGroup">
+      <string notr="true">buttonGroup_2</string>
+     </attribute>
+    </widget>
+    <widget class="QRadioButton" name="radioButtonPolarCoordinate">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>40</y>
+       <width>131</width>
+       <height>17</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Polar Coordinates</string>
+     </property>
+     <attribute name="buttonGroup">
+      <string notr="true">buttonGroup_2</string>
+     </attribute>
+    </widget>
+   </widget>
   </widget>
  </widget>
  <resources/>
  <connections/>
  <buttongroups>
   <buttongroup name="buttonGroup"/>
+  <buttongroup name="buttonGroup_2"/>
  </buttongroups>
 </ui>

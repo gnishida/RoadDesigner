@@ -29,8 +29,12 @@ public:
 	int selectedArea;
 	PolygonBuilder areaBuilder;
 	PolygonBuilder roadsBuilder;
-	bool vertexSelected;
-	RoadVertexDesc selectedVertex;
+	//bool vertexSelected;
+
+	RoadVertexDesc selectedVertexDesc;
+	RoadVertexPtr selectedVertex;
+	RoadEdgeDesc selectedEdgeDesc;
+	RoadEdgePtr selectedEdge;
 
 	// key status
 	bool shiftPressed;

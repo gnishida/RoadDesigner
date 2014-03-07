@@ -6,6 +6,7 @@ MainWindow::MainWindow(QWidget *parent, Qt::WFlags flags) : QMainWindow(parent, 
 
 	// setup the docking widgets
 	controlWidget = new ControlWidget(this);
+	propertyWidget = new PropertyWidget(this);
 
 	// setup the toolbar
 	ui.fileToolBar->addAction(ui.actionNew);
@@ -29,6 +30,7 @@ MainWindow::MainWindow(QWidget *parent, Qt::WFlags flags) : QMainWindow(parent, 
 	connect(ui.actionHighwaySketch, SIGNAL(triggered()), this, SLOT(onHighwaySketch()));
 	connect(ui.actionBoulevardSketch, SIGNAL(triggered()), this, SLOT(onBoulevardSketch()));
 	connect(ui.actionControlWidget, SIGNAL(triggered()), this, SLOT(onShowControlWidget()));
+	connect(ui.actionPropertyWidget, SIGNAL(triggered()), this, SLOT(onShowPropertyWidget()));
 
 	// setup the GL widget
 	glWidget = new GLWidget(this);
@@ -36,6 +38,9 @@ MainWindow::MainWindow(QWidget *parent, Qt::WFlags flags) : QMainWindow(parent, 
 
 	controlWidget->show();
 	addDockWidget(Qt::LeftDockWidgetArea, controlWidget);
+
+	propertyWidget->show();
+	addDockWidget(Qt::RightDockWidgetArea, propertyWidget);
 
 	mode = MODE_AREA_SELECT;
 }
@@ -145,4 +150,9 @@ void MainWindow::onBoulevardSketch() {
 void MainWindow::onShowControlWidget() {
 	controlWidget->show();
 	addDockWidget(Qt::LeftDockWidgetArea, controlWidget);
+}
+
+void MainWindow::onShowPropertyWidget() {
+	propertyWidget->show();
+	addDockWidget(Qt::RightDockWidgetArea, propertyWidget);
 }

@@ -34,7 +34,8 @@ GLWidget::GLWidget(MainWindow* mainWin) : QGLWidget(QGLFormat(QGL::SampleBuffers
 	keyXPressed = false;
 
 	selectedArea = -1;
-	vertexSelected = false;
+	selectedVertex = NULL;
+	selectedEdge = NULL;
 }
 
 GLWidget::~GLWidget() {
@@ -75,14 +76,24 @@ void GLWidget::drawScene() {
 	renderer->render(areas.roads.renderables);
 
 	// draw the kernel
-	if (vertexSelected && selectedArea >= 0 && areas[selectedArea].roads.graph[selectedVertex]->kernel.id != -1) {
+	/*if (selectedVertex != NULL && selectedArea >= 0 && areas[selectedArea].roads.graph[selectedVertexDesc]->kernel.id != -1) {
 		RoadGraph kernel_graph;
-		RoadGeneratorHelper::buildGraphFromKernel(kernel_graph, areas[selectedArea].roads.graph[selectedVertex]->kernel, areas[selectedArea].area.envelope().midPt());
+		RoadGeneratorHelper::buildGraphFromKernel(kernel_graph, areas[selectedArea].roads.graph[selectedVertexDesc]->kernel, areas[selectedArea].area.envelope().midPt());
 		kernel_graph.setZ(camera->dz);
 		kernel_graph.highwayHeight += 10;
 		kernel_graph.avenueHeight += 10;
 		kernel_graph.generateMesh();
 		renderer->render(kernel_graph.renderables);
+	}*/
+
+	// draw the selected vertex
+	if (selectedVertex != NULL) {
+		renderer->renderPoint(selectedVertex->pt, QColor(0, 0, 255), height);
+	}
+
+	// draw the selected edge
+	if (selectedEdge != NULL) {
+		renderer->renderPolyline(selectedEdge->polyLine, QColor(0, 0, 255), GL_LINE_STRIP, height);
 	}
 }
 
@@ -157,16 +168,22 @@ void GLWidget::mousePressEvent(QMouseEvent *e) {
 	if (e->buttons() & Qt::LeftButton) {
 		switch (mainWin->mode) {
 		case MainWindow::MODE_AREA_SELECT:
-			selectedArea = -1;
-			vertexSelected = false;
+			selectedVertex = NULL;
+			selectedEdge = NULL;
 			for (int i = 0; i < areas.size(); ++i) {
 				if (areas[i].area.contains(pos)) {
 					selectedArea = i;
 
-					if (GraphUtil::getVertex(areas[i].roads, pos, 500, selectedVertex)) {
-						vertexSelected = true;
+					if (GraphUtil::getVertex(areas[i].roads, pos, 40, selectedVertexDesc)) {
+						selectedVertex = areas[i].roads.graph[selectedVertexDesc];
+						mainWin->propertyWidget->setRoadVertex(areas[i].roads, selectedVertexDesc, selectedVertex);
+						mainWin->propertyWidget->resetRoadEdge();
 					} else {
-						vertexSelected = false;
+						if (GraphUtil::getEdge(areas[i].roads, pos, 40, selectedEdgeDesc)) {
+							selectedEdge = areas[i].roads.graph[selectedEdgeDesc];
+							mainWin->propertyWidget->resetRoadVertex();
+							mainWin->propertyWidget->setRoadEdge(selectedEdge);
+						}
 					}
 
 					break;
