@@ -57,6 +57,11 @@
     <addaction name="separator"/>
     <addaction name="actionHighwaySketch"/>
     <addaction name="actionBoulevardSketch"/>
+    <addaction name="separator"/>
+    <addaction name="action3DView"/>
+    <addaction name="actionTerrain"/>
+    <addaction name="separator"/>
+    <addaction name="actionDebug"/>
    </widget>
    <addaction name="menuFile"/>
    <addaction name="menuArea"/>
@@ -297,6 +302,9 @@
    </property>
   </action>
   <action name="actionBoulevardSketch">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
    <property name="icon">
     <iconset resource="MainWindow.qrc">
      <normaloff>:/MainWindow/Resources/SketchB_24x24.png</normaloff>:/MainWindow/Resources/SketchB_24x24.png</iconset>
@@ -308,6 +316,42 @@
   <action name="actionPropertyWidget">
    <property name="text">
     <string>Property Widget</string>
+   </property>
+  </action>
+  <action name="actionDebug">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="icon">
+    <iconset resource="MainWindow.qrc">
+     <normaloff>:/MainWindow/Resources/Debug_24x24.png</normaloff>:/MainWindow/Resources/Debug_24x24.png</iconset>
+   </property>
+   <property name="text">
+    <string>Debug</string>
+   </property>
+  </action>
+  <action name="action3DView">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="icon">
+    <iconset resource="MainWindow.qrc">
+     <normaloff>:/MainWindow/Resources/3DView_24x24.png</normaloff>:/MainWindow/Resources/3DView_24x24.png</iconset>
+   </property>
+   <property name="text">
+    <string>3D</string>
+   </property>
+  </action>
+  <action name="actionTerrain">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="icon">
+    <iconset resource="MainWindow.qrc">
+     <normaloff>:/MainWindow/Resources/Terrain_32x32.png</normaloff>:/MainWindow/Resources/Terrain_32x32.png</iconset>
+   </property>
+   <property name="text">
+    <string>Terrain</string>
    </property>
   </action>
  </widget>

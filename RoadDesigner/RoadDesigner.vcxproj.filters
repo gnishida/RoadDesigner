@@ -134,9 +134,6 @@
     <ClCompile Include="..\..\mylib\road\RoadGraph.cpp">
       <Filter>mylib\road</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\mylib\road\RoadGraphRenderer.cpp">
-      <Filter>mylib\road</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\mylib\road\RoadVertex.cpp">
       <Filter>mylib\road</Filter>
     </ClCompile>
@@ -175,6 +172,30 @@
     </ClCompile>
     <ClCompile Include="GeneratedFiles\Release\moc_PropertyWidget.cpp">
       <Filter>Generated Files\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="SimpleTerrain.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SimpleTerrainCell.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\mylib\common\ElevationColorTable.cpp">
+      <Filter>mylib\common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\mylib\common\ColorTable.cpp">
+      <Filter>mylib\common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\mylib\common\Renderer.cpp">
+      <Filter>mylib\common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\mylib\common\WaterRenderer.cpp">
+      <Filter>mylib\common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\mylib\common\Texture.cpp">
+      <Filter>mylib\common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\mylib\common\TextureManager.cpp">
+      <Filter>mylib\common</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -270,9 +291,6 @@
     <ClInclude Include="..\..\mylib\road\RoadGraph.h">
       <Filter>mylib\road</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\mylib\road\RoadGraphRenderer.h">
-      <Filter>mylib\road</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\mylib\road\RoadVertex.h">
       <Filter>mylib\road</Filter>
     </ClInclude>
@@ -305,6 +323,30 @@
     </ClInclude>
     <ClInclude Include="GeneratedFiles\ui_PropertyWidget.h">
       <Filter>Generated Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SimpleTerrain.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SimpleTerrainCell.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\mylib\common\ElevationColorTable.h">
+      <Filter>mylib\common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\mylib\common\ColorTable.h">
+      <Filter>mylib\common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\mylib\common\Renderer.h">
+      <Filter>mylib\common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\mylib\common\WaterRenderer.h">
+      <Filter>mylib\common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\mylib\common\Texture.h">
+      <Filter>mylib\common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\mylib\common\TextureManager.h">
+      <Filter>mylib\common</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

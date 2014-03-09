@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'MainWindow.ui'
 **
-** Created: Fri Mar 7 12:10:47 2014
+** Created: Sat Mar 8 17:11:56 2014
 **      by: Qt User Interface Compiler version 4.8.1
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
@@ -54,6 +54,9 @@ public:
     QAction *actionSave_Highways;
     QAction *actionBoulevardSketch;
     QAction *actionPropertyWidget;
+    QAction *actionDebug;
+    QAction *action3DView;
+    QAction *actionTerrain;
     QWidget *centralWidget;
     QMenuBar *menuBar;
     QMenu *menuFile;
@@ -160,11 +163,30 @@ public:
         actionSave_Highways->setObjectName(QString::fromUtf8("actionSave_Highways"));
         actionBoulevardSketch = new QAction(MainWindow);
         actionBoulevardSketch->setObjectName(QString::fromUtf8("actionBoulevardSketch"));
+        actionBoulevardSketch->setCheckable(true);
         QIcon icon11;
         icon11.addFile(QString::fromUtf8(":/MainWindow/Resources/SketchB_24x24.png"), QSize(), QIcon::Normal, QIcon::Off);
         actionBoulevardSketch->setIcon(icon11);
         actionPropertyWidget = new QAction(MainWindow);
         actionPropertyWidget->setObjectName(QString::fromUtf8("actionPropertyWidget"));
+        actionDebug = new QAction(MainWindow);
+        actionDebug->setObjectName(QString::fromUtf8("actionDebug"));
+        actionDebug->setCheckable(true);
+        QIcon icon12;
+        icon12.addFile(QString::fromUtf8(":/MainWindow/Resources/Debug_24x24.png"), QSize(), QIcon::Normal, QIcon::Off);
+        actionDebug->setIcon(icon12);
+        action3DView = new QAction(MainWindow);
+        action3DView->setObjectName(QString::fromUtf8("action3DView"));
+        action3DView->setCheckable(true);
+        QIcon icon13;
+        icon13.addFile(QString::fromUtf8(":/MainWindow/Resources/3DView_24x24.png"), QSize(), QIcon::Normal, QIcon::Off);
+        action3DView->setIcon(icon13);
+        actionTerrain = new QAction(MainWindow);
+        actionTerrain->setObjectName(QString::fromUtf8("actionTerrain"));
+        actionTerrain->setCheckable(true);
+        QIcon icon14;
+        icon14.addFile(QString::fromUtf8(":/MainWindow/Resources/Terrain_32x32.png"), QSize(), QIcon::Normal, QIcon::Off);
+        actionTerrain->setIcon(icon14);
         centralWidget = new QWidget(MainWindow);
         centralWidget->setObjectName(QString::fromUtf8("centralWidget"));
         MainWindow->setCentralWidget(centralWidget);
@@ -205,6 +227,11 @@ public:
         menuArea->addSeparator();
         menuArea->addAction(actionHighwaySketch);
         menuArea->addAction(actionBoulevardSketch);
+        menuArea->addSeparator();
+        menuArea->addAction(action3DView);
+        menuArea->addAction(actionTerrain);
+        menuArea->addSeparator();
+        menuArea->addAction(actionDebug);
 
         retranslateUi(MainWindow);
 
@@ -253,6 +280,9 @@ public:
         actionSave_Highways->setText(QApplication::translate("MainWindow", "Save Highways", 0, QApplication::UnicodeUTF8));
         actionBoulevardSketch->setText(QApplication::translate("MainWindow", "Boulevard Sketch", 0, QApplication::UnicodeUTF8));
         actionPropertyWidget->setText(QApplication::translate("MainWindow", "Property Widget", 0, QApplication::UnicodeUTF8));
+        actionDebug->setText(QApplication::translate("MainWindow", "Debug", 0, QApplication::UnicodeUTF8));
+        action3DView->setText(QApplication::translate("MainWindow", "3D", 0, QApplication::UnicodeUTF8));
+        actionTerrain->setText(QApplication::translate("MainWindow", "Terrain", 0, QApplication::UnicodeUTF8));
         menuFile->setTitle(QApplication::translate("MainWindow", "File", 0, QApplication::UnicodeUTF8));
         menuWindow->setTitle(QApplication::translate("MainWindow", "Window", 0, QApplication::UnicodeUTF8));
         menuArea->setTitle(QApplication::translate("MainWindow", "Area", 0, QApplication::UnicodeUTF8));

@@ -13,5 +13,8 @@
     <file>Resources/Sketch_24x24.png</file>
     <file>Resources/SketchH_24x24.png</file>
     <file>Resources/SketchB_24x24.png</file>
+    <file>Resources/3DView_24x24.png</file>
+    <file>Resources/Terrain_32x32.png</file>
+    <file>Resources/Debug_24x24.png</file>
   </qresource>
 </RCC>

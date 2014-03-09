@@ -15,6 +15,9 @@ MainWindow::MainWindow(QWidget *parent, Qt::WFlags flags) : QMainWindow(parent, 
 	ui.areaToolBar->addAction(ui.actionAreaCreate);
 	ui.areaToolBar->addAction(ui.actionHighwaySketch);
 	ui.areaToolBar->addAction(ui.actionBoulevardSketch);
+	ui.areaToolBar->addAction(ui.action3DView);
+	ui.areaToolBar->addAction(ui.actionTerrain);
+	ui.areaToolBar->addAction(ui.actionDebug);
 
 	ui.actionAreaSelect->setChecked(true);
 
@@ -29,6 +32,9 @@ MainWindow::MainWindow(QWidget *parent, Qt::WFlags flags) : QMainWindow(parent, 
 	connect(ui.actionAreaCreate, SIGNAL(triggered()), this, SLOT(onAreaCreate()));
 	connect(ui.actionHighwaySketch, SIGNAL(triggered()), this, SLOT(onHighwaySketch()));
 	connect(ui.actionBoulevardSketch, SIGNAL(triggered()), this, SLOT(onBoulevardSketch()));
+	connect(ui.action3DView, SIGNAL(triggered()), this, SLOT(on3DView()));
+	connect(ui.actionTerrain, SIGNAL(triggered()), this, SLOT(onTerrain()));
+	connect(ui.actionDebug, SIGNAL(triggered()), this, SLOT(onDebug()));
 	connect(ui.actionControlWidget, SIGNAL(triggered()), this, SLOT(onShowControlWidget()));
 	connect(ui.actionPropertyWidget, SIGNAL(triggered()), this, SLOT(onShowPropertyWidget()));
 
@@ -117,6 +123,9 @@ void MainWindow::onAreaMenu() {
 	ui.actionAreaCreate->setChecked(mode == MODE_AREA_CREATE);
 	ui.actionHighwaySketch->setChecked(mode == MODE_HIGHWAY_SKETCH);
 	ui.actionBoulevardSketch->setChecked(mode == MODE_BOULEVARD_SKETCH);
+	ui.action3DView->setChecked(mode == MODE_3DVIEW);
+	ui.actionTerrain->setChecked(mode == MODE_TERRAIN);
+	ui.actionDebug->setChecked(mode == MODE_DEBUG);
 }
 
 void MainWindow::onAreaSelect() {
@@ -124,6 +133,9 @@ void MainWindow::onAreaSelect() {
 	ui.actionAreaCreate->setChecked(false);
 	ui.actionHighwaySketch->setChecked(false);
 	ui.actionBoulevardSketch->setChecked(false);
+	ui.action3DView->setChecked(false);
+	ui.actionTerrain->setChecked(false);
+	ui.actionDebug->setChecked(false);
 }
 
 void MainWindow::onAreaCreate() {
@@ -131,6 +143,9 @@ void MainWindow::onAreaCreate() {
 	ui.actionAreaSelect->setChecked(false);
 	ui.actionHighwaySketch->setChecked(false);
 	ui.actionBoulevardSketch->setChecked(false);
+	ui.action3DView->setChecked(false);
+	ui.actionTerrain->setChecked(false);
+	ui.actionDebug->setChecked(false);
 }
 
 void MainWindow::onHighwaySketch() {
@@ -138,6 +153,9 @@ void MainWindow::onHighwaySketch() {
 	ui.actionAreaCreate->setChecked(false);
 	ui.actionAreaSelect->setChecked(false);
 	ui.actionBoulevardSketch->setChecked(false);
+	ui.action3DView->setChecked(false);
+	ui.actionTerrain->setChecked(false);
+	ui.actionDebug->setChecked(false);
 }
 
 void MainWindow::onBoulevardSketch() {
@@ -145,6 +163,39 @@ void MainWindow::onBoulevardSketch() {
 	ui.actionAreaCreate->setChecked(false);
 	ui.actionAreaSelect->setChecked(false);
 	ui.actionHighwaySketch->setChecked(false);
+	ui.action3DView->setChecked(false);
+	ui.actionTerrain->setChecked(false);
+	ui.actionDebug->setChecked(false);
+}
+
+void MainWindow::on3DView() {
+	mode = MODE_3DVIEW;
+	ui.actionAreaSelect->setChecked(false);
+	ui.actionAreaCreate->setChecked(false);
+	ui.actionHighwaySketch->setChecked(false);
+	ui.actionBoulevardSketch->setChecked(false);
+	ui.actionTerrain->setChecked(false);
+	ui.actionDebug->setChecked(false);
+}
+
+void MainWindow::onTerrain() {
+	mode = MODE_TERRAIN;
+	ui.actionAreaSelect->setChecked(false);
+	ui.actionAreaCreate->setChecked(false);
+	ui.actionHighwaySketch->setChecked(false);
+	ui.actionBoulevardSketch->setChecked(false);
+	ui.action3DView->setChecked(false);
+	ui.actionDebug->setChecked(false);
+}
+
+void MainWindow::onDebug() {
+	mode = MODE_DEBUG;
+	ui.actionAreaSelect->setChecked(false);
+	ui.actionAreaCreate->setChecked(false);
+	ui.actionHighwaySketch->setChecked(false);
+	ui.actionBoulevardSketch->setChecked(false);
+	ui.action3DView->setChecked(false);
+	ui.actionTerrain->setChecked(false);
 }
 
 void MainWindow::onShowControlWidget() {

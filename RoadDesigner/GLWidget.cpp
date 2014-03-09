@@ -12,8 +12,6 @@ float GLWidget::MAX_Z = 11520.0f;
 GLWidget::GLWidget(MainWindow* mainWin) : QGLWidget(QGLFormat(QGL::SampleBuffers), (QWidget*)mainWin) {
 	this->mainWin = mainWin;
 
-	renderer = new RoadGraphRenderer();
-
 	// set up the camera
 	camera = new Camera();
 	camera->setLookAt(0.0f, 0.0f, 0.0f);
@@ -25,7 +23,7 @@ GLWidget::GLWidget(MainWindow* mainWin) : QGLWidget(QGLFormat(QGL::SampleBuffers
 	str.setNum(camera->dz);
 	mainWin->ui.statusBar->showMessage(str);
 
-	terrain.init(15000.0f, 15000.0f, 0.0f);
+	terrain.init(15000, 10000, 100);
 
 	// initialize the key status
 	shiftPressed = false;
@@ -43,37 +41,37 @@ GLWidget::~GLWidget() {
 
 void GLWidget::drawScene() {
 	terrain.generateMesh();
-	renderer->render(terrain.renderables);
+	renderer.render(terrain.renderables);
 
 	// define the height for other items
 	float height = (float)((int)(camera->dz * 0.012f)) * 0.15f;
 
 	// draw the building area
 	if (areaBuilder.selecting()) {
-		renderer->renderPolyline(areaBuilder.polyline(), QColor(0, 0, 255), GL_LINE_STIPPLE, height);
+		renderer.renderPolyline(areaBuilder.polyline(), QColor(0, 0, 255), GL_LINE_STIPPLE, height);
 	}
 
 	// draw the building highway
 	if (roadsBuilder.selecting()) {
-		renderer->renderPolyline(roadsBuilder.polyline(), QColor(255, 0, 0), GL_LINE_STIPPLE, height);
+		renderer.renderPolyline(roadsBuilder.polyline(), QColor(255, 0, 0), GL_LINE_STIPPLE, height);
 	}
 
 	// draw the areas
 	for (int i = 0; i < areas.size(); ++i) {
 		if (i == selectedArea) {
-			renderer->renderArea(areas[i].area, GL_LINE_STIPPLE, QColor(0, 0, 255), height);
+			renderer.renderArea(areas[i].area, GL_LINE_STIPPLE, QColor(0, 0, 255), height);
 		} else {
-			renderer->renderArea(areas[i].area, GL_LINE_STIPPLE, QColor(196, 196, 255), height);
+			renderer.renderArea(areas[i].area, GL_LINE_STIPPLE, QColor(196, 196, 255), height);
 		}
 
 		// draw the road graph
 		areas[i].roads.generateMesh();
-		renderer->render(areas[i].roads.renderables);
+		renderer.render(areas[i].roads.renderables);
 	}
 
 	// draw the highways
 	areas.roads.generateMesh();
-	renderer->render(areas.roads.renderables);
+	renderer.render(areas.roads.renderables);
 
 	// draw the kernel
 	/*if (selectedVertex != NULL && selectedArea >= 0 && areas[selectedArea].roads.graph[selectedVertexDesc]->kernel.id != -1) {
@@ -88,12 +86,12 @@ void GLWidget::drawScene() {
 
 	// draw the selected vertex
 	if (selectedVertex != NULL) {
-		renderer->renderPoint(selectedVertex->pt, QColor(0, 0, 255), height);
+		renderer.renderPoint(selectedVertex->pt, QColor(0, 0, 255), height);
 	}
 
 	// draw the selected edge
 	if (selectedEdge != NULL) {
-		renderer->renderPolyline(selectedEdge->polyLine, QColor(0, 0, 255), GL_LINE_STRIP, height);
+		renderer.renderPolyline(selectedEdge->polyLine, QColor(0, 0, 255), GL_LINE_STRIP, height);
 	}
 }
 
@@ -174,19 +172,6 @@ void GLWidget::mousePressEvent(QMouseEvent *e) {
 			for (int i = 0; i < areas.size(); ++i) {
 				if (areas[i].area.contains(pos)) {
 					selectedArea = i;
-
-					if (GraphUtil::getVertex(areas[i].roads, pos, 10, selectedVertexDesc)) {
-						selectedVertex = areas[i].roads.graph[selectedVertexDesc];
-						mainWin->propertyWidget->setRoadVertex(areas[i].roads, selectedVertexDesc, selectedVertex);
-						mainWin->propertyWidget->resetRoadEdge();
-					} else {
-						if (GraphUtil::getEdge(areas[i].roads, pos, 10, selectedEdgeDesc)) {
-							selectedEdge = areas[i].roads.graph[selectedEdgeDesc];
-							mainWin->propertyWidget->resetRoadVertex();
-							mainWin->propertyWidget->setRoadEdge(selectedEdge);
-						}
-					}
-
 					break;
 				}
 			}
@@ -228,6 +213,26 @@ void GLWidget::mousePressEvent(QMouseEvent *e) {
 			}
 
 			break;
+		case MainWindow::MODE_TERRAIN:
+			terrain.addValue(pos.x(), pos.y(), 500);
+			break;
+		case MainWindow::MODE_DEBUG:
+			selectedVertex = NULL;
+			selectedEdge = NULL;
+			if (selectedArea >= 0) {
+				if (GraphUtil::getVertex(areas[selectedArea].roads, pos, 10, selectedVertexDesc)) {
+					selectedVertex = areas[selectedArea].roads.graph[selectedVertexDesc];
+					mainWin->propertyWidget->setRoadVertex(areas[selectedArea].roads, selectedVertexDesc, selectedVertex);
+					mainWin->propertyWidget->resetRoadEdge();
+				} else {
+					if (GraphUtil::getEdge(areas[selectedArea].roads, pos, 10, selectedEdgeDesc)) {
+						selectedEdge = areas[selectedArea].roads.graph[selectedEdgeDesc];
+						mainWin->propertyWidget->resetRoadVertex();
+						mainWin->propertyWidget->setRoadEdge(selectedEdge);
+					}
+				}
+			}
+			break;
 		}
 	}
 
@@ -249,7 +254,14 @@ void GLWidget::mouseMoveEvent(QMouseEvent *e) {
 	QVector2D pos;
 	mouseTo2D(e->x(), e->y(), pos);
 
-	if (e->buttons() & Qt::MidButton) {   // Shift the camera
+	if (e->buttons() & Qt::LeftButton) {
+		switch (mainWin->mode) {
+		case MainWindow::MODE_3DVIEW:
+			camera->changeXRotation(dy * 0.4f);
+			camera->changeZRotation(dx * 0.4f);
+			break;
+		}
+	} else if (e->buttons() & Qt::MidButton) {   // Shift the camera
 		setCursor(Qt::ClosedHandCursor);
 		camera->changeXYZTranslation(-dx * camera->dz * 0.001f, dy * camera->dz * 0.001f, 0);
 	} else if (e->buttons() & Qt::RightButton) { // Zoom the camera
