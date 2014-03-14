@@ -128,19 +128,13 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="..\..\mylib\common\BBox.cpp" />
-    <ClCompile Include="..\..\mylib\common\ColorTable.cpp" />
-    <ClCompile Include="..\..\mylib\common\ElevationColorTable.cpp" />
     <ClCompile Include="..\..\mylib\common\global.cpp" />
     <ClCompile Include="..\..\mylib\common\Polygon2D.cpp" />
     <ClCompile Include="..\..\mylib\common\PolygonBuilder.cpp" />
     <ClCompile Include="..\..\mylib\common\Polyline2D.cpp" />
     <ClCompile Include="..\..\mylib\common\Renderable.cpp" />
-    <ClCompile Include="..\..\mylib\common\Renderer.cpp" />
-    <ClCompile Include="..\..\mylib\common\Texture.cpp" />
-    <ClCompile Include="..\..\mylib\common\TextureManager.cpp" />
     <ClCompile Include="..\..\mylib\common\TopNSearch.cpp" />
     <ClCompile Include="..\..\mylib\common\Util.cpp" />
-    <ClCompile Include="..\..\mylib\common\WaterRenderer.cpp" />
     <ClCompile Include="..\..\mylib\road\feature\AbstractFeature.cpp" />
     <ClCompile Include="..\..\mylib\road\feature\GenericFeature.cpp" />
     <ClCompile Include="..\..\mylib\road\feature\GridFeature.cpp" />
@@ -159,6 +153,7 @@
     <ClCompile Include="..\..\mylib\road\RoadAreaSet.cpp" />
     <ClCompile Include="..\..\mylib\road\RoadEdge.cpp" />
     <ClCompile Include="..\..\mylib\road\RoadGraph.cpp" />
+    <ClCompile Include="..\..\mylib\road\RoadGraphRenderer.cpp" />
     <ClCompile Include="..\..\mylib\road\RoadVertex.cpp" />
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="ControlWidget.cpp" />
@@ -201,8 +196,6 @@
     <ClCompile Include="MainWindow.cpp" />
     <ClCompile Include="PropertyWidget.cpp" />
     <ClCompile Include="SimpleFlatTerrain.cpp" />
-    <ClCompile Include="SimpleTerrain.cpp" />
-    <ClCompile Include="SimpleTerrainCell.cpp" />
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="MainWindow.h">
@@ -247,20 +240,14 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\mylib\common\BBox.h" />
-    <ClInclude Include="..\..\mylib\common\ColorTable.h" />
     <ClInclude Include="..\..\mylib\common\common.h" />
-    <ClInclude Include="..\..\mylib\common\ElevationColorTable.h" />
     <ClInclude Include="..\..\mylib\common\global.h" />
     <ClInclude Include="..\..\mylib\common\Polygon2D.h" />
     <ClInclude Include="..\..\mylib\common\PolygonBuilder.h" />
     <ClInclude Include="..\..\mylib\common\Polyline2D.h" />
     <ClInclude Include="..\..\mylib\common\Renderable.h" />
-    <ClInclude Include="..\..\mylib\common\Renderer.h" />
-    <ClInclude Include="..\..\mylib\common\Texture.h" />
-    <ClInclude Include="..\..\mylib\common\TextureManager.h" />
     <ClInclude Include="..\..\mylib\common\TopNSearch.h" />
     <ClInclude Include="..\..\mylib\common\Util.h" />
-    <ClInclude Include="..\..\mylib\common\WaterRenderer.h" />
     <ClInclude Include="..\..\mylib\road\feature\AbstractFeature.h" />
     <ClInclude Include="..\..\mylib\road\feature\GenericFeature.h" />
     <ClInclude Include="..\..\mylib\road\feature\GridFeature.h" />
@@ -279,12 +266,11 @@
     <ClInclude Include="..\..\mylib\road\RoadAreaSet.h" />
     <ClInclude Include="..\..\mylib\road\RoadEdge.h" />
     <ClInclude Include="..\..\mylib\road\RoadGraph.h" />
+    <ClInclude Include="..\..\mylib\road\RoadGraphRenderer.h" />
     <ClInclude Include="..\..\mylib\road\RoadVertex.h" />
     <ClInclude Include="Camera.h" />
     <ClInclude Include="GeneratedFiles\ui_PropertyWidget.h" />
     <ClInclude Include="GLWidget.h" />
-    <ClInclude Include="SimpleTerrain.h" />
-    <ClInclude Include="SimpleTerrainCell.h" />
     <CustomBuild Include="PropertyWidget.h">
       <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(QTDIR)\bin\moc.exe;%(FullPath)</AdditionalInputs>
       <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Moc%27ing PropertyWidget.h...</Message>

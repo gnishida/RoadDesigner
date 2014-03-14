@@ -23,7 +23,7 @@ GLWidget::GLWidget(MainWindow* mainWin) : QGLWidget(QGLFormat(QGL::SampleBuffers
 	str.setNum(camera->dz);
 	mainWin->ui.statusBar->showMessage(str);
 
-	terrain.init(15000, 10000, 100);
+	terrain.init(6000, 6000, 0);
 
 	// initialize the key status
 	shiftPressed = false;
@@ -91,7 +91,7 @@ void GLWidget::drawScene() {
 
 	// draw the selected edge
 	if (selectedEdge != NULL) {
-		renderer.renderPolyline(selectedEdge->polyLine, QColor(0, 0, 255), GL_LINE_STRIP, height);
+		renderer.renderPolyline(selectedEdge->polyline, QColor(0, 0, 255), GL_LINE_STRIP, height);
 	}
 }
 
@@ -213,9 +213,6 @@ void GLWidget::mousePressEvent(QMouseEvent *e) {
 			}
 
 			break;
-		case MainWindow::MODE_TERRAIN:
-			terrain.addValue(pos.x(), pos.y(), 500);
-			break;
 		case MainWindow::MODE_DEBUG:
 			selectedVertex = NULL;
 			selectedEdge = NULL;
@@ -255,12 +252,6 @@ void GLWidget::mouseMoveEvent(QMouseEvent *e) {
 	mouseTo2D(e->x(), e->y(), pos);
 
 	if (e->buttons() & Qt::LeftButton) {
-		switch (mainWin->mode) {
-		case MainWindow::MODE_3DVIEW:
-			camera->changeXRotation(dy * 0.4f);
-			camera->changeZRotation(dx * 0.4f);
-			break;
-		}
 	} else if (e->buttons() & Qt::MidButton) {   // Shift the camera
 		setCursor(Qt::ClosedHandCursor);
 		camera->changeXYZTranslation(-dx * camera->dz * 0.001f, dy * camera->dz * 0.001f, 0);

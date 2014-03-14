@@ -12,7 +12,7 @@ class MainWindow : public QMainWindow {
 Q_OBJECT
 
 public:
-	static enum { MODE_AREA_SELECT = 0, MODE_AREA_CREATE, MODE_HIGHWAY_SKETCH, MODE_BOULEVARD_SKETCH, MODE_3DVIEW, MODE_TERRAIN, MODE_DEBUG };
+	static enum { MODE_AREA_SELECT = 0, MODE_AREA_CREATE, MODE_HIGHWAY_SKETCH, MODE_BOULEVARD_SKETCH, MODE_DEBUG };
 
 public:
 	Ui::MainWindow ui;
@@ -40,8 +40,6 @@ public slots:
 	void onAreaCreate();
 	void onHighwaySketch();
 	void onBoulevardSketch();
-	void on3DView();
-	void onTerrain();
 	void onDebug();
 	void onShowControlWidget();
 	void onShowPropertyWidget();

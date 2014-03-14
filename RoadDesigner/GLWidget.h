@@ -2,7 +2,7 @@
 
 #include <QString>
 #include <QGLWidget>
-#include <common/Renderer.h>
+#include <road/RoadGraphRenderer.h>
 #include <common/PolygonBuilder.h>
 #include <road/RoadGraph.h>
 #include <road/RoadArea.h>
@@ -10,7 +10,7 @@
 #include <road/feature/GridFeature.h>
 #include <road/feature/RadialFeature.h>
 #include "Camera.h"
-#include "SimpleTerrain.h"
+#include "SimpleFlatTerrain.h"
 
 class MainWindow;
 
@@ -22,8 +22,8 @@ public:
 public:
 	MainWindow* mainWin;
 	Camera* camera;
-	SimpleTerrain terrain;
-	Renderer renderer;
+	SimpleFlatTerrain terrain;
+	RoadGraphRenderer renderer;
 	QPoint lastPos;
 	RoadAreaSet areas;
 	int selectedArea;

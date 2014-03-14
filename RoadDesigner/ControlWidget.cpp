@@ -22,6 +22,8 @@ ControlWidget::ControlWidget(MainWindow* mainWin) : QDockWidget("Control Widget"
 	ui.checkBoxLocalStreets->setChecked(false);
 	ui.checkBoxInvadingCheck->setChecked(false);
 	ui.radioButtonMultiSeeds->setChecked(true);
+	ui.checkBoxConnectAvenues->setChecked(true);
+	ui.checkBoxCropping->setChecked(true);
 	ui.radioButtonCartesianCoordinate->setChecked(true);
 	ui.lineEditWeightEdge->setText("1");
 	ui.lineEditWeightLocation->setText("1");
